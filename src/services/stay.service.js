@@ -27,8 +27,8 @@ async function query(filterBy = { txt: '', price: 0 }) {
 }
 
 function getById(stayId) {
-    // return storageService.get(STORAGE_KEY, stayId)
-    return httpService.get(`stay/${stayId}`)
+    return storageService.get(STAY_STORAGE_KEY, stayId)
+    // return httpService.get(`stay/${stayId}`)
 }
 
 async function remove(stayId) {

@@ -1,0 +1,21 @@
+.stay-details .img-container {
+    display: grid;
+    scroll-margin-top: 114px;
+    grid-template: repeat(2, 275px)/2fr 1fr 1fr;
+    border-radius: 20px;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.stay-details .img-container img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    color: #222;
+    object-fit: cover;
+}
+
+@media (max-width: 1320px) and (max-height: 1100px) {
+    .stay-details .img-container {
+        grid-template: repeat(2,minmax(150,25vh))/2fr 1fr 1fr;
+    }
+}
