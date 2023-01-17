@@ -37,6 +37,7 @@ export function AppHeader() {
         <header className="app-header">
             <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
+                <NavLink to='/stay'>Stays </NavLink>
 
                 {user &&
                     <span className="user-info">
