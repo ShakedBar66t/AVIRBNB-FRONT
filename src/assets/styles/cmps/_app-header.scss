@@ -1,53 +1,138 @@
 .app-header {
-    background-color: $clr4;
-    padding: 10px;
-
-
-    .user-info {
-        // background-color: $clr2;
-        // padding: 2px 8px;
-        padding-left: 100px;
-        color: $clr1;
-
-        .score {
-            background-color: $clr2;
-            color: $clr6;
-            padding: 8px;
-            margin: 10px;
-            border-radius: 50%;
-        }
-
-        img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-    }
-
-    .user-info .btn-link {
-        color: $clr2;
-    }
 
     nav {
+        display: flex;
+        justify-content: space-between;
         font-size: .8em;
-        background-color: $clr5;
+        background-color: white;
         padding: 5px;
+        align-items: center;
+        border-bottom: 1px solid lightgray;
 
     }
 
-    nav a:first-child {
-        margin-right: 30px;
+    .header-logo {
+        cursor: pointer;
+        height: 70px;
+        width: 70xp;
     }
 
-    nav a:not(:first-child) {
-        border-top: 1px solid $clr1;
-        padding: 0 5px;
-        margin: 10px;
+    .filter-container {
+        border-radius: 16px;
+        box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.25);
+        transition: 0.3s;
+
+        &:hover {
+            box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+        }
     }
 
-    nav .active {
-        color: $clr1;
+    & button {
+        background-color: white;
+        color: #222222;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
+
+    .location-filter {
+        border-radius: 40px 4px 4px 40px;
+    }
+
+    .search-filter {
+        border-radius: 4px 40px 40px 4px;
+    }
+
+    .host-btn,
+    .lang-btn {
+        border-radius: 16px;
+
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.3);
+        }
+    }
+
+    .search-btn {
+        background-color: #ff385c;
+        border-radius: 50%;
+        height: 40px;
+    }
+
+    .user-nav-container {
+        justify-content: left;
+    }
+
+    .user-info-btn {
+        transition: 0.3s;
+        border: 1px solid lightgray;
+        border-radius: 16px;
+
+        &:hover {
+            box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.3);
+        }
+    }
+
+
+}
+
+/////// modals ////////
+.user-modal {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    display: none;
+    z-index: 1;
+
+    &.open {
+        display: block;
+    }
+
+    & button {
+        width: 100%;
+
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.3);
+        }
+
+    }
+
+
+}
+
+.filter-modal {
+    position: absolute;
+    height: 60px;
+    width: 600px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 0;
+    z-index: 1;
+    border: 1px solid lightgray;
+    border-radius: 35px;
+
+    display: none;
+
+    &.open {
+        display: flex;
+
+    }
+
+    & button {
+        width: 100%;
+        border-radius: 16px;
+
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.3);
+        }
+
+    }
+
 
 }
