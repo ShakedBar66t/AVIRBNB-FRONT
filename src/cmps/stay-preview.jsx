@@ -5,6 +5,7 @@ export function StayPreview({stay}){
     const navigate = useNavigate()
 
     return <article className="stay-preview" onClick={()=>{navigate(`/stay/${stay._id}`)}}>
+        <img className="stay-preview-img" src={stay.imgUrls[0]} alt="" />
         {stay.name}
     </article>
 }
