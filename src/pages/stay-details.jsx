@@ -21,15 +21,18 @@ export function StayDetails() {
 
     return (stay) &&
         <section className="stay-details">
-            <h1>Name :{stay.name}</h1>
-            <h2>⭐️4.9·<span>20 reviews</span>·#ADD LOCATION#</h2>
+            <div className="stay-info">
+                <h1>Name :{stay.name}</h1>
+                <h2>⭐️4.9·<span>20 reviews</span>·<span>New York, United States</span></h2>
+            </div>
             <div className="img-container">
-                <img className="stay-details-img" src={stay.imgUrls[0]} />
-                <img className="stay-details-img" src={stay.imgUrls[1]} />
-                <img className="stay-details-img" src={stay.imgUrls[2]} />
-                <img className="stay-details-img" src={stay.imgUrls[3]} />
-                <img className="stay-details-img" src={stay.imgUrls[4]} />
-                <img className="stay-details-img" src={stay.imgUrls[5]} />
+                {stay.imgUrls.map((img, index) => {
+                    return <div className={`img-details${index}`} key={index}>
+                        {console.log(img)}
+                        {console.log(index)}
+                        <img src={img} />
+                    </div>
+                })}
             </div>
         </section>
 
