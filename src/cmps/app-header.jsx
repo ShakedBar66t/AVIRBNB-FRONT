@@ -56,11 +56,12 @@ export function AppHeader() {
                 <NavLink to='/stay'>Stays </NavLink> */}
                 <div className='logo-container'>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
+                    <span className='header-logo-text'>virbnb</span>
                 </div>
                 <div className='filter-container'>
                     <div className='filter-btns' onClick={toggleFilterModal}>
-                        <button className='location-filter '>Anywhere |</button>
-                        <button className='time-filter '>Any week |</button>
+                        <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
+                        <button className='time-filter'>Any week <span className='seperator-span'></span></button>
                         <button className='guest-filter '>Add guests </button>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>
@@ -90,7 +91,7 @@ export function AppHeader() {
                         </section>
                     } */}
             </nav>
-            <div className={`user-modal ${userModal ? 'open' : ''}`}>
+            <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
                 <button>Log in </button>
                 <button>Sign up </button>
                 <hr />
