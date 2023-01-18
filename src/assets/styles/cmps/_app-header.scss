@@ -1,5 +1,12 @@
 .app-header {
     border-bottom: 1px solid lightgray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
 
     nav {
         align-items: center;
@@ -73,7 +80,8 @@
         }
 
         .guest-filter {
-            font-weight: 400
+            font-weight: 400;
+            color: rgba(134, 134, 134, 0.8)
         }
     }
 
@@ -104,11 +112,12 @@
     .search-btn {
         background-color: #ff385c;
         border-radius: 50%;
-        height: 40px;
-        width: 40px;
+        height: 32px;
+        width: 32px;
 
         .fa-search {
             margin-top: 1px;
+            font-size: 12px;
         }
     }
 
@@ -185,7 +194,7 @@
     right: 35px;
     top: 70px;
     display: none;
-    z-index: 1;
+    z-index: 5;
     box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
 
     &.open {

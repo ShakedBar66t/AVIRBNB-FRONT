@@ -9,6 +9,7 @@ import { useState } from 'react'
 
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
+import { LabelsFilter } from './labels-filter'
 export function AppHeader() {
 
     const [userModal, setUserModal] = useState(false)
@@ -107,8 +108,9 @@ export function AppHeader() {
                 <button className='search-btn'><FaSearch color='white' /></button>
             </div>
             <div className='labels-container'>
+
             </div>
-            {/* <hr className=''/> */}
+            <LabelsFilter />
         </header>
     )
 }

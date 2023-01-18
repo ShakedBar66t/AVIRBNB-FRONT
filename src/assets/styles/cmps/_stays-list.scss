@@ -1,6 +1,16 @@
 .stay-list{
     display: grid;
+   
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+    // grid-template-columns: repeat(auto-fill, minmax(max(240px, 350px), 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(max(240px, 350px), 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
     gap: 24px;
-    margin-top: 16px;
+    margin-top: 176px;
+    @include for-ultrawide-layout {
+
+        grid-template-columns: repeat(6,1fr);
+    }
+    // grid-template-columns: repeat(6,1fr);
 }
