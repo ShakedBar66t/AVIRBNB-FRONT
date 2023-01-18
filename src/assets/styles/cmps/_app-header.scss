@@ -8,6 +8,27 @@
     z-index: 1;
     background-color: white;
 
+    &.open {
+        height: 120px;
+    }
+
+    .background-shadow {
+        top: 100px;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: #22222256;
+        opacity: 0;
+        display: none;
+        z-index: 1;
+        position: absolute;
+
+        &.open {
+            display: block;
+            opacity: 1;
+        }
+    }
+
     nav {
         align-items: center;
         display: flex;
@@ -19,7 +40,6 @@
 
     .logo-container {
         display: flex;
-        // padding: 8px;
         height: 36px;
         width: 102px;
         flex: 1 0 140px;
@@ -47,6 +67,11 @@
         align-items: center;
         display: flex;
         border: 1px solid rgba(211, 211, 211, 1);
+        opacity: 1;
+
+        &.closed {
+            opacity: 0;
+        }
 
         &:hover {
             box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
@@ -69,8 +94,6 @@
         }
     }
 
-
-
     .filter-btns {
         padding: 3px 8px;
 
@@ -89,11 +112,6 @@
         border-radius: 40px 4px 4px 40px;
         padding-left: 8px;
         padding-right: 8px;
-        // border-right: 1px solid rgba(211, 211, 211);
-    }
-
-    .time-filter {
-        // border-right: 1px solid rgba(211, 211, 211);
     }
 
     .search-filter {
@@ -232,32 +250,38 @@
 }
 
 .filter-modal {
-    position: absolute;
     height: 60px;
     width: 600px;
     background-color: white;
-    border-radius: 5px;
-    padding: 5px 0;
-    z-index: 1;
     border: 1px solid lightgray;
     border-radius: 35px;
+    padding: 5px 0;
+    z-index: 0;
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
 
-    display: none;
+    display: flex;
+    flex: 1 1 0%;
+    min-width: 0;
+    pointer-events: auto;
 
     &.open {
-        display: flex;
-
+        z-index: 2;
+        opacity: 1;
+        transform: scale(1.2) translateY(30%) translateX(-45%)
     }
+}
 
-    & button {
-        width: 100%;
-        border-radius: 16px;
+.filter-modal button {
+    width: 100%;
+    border-radius: 16px;
+    transition: background-color 0.3s ease-in-out;
 
-        &:hover {
-            background-color: rgba(211, 211, 211, 0.3);
-        }
-
+    &:hover {
+        background-color: rgba(211, 211, 211, 0.3);
     }
-
-
 }

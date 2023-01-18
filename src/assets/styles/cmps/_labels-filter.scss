@@ -1,0 +1,139 @@
+.carousel {
+    position: relative;
+    display: flex;
+    height: 80px;
+    flex-grow: 1;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    // font-size: 200;
+
+    .carousel-inner {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .prev-btn {
+
+        z-index: 2;
+    }
+
+    .next-btn {
+        position: absolute;
+        right: 0;
+        height: 80px;
+    }
+
+    .carousel-group {
+        display: flex;
+        z-index: 0;
+        scroll-snap-align: start;
+    }
+
+    .label-filter-btn {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        scroll-snap-align: center;
+
+        & span {
+            font-size: 14px;
+        }
+
+        & img {
+            height: 26px;
+            width: 26px;
+        }
+
+        &:hover {
+            border-bottom: 1px black solid;
+        }
+    }
+
+}
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 200%;
+}
+
+.carousel-group {
+    width: 100%;
+    position: relative;
+    transition: transform 0.5s ease;
+}
+
+.label-filter-btn {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    scroll-snap-align: center;
+    border-bottom: solid 1px white;
+
+    & span {
+        font-size: 14px;
+    }
+
+    & img {
+        height: 26px;
+        width: 26px;
+    }
+
+    &:hover {
+        border-bottom: 1px black solid;
+    }
+}
+
+// .carousel {
+//     display: flex;
+//     width: 100%;
+//     flex-wrap: nowrap;
+//     overflow-x: scroll;
+// }
+
+// .carousel-inner {
+//     display: flex;
+//     flex-wrap: nowrap;
+// }
+
+// .label-filter-btn {
+//     flex: 1;
+//     margin: 10px;
+//     text-align: center;
+// }
+
+// .label-filter-btn img {
+//     width: 100%;
+//     height: auto;
+// }
+
+// .prev-btn,
+// .next-btn {
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+// }
+
+// .prev-btn {
+//     left: 0;
+// }
+
+// .next-btn {
+//     right: 0;
+// }
