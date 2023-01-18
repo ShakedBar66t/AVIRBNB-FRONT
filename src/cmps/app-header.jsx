@@ -107,6 +107,7 @@ export function AppHeader() {
                 <button className='search-btn'><FaSearch color='white' /></button>
             </div>
             <div className='labels-container'>
+
             </div>
             {/* <hr className=''/> */}
         </header>
