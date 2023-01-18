@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
-import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
+// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
 // import { FaHeart } from "react-icons/fa";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaAccessibleIcon } from "react-icons/fa";
