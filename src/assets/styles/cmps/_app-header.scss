@@ -2,33 +2,53 @@
     border-bottom: 1px solid lightgray;
 
     nav {
-        display: flex;
-        justify-content: space-between;
         align-items: center;
         display: flex;
-        height: 100%;
+        height: 80px;
         position: relative;
         width: 100%;
         z-index: 1
     }
 
-    .header-logo {
-        cursor: pointer;
-        height: 70px;
-        width: 70xp;
+    .logo-container {
+        display: flex;
+        // padding: 8px;
+        height: 36px;
+        width: 102px;
+        flex: 1 0 140px;
+
+        .header-logo {
+            cursor: pointer;
+            height: 100%;
+            width: 36px;
+        }
+
+        .header-logo-text {
+            font-family: Cereal;
+            align-self: center;
+            color: #ff385c;
+            font-size: 22px;
+            font-weight: bold;
+        }
     }
 
     .filter-container {
-        border-radius: 16px;
+        border-radius: 25px;
         box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.25);
         transition: 0.3s;
+        height: 48px;
+        align-items: center;
+        display: flex;
+        border: 1px solid rgba(211, 211, 211, 1);
 
         &:hover {
             box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+            cursor: pointer;
         }
     }
 
     & button {
+        cursor: pointer;
         border: none;
         background-color: white;
         color: #222222;
@@ -36,10 +56,36 @@
         line-height: 18px;
         font-weight: 600;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        &:not(:last-child) {
+            padding: 0 16px;
+        }
+    }
+
+
+
+    .filter-btns {
+        padding: 3px 8px;
+
+        &> :first-child,
+        &> :nth-child(2) {
+            border-right: 1px solid rgba(211, 211, 211);
+        }
+
+        .guest-filter {
+            font-weight: 400
+        }
     }
 
     .location-filter {
         border-radius: 40px 4px 4px 40px;
+        padding-left: 8px;
+        padding-right: 8px;
+        // border-right: 1px solid rgba(211, 211, 211);
+    }
+
+    .time-filter {
+        // border-right: 1px solid rgba(211, 211, 211);
     }
 
     .search-filter {
@@ -59,11 +105,17 @@
         background-color: #ff385c;
         border-radius: 50%;
         height: 40px;
+        width: 40px;
+
+        .fa-search {
+            margin-top: 1px;
+        }
     }
 
     .user-nav-container {
         display: flex;
-        justify-content: left;
+        flex: 1 0 140px;
+        justify-content: flex-end;
         padding: 5px 5px 5px 12px;
         height: 100%;
     }
@@ -87,8 +139,7 @@
 
         & .bi-globe {
             margin-top: 5px;
-            height: 16px;
-            width: 16px;
+            font-size: 16px;
         }
     }
 
@@ -124,23 +175,39 @@
 /////// modals ////////
 .user-modal {
     position: absolute;
-    height: 200px;
-    width: 200px;
+    width: 240px;
+    // height: 100%;
     background-color: white;
-    border-radius: 5px;
-    padding: 5px 0;
-    display: flex;
+    border-radius: 10px;
+    padding: 8px 0;
     flex-direction: column;
-    right: 0;
+    justify-content: center;
+    right: 35px;
+    top: 70px;
     display: none;
     z-index: 1;
+    box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
 
     &.open {
-        display: block;
+        display: flex;
+        justify-content: space-between;
     }
 
     & button {
+        text-align: left;
         width: 100%;
+        height: 40px;
+        padding: 10px 16px;
+
+
+        &:not(:first-child) {
+            font-weight: 400;
+
+        }
+
+        &:first-child {
+            font-weight: 600;
+        }
 
         &:hover {
             background-color: rgba(211, 211, 211, 0.3);
@@ -148,6 +215,10 @@
 
     }
 
+    hr {
+        width: 100%;
+        color: rgba(211, 211, 211, 0.1);
+    }
 
 }
 
