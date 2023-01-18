@@ -38,7 +38,8 @@
         cursor:pointer ;
         
        .heart-fa{
-        color: $clr7;
+
+        color:rgba($color: $clr7, $alpha: 0.7) ;
        }
 
         .reg-heart-fa{

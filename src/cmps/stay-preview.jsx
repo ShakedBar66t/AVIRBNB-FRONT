@@ -19,6 +19,7 @@ export function StayPreview({ stay }) {
         onMouseLeave={() => setIsHover(false)}
     >
         <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
+        <button className="like-btn clear-btn"><FaHeart className="heart-fa" /></button>
         <button className="like-btn clear-btn"><FaRegHeart className="reg-heart-fa" /></button>
         
         {(isHover && currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev)=>{
