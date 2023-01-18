@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadStays, addStay, updateStay, removeStay, addToStayt } from '../store/actions/stay.actions.js'
+import { AppHeader } from '../cmps/app-header'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
@@ -18,7 +19,7 @@ export function StayIndex() {
     async function onRemoveStay(stayId) {
         try {
             await removeStay(stayId)
-            showSuccessMsg('Stay removed')            
+            showSuccessMsg('Stay removed')
         } catch (err) {
             showErrorMsg('Cannot remove stay')
         }
@@ -32,7 +33,7 @@ export function StayIndex() {
             showSuccessMsg(`Stay added (id: ${savedStay._id})`)
         } catch (err) {
             showErrorMsg('Cannot add stay')
-        }        
+        }
     }
 
     async function onUpdateStay(stay) {
@@ -43,10 +44,10 @@ export function StayIndex() {
             showSuccessMsg(`Stay updated, new price: ${savedStay.price}`)
         } catch (err) {
             showErrorMsg('Cannot update stay')
-        }        
+        }
     }
 
-    function onAddToStayt(stay){
+    function onAddToStayt(stay) {
         console.log(`Adding ${stay.vendor} to Stayt`)
         addToStayt(stay)
         showSuccessMsg('Added to Stayt')
@@ -58,9 +59,9 @@ export function StayIndex() {
 
 
     return <section className='stay-index stay-index-layout'>
+        <AppHeader />
+        <StayList stays={stays} />
 
-        <StayList stays={stays}/>
-        
     </section>
 
     // return (

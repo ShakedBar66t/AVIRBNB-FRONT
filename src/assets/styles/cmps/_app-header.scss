@@ -1,14 +1,15 @@
 .app-header {
+    border-bottom: 1px solid lightgray;
 
     nav {
         display: flex;
         justify-content: space-between;
-        font-size: .8em;
-        background-color: white;
-        padding: 5px;
         align-items: center;
-        border-bottom: 1px solid lightgray;
-
+        display: flex;
+        height: 100%;
+        position: relative;
+        width: 100%;
+        z-index: 1
     }
 
     .header-logo {
@@ -28,6 +29,7 @@
     }
 
     & button {
+        border: none;
         background-color: white;
         color: #222222;
         font-size: 14px;
@@ -60,19 +62,62 @@
     }
 
     .user-nav-container {
+        display: flex;
         justify-content: left;
+        padding: 5px 5px 5px 12px;
+        height: 100%;
+    }
+
+    .host-lng-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .lang-btn {
+            border-radius: 22px;
+            height: 42px;
+            width: 46px;
+            margin: 0 5px;
+        }
+
+        & .host-btn {
+            padding: 12px;
+            border-radius: 22px;
+        }
+
+        & .bi-globe {
+            margin-top: 5px;
+            height: 16px;
+            width: 16px;
+        }
     }
 
     .user-info-btn {
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        align-items: center;
+        height: 42px;
+        width: 77px;
+        padding: 6px 6px 5px 10px;
         transition: 0.3s;
         border: 1px solid lightgray;
-        border-radius: 16px;
+        border-radius: 21px;
 
         &:hover {
             box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.3);
         }
+
+        .fa-user-circle {
+            height: 30px;
+            width: 30px;
+            color: gray;
+        }
     }
 
+    .fa-search {
+        color: white;
+    }
 
 }
 

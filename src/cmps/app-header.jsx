@@ -6,6 +6,9 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useState } from 'react'
 
+
+import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
+import { BiGlobe } from 'react-icons/bi'
 export function AppHeader() {
 
     const [userModal, setUserModal] = useState(false)
@@ -47,25 +50,28 @@ export function AppHeader() {
     }
 
     return (
-        <header className="app-header">
-            <nav>
+        <header className="app-header full stay-index-layout">
+            <nav >
                 {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
                 <NavLink to='/stay'>Stays </NavLink> */}
                 <div className='logo-container'>
-                    <img className='header-logo' src={require(`../assets/img/airbnb-header-logo.png`)} alt='' onClick={() => navigate('/stay')} />
+                    <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                 </div>
                 <div className='filter-container'>
                     <div className='filter-btns' onClick={toggleFilterModal}>
-                        <button className='location-filter header-btn'>Anywhere |</button>
-                        <button className='time-filter header-btn'>Any week |</button>
-                        <button className='guest-filter header-btn'>Add guests </button>
-                        <button className='search-btn  user-header-btn'>🔍</button>
+                        <button className='location-filter '>Anywhere |</button>
+                        <button className='time-filter '>Any week |</button>
+                        <button className='guest-filter '>Add guests </button>
+                        <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>
                 </div>
                 <div className='user-nav-container'>
-                    <button className='host-btn user-header-btn'>Airbnb your home</button>
-                    <button className='lang-btn  user-header-btn'>🌐</button>
-                    <button onClick={toggleUserModal} className='user-info-btn header-btn' ><span>=</span><span>👤</span></button>
+                    <div className='host-lng-container'>
+                        <button className='host-btn'>Airbnb your home</button>
+                        <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
+                    </div>
+
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
                 </div>
 
                 {/* {user &&
@@ -87,6 +93,7 @@ export function AppHeader() {
             <div className={`user-modal ${userModal ? 'open' : ''}`}>
                 <button>Log in </button>
                 <button>Sign up </button>
+                <hr />
                 <button>Airbnb your home </button>
                 <button>Host an experience </button>
                 <button>Help </button>
@@ -96,10 +103,11 @@ export function AppHeader() {
                 <button>Check in </button>
                 <button>Check out </button>
                 <button>Who </button>
-                <button className='search-btn  user-header-btn'>🔍</button>
+                <button className='search-btn'><FaSearch color='white' /></button>
             </div>
             <div className='labels-container'>
             </div>
+            {/* <hr className=''/> */}
         </header>
     )
 }
