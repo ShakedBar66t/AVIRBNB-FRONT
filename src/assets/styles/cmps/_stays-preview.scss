@@ -9,11 +9,9 @@
 
     .img-preview-paging-btns{
         position: absolute;
-        // top: 140px;
         top: 35%;
         border-radius: 50%;
         background-color: rgba($color: $clr6, $alpha: 0.9);
-        // left: 20px;
         color: $clr7;
         padding:8px ;
         font-size: 14px;
@@ -54,9 +52,12 @@
 
     .curr-img-indication{
         position: absolute;
-   
          top: 50%;
         left: 38%;
      
+    }
+
+    .prev-loc{
+        color: $clr7;
     }
 }

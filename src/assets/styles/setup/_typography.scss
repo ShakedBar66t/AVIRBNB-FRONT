@@ -14,3 +14,41 @@
     font-family: Roboto;
     src: url(../../fonts/Roboto-Black.ttf);
 }
+
+@font-face {
+    font-family: fa-brands;
+    src: url("/assets/fonts/fa-brands-400.ttf");
+}
+
+@font-face {
+    font-family: fa-solid;
+    src: url("/assets/fonts/fa-solid-900.ttf");
+}
+
+@font-face {
+    font-family: fa-regular;
+    src: url("/assets/fonts/fa-regular-400.ttf");
+}
+
+.fa-brands{
+    font-family: fa-brands;
+}
+
+.fa-regular {
+    font-family: fa-regular;
+}
+
+.fa-solid{
+    font-family: fa-solid;
+}
+
+
+.fa-regular.envelope::before{
+    content: "\f0e0";
+    color: var(--clr03);  
+}
+
+.fa-solid.house::before{
+    content: "\f015";
+    color: var(--clr03);  
+}
