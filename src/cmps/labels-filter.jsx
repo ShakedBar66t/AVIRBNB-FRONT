@@ -1,18 +1,31 @@
 
+import { TbBuildingCastle } from "react-icons/tb";
+import { FaMountain, FaSwimmingPool, FaFortAwesome, FaSkiing } from "react-icons/fa"
+export function LabelsFilter() {
 
-TbBuildingCastle
+    const stayLabels = [{ name: 'Amazing views', icon: <FaMountain /> }, { name: 'Castles', icon: <TbBuildingCastle /> },
+    { name: 'Amzaing pools', icon: <FaSwimmingPool /> }, { name: 'Ski-in/out', icon: <FaSkiing /> },
+    { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' },
+    { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' },
+    { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' },
+    { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' }, { name: '', icon: '' },
+    ]
 
-export function labelsFilter() {
+    return (
+        <div>
+            {stayLabels[0].icon}
+            {/* {stayLabels.map((label, index) => {
+                return < button key={index} > <span>{label}</span></button>
 
-    const stayLabels = ['lake', 'Amazing views', 'Castles', ' Amzaing pools', 'Mansions',
-        'Historical homes', 'Ski-in/out', 'Riads', 'Luxe', 'OMG!', 'Grand pianos', 'Houserboats',
-        'Top of the world', 'Islands', 'New', 'Tranding', 'Cabins', 'Boats', 'Tiny homes', 'Tropical',
-        'Bed & breakfasts', 'Design', 'Beachfront', 'Farms', 'Arctic', 'Caves', 'Play', 'Iconic cities']
+            })} */}
 
-    // return <div className="labels-container">
+        </div >
 
-    // </div>
-    //     <button className=""
-    // {
-    // }
+    )
+
 }
+
+// {name: Castles}, {name:  Amzaing pools}, {name: Mansions},
+// {name: Ski-in/out}, {name: Luxe}, {name: OMG!}, {name: Grand pianos}, {name: Houserboats},
+// {name: Top of the world}, {name: Islands}, {name: New}, {name: Tranding}, {name: Cabins}, {name: Boats}, {name: Tiny homes}, {name: Tropical},
+// {name: Bed & breakfasts}, {name: Design}, {name: Beachfront}, {name: Farms}, {name: Arctic}, {name: Caves}, {name: Play}, {name: Iconic cities}]
