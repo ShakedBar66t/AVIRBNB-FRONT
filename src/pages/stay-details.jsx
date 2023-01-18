@@ -90,7 +90,7 @@ export function StayDetails() {
                     </div>
                     <div className="air-cover">
                         <h3>
-                            <span style={{ color: 'red' }}>air</span>cover
+                            <span style={{ color: 'red' }}>avir</span>cover
                         </h3>
                         <p>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
@@ -105,7 +105,28 @@ export function StayDetails() {
                         </div>
                     </div>
                     <section className="reverse-modal">
-
+                        <form>
+                            <header>
+                                <h4><span>{stay.price}$</span> night</h4>
+                                <div className="review-totals">
+                                    <FaStar/>
+                                    {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
+                                    <span>4.8 ·</span> 
+                                    <a href="">20 reviews</a>
+                                </div>
+                            </header>
+                            <div className="picker-container">
+                                <div className="check-in picker">
+                                    <label htmlFor="check-in">CHECK-IN</label>
+                                    <input type="text" placeholder="MM/DD/YYYY" />
+                                </div>
+                                <section className="date-picker-container">
+                                    <div className="el-date-editor">
+                                        
+                                    </div>
+                                </section>
+                            </div>
+                        </form>
                     </section>
                 </section>
             </div>
