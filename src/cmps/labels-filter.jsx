@@ -13,7 +13,7 @@ export function LabelsFilter() {
 
     return (
         <div>
-            {stayLabels[0].icon}
+            {/* {stayLabels[0].icon} */}
             {/* {stayLabels.map((label, index) => {
                 return < button key={index} > <span>{label}</span></button>
 

@@ -71,6 +71,7 @@ export function AppHeader() {
                     <div className='host-lng-container'>
                         <button className='host-btn'>Airbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
+                        <span className='fa-solid castle'></span>
                     </div>
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
