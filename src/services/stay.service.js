@@ -176,7 +176,7 @@ const demoLocs = [{
        reviews:[getDemoReview(),getDemoReview(),getDemoReview(),getDemoReview()],
        likedByUsers:[{_id:utilService.makeId(),fullname:'Kinki Uncle',imgUrl:'https://preview.redd.it/8rfj7dyr4co91.jpg?auto=webp&s=fb9d08619d652e5c27086d16f15133fcb327928e'},
        {_id:utilService.makeId(),fullname:'Asi Sassi',imgUrl:'https://i.pinimg.com/736x/93/45/89/934589f3aa2f266b260de8bfeb3ae1ab.jpg'},
-       {_id:utilService.makeId(),fullname:'Yaron Biton',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvM7m3XNTKot6plKwCy6tn56-1Rqxj4P8eMNJQl8BfSKgTdtcBIe45t_7BlIm6R9VdQE&usqp=CAU'}]
+       {_id:utilService.makeId(),fullname:'mr ass',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvM7m3XNTKot6plKwCy6tn56-1Rqxj4P8eMNJQl8BfSKgTdtcBIe45t_7BlIm6R9VdQE&usqp=CAU'}]
     }
 }
 //       "loc": {
