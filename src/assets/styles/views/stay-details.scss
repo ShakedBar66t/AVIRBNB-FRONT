@@ -48,6 +48,32 @@
             padding-block: 32px;
             border-bottom: 1px solid #dddddd;
         }
+
+        .reverse-modal form header {
+            display: flex;
+            justify-content: space-between;
+
+            h4 {
+                font-weight: 400;
+                margin: 0;
+
+                span {
+                    font-weight: 600;
+                    font-size: 1.375em;
+                }
+            }
+
+            .review-totals {
+                font-size: 14px;
+                font-weight: 600;
+
+                a {
+                    color: #717171;
+                    text-decoration: underline;
+                }
+            }
+        }
+
     }
 
     h2 {
@@ -69,6 +95,12 @@
         font-family: Cereal;
         text-transform: capitalize;
         font-weight: 200;
+    }
+
+    .review-totals {
+        display: flex;
+        align-items: center;
+        gap: 0.1875em;
     }
 
 

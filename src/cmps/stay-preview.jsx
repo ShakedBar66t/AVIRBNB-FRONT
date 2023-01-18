@@ -6,6 +6,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
 import { stayService } from "../services/stay.service";
+import { utilService } from "../services/util.service";
 
 
 
@@ -15,7 +16,27 @@ export function StayPreview({ stay }) {
     const [isHover, setIsHover] = useState(false)
     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
 
+    function getDateString(){
 
+    }
+
+  
+    function PrevDateStr(){
+        const day = 1000*60*60*24
+      const startingDate =  Date.now() + (utilService.getRandomIntInclusive(0,14) * day)
+      const startingMonth = utilService.getMonthName(new Date(startingDate))
+      const startingDay = new Date(startingDate).getDate()
+    //   new Date(sentAt).getDate()
+
+    const endDate = startingDate + day*5
+    const endingMonth = utilService.getMonthName(new Date(endDate))
+    const endingDay = new Date(endDate).getDate()
+
+
+        return <p className="prev-date">{`${startingMonth} ${startingDay}- ${(startingMonth===endingMonth)? '': endingMonth} ${endingDay} `}</p>
+      console.log(startingDay)
+    //   const strDate = 
+    }
 
     return <article className="stay-preview"
         onClick={() => { navigate(`/stay/${stay._id}`) }}
@@ -48,13 +69,21 @@ export function StayPreview({ stay }) {
             <div className="prev-loc-rate">
                 <p className="prev-loc">{stay.loc.city + ', ' + stay.loc.country}</p>
                 <p className="stay-prev-rating">
-                    <span className="fa-solid star" style={{ fontSize: "14px" }}>
-                    </span>{stayService.getAvrStayRating(stay.reviews)}</p>
-
-
+                    <span className="fa-solid star" style={{ fontSize: "12px" }}>
+                    </span>{" " + stayService.getAvrStayRating(stay.reviews)}
+                </p>
             </div>
+            <p className="prev-host-name">{"Hosted by " + (stay.host.fullname.slice(0,stay.host.fullname.indexOf(' ')))}</p>
+            <PrevDateStr />
+            <p className="prev-price">{'$'+ stay.price}</p>
+
+
+
+
+
+
         </div>
-        {stay.name}
+       
     </article>
 }
 // var perc = ((pEarned/pPos) * 100).toFixed(3);

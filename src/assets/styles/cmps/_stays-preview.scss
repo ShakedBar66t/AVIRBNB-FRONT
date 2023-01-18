@@ -1,6 +1,9 @@
 .stay-preview{
     position: relative;
-    aspect-ratio: 0.73/1;
+    // aspect-ratio: 0.77/1;
+    font-family: Circular;
+    font-size: 16px;
+    line-height: 18px;
     .stay-preview-img{
         width: 100%;
         aspect-ratio: 1/1;
@@ -44,9 +47,6 @@
             line-height: 20px;
             font-weight: 600;
             color:$clr6 ;
-           border-color: green;
-            // background-color: red;
-
         }
     }
 
@@ -66,10 +66,22 @@
         display: flex;
         justify-content: space-between;
         font-weight: 500;
-        font-family: Circular;
-        font-size: 16px;
-//         FONT-FAMILY
-// Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif
+ 
+
+
+
+    }
+    .prev-host-name, .prev-date{
+        color: $clr8;
+    }
+    .prev-price{
+        color: $clr7;
+       
+        margin-top: 10px;
+    }
+
+    p{
+        margin-bottom: 0;
     }
 
     // .stay-prev-rating{
