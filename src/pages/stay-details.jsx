@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { stayService } from "../services/stay.service"
 import { IoShareOutline } from 'react-icons/io5'
 import { BsHeart, BsTrophy } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
-import { GrKey } from 'react-icons/gr'
+import { HiOutlineKey } from 'react-icons/hi'
 import { MdOutlineCleaningServices } from 'react-icons/md'
 
 
@@ -81,7 +82,7 @@ export function StayDetails() {
                             <p>Great location</p>
                             <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
                         </div>
-                        <GrKey />
+                        <HiOutlineKey />
                         <div>
                             <p>Great check-in experience</p>
                             <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
@@ -101,10 +102,11 @@ export function StayDetails() {
                     <div className="amenities-container" id="amenities">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
-                            <MdOutlineCleaningServices/>
                         </div>
-
                     </div>
+                    <section className="reverse-modal">
+
+                    </section>
                 </section>
             </div>
         </section >
