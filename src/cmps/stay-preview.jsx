@@ -39,7 +39,7 @@ export function StayPreview({ stay }) {
     }
 
     return <article className="stay-preview"
-        onClick={() => { navigate(`/stay/${stay._id}`) }}
+        onClick={() => { navigate(`/explore/${stay._id}`) }}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
     >
@@ -62,7 +62,7 @@ export function StayPreview({ stay }) {
         <div className="curr-img-indication flex">
             {stay.imgUrls.map((imgurl, idx) => {
                 const dotClr = (currImgUrlIdx === idx) ? "white" : "rgba(255, 255, 255,0.7)"
-                return <div key={imgurl + idx} style={{ fontSize: "60px", color: dotClr }}>.</div>
+                return <div key={imgurl + idx} style={{ fontSize: "50px", color: dotClr }}>.</div>
             })}
         </div>
         <div>

@@ -10,8 +10,11 @@ import { useState } from 'react'
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
+import { useDispatch } from 'react-redux'
+import { TOGGLE_LOGIN_MODAL } from '../store/reducers/user.reducer'
 export function AppHeader() {
 
+    const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
     const [filterModal, setFilterModal] = useState(false)
     const navigate = useNavigate()
@@ -94,7 +97,7 @@ export function AppHeader() {
                     } */}
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
-                <button>Log in </button>
+                <button onClick={()=>dispatch({ type: TOGGLE_LOGIN_MODAL })}>Log in </button>
                 <button>Sign up </button>
                 <hr />
                 <button>Airbnb your home </button>

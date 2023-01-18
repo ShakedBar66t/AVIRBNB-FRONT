@@ -60,7 +60,9 @@ export function StayIndex() {
 
     return <section className='stay-index stay-index-layout'>
         <AppHeader />
+       
         <StayList stays={stays} />
+        
 
     </section>
 

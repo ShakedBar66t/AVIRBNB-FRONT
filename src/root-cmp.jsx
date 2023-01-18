@@ -15,9 +15,11 @@ import { AppHeader } from './cmps/app-header'
 import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 import { StayDetails } from './pages/stay-details'
-
+import { useSelector } from 'react-redux'
+import { LoginModal } from './cmps/login-modal.jsx'
 export function RootCmp() {
 
+    const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
     return (
         <div>
             {/* <AppHeader /> */}
@@ -29,7 +31,9 @@ export function RootCmp() {
                     <Route path="/explore" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />
                 </Routes>
+                
             </main>
+            {(isLoginModalOpen)&& <LoginModal />}
             {/* <AppFooter /> */}
         </div>
     )

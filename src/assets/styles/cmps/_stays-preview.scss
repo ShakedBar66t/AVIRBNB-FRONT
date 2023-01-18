@@ -3,16 +3,16 @@
     // aspect-ratio: 0.77/1;
     font-family: Circular;
     font-size: 16px;
-    line-height: 18px;
+    line-height: 20px;
     .stay-preview-img{
         width: 100%;
-        aspect-ratio: 1/1;
+        aspect-ratio: 1/0.95;
         border-radius: 10px;
     }
 
     .img-preview-paging-btns{
         position: absolute;
-        top: 35%;
+        top: 37.5%;
         border-radius: 50%;
         background-color: rgba($color: $clr6, $alpha: 0.9);
         color: $clr7;
@@ -52,7 +52,7 @@
 
     .curr-img-indication{
         position: absolute;
-         top: 50%;
+        bottom:28% ;
         left: 38%;
 
      
