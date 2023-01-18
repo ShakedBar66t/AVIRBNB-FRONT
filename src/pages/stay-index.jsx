@@ -57,7 +57,7 @@ export function StayIndex() {
     }
 
 
-    return <section className='stay-index'>
+    return <section className='stay-index stay-index-layout'>
 
         <StayList stays={stays}/>
         
