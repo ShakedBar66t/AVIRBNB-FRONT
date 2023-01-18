@@ -77,7 +77,7 @@ function getEmptyStay() {
 function _createStays(){
     let stays = utilService.loadFromStorage(STAY_STORAGE_KEY) || []
     if(!stays || !stays.length){
-        for(let i=0;i<10;i++){
+        for(let i=0;i<20;i++){
             
             const stay =  _createStay()
             stays.push(stay)
@@ -113,6 +113,44 @@ const stayLabels = ['lake','Amazing views', 'Castles',' Amzaing pools','Mansions
 'Top of the world','Islands','New','Tranding','Cabins','Boats','Tiny homes','Tropical',
 'Bed & breakfasts','Design','Beachfront','Farms','Arctic','Caves','Play','Iconic cities']
 
+const demoLocs = [{
+            "country": "Portugal",
+            "countryCode": "PT",
+            "city": "Porto",
+            "address": "17 Kombo st",
+            "lat": -8.61308,
+            "lng": 41.1413
+          },{ "country": "France",
+          "countryCode": "FR",
+          "city": "Paris",
+          "address": "16 Av Victor Hugo",
+          "lat": 48.871938,
+          "lng": 2.290538},
+          {    "country": "Spain",
+          "countryCode": "ES",
+          "city": "Madrid",
+          "address": "Prta del Sol, 7",
+          "lat": 40.4168,
+          "lng": -3.7022}]
+
+ function getDemoReview(){
+
+     return   {
+      "id": utilService.makeId(),
+      "txt": utilService.makeLorem(4),
+      "rate":utilService.getRandomIntInclusive(1,5),
+      "by": {
+        "_id": utilService.makeId(),
+        "fullname": "Kuku Epta",
+        "imgUrl": 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6q9BznG8oztRJPy6U0iowu827IrJA4u-mzpk9jRyyWsES4La3RBP-SxuSxr8DuOffDB4&usqp=CAU'
+      }
+    }
+ }
+
+  
+        
+        
+
     return {
         _id:utilService.makeId(),
         name: utilService.makeLorem(3),
@@ -131,12 +169,37 @@ const stayLabels = ['lake','Amazing views', 'Castles',' Amzaing pools','Mansions
        labels:[stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)],
        stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)],
        stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)]],
-       reviews:[utilService.makeLorem(5),utilService.makeLorem(5)],
        host:{ _id:utilService.makeId(),fullname:'moshe ha gadol',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6q9BznG8oztRJPy6U0iowu827IrJA4u-mzpk9jRyyWsES4La3RBP-SxuSxr8DuOffDB4&usqp=CAU'},
-       loc:{},
-       likedByUsers:[]
+       loc:demoLocs[utilService.getRandomIntInclusive(0,demoLocs.length-1)],
+       reviews:[getDemoReview(),getDemoReview(),getDemoReview(),getDemoReview()],
+       likedByUsers:[{_id:utilService.makeId(),fullname:'Kinki Uncle',imgUrl:'https://preview.redd.it/8rfj7dyr4co91.jpg?auto=webp&s=fb9d08619d652e5c27086d16f15133fcb327928e'},
+       {_id:utilService.makeId(),fullname:'Asi Sassi',imgUrl:'https://i.pinimg.com/736x/93/45/89/934589f3aa2f266b260de8bfeb3ae1ab.jpg'},
+       {_id:utilService.makeId(),fullname:'Yaron Biton',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvM7m3XNTKot6plKwCy6tn56-1Rqxj4P8eMNJQl8BfSKgTdtcBIe45t_7BlIm6R9VdQE&usqp=CAU'}]
     }
 }
+//       "loc": {
+//         "country": "Portugal",
+//         "countryCode": "PT",
+//         "city": "Porto",
+//         "address": "17 Kombo st",
+//         "lat": -8.61308,
+//         "lng": 41.1413
+//       },
+//       "reviews": [
+//         {
+//           "id": "madeId",
+//           "txt": "Very helpful hosts. Cooked traditional...",
+//           "rate": 4,
+//           "by": {
+//             "_id": "u102",
+//             "fullname": "user2",
+//             "imgUrl": "/img/img2.jpg"
+//           }
+//         }
+//       ],
+//       "likedByUsers": ['mini-user'] // for user-wishlist : use $in
+//     }
+//   ]
 
 
 
