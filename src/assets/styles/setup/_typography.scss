@@ -52,6 +52,10 @@
     content: "\f0e0";
     color: var(--clr03);  
 }
+.fa-solid.beach::before{
+    content: "\f5ca";
+    color: $clr7;  
+}
 
 .fa-solid.star::before{
     content: "\f005";
