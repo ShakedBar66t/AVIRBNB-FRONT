@@ -1,8 +1,33 @@
 .stay-preview{
+    position: relative;
 
     .stay-preview-img{
         width: 100%;
         aspect-ratio: 1/1;
         border-radius: 10px;
+    }
+
+    .like-btn{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: none;
+        background: none;
+        font-size: 24px;
+        line-height: 20px;
+        font-weight: 600;
+        
+       .heart-fa{
+        color: #222222;
+       }
+
+        .reg-heart-fa{
+            line-height: 20px;
+            font-weight: 600;
+            color:$clr6 ;
+           border-color: green;
+            // background-color: red;
+
+        }
     }
 }
