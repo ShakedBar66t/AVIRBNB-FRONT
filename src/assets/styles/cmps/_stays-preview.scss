@@ -54,10 +54,27 @@
         position: absolute;
          top: 50%;
         left: 38%;
+
      
     }
 
     .prev-loc{
         color: $clr7;
     }
+    
+    .prev-loc-rate{
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-family: Circular;
+        font-size: 16px;
+//         FONT-FAMILY
+// Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif
+    }
+
+    // .stay-prev-rating{
+    //     position: absolute;
+    //     right: 0;
+    //     bottom: 17.5%;
+    // }
 }
