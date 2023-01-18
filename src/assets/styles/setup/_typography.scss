@@ -35,7 +35,7 @@
     src: url("/assets/fonts/fa-regular-400.ttf");
 }
 
-.fa-brands{
+.fa-brands {
     font-family: fa-brands;
 }
 
@@ -43,21 +43,21 @@
     font-family: fa-regular;
 }
 
-.fa-solid{
+.fa-solid {
     font-family: fa-solid;
 }
 
 
-.fa-regular.envelope::before{
+.fa-regular.envelope::before {
     content: "\f0e0";
-    color: var(--clr03);  
+    color: var(--clr03);
 }
 .fa-solid.beach::before{
     content: "\f5ca";
     color: $clr7;  
 }
 
-.fa-solid.star::before{
+.fa-solid.star::before {
     content: "\f005";
-    color: $clr7;  
+    color: $clr7;
 }
