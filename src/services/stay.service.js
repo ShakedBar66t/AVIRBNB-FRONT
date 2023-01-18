@@ -5,6 +5,8 @@ import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 import { storageService } from './async-storage.service.js'
 
+import { MdOutlineCleaningServices } from 'react-icons/md'
+
 
 const STAY_STORAGE_KEY = 'stayDB'
 
@@ -102,7 +104,7 @@ function _createStay(){
 ]
 const stayTypes = ['Entire place','Private rooms','Hotel rooms','Shared rooms']
 
-const stayAmenities = ['Hair dryer', 'Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
+const stayAmenities = [{ name: 'Cleaning products', icon: <MdOutlineCleaningServices/> }, 'Shampoo', 'Body soap', 'Hot water',
  'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
   'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
    'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',

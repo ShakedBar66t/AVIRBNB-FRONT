@@ -30,7 +30,7 @@ export function RootCmp() {
                     <Route path="/stay/:stayId" element={<StayDetails />} />
                 </Routes>
             </main>
-            <AppFooter />
+            {/* <AppFooter /> */}
         </div>
     )
 }
