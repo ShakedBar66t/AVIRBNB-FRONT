@@ -51,7 +51,7 @@ export function AppHeader() {
     }
 
     return (
-        <header className="app-header full stay-index-layout">
+        <header className={`app-header full stay-index-layout ${filterModal ? 'open' : ''}`}>
             <nav >
                 {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
                 <NavLink to='/stay'>Stays </NavLink> */}
@@ -59,8 +59,8 @@ export function AppHeader() {
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>virbnb</span>
                 </div>
-                <div className='filter-container'>
-                    <div className='filter-btns' onClick={toggleFilterModal}>
+                <div onClick={toggleFilterModal} className={`filter-container ${filterModal ? 'closed' : ''}`}>
+                    <div className='filter-btns' >
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
                         <button className='guest-filter '>Add guests </button>
@@ -71,7 +71,7 @@ export function AppHeader() {
                     <div className='host-lng-container'>
                         <button className='host-btn'>Airbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
-                        <span className='fa-solid castle'></span>
+                        {/* <span className='fa-solid castle'></span> */}
                     </div>
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
@@ -112,6 +112,7 @@ export function AppHeader() {
 
             </div>
             <LabelsFilter />
+            <div onClick={toggleFilterModal} className={`background-shadow full ${filterModal ? 'open' : ''}`} ></div>
         </header>
     )
 }
