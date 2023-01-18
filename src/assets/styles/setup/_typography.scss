@@ -8,6 +8,11 @@
     src: url(../../fonts/AirbnbCereal_W_Bk.otf);
 }
 
+@font-face {
+    font-family: Circular;
+    src: url(../../fonts/CircularStd-Book.otf);
+}
+
 
 
 @font-face {
@@ -48,13 +53,7 @@
     color: var(--clr03);  
 }
 
-.fa-solid.house::before{
-    content: "\f015";
-    color: var(--clr03);  
+.fa-solid.star::before{
+    content: "\f005";
+    color: $clr7;  
 }
-
-.fa-solid.fridge::before{
-    content: "\e026";
-    color: var(--clr03);  
-}
-

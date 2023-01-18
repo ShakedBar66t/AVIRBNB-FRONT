@@ -5,6 +5,8 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
+import { stayService } from "../services/stay.service";
+
 
 
 
@@ -12,6 +14,8 @@ export function StayPreview({ stay }) {
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false)
     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
+
+
 
     return <article className="stay-preview"
         onClick={() => { navigate(`/stay/${stay._id}`) }}
@@ -41,16 +45,19 @@ export function StayPreview({ stay }) {
             })}
         </div>
         <div>
-            <div>
+            <div className="prev-loc-rate">
                 <p className="prev-loc">{stay.loc.city + ', ' + stay.loc.country}</p>
-                <p> <span className="fa-regular envelope"></span></p>
-                <p> <span className="fa-solid house"></span></p>
+                <p className="stay-prev-rating">
+                    <span className="fa-solid star" style={{ fontSize: "14px" }}>
+                    </span>{stayService.getAvrStayRating(stay.reviews)}</p>
+
 
             </div>
         </div>
         {stay.name}
     </article>
 }
+// var perc = ((pEarned/pPos) * 100).toFixed(3);
 //       "loc": {
 //         "country": "Portugal",
 //         "countryCode": "PT",

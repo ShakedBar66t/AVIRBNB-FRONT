@@ -16,11 +16,20 @@ export const stayService = {
     save,
     remove,
     getEmptyStay,
-    addStayMsg
+    addStayMsg,
+    getAvrStayRating
 }
 window.cs = stayService
 
 _createStays()
+
+
+function getAvrStayRating(reviews){ 
+  const totalRate =  reviews.reduce((acc,review)=>{
+        return acc+=review.rate
+    },0)
+    return (totalRate/reviews.length).toFixed(2)  
+}
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
