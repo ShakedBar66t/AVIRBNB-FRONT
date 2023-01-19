@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { stayService } from "../services/stay.service"
 import { IoShareOutline } from 'react-icons/io5'
