@@ -4,6 +4,14 @@
     font-family: Circular;
     font-size: 16px;
     line-height: 20px;
+
+    &:hover{
+
+        & .img-preview-paging-btns{
+            opacity: 1;
+        }
+    }
+
     .stay-preview-img{
         width: 100%;
         aspect-ratio: 1/0.95;
@@ -20,6 +28,9 @@
         font-size: 14px;
         margin: 0;
         text-align: center;
+        opacity: 0;
+        transition: opacity 0.2s;
+
     }
     .prev-img-preview-btn{
         left: 5%;
@@ -52,7 +63,7 @@
 
     .curr-img-indication{
         position: absolute;
-        bottom:28% ;
+        bottom:33% ;
         left: 38%;
 
      
@@ -84,9 +95,5 @@
         margin-bottom: 0;
     }
 
-    // .stay-prev-rating{
-    //     position: absolute;
-    //     right: 0;
-    //     bottom: 17.5%;
-    // }
+
 }

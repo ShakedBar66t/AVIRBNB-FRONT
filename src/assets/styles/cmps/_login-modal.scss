@@ -9,12 +9,22 @@
     border-radius: 10px;
     left: 0;
     right: 0;
-    margin: 0 auto;
+    margin: auto;
     opacity: 0;
+   
+    color: $clr7;
+    font-family: Circular;
+
+
+    & > *:not(.full){
+        padding: 0 24px;
+    }
+
 
     &.open {
         opacity: 1;
-        top: 10%;
+        bottom: 0;
+        top: 0;
         opacity: 1;
     }
 
@@ -22,11 +32,53 @@
         top: 100vh;
     }
 
-    @include for-narrow-layout {
+    // @include for-narrow-layout {
+    //     width: 568px;
+    // }
+
+       @include for-narrow-layout {
+
         width: 568px;
     }
 
-    @include for-wide-layout {
-        width: 568px;
+    header {
+        display: flex;
+        align-items: center;
+        // height: 32px;
+        // padding: 24px 0;
+        margin: 24px 0;
+
+
+        h2 {
+            margin: auto;
+            font-size: 1rem;
+
+
+
+        }
+
+        button {
+            position: absolute;
+            
+        }
     }
+
+    hr{
+        color: rgba(211, 211, 211, 1);
+    }
+
+    .main-login-cont{
+        margin: 24px 0;
+        
+        main{
+            padding: 0;
+        }
+        h3{
+            font-size: 22px;
+        }
+    }
+
+    // .secondary{
+    //     color: gold !important;
+    // }
 }

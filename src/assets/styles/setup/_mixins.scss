@@ -9,7 +9,7 @@
 }
 
 @mixin for-narrow-layout {
-    @media (min-width: calc($mobile-breakpoint )) {
+    @media (min-width: calc($narrow-breakpoint )) {
         @content;
     }
 }

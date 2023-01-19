@@ -56,6 +56,7 @@ export function AppHeader() {
     }
 
     function toggleLoginModal() {
+        toggleUserModal()
         setLoginModal(!loginModal)
         dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
     }

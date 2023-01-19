@@ -9,12 +9,14 @@ export const REMOVE_USER = 'REMOVE_USER'
 export const SET_USERS = 'SET_USERS'
 export const SET_SCORE = 'SET_SCORE'
 export const TOGGLE_LOGIN_MODAL= 'TOGGLE_LOGIN_MODAL'
+export const TOGGLE_IS_SHADOW= 'TOGGLE_IS_SHADOW'
 
 const initialState = {
     count: 10,
     user: userService.getLoggedinUser(),
     users: [],
     isLoginModalOpen:false,
+    isShadow:false,
     watchedUser : null
 }
 
@@ -32,6 +34,9 @@ export function userReducer(state = initialState, action) {
             break
         case TOGGLE_LOGIN_MODAL:
             newState = { ...state, isLoginModalOpen: !state.isLoginModalOpen }
+            break
+        case TOGGLE_IS_SHADOW:
+            newState = { ...state, isShadow: !state.isShadow }
             break
         case SET_USER:
             newState = { ...state, user: action.user }
