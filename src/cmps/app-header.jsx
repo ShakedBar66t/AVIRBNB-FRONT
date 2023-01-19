@@ -17,6 +17,7 @@ export function AppHeader() {
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
     const [filterModal, setFilterModal] = useState(false)
+    const [loginModal, setLoginModal] = useState(false)
     const navigate = useNavigate()
 
 
@@ -52,6 +53,20 @@ export function AppHeader() {
     function toggleFilterModal() {
         setFilterModal(!filterModal)
     }
+    function toggleLoginModal() {
+        setLoginModal(!loginModal)
+        dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
+    }
+
+    function handelShadowClick() {
+        if (filterModal) setFilterModal(!filterModal)
+        if (loginModal) {
+            setLoginModal(!loginModal)
+            dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
+        }
+    }
+
+
 
     return (
         <header className="app-header full stay-index-layout">
@@ -74,7 +89,6 @@ export function AppHeader() {
                     <div className='host-lng-container'>
                         <button className='host-btn'>Airbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
-                        <span className='fa-solid castle'></span>
                     </div>
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
@@ -97,7 +111,7 @@ export function AppHeader() {
                     } */}
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
-                <button onClick={()=>dispatch({ type: TOGGLE_LOGIN_MODAL, diff:1 })}>Log in </button>
+                <button onClick={toggleLoginModal}>Log in </button>
                 <button>Sign up </button>
                 <hr />
                 <button>Airbnb your home </button>
@@ -111,6 +125,7 @@ export function AppHeader() {
                 <button>Who </button>
                 <button className='search-btn'><FaSearch color='white' /></button>
             </div>
+            <div onClick={handelShadowClick} className={`background-shadow full ${filterModal ? 'open' : ''} ${loginModal ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
             </div>
