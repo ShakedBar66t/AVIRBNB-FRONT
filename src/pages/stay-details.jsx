@@ -7,6 +7,7 @@ import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
 import { HiOutlineKey } from 'react-icons/hi'
 import { MdOutlineCleaningServices } from 'react-icons/md'
+import { Example } from "../cmps/date-picker"
 
 
 export function StayDetails() {
@@ -32,6 +33,7 @@ export function StayDetails() {
     }
 
     console.log(stay)
+    // console.log(stay.reviews[0].by.imgUrl)
 
 
     return (stay) &&
@@ -101,34 +103,227 @@ export function StayDetails() {
                     <div className="amenities-container" id="amenities">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
+                            {stay.amenities.map((amenity, index) => {
+                                return <div className="amenities-list" key={index}>
+                                    <div>{amenity}</div>
+                                </div>
+                            })}
                         </div>
                     </div>
-                    <section className="reverse-modal">
-                        <form>
-                            <header>
-                                <h4><span>{stay.price}$</span> night</h4>
-                                <div className="review-totals">
-                                    <FaStar/>
-                                    {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>4.8 ·</span> 
-                                    <a href="">20 reviews</a>
-                                </div>
-                            </header>
-                            <div className="picker-container">
-                                <div className="check-in picker">
-                                    <label htmlFor="check-in">CHECK-IN</label>
-                                    <input type="text" placeholder="MM/DD/YYYY" />
-                                </div>
-                                <section className="date-picker-container">
-                                    <div className="el-date-editor">
-                                        
-                                    </div>
-                                </section>
+                </section>
+                <section className="reverse-modal">
+                    <form>
+                        <header>
+                            <h4><span>{stay.price}$</span> night</h4>
+                            <div className="review-totals">
+                                <FaStar />
+                                {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
+                                <span>4.8 ·</span>
+                                <a href="">20 reviews</a>
                             </div>
-                        </form>
-                    </section>
+                        </header>
+                        <div className="picker-container">
+                            <div className="check-in picker">
+                                <label htmlFor="check-in">CHECK-IN</label>
+                                <input type="text" placeholder="MM/DD/YYYY" />
+                            </div>
+                            <section className="date-picker-container">
+                                <div className="el-date-editor">
+                                    <Example />
+                                </div>
+                            </section>
+                        </div>
+                        <div className="btn-container">
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="cell"></div>
+                            <div className="content">
+                                <button className="action-btn">
+                                    <span>Check availability</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
+                            <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
+                            <div className="prices">
+                                <p>${stay.price} x 0 nights</p>
+                                <p>0$</p>
+                                <p>Cleaning fee</p>
+                                <p>0$</p>
+                                <p>Service fee</p>
+                                <p>0$</p>
+                            </div>
+                            <div className="total">
+                                <p>Total</p>
+                                <p>0$</p>
+                            </div>
+                        </div>
+                    </form>
                 </section>
             </div>
+            <section id="reviews">
+                <header>
+                    <div className="review-totals">
+                        <FaStar />
+                        <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                      <a href="">{stay.reviews.length} reviews </a> 
+                    </div>
+                </header>
+                <div className="rating">
+                    <p>Cleanliness</p>
+                    <span className="progress-container">
+                        <progress max="5" value="4.966666666666667">
+                        </progress>
+                        5.0
+                    </span>
+                    <p>Check-in</p>
+                    <span className="progress-container">
+                        <progress max="5" value="4.466666666666667">
+                        </progress>
+                        4.5
+                    </span>
+                    <p>Location</p>
+                    <span className="progress-container">
+                        <progress max="5" value="4.333333333333333">
+                        </progress>
+                        4.3
+                    </span>
+                    <p>Communication</p>
+                    <span className="progress-container">
+                        <progress max="5" value="3.6666666666666665">
+                        </progress>
+                        3.7
+                    </span>
+                    <p>Accuracy</p>
+                    <span className="progress-container">
+                        <progress max="5" value="4.266666666666667">
+                        </progress>
+                        4.3
+                    </span>
+                    <p>Value</p>
+                    <span className="progress-container">
+                        <progress max="5" value="3.9333333333333336">
+                        </progress>
+                        3.9
+                    </span>
+                </div>
+                <main className="review-container">
+                    {stay.reviews.map((review, index) => {
+                        return <div className="review-preview" key={index}>
+                            <div className="mini-user-details">
+                                <img src={review.by.imgUrl} />
+                                <p>{review.by.fullname}</p>
+                                <span>Rated: {review.rate} <FaStar /></span>
+                            </div>
+                            <p className="review-text text0">
+                                {review.txt}
+                            </p>
+                        </div>
+                    })}
+                </main>
+            </section>
+            <section className="map" id="map">
+                <h2>Where you'll be</h2>
+                
+
+            </section>
         </section >
 
 
