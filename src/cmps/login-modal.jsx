@@ -37,6 +37,10 @@ export function LoginModal() {
             {/* {(!isSignUpModal) && <SignInForm />}
            {(isSignUpModal) && < SignUpForm/>} */}
             < SignInForm />
+            
+            <p className='or-p'>OR</p> 
+            <hr /> 
+         
 
         </main>
     </div>
