@@ -50,9 +50,11 @@ export function AppHeader() {
     function toggleUserModal() {
         setUserModal(!userModal)
     }
+
     function toggleFilterModal() {
         setFilterModal(!filterModal)
     }
+
     function toggleLoginModal() {
         setLoginModal(!loginModal)
         dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
@@ -67,17 +69,14 @@ export function AppHeader() {
     }
 
 
-
     return (
         <header className="app-header full stay-index-layout">
             <nav >
-                {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
-                <NavLink to='/stay'>Stays </NavLink> */}
                 <div className='logo-container'>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>virbnb</span>
                 </div>
-                <div className='filter-container'>
+                <div className={`filter-container ${filterModal ? 'closed' : ''}`}>
                     <div className='filter-btns' onClick={toggleFilterModal}>
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
@@ -93,22 +92,6 @@ export function AppHeader() {
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
                 </div>
-
-                {/* {user &&
-                    <span className="user-info">
-                        <Link to={`user/${user._id}`}>
-                        {user.imgUrl && <img src={user.imgUrl} />}
-                        {user.fullname}
-                        </Link>
-                        <span className="score">{user.score?.toLocaleString()}</span>
-                        <button onClick={onLogout}>Logout</button>
-                        </span>
-                    }
-                    {!user &&
-                        <section className="user-info">
-                        <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-                        </section>
-                    } */}
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
                 <button onClick={toggleLoginModal}>Log in </button>

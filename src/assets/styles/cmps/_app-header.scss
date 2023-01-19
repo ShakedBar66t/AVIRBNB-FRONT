@@ -12,8 +12,19 @@
         height: 120px;
     }
 
+    & button {
+        cursor: pointer;
+        border: none;
+        background-color: white;
+        color: #222222;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
     .background-shadow {
-        top: 100px;
+        top: 80px;
         left: 0;
         height: 100vh;
         width: 100vw;
@@ -43,7 +54,14 @@
         height: 80px;
         position: relative;
         width: 100%;
-        z-index: 1
+        z-index: 1;
+
+        & button {
+
+            &:not(:last-child) {
+                padding: 0 16px;
+            }
+        }
     }
 
     .logo-container {
@@ -69,7 +87,7 @@
 
     .filter-container {
         border-radius: 25px;
-        box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.25);
+        box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.15);
         transition: 0.3s;
         height: 48px;
         align-items: center;
@@ -87,23 +105,8 @@
         }
     }
 
-    & button {
-        cursor: pointer;
-        border: none;
-        background-color: white;
-        color: #222222;
-        font-size: 14px;
-        line-height: 18px;
-        font-weight: 600;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-        &:not(:last-child) {
-            padding: 0 16px;
-        }
-    }
-
     .filter-btns {
-        padding: 3px 8px;
+        padding: 3px 8px 3px 15px;
 
         &> :first-child,
         &> :nth-child(2) {
@@ -114,37 +117,38 @@
             font-weight: 400;
             color: rgba(134, 134, 134, 0.8)
         }
-    }
 
-    .location-filter {
-        border-radius: 40px 4px 4px 40px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .search-filter {
-        border-radius: 4px 40px 40px 4px;
-    }
-
-    .host-btn,
-    .lang-btn {
-        border-radius: 16px;
-
-        &:hover {
-            background-color: rgba(211, 211, 211, 0.3);
+        .location-filter {
+            border-radius: 40px 4px 4px 40px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
-    }
 
-    .search-btn {
-        background-color: #ff385c;
-        border-radius: 50%;
-        height: 32px;
-        width: 32px;
-
-        .fa-search {
-            margin-top: 1px;
-            font-size: 12px;
+        .search-filter {
+            border-radius: 4px 40px 40px 4px;
         }
+
+        .host-btn,
+        .lang-btn {
+            border-radius: 16px;
+
+            &:hover {
+                background-color: rgba(211, 211, 211, 0.3);
+            }
+        }
+
+        .search-btn {
+            background-color: #ff385c;
+            border-radius: 50%;
+            height: 32px;
+            width: 32px;
+
+            .fa-search {
+                margin-top: 1px;
+                font-size: 12px;
+            }
+        }
+
     }
 
     .user-nav-container {
@@ -208,10 +212,10 @@
 }
 
 /////// modals ////////
+/// 
 .user-modal {
     position: absolute;
     width: 240px;
-    // height: 100%;
     background-color: white;
     border-radius: 10px;
     padding: 8px 0;
@@ -264,7 +268,6 @@
     border: 1px solid lightgray;
     border-radius: 35px;
     padding: 5px 0;
-    z-index: 0;
     position: fixed;
     top: 60px;
     left: 50%;
@@ -273,7 +276,6 @@
     transition: all 0.3s ease-in-out;
 
     display: flex;
-    flex: 1 1 0%;
     min-width: 0;
     pointer-events: auto;
 
@@ -282,14 +284,22 @@
         opacity: 1;
         transform: scale(1.2) translateY(30%) translateX(-45%)
     }
-}
 
-.filter-modal button {
-    width: 100%;
-    border-radius: 16px;
-    transition: background-color 0.3s ease-in-out;
+    .search-btn {
+        align-self: center;
+        background-color: #ff385c;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+    }
 
-    &:hover {
-        background-color: rgba(211, 211, 211, 0.3);
+    & button {
+        width: 70%;
+        border-radius: 16px;
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.3);
+        }
     }
 }
