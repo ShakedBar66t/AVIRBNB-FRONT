@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-
+import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 export function LabelsFilter() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [displayCount, setDisplayCount] = useState(7);
+    const [displayCount, setDisplayCount] = useState(4);
+    const [displayNext, setDisplayNext] = useState(true);
     const stayLabels = [
         { name: 'By the lake', src: 'lake' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
         { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' }, { name: 'Historical homes', src: 'historical-homes' },
         { name: 'Ski-in/out', src: 'ski' }, { name: 'Riads', src: 'riads' }, { name: 'Luxe', src: 'luxe' }, { name: 'OMG!', src: 'omg' },
-        { name: 'Grand pianos', src: 'piano' }, { name: 'Houseboats', src: 'houseboats' }, { name: 'Top of the world', src: 'top' }, { name: 'Islands', src: 'islands' },
+        { name: 'Grand pianos', src: 'piano' }, { name: 'Houseboats', src: 'houseboats' }, { name: 'Mountains', src: 'top' }, { name: 'Islands', src: 'islands' },
         { name: 'New', src: 'new' }, { name: 'Trending', src: 'trending' }, { name: 'Cabins', src: 'cabin' }, { name: 'Boats', src: 'boats' },
         { name: 'Tiny homes', src: 'tiny' }, { name: 'Tropical', src: 'tropical' }
         , { name: 'Bed & breakfasts', src: 'bnb' }, { name: 'Design', src: 'design' }
@@ -19,6 +20,8 @@ export function LabelsFilter() {
         if (currentIndex + displayCount < stayLabels.length) {
             setCurrentIndex(currentIndex + displayCount);
         }
+        console.log(currentIndex > stayLabels.length)
+        console.log(currentIndex, stayLabels.length)
     }
 
     const handlePrev = () => {
@@ -29,7 +32,6 @@ export function LabelsFilter() {
 
     return (
         <div className="carousel stay-index-layout">
-            <button className="prev-btn" onClick={handlePrev}>prev</button>
             <div className="carousel-inner">
                 {
                     stayLabels.map((label, index) => {
@@ -44,11 +46,17 @@ export function LabelsFilter() {
                     })
                 }
             </div>
-            <button className="next-btn" onClick={handleNext}>Next</button>
+            <div className='btn-container prev '>
+                <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+            </div>
+            <div className='btn-container next'>
+            <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
+            </div>
+            {/* <div>setting</div> */}
         </div>
     );
 };
-
+// 
 
         // <div className="carousel">
         //     <button className="prev-btn" onClick={handlePrevClick}>Prev</button>

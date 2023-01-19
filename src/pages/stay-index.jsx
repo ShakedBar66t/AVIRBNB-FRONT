@@ -60,35 +60,9 @@ export function StayIndex() {
 
     return <section className='stay-index stay-index-layout'>
         <AppHeader />
-       
         <StayList stays={stays} />
         
 
     </section>
 
-    // return (
-    //     <div>
-    //         <h3>Stays App</h3>
-    //         <main>
-    //             <button onClick={onAddStay}>Add Stay ⛐</button>
-    //             <ul className="stay-list">
-    //                 {stays.map(stay =>
-    //                     <li className="stay-preview" key={stay._id}>
-    //                         <h4>{stay.vendor}</h4>
-    //                         <h1>⛐</h1>
-    //                         <p>Price: <span>${stay.price.toLocaleString()}</span></p>
-    //                         <p>Owner: <span>{stay.owner && stay.owner.fullname}</span></p>
-    //                         <div>
-    //                             <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
-    //                             <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
-    //                         </div>
-
-    //                         <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
-    //                         <button className="buy" onClick={() => { onAddToStayt(stay) }}>Add to stayt</button>
-    //                     </li>)
-    //                 }
-    //             </ul>
-    //         </main>
-    //     </div>
-    // )
 }
