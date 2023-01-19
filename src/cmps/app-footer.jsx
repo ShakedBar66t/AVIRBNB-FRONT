@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-import { removeFromCart, checkout } from '../store/car.actions'
+// import { removeFromCart, checkout } from '../store/car.actions'
 import { UserMsg } from './user-msg.jsx'
 
 export function AppFooter() {
@@ -12,14 +12,14 @@ export function AppFooter() {
     const count = useSelector(storeState => storeState.userModule.count)
     const cartTotal = cart.reduce((acc, car) => acc + car.price, 0)
 
-    async function onCheckout() {
-        try {
-            const score = await checkout(cartTotal)
-            showSuccessMsg(`Charged, your new score: ${score.toLocaleString()}`)
-        } catch(err) {
-            showErrorMsg('Cannot checkout')
-        }
-    }
+    // async function onCheckout() {
+    //     try {
+    //         const score = await checkout(cartTotal)
+    //         showSuccessMsg(`Charged, your new score: ${score.toLocaleString()}`)
+    //     } catch(err) {
+    //         showErrorMsg('Cannot checkout')
+    //     }
+    // }
 
     return (
         <footer className="app-footer">
@@ -44,14 +44,14 @@ export function AppFooter() {
                     {
                         cart.map((car, idx) => <li key={idx}>
                             <button onClick={() => {
-                                removeFromCart(car._id)
+                                // removeFromCart(car._id)
                             }}>x</button>
                             {car.vendor}
                         </li>)
                     }
                 </ul>
                 <p>Total: ${cartTotal.toLocaleString()} </p>
-                <button onClick={onCheckout}>Checkout</button>
+                {/* <button onClick={onCheckout}>Checkout</button> */}
             </section>}
             <UserMsg />
         </footer>
