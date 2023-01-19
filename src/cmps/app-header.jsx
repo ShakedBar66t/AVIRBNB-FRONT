@@ -11,7 +11,9 @@ import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
-import { TOGGLE_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
+
+
 export function AppHeader() {
 
     const dispatch = useDispatch()
@@ -20,6 +22,7 @@ export function AppHeader() {
     const [loginModal, setLoginModal] = useState(false)
     const navigate = useNavigate()
 
+    const isShadow = useSelector(storeState => storeState.userModule.isShadow)
 
     const user = useSelector(storeState => storeState.userModule.user)
     async function onLogin(credentials) {
@@ -59,14 +62,16 @@ export function AppHeader() {
         toggleUserModal()
         setLoginModal(!loginModal)
         dispatch({ type: TOGGLE_LOGIN_MODAL })
+        dispatch({ type: TOGGLE_IS_SHADOW })
     }
 
     function handelShadowClick() {
-        if (filterModal) setFilterModal(!filterModal)
-        if (loginModal) {
-            setLoginModal(!loginModal)
-            dispatch({ type: TOGGLE_LOGIN_MODAL })
+        if (filterModal) {
+            setFilterModal(!filterModal)
+            return
         }
+        dispatch({ type: TOGGLE_LOGIN_MODAL })
+        dispatch({ type: TOGGLE_IS_SHADOW })
     }
 
 
@@ -109,7 +114,7 @@ export function AppHeader() {
                 <button>Who </button>
                 <button className='search-btn'><FaSearch color='white' /></button>
             </div>
-            <div onClick={handelShadowClick} className={`background-shadow full ${filterModal ? 'open' : ''} ${loginModal ? 'login' : ''}`} ></div>
+            <div onClick={handelShadowClick} className={`background-shadow full ${filterModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
             </div>

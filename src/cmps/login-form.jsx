@@ -107,9 +107,10 @@ const theme = createTheme({
             <span onClick={()=>{
               setIsValid('')
               dispatch({type:TOGGLE_IS_SIGNUP_MODAL})}
-              }>{(isSignUpModal)? 'Sign Up':'Sign In'} </span> </p>
+              }>{(isSignUpModal)? 'Sign In':'Sign Up'} </span> </p>
             <button className='login-btn'>Continue</button>
             <p>{isValid}</p>
+            <hr/><span className='or-span'>OR</span>
           </Box>
         </Box>
       </Container>
