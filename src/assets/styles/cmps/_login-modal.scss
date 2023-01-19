@@ -46,29 +46,31 @@
         align-items: center;
         // height: 32px;
         // padding: 24px 0;
-        margin: 24px 0;
+        margin: 12px 0;
 
 
         h2 {
             margin: auto;
             font-size: 1rem;
+            padding: 12px;
 
 
 
         }
 
         button {
+            top: 24px;
             position: absolute;
             
         }
     }
 
     hr{
-        color: rgba(211, 211, 211, 1);
+        color: $clr8;
     }
 
     .main-login-cont{
-        margin: 24px 0;
+        // margin: 24px 0;
         
         main{
             padding: 0;
@@ -76,6 +78,35 @@
         h3{
             font-size: 22px;
         }
+    }
+
+    .signup-link{
+        padding: 16px 0;
+        margin-bottom: 0;
+
+        span{
+            border-bottom: 1px solid black;
+            cursor: pointer;
+        }
+    }
+
+    .login-btn{
+        width: 100%;
+        padding: 1rem;
+       
+        border-radius: 8px;
+        // margin: 16px 0;
+        border: none;
+        color: $clr6;
+        cursor: pointer;
+        background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
+        rgb(241, 37, 75) 0%,
+        rgb(230, 30, 77) 27.5%,
+        rgb(227, 28, 95) 40%,
+        rgb(215, 4, 102) 57.5%,
+        rgb(189, 30, 89) 75%,
+        rgb(189, 30, 89) 100%);
+
     }
 
     // .secondary{
