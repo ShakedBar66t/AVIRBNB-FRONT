@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux'
 import { LoginModal } from './cmps/login-modal.jsx'
 export function RootCmp() {
 
-    const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
+    
     return (
         <div>
             {/* <AppHeader /> */}
@@ -33,7 +33,8 @@ export function RootCmp() {
                 </Routes>
                 
             </main>
-            {(isLoginModalOpen)&& <LoginModal />}
+            { <LoginModal  />}
+            {/* {(isLoginModalOpen)&& <LoginModal />} */}
             {/* <AppFooter /> */}
         </div>
     )

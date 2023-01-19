@@ -1,0 +1,32 @@
+.login-modal {
+    position: absolute;
+
+    background-color: $clr6;
+    // top: 100px;
+    // right: 0;
+    width: 100vw;
+    height: 650px;
+    // transition: 0.7s;
+    transition: width 0s, top 0.7s;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+
+    @include for-narrow-layout {
+        width: 568px;
+    }
+
+    @include for-wide-layout {
+        width: 568px;
+    }
+
+    &.open {
+        top: 17vh;
+    }
+
+    &.closed {
+        top: 100vh;
+    }
+}
