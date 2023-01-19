@@ -1,17 +1,19 @@
 .login-modal {
     position: absolute;
 
-    background-color: $clr6;
+    background-color: blue;
+    // background-color: $clr6;
     // top: 100px;
     // right: 0;
     width: 100vw;
     height: 650px;
     // transition: 0.7s;
-    transition: width 0s, top 0.7s;
+    transition: width 0s, top 1s;
     border-radius: 10px;
     left: 0;
     right: 0;
-    margin: 0 auto;
+    // margin: 0 auto;
+    margin: auto;
 
 
     @include for-narrow-layout {
@@ -23,10 +25,13 @@
     }
 
     &.open {
-        top: 17vh;
+        // top: 17vh;
+        top: 17%;
+        // bottom: 0;
     }
 
     &.closed {
-        top: 100vh;
+        // display: none;
+        top: 200vh;
     }
 }
