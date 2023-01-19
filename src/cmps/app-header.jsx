@@ -58,14 +58,14 @@ export function AppHeader() {
     function toggleLoginModal() {
         toggleUserModal()
         setLoginModal(!loginModal)
-        dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
+        dispatch({ type: TOGGLE_LOGIN_MODAL })
     }
 
     function handelShadowClick() {
         if (filterModal) setFilterModal(!filterModal)
         if (loginModal) {
             setLoginModal(!loginModal)
-            dispatch({ type: TOGGLE_LOGIN_MODAL, diff: 1 })
+            dispatch({ type: TOGGLE_LOGIN_MODAL })
         }
     }
 
