@@ -1,0 +1,57 @@
+
+.host-home-page{
+    font-family: Circular;
+    .logo{
+        font-size: rem(30px);
+        color: $clr7;
+        margin: 20px;
+    }
+
+    .page-cont{
+       
+        margin: 250px auto;
+
+        width: 90vw;
+        @include for-normal-layout {
+            width: 1080px;
+        }
+
+
+        p{ 
+            font-size: rem(14px);
+        }
+
+        h1{
+            font-size: rem(38px);
+            animation: color-change 3s infinite;
+
+            @include for-narrow-layout {
+                font-size: rem(75px);
+            }
+            
+        }
+        
+
+          @keyframes color-change {
+            0% { color: rgb(241, 37, 75); }
+            25% { color: rgb(230, 30, 77); }
+            50% { color: rgb(227, 28, 95); }
+            75% { color: rgb(215, 4, 102); }
+            100% { color: rgb(189, 30, 89); }
+          }
+
+          button{
+            color: $clr5;
+            background-color: $clr7;
+            border-radius:8px ;
+            padding:14px 24px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover{
+                background-color: lighten($color: $clr7, $amount: 5%);
+            }
+          }   
+    }
+}

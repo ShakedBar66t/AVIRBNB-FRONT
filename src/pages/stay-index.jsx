@@ -7,6 +7,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 
 import { StayList } from '../cmps/stay-list.jsx'
+import { PreviewImgCarousel } from '../cmps/img-carousel.jsx'
 
 export function StayIndex() {
 
@@ -61,6 +62,8 @@ export function StayIndex() {
     return <section className='stay-index stay-index-layout'>
         <AppHeader />
         <StayList stays={stays} />
+        {/* <PreviewImgCarousel imgs={stays[0].imgUrls} /> */}
+
         
 
     </section>

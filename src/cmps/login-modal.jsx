@@ -5,6 +5,8 @@ import { SignUpForm } from "./signup-form";
 import { SignInForm } from "./login-form";
 import { TOGGLE_IS_SIGNUP_MODAL, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer';
 import { useDispatch } from "react-redux";
+import { BsFacebook,BsApple } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 
 export function LoginModal() {
@@ -36,10 +38,16 @@ export function LoginModal() {
             <h3 >Welcome to Avirbnb</h3>
             {/* {(!isSignUpModal) && <SignInForm />}
            {(isSignUpModal) && < SignUpForm/>} */}
-            < SignInForm />
+            < SignInForm onCloseLoginModal={onCloseLoginModal} />
             
             <p className='or-p'>OR</p> 
             <hr /> 
+
+            <div className="more-login-opt">
+                <button><span style={{color:'#2050b3'}}><BsFacebook/></span> Continue with Facebook</button>
+                <button><span><FcGoogle/></span> Continue with Google</button>
+                <button><span style={{color:'black'}}><BsApple/></span> Continue with Apple</button>
+            </div>
          
 
         </main>
