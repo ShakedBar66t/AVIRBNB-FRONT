@@ -87,7 +87,7 @@ export function AppHeader() {
                 </div>
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn'>Airbnb your home</button>
+                        <button className='host-btn'>Avirbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
@@ -98,7 +98,7 @@ export function AppHeader() {
                 <button onClick={toggleLoginModal}>Log in </button>
                 <button>Sign up </button>
                 <hr />
-                <button>Airbnb your home </button>
+                <button>Avirbnb your home </button>
                 <button>Host an experience </button>
                 <button>Help </button>
             </div>
