@@ -30,6 +30,7 @@
         width: 100%;
         aspect-ratio: 1/0.95;
         border-radius: 10px;
+
     }
 
     .img-preview-paging-btns {
@@ -116,3 +117,116 @@
 
 
 }
+
+// .slick-slider.slick-initialized {
+//     // position: relative;
+//     z-index: 0;
+
+// }
+
+// .slick-arrow.slick-prev{
+//     border: none;
+//     position: absolute;
+//     top:50%;
+//     font-size: 24px;
+//     height: 50px;
+//     z-index: 2;
+//     width: 100px;
+//    left: 0;
+// }
+
+// .slick-arrow.slick-prev::before {
+//     background-color: aqua;
+
+//     font-size: 24px;
+//     position: absolute;
+//     top: 50%;
+//     left: 0px;
+    
+//     height: 50px;
+//     z-index: 3 !important;
+//     // // width: 100px;
+// }
+
+// .slick-arrow.slick-next::before {
+//     // background-color: blue;
+//     // background: none;
+//     border: none;
+//     position: absolute;
+//     top: 50%;
+//     font-size: 24px;
+//     height: 50px;
+//     z-index: 2;
+//     width: 100px;
+//     right: 0;
+// }
+
+
+// .slick-dots li {
+//     margin: 0 auto;
+//     padding: 0px;
+//     bottom: 30px;
+
+// }
+
+// .slick-dots li.slick-active button:before {
+//     color: white
+// }
+
+// .slick-dots li button::before {
+//     font-size: 10px;
+//     margin-inline-start: 0px;
+//     color: $clr5;
+//     bottom: 100px;
+
+// }
+
+.slick-slider {
+    position: relative;
+    // height: 100%;
+    button {
+        margin: -5px 0;
+    }
+    &:hover {
+        .slick-prev {
+            opacity: 1;
+        }
+        .slick-next {
+            opacity: 1;
+        }
+    }
+    div {
+        max-height: 270px;
+    }
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 30px !important;
+    }
+    .slick-prev,
+    .slick-next {
+        position: absolute;
+        top: 55%;
+        left: 0px;
+        z-index: 5;
+        opacity: 0;
+        transform: translateY(-55%);
+    }
+    .slick-next {
+        right: 10px;
+        left: unset;
+    }
+    .slick-dots {
+        bottom: 5px;
+        li{
+            margin: 0;
+        }
+        li button::before {
+            color: $clr6;
+            font-size: 8px;
+            opacity: 0.6;
+            
+        }
+        li.slick-active button::before {
+            opacity: 1;
+        }
+    }}

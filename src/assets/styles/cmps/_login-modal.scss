@@ -32,9 +32,7 @@
         top: 100vh;
     }
 
-    // @include for-narrow-layout {
-    //     width: 568px;
-    // }
+
 
     @include for-narrow-layout {
 
@@ -44,8 +42,6 @@
     header {
         display: flex;
         align-items: center;
-        // height: 32px;
-        // padding: 24px 0;
         margin: 12px 0;
 
 
@@ -100,17 +96,45 @@
         border: none;
         color: $clr6;
         cursor: pointer;
-        background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
-                rgb(241, 37, 75) 0%,
-                rgb(230, 30, 77) 27.5%,
-                rgb(227, 28, 95) 40%,
-                rgb(215, 4, 102) 57.5%,
-                rgb(189, 30, 89) 75%,
-                rgb(189, 30, 89) 100%);
-
+        background-image: $bgclr1;
     }
 
-    // .secondary{
-    //     color: gold !important;
-    // }
+    .or-p {
+        position: absolute;
+        // left: 0;
+        background-color: $clr6;
+        right: 50%;
+        font-size: 0.8rem;
+        color: $clr8;
+    }
+
+    .more-login-opt {
+        margin-top: 20px;
+
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 13px;
+            font-size: 14px;
+            color: $clr7;
+            border-radius: 10px;
+            background: none;
+            border: 1px solid black;
+            font-weight: bold;
+            position: relative;
+
+            &:hover {
+                background-color: darken($color: $clr6, $amount: 5%);
+            }
+
+            span {
+                font-size: 20px;
+                position: absolute;
+                left: 20px;
+            }
+        }
+    }
+
+
 }

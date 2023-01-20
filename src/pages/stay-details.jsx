@@ -8,6 +8,7 @@ import { SlLocationPin } from 'react-icons/sl'
 import { HiOutlineKey } from 'react-icons/hi'
 import { MdOutlineCleaningServices } from 'react-icons/md'
 import { Example } from "../cmps/date-picker"
+import GoogleMap from "../cmps/google-map"
 
 
 export function StayDetails() {
@@ -321,6 +322,8 @@ export function StayDetails() {
             </section>
             <section className="map" id="map">
                 <h2>Where you'll be</h2>
+                <h3>{stay.loc.city}, {stay.loc.country}</h3>
+                <GoogleMap/>
                 
 
             </section>

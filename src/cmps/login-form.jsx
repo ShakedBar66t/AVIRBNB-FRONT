@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer';
 import { useState } from 'react';
-export  function SignInForm() {
+import { login,signup } from '../store/user.actions';
+export  function SignInForm({onCloseLoginModal}) {
 
   const [isValid,setIsValid] = useState('')
   const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const theme = createTheme({
   }
 })
 
-  const handleSubmit = (event) => {
+async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const currUser = {
@@ -34,13 +35,49 @@ const theme = createTheme({
       password: data.get('password'),
       fullname: data.get('fullname'),
     }
-  console.log('this is curr user',currUser)
-  validate(currUser)
-  if(!isValid){
+    validate(currUser)
+    if(isValid){
+      return
+    }
+    if(isSignUpModal){
+    console.log('this is curr user',currUser)
+    signup(currUser)
+    .then(onCloseLoginModal)
+    .catch(err=>{
+      console.log('damn',err)
+    })
     return
   }
+
+  login(currUser).then(onCloseLoginModal)
+  .catch(setIsValid)
   
   };
+  // const  handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const currUser = {
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //     fullname: data.get('fullname'),
+  //   }
+  //   validate(currUser)
+  //   if(isValid){
+  //     return
+  //   }
+  //   if(isSignUpModal){
+  //   console.log('this is curr user',currUser)
+  //   signup(currUser)
+  //   .then(onCloseLoginModal)
+  //   .catch(err=>{
+  //     console.log('damn',err)
+  //   })
+  //   return
+  // }
+
+  // login(currUser).then(onCloseLoginModal)
+  
+  // };
 
   function validate(user){
     if (!user.email.includes('@') || !user.email.includes('.')){
@@ -50,7 +87,7 @@ const theme = createTheme({
       setIsValid('Password should have 8 to 16 characters')
       return 
     }
-    if(!user.fullname.includes(' ') && user.fullname.length>0){
+    if(user?.fullname?.includes(' ') ===true){
       setIsValid('Invalid full name')
       return 
     }
@@ -109,8 +146,8 @@ const theme = createTheme({
               dispatch({type:TOGGLE_IS_SIGNUP_MODAL})}
               }>{(isSignUpModal)? 'Sign In':'Sign Up'} </span> </p>
             <button className='login-btn'>Continue</button>
-            <p>{isValid}</p>
-            <hr/><span className='or-span'>OR</span>
+            <p style={{padding:'10px 0' }}>{isValid}</p>
+           
           </Box>
         </Box>
       </Container>

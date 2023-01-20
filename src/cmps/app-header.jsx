@@ -10,9 +10,8 @@ import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer'
 
-import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
-import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 
 
 export function AppHeader() {
@@ -60,7 +59,10 @@ export function AppHeader() {
         setSearchModal(!searchModal)
     }
 
-    function toggleLoginModal() {
+    function toggleLoginModal(signup) {
+        if (signup === 'signup') {
+            dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
+        }
         toggleUserModal()
         setLoginModal(!loginModal)
         dispatch({ type: TOGGLE_LOGIN_MODAL })
@@ -85,7 +87,7 @@ export function AppHeader() {
     return (
         <header className="app-header full stay-index-layout">
             <nav >
-                <div className='logo-container'>
+                <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>virbnb</span>
                 </div>
@@ -99,20 +101,32 @@ export function AppHeader() {
                 </div>
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn'>Airbnb your home</button>
+                        <button className='host-btn'>Avirbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span ><FaUserCircle className='fa-user-circle ' /></span></button>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '30px', height: '30px' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
-                <button onClick={toggleLoginModal}>Log in </button>
-                <button>Sign up </button>
+                {(!user) && <button onClick={toggleLoginModal}>Log in </button>}
+                {(!user) && <button onClick={() => toggleLoginModal('signup')}>Sign up </button>}
+                {(user) && <button >Notifications </button>}
+                {(user) && <button >Trips </button>}
+                {(user) && <button >Wishlists </button>}
                 <hr />
                 <button>Airbnb your home </button>
-                <button>Host an experience </button>
+                <button onClick={() => {
+                    if (!user) {
+
+                        toggleLoginModal()
+
+                        return
+                    }
+                    navigate('/host/home')
+                }}>Host an experience </button>
                 <button>Help </button>
+                {(user) && <button onClick={() => { logout() }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''}`}>
                 <button>where </button>
