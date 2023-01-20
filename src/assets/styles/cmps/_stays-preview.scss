@@ -1,20 +1,20 @@
-.stay-preview{
+.stay-preview {
     position: relative;
     // aspect-ratio: 0.77/1;
     font-family: Circular;
     font-size: 1rem;
     line-height: 20px;
 
-    &:hover{
+    &:hover {
 
-        & .img-preview-paging-btns{
+        & .img-preview-paging-btns {
             opacity: 1;
         }
     }
 
     // .img-carousel{
     //     display: flex;
-       
+
     //     overflow: hidden;
     //     // width: 100%;
     //     aspect-ratio: 1/0.95;
@@ -26,19 +26,19 @@
     //     }
     // }
 
-    .stay-preview-img{
+    .stay-preview-img {
         width: 100%;
         aspect-ratio: 1/0.95;
         border-radius: 10px;
     }
 
-    .img-preview-paging-btns{
+    .img-preview-paging-btns {
         position: absolute;
         top: 37.5%;
         border-radius: 50%;
         background-color: rgba($color: $clr6, $alpha: 0.9);
         color: $clr7;
-        padding:8px ;
+        padding: 8px;
         font-size: 14px;
         margin: 0;
         text-align: center;
@@ -46,66 +46,71 @@
         transition: opacity 0.2s;
 
     }
-    .prev-img-preview-btn{
+
+    .prev-img-preview-btn {
         left: 5%;
     }
-    .next-img-preview-btn{
+
+    .next-img-preview-btn {
         right: 5%;
     }
 
 
-    .like-btn{
+    .like-btn {
         position: absolute;
         top: 10px;
         right: 10px;
         font-size: 24px;
         line-height: 20px;
         font-weight: 600;
-        cursor:pointer ;
-        
-       .heart-fa{
+        cursor: pointer;
 
-        color:rgba($color: $clr7, $alpha: 0.7) ;
-       }
+        .heart-fa {
 
-        .reg-heart-fa{
+            color: rgba($color: $clr7, $alpha: 0.7);
+        }
+
+        .reg-heart-fa {
             line-height: 20px;
             font-weight: 600;
-            color:$clr6 ;
+            color: $clr6 ;
         }
     }
 
-    .curr-img-indication{
+    .curr-img-indication {
         position: absolute;
-        bottom:33% ;
+        bottom: 33%;
         left: 38%;
 
-     
+
     }
 
-    .prev-loc{
+    .prev-loc {
         color: $clr7;
     }
-    
-    .prev-loc-rate{
+
+    .prev-loc-rate {
         display: flex;
         justify-content: space-between;
         font-weight: 500;
- 
+
 
 
 
     }
-    .prev-host-name, .prev-date{
+
+    .prev-host-name,
+    .prev-date {
         color: $clr8;
     }
-    .prev-price{
+
+    .prev-price {
         color: $clr7;
-       
+
         margin-top: 10px;
     }
 
-    p{
+    p {
         margin-bottom: 0;
     }
 

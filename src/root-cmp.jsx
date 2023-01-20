@@ -16,9 +16,10 @@ import { UserDetails } from './pages/user-details'
 import { StayDetails } from './pages/stay-details'
 import { useSelector } from 'react-redux'
 import { LoginModal } from './cmps/login-modal.jsx'
+import { FilterModal } from './cmps/filter-modal.jsx'
 export function RootCmp() {
 
-    
+
     return (
         <div>
             {/* <AppHeader /> */}
@@ -30,9 +31,10 @@ export function RootCmp() {
                     <Route path="/explore" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />
                 </Routes>
-                
+
             </main>
-            { <LoginModal  />}
+            {<LoginModal />}
+            <FilterModal />
             {/* {(isLoginModalOpen)&& <LoginModal />} */}
             {/* <AppFooter /> */}
         </div>

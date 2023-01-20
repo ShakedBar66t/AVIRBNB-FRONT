@@ -6,23 +6,25 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useState } from 'react'
 
-
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
+
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
+import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 
 
 export function AppHeader() {
 
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
-    const [filterModal, setFilterModal] = useState(false)
+    const [searchModal, setSearchModal] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
     const navigate = useNavigate()
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
+    const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
 
     const user = useSelector(storeState => storeState.userModule.user)
     async function onLogin(credentials) {
@@ -55,7 +57,7 @@ export function AppHeader() {
     }
 
     function toggleFilterModal() {
-        setFilterModal(!filterModal)
+        setSearchModal(!searchModal)
     }
 
     function toggleLoginModal() {
@@ -66,8 +68,13 @@ export function AppHeader() {
     }
 
     function handelShadowClick() {
-        if (filterModal) {
-            setFilterModal(!filterModal)
+        if (searchModal) {
+            setSearchModal(!searchModal)
+            return
+        }
+        else if (isFilterModalOpen) {
+            dispatch({ type: TOGGLE_FILTER_MODAL })
+            dispatch({ type: TOGGLE_IS_SHADOW })
             return
         }
         dispatch({ type: TOGGLE_LOGIN_MODAL })
@@ -82,7 +89,7 @@ export function AppHeader() {
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>virbnb</span>
                 </div>
-                <div className={`filter-container ${filterModal ? 'closed' : ''}`}>
+                <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     <div className='filter-btns' onClick={toggleFilterModal}>
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
@@ -107,14 +114,14 @@ export function AppHeader() {
                 <button>Host an experience </button>
                 <button>Help </button>
             </div>
-            <div className={`filter-modal ${filterModal ? 'open' : ''}`}>
+            <div className={`filter-modal ${searchModal ? 'open' : ''}`}>
                 <button>where </button>
                 <button>Check in </button>
                 <button>Check out </button>
                 <button>Who </button>
                 <button className='search-btn'><FaSearch color='white' /></button>
             </div>
-            <div onClick={handelShadowClick} className={`background-shadow full ${filterModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
+            <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
             </div>
