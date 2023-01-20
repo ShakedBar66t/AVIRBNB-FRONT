@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer';
 import { useState } from 'react';
-export  function SignInForm() {
+import { login,signup } from '../store/user.actions';
+export  function SignInForm({onCloseLoginModal}) {
 
   const [isValid,setIsValid] = useState('')
   const dispatch = useDispatch()
@@ -34,11 +35,17 @@ const theme = createTheme({
       password: data.get('password'),
       fullname: data.get('fullname'),
     }
-  console.log('this is curr user',currUser)
-  validate(currUser)
-  if(!isValid){
+    validate(currUser)
+    if(isValid){
+      return
+    }
+    if(isSignUpModal){
+    console.log('this is curr user',currUser)
+    signup(currUser).then(onCloseLoginModal)
     return
   }
+
+  login(currUser).then(onCloseLoginModal)
   
   };
 
@@ -50,7 +57,7 @@ const theme = createTheme({
       setIsValid('Password should have 8 to 16 characters')
       return 
     }
-    if(!user.fullname.includes(' ') && user.fullname.length>0){
+    if(!user?.fullname?.includes(' ') ){
       setIsValid('Invalid full name')
       return 
     }
@@ -109,7 +116,7 @@ const theme = createTheme({
               dispatch({type:TOGGLE_IS_SIGNUP_MODAL})}
               }>{(isSignUpModal)? 'Sign In':'Sign Up'} </span> </p>
             <button className='login-btn'>Continue</button>
-            <p style={{padding:'10px 0'}}>{isValid}</p>
+            <p style={{padding:'10px 0' }}>{isValid}</p>
            
           </Box>
         </Box>

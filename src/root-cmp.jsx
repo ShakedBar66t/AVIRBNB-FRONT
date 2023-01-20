@@ -16,8 +16,13 @@ import { UserDetails } from './pages/user-details'
 import { StayDetails } from './pages/stay-details'
 import { useSelector } from 'react-redux'
 import { LoginModal } from './cmps/login-modal.jsx'
+import { HostHome } from './pages/host-home-page'
+import { HostIndex } from './pages/host-index'
+
+
 export function RootCmp() {
 
+    const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
     
     return (
         <div>
@@ -29,10 +34,12 @@ export function RootCmp() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />
+                    <Route path="/host/home" element={<HostHome />} />
+                    <Route path="/host" element={<HostIndex />} />
                 </Routes>
                 
             </main>
-            { <LoginModal  />}
+            {(isLoginModalOpen) && <LoginModal  />}
             {/* {(isLoginModalOpen)&& <LoginModal />} */}
             {/* <AppFooter /> */}
         </div>
