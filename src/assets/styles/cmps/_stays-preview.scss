@@ -180,3 +180,53 @@
 //     bottom: 100px;
 
 // }
+
+.slick-slider {
+    position: relative;
+    // height: 100%;
+    button {
+        margin: -5px 0;
+    }
+    &:hover {
+        .slick-prev {
+            opacity: 1;
+        }
+        .slick-next {
+            opacity: 1;
+        }
+    }
+    div {
+        max-height: 270px;
+    }
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 30px !important;
+    }
+    .slick-prev,
+    .slick-next {
+        position: absolute;
+        top: 55%;
+        left: 0px;
+        z-index: 5;
+        opacity: 0;
+        transform: translateY(-55%);
+    }
+    .slick-next {
+        right: 10px;
+        left: unset;
+    }
+    .slick-dots {
+        bottom: 5px;
+        li{
+            margin: 0;
+        }
+        li button::before {
+            color: $clr6;
+            font-size: 8px;
+            opacity: 0.6;
+            
+        }
+        li.slick-active button::before {
+            opacity: 1;
+        }
+    }}

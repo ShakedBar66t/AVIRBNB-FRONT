@@ -105,7 +105,7 @@ export function AppHeader() {
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
                 { (!user) &&<button onClick={toggleLoginModal}>Log in </button>}
-                {(!user) && <button >Sign up </button>}
+                {(!user) && <button onClick={()=>toggleLoginModal('signup')}>Sign up </button>}
                 {(user) && <button >Notifications </button>}
                 {(user) && <button >Trips </button>}
                 {(user) && <button >Wishlists </button>}
