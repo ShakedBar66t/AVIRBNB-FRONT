@@ -49,14 +49,15 @@ async function remove(stayId) {
 async function save(stay) {
     var savedStay
     if (stay._id) {
-        // savedStay = await storageService.put(STORAGE_KEY, stay)
-        savedStay = await httpService.put(`stay/${stay._id}`, stay)
+        savedStay = await storageService.put(STAY_STORAGE_KEY, stay)
+        // savedStay = await httpService.put(`stay/${stay._id}`, stay)
 
     } else {
         // Later, owner is set by the backend
         stay.owner = userService.getLoggedinUser()
-        // savedStay = await storageService.post(STORAGE_KEY, stay)
-        savedStay = await httpService.post('stay', stay)
+        savedStay = await storageService.post(STAY_STORAGE_KEY, stay)
+
+        // savedStay = await httpService.post('stay', stay)
     }
     return savedStay
 }

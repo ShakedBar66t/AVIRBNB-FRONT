@@ -20,7 +20,7 @@ export  function PreviewImgCarousel({stay}) {
     <Slider {...settings} style={{width:'100%',position:'relative'}} >
     {/* <Slider className="img-carousel" {...settings}> */}
         {stay.imgUrls.map((img,idx)=>{
-            return <div   onClick={() => { navigate(`/explore/${stay._id}`) }} key={img+idx}><img  className="stay-preview-img" src={img}/></div>
+            return <div className="img-preview-cont "    onClick={() => { navigate(`/explore/${stay._id}`) }} key={img+idx}><img  className="stay-preview-img" src={img}/></div>
            
         })}
       {/* <div>

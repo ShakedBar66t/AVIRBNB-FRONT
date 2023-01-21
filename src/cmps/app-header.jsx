@@ -12,6 +12,7 @@ import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer'
+import { toggleLoginModal } from '../store/user.actions.js'
 
 
 
@@ -59,15 +60,15 @@ export function AppHeader() {
         setFilterModal(!filterModal)
     }
 
-    function toggleLoginModal(signup) {
-        if(signup==='signup'){
-            dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
-        }
-        toggleUserModal()
-        setLoginModal(!loginModal)
-        dispatch({ type: TOGGLE_LOGIN_MODAL })
-        dispatch({ type: TOGGLE_IS_SHADOW })
-    }
+    // function toggleLoginModal(signup) {
+    //     if(signup==='signup'){
+    //         dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
+    //     }
+    //     toggleUserModal()
+    //     setLoginModal(!loginModal)
+    //     dispatch({ type: TOGGLE_LOGIN_MODAL })
+    //     dispatch({ type: TOGGLE_IS_SHADOW })
+    // }
 
     function handelShadowClick() {
         if (filterModal) {
@@ -104,17 +105,26 @@ export function AppHeader() {
                 </div>
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
-                { (!user) &&<button onClick={toggleLoginModal}>Log in </button>}
-                {(!user) && <button onClick={()=>toggleLoginModal('signup')}>Sign up </button>}
+                { (!user) &&<button onClick={()=>{
+
+                    toggleUserModal()
+                    toggleLoginModal()
+                } }>Log in </button>}
+                {(!user) && <button onClick={()=>{
+                    toggleUserModal()
+                    toggleLoginModal('signup')
+                    }}>Sign up </button>}
                 {(user) && <button >Notifications </button>}
                 {(user) && <button >Trips </button>}
                 {(user) && <button >Wishlists </button>}
                 <hr />
-                <button>Airbnb your home </button>
+                {(user)&&< button onClick={()=>{navigate(`/user/${user._id}`)}}>Account </button>}
                 <button onClick={()=>{
                     if(!user){
 
                         toggleLoginModal()
+                        toggleUserModal()
+
                         
                         return
                     }

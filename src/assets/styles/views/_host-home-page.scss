@@ -9,9 +9,14 @@
 
     .page-cont{
        
-        margin: 250px auto;
+        margin: 120px auto;
 
         width: 90vw;
+        @include for-narrow-layout {
+            width: 1080px;
+            margin: 250px auto;
+        }
+
         @include for-normal-layout {
             width: 1080px;
         }
