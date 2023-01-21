@@ -32,8 +32,32 @@ function getAvrStayRating(reviews) {
     return (totalRate / reviews.length).toFixed(2)
 }
 
+// async function query(filterBy = getDefaultFilter()) {
+//     const stays = await storageService.query(STAY_STORAGE_KEY)
+//     console.log(stays)
+//     let filteredStays = stays.filter(stay => stay.price >= filterBy.minPrice && stay.price <= filterBy.maxPrice)
 
-async function query(filterBy = { txt: '', price: 0 }) {
+//     if (filterBy.bedrooms) {
+//         filteredStays = filteredStays.filter(stay => stay.bedrooms === filterBy.bedrooms)
+//     }
+//     if (filterBy.type) {
+//         filteredStays = filteredStays.filter(stay => stay.type === filterBy.type)
+//     }
+//     if (filterBy.beds) {
+//         filteredStays = filteredStays.filter(stay => stay.beds === filterBy.beds)
+//     }
+//     if (filterBy.bathrooms) {
+//         filteredStays = filteredStays.filter(stay => stay.bathrooms === filterBy.bathrooms)
+//     }
+//     if (filterBy.amenities.length) {
+//         filteredStays = filteredStays.filter(stay => filterBy.amenities.every(amenity => stay.amenities.includes(amenity)))
+//     }
+//     return (filteredStays)
+// }
+
+
+
+async function query(filterBy = getDefaultFilter()) {
     return storageService.query(STAY_STORAGE_KEY)
     // return httpService.get(STAY_STORAGE_KEY, filterBy)
 }
@@ -346,6 +370,6 @@ function _createStay() {
 
 
 function getDefaultFilter() {
-    return { minPrice: 0, maxPrice: 2000, bedrooms: '', type: '', beds: '', bathrooms: '' }
+    return { minPrice: 50, maxPrice: 2000, bedrooms: '', type: '', beds: '', bathrooms: '', amenities: [] }
 }
 
