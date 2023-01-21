@@ -1,30 +1,30 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { IoCloseSharp } from "react-icons/io5"
-import { Checkbox, TextField } from "@mui/material"
-
+import { TextField } from "@mui/material"
+import MultiRangeSlider from "./multirange-slider"
+import { debounce } from 'lodash'
 import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
-import MultiRangeSlider from "./multirange-slider"
+import { stayService } from "../services/stay.service"
+
 
 
 
 export function FilterModal() {
     const dispatch = useDispatch()
-    const [minPrice, setMinPrice] = useState(0)
-    const [maxPrice, setMaxPrice] = useState(2000)
+    const rangeRef = useRef({ minPrice: 0, maxPrice: 800 });
     const [checked, setChecked] = useState(false)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
     const numbers = [1, 2, 3, 4, 5, 6, 7, '8+']
 
+    const [filterBy, setFilterBy] = useState(stayService.getDefaultFilter)
 
-    const [selectedBedrooms, setSelectedBedrooms] = useState(null)
-    const [selectedBeds, setSelectedBeds] = useState(null)
-    const [selectedBathrooms, setSelectedBathrooms] = useState(null)
-
-    const handleClick = (num) => {
-        console.log(num)
-        selectedBathrooms(num)
+    const handleClick = (ev, num) => {
+        ev.preventDefault()
+        const { name } = ev.target;
+        setFilterBy({ ...filterBy, [name]: num, min: rangeRef.current.min, max: rangeRef.current.max });
+        console.log(filterBy)
     }
 
 
@@ -52,11 +52,13 @@ export function FilterModal() {
 
                             <div className="columns-div">
                                 {values.map((value, index) => <div key={index} className="column" style={{ height: `${value}px` }}></div>)}
-                                <div class='wrapper' style={{ position: 'relative' }}>
+                                <div className='wrapper' style={{ position: 'relative' }}>
                                     <MultiRangeSlider style={{ position: 'absolute' }}
-                                        min={0}
-                                        max={800}
-                                        onChange={({ min, max }) => { return }}
+                                        min={rangeRef.current.min}
+                                        max={rangeRef.current.max}
+                                        onChange={({ min, max }) => {
+                                            rangeRef.current = { min, max };
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -75,7 +77,7 @@ export function FilterModal() {
                 <div className="type-filter-main-container">
 
 
-                    <span className="">Type of place</span>
+                    <span className="filter-type-title">Type of place</span>
                     <div className="type-filter-sub-container">
                         <div className='type-btns-container'>
                             <div className='type-btns-inner'>
@@ -128,70 +130,96 @@ export function FilterModal() {
                 <div className="rooms-beds-container">
                 </div>
                 <div className="rooms-beds-title"></div>
-                <span >Rooms and beds</span>
-                <div className="rooms-beds-btns-container">
-                    <div class="inner-numbers-container-wrapper">
-
+                <span className="filter-type-title">Rooms and beds</span>
+                <div className="rooms-beds-btns-filter">
+                    <div className="inner-numbers-container-wrapper">
                         <div className="inner-numbers-container">
                             <span>Bedrooms</span>
                             <div className="btns-container">
-                                <button className="rooms-beds-any-btn" onClick={() => setSelectedBedrooms(null)}> Any</button>
-
+                                <button
+                                    className={`rooms-beds-any-btn ${!filterBy.bedrooms ? 'selected' : ''}`}
+                                    onClick={() => setFilterBy({ ...filterBy, bedrooms: null })}
+                                >
+                                    Any
+                                </button>
                                 {numbers.map((number) => {
                                     return (
                                         <button
+                                            name="bedrooms"
                                             value={number}
                                             key={`bedrooms-${number}`}
-                                            className={`rooms-beds-num-btn ${selectedBedrooms === number ? 'selected' : ''}`}
-                                            onClick={() => handleClick(number)}
+                                            className={`rooms-beds-num-btn ${filterBy.bedrooms === number ? 'selected' : ''}`}
+                                            onClick={(ev) => handleClick(ev, number)}
                                         >
                                             {number}
                                         </button>
                                     )
-                                }
-                                )}
+                                })}
                             </div>
                         </div>
+
                         <div className="inner-numbers-container">
                             <span>Beds</span>
                             <div className="btns-container">
-                                <button className="rooms-beds-any-btn" onClick={() => setSelectedBeds(null)}> Any</button>
-
+                                <button
+                                    className={`rooms-beds-any-btn ${!filterBy.beds ? 'selected' : ''}`}
+                                    onClick={() => setFilterBy({ ...filterBy, beds: null })}
+                                >
+                                    Any
+                                </button>
                                 {numbers.map((number) => {
                                     return (
                                         <button
+                                            name="beds"
                                             value={number}
-                                            key={`bedrooms-${number}`}
-                                            className={`rooms-beds-num-btn ${selectedBeds === number ? 'selected' : ''}`}
-                                            onClick={() => handleClick(number)}
+                                            key={`beds-${number}`}
+                                            className={`rooms-beds-num-btn ${filterBy.beds === number ? 'selected' : ''}`}
+                                            onClick={(ev) => handleClick(ev, number)}
                                         >
                                             {number}
                                         </button>
                                     )
-                                }
-                                )}
+                                })}
                             </div>
                         </div>
                         <div className="inner-numbers-container">
-
                             <span>Bathrooms</span>
                             <div className="btns-container">
-                                <button className="rooms-beds-any-btn" onClick={() => setSelectedBathrooms(null)}> Any</button>
-
+                                <button
+                                    className={`rooms-beds-any-btn ${!filterBy.bathrooms ? 'selected' : ''}`}
+                                    onClick={() => setFilterBy({ ...filterBy, bathrooms: null })}
+                                >
+                                    Any
+                                </button>
                                 {numbers.map((number) => {
                                     return (
                                         <button
+                                            name="bathrooms"
                                             value={number}
-                                            key={`bedrooms-${number}`}
-                                            className={`rooms-beds-num-btn ${selectedBathrooms === number ? 'selected' : ''}`}
-                                            onClick={() => handleClick(number)}
+                                            key={`bathrooms-${number}`}
+                                            className={`rooms-beds-num-btn ${filterBy.bathrooms === number ? 'selected' : ''}`}
+                                            onClick={(ev) => handleClick(ev, number)}
                                         >
                                             {number}
                                         </button>
                                     )
-                                }
-                                )}
+                                })}
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="property-type-filter">
+                    <div className="rooms-beds-title"></div>
+
+                    <div className="property-type-filter-container">
+                        <span className="filter-type-title"> Property type</span>
+
+                        <div className="property-type-btns-container">
+                            <button className="property-type-filter-btn"><div className="inner-btn-div"><img src={require(`../assets/labels-logos/house.jpg`)} ></img><span>House</span></div></button>
+                            <button className="property-type-filter-btn"><div className="inner-btn-div"><img src={require(`../assets/labels-logos/apartment.jpg`)} ></img><span>Apartment</span></div></button>
+                            <button className="property-type-filter-btn"><div className="inner-btn-div"><img src={require(`../assets/labels-logos/guesthouse.jpg`)} ></img><span>Guesthouse</span></div></button>
+                            <button className="property-type-filter-btn"><div className="inner-btn-div"><img src={require(`../assets/labels-logos/hotel.jpg`)} ></img><span>Hotel</span></div></button>
                         </div>
                     </div>
                 </div>
