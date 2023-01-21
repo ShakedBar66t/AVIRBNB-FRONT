@@ -1,6 +1,41 @@
-.carousel {
+.carousel-container {
     position: relative;
-    width: 100%;
+
+    .setting-btn {
+        position: absolute;
+        right: 0;
+        justify-self: start;
+        height: 48px;
+        width: 90px;
+        align-self: center;
+        border: 1px solid lightgray;
+        border-radius: 12px;
+        font-size: rem(12px);
+        line-height: rem(16px);
+        font-weight: 700;
+
+        & span {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        & .setting-icon {
+            height: 16px;
+            width: 16px;
+            font-size: rem(16px);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.carousel {
+    grid-column: 1 / 3;
+    position: relative;
+    width: 95%;
     overflow: hidden;
     display: flex;
     height: 80px;
@@ -40,7 +75,7 @@
             border-radius: 50%;
             transition: 0.4s;
             background-color: #fff;
-            font-size: large;
+            font-size: rem(18px);
 
             &:hover {
                 box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.3);
@@ -65,7 +100,6 @@
         }
     }
 
-
     .carousel-group {
         display: flex;
         flex-direction: column;
@@ -82,11 +116,12 @@
         align-items: center;
         margin-top: 5px;
         transition: color 0.5s ease;
+        color: $clr8;
 
         & span {
-            line-height: 16px;
+            line-height: rem(16px);
             padding-top: 5px;
-            font-size: 14px;
+            font-size: rem(14px);
         }
 
         & img {
@@ -98,7 +133,7 @@
             transform: 1s ease;
             color: black;
             cursor: pointer;
-            border-bottom: 2px black solid;
+            border-bottom: 3px $clr8 solid;
             transition: color 0.5s ease;
         }
     }

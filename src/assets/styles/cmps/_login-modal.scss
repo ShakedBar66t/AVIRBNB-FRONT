@@ -10,13 +10,13 @@
     left: 0;
     right: 0;
     margin: auto;
-    opacity: 0;
-   
+    // opacity: 0;
+
     color: $clr7;
     font-family: Circular;
 
 
-    & > *:not(.full){
+    &>*:not(.full) {
         padding: 0 24px;
     }
 
@@ -34,7 +34,7 @@
 
 
 
-       @include for-narrow-layout {
+    @include for-narrow-layout {
 
         width: 568px;
     }
@@ -57,39 +57,40 @@
         button {
             top: 24px;
             position: absolute;
-            
+
         }
     }
 
-    hr{
+    hr {
         color: $clr8;
     }
 
-    .main-login-cont{
+    .main-login-cont {
         // margin: 24px 0;
-        
-        main{
+
+        main {
             padding: 0;
         }
-        h3{
+
+        h3 {
             font-size: 22px;
         }
     }
 
-    .signup-link{
+    .signup-link {
         padding: 16px 0;
         margin-bottom: 0;
 
-        span{
+        span {
             border-bottom: 1px solid black;
             cursor: pointer;
         }
     }
 
-    .login-btn{
+    .login-btn {
         width: 100%;
         padding: 1rem;
-       
+
         border-radius: 8px;
         // margin: 16px 0;
         border: none;
@@ -98,18 +99,19 @@
         background-image: $bgclr1;
     }
 
-    .or-p{
+    .or-p {
         position: absolute;
         // left: 0;
         background-color: $clr6;
         right: 50%;
-       font-size: 0.8rem;
-       color: $clr8;
+        font-size: 0.8rem;
+        color: $clr8;
     }
 
-    .more-login-opt{
+    .more-login-opt {
         margin-top: 20px;
-        button{
+
+        button {
             display: block;
             width: 100%;
             margin-top: 1rem;
@@ -122,10 +124,11 @@
             font-weight: bold;
             position: relative;
 
-            &:hover{
-                background-color: darken($color: $clr6, $amount:5%);
+            &:hover {
+                background-color: darken($color: $clr6, $amount: 5%);
             }
-            span{
+
+            span {
                 font-size: 20px;
                 position: absolute;
                 left: 20px;
@@ -133,5 +136,5 @@
         }
     }
 
-    
+
 }

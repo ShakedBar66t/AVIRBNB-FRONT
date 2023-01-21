@@ -1,0 +1,316 @@
+.modal-container {
+    position: fixed;
+    top: 10%;
+    background-color: $clr6;
+    width: 780px;
+    height: 90vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0;
+    z-index: 3;
+    visibility: hidden;
+    min-width: 670px;
+    min-height: 475px;
+    max-height: 850px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.3);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    // .modal-container {
+    //     border-bottom: $bs1;
+    // }
+
+    &.open {
+        visibility: visible;
+        opacity: 1;
+        bottom: 0;
+        top: 0;
+        opacity: 1;
+    }
+
+
+    & .filter-modal-header {
+        display: flex;
+        align-items: center;
+        padding: 12px 24px;
+        border-bottom: $bs1;
+
+        & h2 {
+            margin: auto;
+            font-size: 1rem;
+            padding: 12px;
+        }
+
+        & button {
+            border: none;
+            background-color: $clr6;
+            position: absolute;
+            text-align: center;
+        }
+    }
+
+    & .filter-modal-footer {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-top: $bs1;
+
+        & .clear-all-btn,
+        & .show-all-btn {
+            border: none;
+            font-size: rem(16px);
+            font-weight: 600;
+            line-height: rem(20px);
+            cursor: pointer;
+        }
+
+        & .clear-all-btn {
+            background-color: none;
+            padding: 10px 0;
+            text-decoration: underline;
+            color: $clr7;
+
+            &:hover {
+                color: #000000;
+            }
+        }
+
+        & .show-all-btn {
+            width: 175px;
+            height: 48px;
+            border: none;
+            color: $clr6;
+            background-color: $clr7;
+            border-radius: 6px;
+            padding: 14px 24px;
+
+            &:hover {
+                background-color: #000000;
+            }
+        }
+    }
+
+
+    .columns-div {
+        align-self: center;
+        border-bottom: $bs1;
+    }
+
+    & .price-range-columns-inner {
+        height: 250px;
+        justify-content: space-evenly;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inputs-container {
+        display: flex;
+        justify-content: space-around;
+
+        & .min-price-container,
+        & .max-price-container {
+            width: 205px;
+            border-radius: 9px;
+            border: 2px solid lightgray;
+        }
+    }
+
+    & .price-range-columns {
+        height: 300px;
+        width: 100%;
+        border-bottom: $bs1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .column {
+        display: inline-block;
+        border-radius: 1px;
+        margin-right: 1px;
+        width: 15px;
+        background-color: #b0b0b0;
+    }
+
+    .columns-div {
+        align-self: center;
+        border-bottom: $bs1;
+    }
+
+}
+
+.modal-filters-container {
+    padding: 0 40px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 70vh;
+
+    & .price-range-container {
+
+        padding: 32px 0;
+
+        & h2 {
+            font-weight: 400;
+            padding: 0;
+        }
+
+        & .average-span {
+            color: $clr8;
+            margin-top: 20px;
+            font-weight: 400;
+            font-size: rem(14px);
+        }
+    }
+
+
+}
+
+.modal-filters-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-filters-container::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 8px;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.type-btns-container:hover .type-btns-inner>input[type="checkbox"] {
+    border: 1px solid gray;
+}
+
+
+.type-filter-sub-container {
+    display: grid;
+    grid-template-rows: 84px 84px;
+    grid-template-columns: 350px 350px;
+    // padding: ;
+}
+
+.type-btns-container {
+    display: flex;
+    align-items: flex-start;
+
+    &:hover {
+        & input[type="checkbox"] {
+            border: 1px red solid;
+        }
+
+        background-color: rebeccapurple;
+    }
+
+    & .type-btns-inner {
+        display: flex;
+        padding-top: 10px;
+
+        input[type="checkbox"] {
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: currentColor;
+            width: 24px;
+            height: 24px;
+            border: 1px solid lightgray;
+            border-radius: 0.15em;
+            transform: translateY(-0.075em);
+        }
+
+        & .type-btns-inner-text {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        & label {
+            font-size: rem(16px);
+            line-height: rem(20px)
+        }
+
+        & span {
+            color: rgb(113, 113, 113);
+            margin-top: 4px;
+            word-break: break-word;
+            font-size: rem(14px);
+            line-height: rem(18px)
+        }
+    }
+
+    input[type="checkbox"]:checked::before {
+        color: white;
+    }
+
+    input[type="checkbox"]:checked {
+        background-color: black;
+    }
+
+
+
+}
+
+.rooms-beds-btns-container {
+    height: 400px;
+
+    & .rooms-beds-title {}
+
+    & .inner-numbers-container-wrapper {
+        height: 100%;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    & .inner-numbers-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    & .btns-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        & span {
+            margin-bottom: 20px;
+        }
+
+        & button {
+            height: 40px;
+            cursor: pointer;
+            border-radius: 20px;
+
+            &:hover {
+                border: 2px solid #000000;
+            }
+        }
+
+        & .rooms-beds-any-btn {
+            background-color: $clr7;
+            color: $clr6;
+            width: 80px;
+            border: none;
+        }
+
+        & .rooms-beds-num-btn {
+            border: 1px solid lightgray;
+            background-color: inherit;
+            width: 60px;
+        }
+
+        &.rooms-beds-num-btn:hover,
+        .rooms-beds-num-btn:focus,
+        .rooms-beds-num-btn:active {
+            background-color: red;
+        }
+
+    }
+}
