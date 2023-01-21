@@ -9,6 +9,7 @@ import { HiOutlineKey } from 'react-icons/hi'
 import { MdOutlineCleaningServices } from 'react-icons/md'
 import { Example } from "../cmps/date-picker"
 import GoogleMap from "../cmps/google-map"
+import { AppFooter } from "../cmps/app-footer"
 
 
 export function StayDetails() {
@@ -38,7 +39,7 @@ export function StayDetails() {
 
 
     return (stay) &&
-        <section className="stay-details secondary-container">
+        <section className="stay-details full secondary-container">
             <div className="stay-header">
                 <h1>Name :{stay.name}</h1>
                 <div className="stay-header-links">
@@ -65,7 +66,7 @@ export function StayDetails() {
                 })}
             </div>
             <div className="full">
-                <header className="sticky details-header full secondary-container">
+                <header className="details-header full secondary-container">
                     <section className="secondary-container">
                         <nav className="details-nav">
                             <a href="#photos">Photos</a>
@@ -350,7 +351,7 @@ export function StayDetails() {
 
 
             </section>
+            <AppFooter/>
         </section >
-
 
 }
