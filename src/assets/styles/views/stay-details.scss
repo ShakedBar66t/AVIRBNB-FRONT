@@ -134,7 +134,8 @@
             position: sticky;
             top: 128px;
             box-shadow: #0000001f 0 6px 16px;
-            max-width: 400px;
+            width: 350px;
+            // max-width: 400px;
 
             .btn-container {
                 position: relative;
@@ -639,4 +640,58 @@ h3 {
         }
 
     }
+}
+
+.order-input{
+
+    .guests-input{
+
+        position: relative;
+        padding:20px 5px ;
+        display: flex;
+        justify-content: space-between;
+        outline: 1px solid $clr7;
+
+        small{
+            position: absolute;
+            top: 0;
+        }
+    }
+
+}
+
+.guests-modal{
+    position: absolute;
+    background-color: $clr6;
+    top: 35%;
+    width: 87%;
+    .guests-type-input{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 5px;
+        border-bottom: 1px solid $clr8;
+        // position: ;
+        // small{
+        //     position: absolute;
+        //     top: 0;
+        // }
+        &-value{
+            align-self: end;
+            display: flex;
+            align-items: center;
+
+            button{
+                font-size: 1.4rem;
+                cursor: pointer;
+                padding-top: 8px;
+            }
+
+            span{
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    
+   
 }

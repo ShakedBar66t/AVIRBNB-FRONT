@@ -168,6 +168,7 @@ const demoLocs = [{
         name: utilService.makeLorem(3),
         type:stayTypes[utilService.getRandomIntInclusive(0,stayTypes.length-1)],
         price: utilService.getRandomIntInclusive(1000, 9000),
+        capacity:utilService.getRandomIntInclusive(2,12),
         imgUrls:[imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
         imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
         imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],

@@ -10,6 +10,14 @@ import { MdOutlineCleaningServices } from 'react-icons/md'
 import { Example } from "../cmps/date-picker"
 import GoogleMap from "../cmps/google-map"
 import { AppFooter } from "../cmps/app-footer"
+import { GrDown, GrUp } from 'react-icons/gr'
+import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
+import { fontWeight } from "@mui/system"
+
+import "antd/dist/antd"
+import { DatePicker } from "antd";
+import { moment } from "moment"
+const {RangePicker} = DatePicker
 
 
 export function StayDetails() {
@@ -24,6 +32,10 @@ export function StayDetails() {
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
+    const [isGuestModal, ToggleGuestModal] = useState(false)
+    const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
+    const [dates, setDates] = useState([])
+
 
     useEffect(() => {
         loadStay()
@@ -34,8 +46,13 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    console.log(stay)
+    console.log('datesssssss!!!!!',dates)
     // console.log(stay.reviews[0].by.imgUrl)
+
+    function handleGuestsInput(type, diff) {
+        setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
+        console.log(guests)
+    }
 
 
     return (stay) &&
@@ -93,7 +110,7 @@ export function StayDetails() {
                     <div className="subtitle">
                         <div className="">
                             <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
-                            <span>4 guests · 1 bathroom · 2 bedrooms </span>
+                            <span>{stay.capacity} guests · 1 bathroom · 2 bedrooms </span>
                         </div>
                         <img className="host-image" src={stay.host.imgUrl} />
                     </div>
@@ -137,9 +154,9 @@ export function StayDetails() {
                     </div>
                 </section>
                 <section className="reserve-modal">
-                    <form>
+                    <form >
                         <header>
-                            <h4><span>{stay.price}$</span> night</h4>
+                            <h4><span>{stay.price + '$ '} </span> night</h4>
                             <div className="review-totals">
                                 <FaStar />
                                 {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
@@ -147,7 +164,88 @@ export function StayDetails() {
                                 <a href="">20 reviews</a>
                             </div>
                         </header>
-                        <div className="picker-container">
+                        <div className="order-input">
+                            <div className="date-input"> 
+                            {/* <input type="text" /> */}
+                                <RangePicker 
+                                onChange={(values)=> {
+
+                                    // const value1 = moment(values[0]).format('DD-MM-YYYY')
+                                  const  time1 = values[0].$d
+                                   const date = new Date(time1)
+                                   const date1 = date.getTime()
+                                    console.log('valuesss!!!!',date1)
+                                    setDates(values)
+
+                                }}
+                                />
+                                {/* <DatePicker/> */}
+                            </div>
+                            <div className="guests-input">
+                                <small>Guests max capacity of {stay.capacity}</small>
+                                <p style={{fontSize:'14px', fontWeight:'bold'}}>
+                                    {(guests.adults)? <span>{guests.adults + ' Adults'}</span>: '' }
+                                    {(guests.children)? <span>{" " + guests.children + ' Children'}</span>: ''}
+                                    {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
+                                    {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
+                                   
+
+                                </p>
+                                <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
+                                    {(isGuestModal) ? <GrUp /> : <GrDown />}</button>
+                            </div>
+
+                        </div>
+                        {(isGuestModal) && <div className="guests-modal">
+                            <div className="guests-type-input">
+                                <div>
+                                    <p>Adults</p>
+                                    <small>Ages 13 or above</small>
+                                </div>
+                                <div className="guests-type-input-value">
+                                    {/* {` ${(guests.adults===0)? 'disabled':''}`} */}
+                                    <button type="button" className="clear-btn" disabled={!guests.adults} onClick={() => { handleGuestsInput('adults', -1) }}><IoRemoveCircleOutline /></button>
+                                    <span>{guests.adults}</span>
+                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('adults', 1) }}><IoAddCircleOutline /></button>
+                                </div>
+
+                            </div>
+
+                            <div className="guests-type-input">
+                                <div>
+                                    <p>Children</p>
+                                    <small>Ages 2-12</small>
+                                </div>
+                                <div className="guests-type-input-value">
+                                    <button type="button" className="clear-btn" disabled={!guests.children} onClick={() => { handleGuestsInput('children', -1) }}><IoRemoveCircleOutline /></button>
+                                    <span>{guests.children}</span>
+                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('children', 1) }}><IoAddCircleOutline /></button>
+                                </div>
+                            </div>
+                            <div className="guests-type-input">
+                                <div>
+                                    <p>Infants</p>
+                                    <small>Under 2</small>
+                                </div>
+                                <div className="guests-type-input-value">
+                                    <button type="button" className="clear-btn" disabled={!guests.infants} onClick={() => { handleGuestsInput('infants', -1) }}><IoRemoveCircleOutline /></button>
+                                    <span>{guests.infants}</span>
+                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('infants', 1) }}><IoAddCircleOutline /></button>
+                                </div>
+                            </div>
+                            <div className="guests-type-input">
+                                <div>
+                                    <p>Pets</p>
+                                    <small>Service animals?</small>
+                                </div>
+                                <div className="guests-type-input-value">
+                                    <button type="button" className="clear-btn" disabled={!guests.pets} onClick={() => { handleGuestsInput('pets', -1) }}><IoRemoveCircleOutline /></button>
+                                    <span>{guests.pets}</span>
+                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('pets', 1) }}><IoAddCircleOutline /></button>
+                                </div>
+                            </div>
+                        </div>}
+                        {/* <div className="picker-container">
                             <div className="check-in picker">
                                 <label htmlFor="check-in">CHECK-IN</label>
                                 <input type="text" placeholder="MM/DD/YYYY" />
@@ -263,8 +361,10 @@ export function StayDetails() {
                                 <button className="action-btn">
                                     <span>Reserve</span>
                                 </button>
-                            </div>
-                        </div>
+                            </div> 
+                         </div> */}
+
+
                         <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
                             <div className="prices">
@@ -351,7 +451,7 @@ export function StayDetails() {
 
 
             </section>
-            <AppFooter/>
+            <AppFooter />
         </section >
 
 }

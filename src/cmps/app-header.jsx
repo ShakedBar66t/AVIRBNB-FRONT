@@ -121,7 +121,7 @@ export function AppHeader() {
                     toggleLoginModal('signup')
                     }}>Sign up </button>}
                 {(user) && <button >Notifications </button>}
-                {(user) && <button >Trips </button>}
+                {(user) && <button onClick={()=>navigate('/user/trip')} >Trips </button>}
                 {(user) && <button >Wishlists </button>}
                 <hr />
                 {(user)&&< button onClick={()=>{navigate(`/user/${user._id}`)}}>Account </button>}
@@ -136,6 +136,7 @@ export function AppHeader() {
                     }
                     navigate('/host/home')
                 }}>Host an experience </button>
+                <button>About</button>
                 <button>Help </button>
                 {(user) && <button onClick={() => { logout() }}>Log out</button>}
             </div>

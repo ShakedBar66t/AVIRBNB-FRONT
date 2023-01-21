@@ -21,6 +21,7 @@ import { FilterModal } from './cmps/filter-modal.jsx'
 
 import { HostHome } from './pages/host-home-page'
 import { HostIndex } from './pages/host-index'
+import { UserTrips } from './pages/user-trips'
 
 
 export function RootCmp() {
@@ -32,6 +33,8 @@ export function RootCmp() {
             <main>
                 <Routes>
                     {/* {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)} */}
+
+                    <Route path="/user/trip" element={<UserTrips />} />
                     <Route path="/user/:id" element={<UserDetails />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />
