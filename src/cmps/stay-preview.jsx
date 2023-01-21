@@ -87,9 +87,8 @@
 //     </article>
 // }
 
-
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
@@ -98,18 +97,27 @@ import { FaAngleRight } from "react-icons/fa";
 import { stayService } from "../services/stay.service";
 import { utilService } from "../services/util.service";
 import { PreviewImgCarousel } from "./img-carousel";
+import { useSelector } from "react-redux";
 
 
 
 
-export function StayPreview({ stay }) {
+export function StayPreview({ stay,onToggleLike }) {
     const navigate = useNavigate()
-  
+    const [heartColor,setHeartColor] = useState('rgba($color: $clr7, $alpha: 0.7)')
+    const [isLikedByUser,setIsLikedByUser] = useState(false)
     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
+    const user = useSelector(storeState => storeState.userModule.user)
 
     function getDateString(){
 
     }
+
+    useEffect(()=>{
+
+    },[heartColor])
+
+    // console.log('is liked,!!!!!!!!!!!!!!!!!!!!',isLikedByUser)
 
   
     function PrevDateStr(){
@@ -129,6 +137,19 @@ export function StayPreview({ stay }) {
     //   const strDate = 
     }
 
+    function checkIfLikedByUser(){
+        const indexOfuser = stay.likedByUsers.findIndex(currUser=>currUser._id===user?._id)
+        if(indexOfuser > -1 ){
+            // setHeartColor('#ff385c')
+            return 'liked'
+            
+        }
+        else{
+            // setHeartColor('rgba($color: $clr7, $alpha: 0.7)')
+            return 'unliked'
+        }
+    }
+
     return <article className="stay-preview"
         // onClick={() => { navigate(`/explore/${stay._id}`) }}
     
@@ -136,8 +157,14 @@ export function StayPreview({ stay }) {
         <PreviewImgCarousel stay={stay}/>
         {/* <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" /> */}
 
-        <button className="like-btn clear-btn"><FaHeart className="heart-fa" /></button>
-        <button className="like-btn clear-btn"><FaRegHeart className="reg-heart-fa" /></button>
+        <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>
+        <button className="like-btn clear-btn" onClick={()=>{onToggleLike(stay).then((ans)=>{
+            console.log('is liked,',ans)
+            // checkIfLikedByUser()
+            // console.log(isLikedByUser=== true && !!user)
+            setIsLikedByUser(prev=>!prev)
+        })}}
+        ><FaRegHeart className="reg-heart-fa" /></button>
 
         {/* {( currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
             ev.stopPropagation()
@@ -171,16 +198,10 @@ export function StayPreview({ stay }) {
             <p className="prev-price">{'$'+ stay.price}</p>
 
 
-
-
-
-
         </div>
        
     </article>
 }
-
-
 
 // import { useNavigate } from "react-router-dom"
 // import { useState } from "react";

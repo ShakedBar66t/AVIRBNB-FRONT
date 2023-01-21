@@ -3,7 +3,7 @@ import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from "./reducers/user.reducer.js";
+import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL } from "./reducers/user.reducer.js";
 
 export async function loadUsers() {
     try {
@@ -37,7 +37,7 @@ export async function login(credentials) {
         return user
     } catch (err) {
         console.log('Cannot login', err)
-        
+
         throw err
     }
 }
@@ -78,3 +78,18 @@ export async function loadUser(userId) {
         console.log('Cannot load user', err)
     }
 }
+
+export function toggleLoginModal(signup) {
+
+    if (signup === 'signup') {
+        store.dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
+    }
+    // toggleUserModal()
+    // setLoginModal(!loginModal)
+    store.dispatch({ type: TOGGLE_LOGIN_MODAL })
+    store.dispatch({ type: TOGGLE_IS_SHADOW })
+}
+
+// export function toggleUserModal() {
+//     setUserModal(!userModal)
+// }

@@ -8,10 +8,12 @@ import { stayService } from '../services/stay.service.js'
 
 import { StayList } from '../cmps/stay-list.jsx'
 import { PreviewImgCarousel } from '../cmps/img-carousel.jsx'
+import { toggleLoginModal } from '../store/user.actions.js'
 
 export function StayIndex() {
 
     const stays = useSelector(storeState => storeState.stayModule.stays)
+    const user = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         loadStays()
@@ -58,10 +60,32 @@ export function StayIndex() {
         console.log(`TODO Adding msg to stay`)
     }
 
+   async function onToggleLike(stay){
+
+        if (!user){
+            toggleLoginModal()
+            return
+        }
+
+        else{
+          const indexOfuser = stay.likedByUsers.findIndex(currUser=>currUser._id===user._id)
+            if(indexOfuser > -1){
+                stay.likedByUsers.splice(indexOfuser,1)
+                await updateStay(stay)
+                return false
+            }
+            else{
+                stay.likedByUsers.push(user)
+                await updateStay(stay)
+                return true
+            }   
+        }
+    }
+
 
     return <section className='stay-index stay-index-layout'>
         <AppHeader />
-        <StayList stays={stays} />
+        <StayList stays={stays} onToggleLike={onToggleLike} />
         {/* <PreviewImgCarousel imgs={stays[0].imgUrls} /> */}
 
         
