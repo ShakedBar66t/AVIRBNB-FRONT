@@ -71,6 +71,7 @@ export function FilterModal() {
 
                 </div>
 
+
                 <div className="type-filter-main-container">
 
 
