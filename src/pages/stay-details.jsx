@@ -64,6 +64,29 @@ export function StayDetails() {
                     </div>
                 })}
             </div>
+            <div className="full">
+                <header className="sticky details-header full secondary-container">
+                    <section className="secondary-container">
+                        <nav className="details-nav">
+                            <a href="#photos">Photos</a>
+                            <a href="#amenities">Amenities</a>
+                            <a href="#reviews">Reviews</a>
+                            <a href="#map">Map</a>
+                        </nav>
+                        <div className="reserve-container">
+                            <div className="reserve-info-container">
+                                <p>${stay.price} <span>night</span></p>
+                                <div className="review-totals">
+                                    <FaStar />
+                                    <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                                    <a href="#reviews">{stay.reviews.length} reviews</a>
+                                </div>
+                            </div>
+                            <button className="btn-reserve">Reserve</button>
+                        </div>
+                    </section>
+                </header>
+            </div>
             <div className="stay-info">
                 <section className="content">
                     <div className="subtitle">
@@ -101,7 +124,7 @@ export function StayDetails() {
                     <div className="summary">
                         If the dates you wish are not available, we have other options in the same location. You can find them on my profile. My goal is for you to have your days with the most comfort i can propose. I want you to taste all the feelings in Porto, as our food, as our best places, our best pointviews. I just love to help you enjoying this beautiful city :
                     </div>
-                    <div className="amenities-container" id="amenities">
+                    <div className="amenities-container">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
                             {stay.amenities.map((amenity, index) => {
@@ -112,7 +135,7 @@ export function StayDetails() {
                         </div>
                     </div>
                 </section>
-                <section className="reverse-modal">
+                <section className="reserve-modal">
                     <form>
                         <header>
                             <h4><span>{stay.price}$</span> night</h4>
@@ -237,7 +260,7 @@ export function StayDetails() {
                             <div className="cell"></div>
                             <div className="content">
                                 <button className="action-btn">
-                                    <span>Check availability</span>
+                                    <span>Reserve</span>
                                 </button>
                             </div>
                         </div>
@@ -259,12 +282,12 @@ export function StayDetails() {
                     </form>
                 </section>
             </div>
-            <section id="reviews">
+            <section className="reviews">
                 <header>
                     <div className="review-totals">
                         <FaStar />
                         <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
-                      <a href="">{stay.reviews.length} reviews </a> 
+                        <a href="">{stay.reviews.length} reviews </a>
                     </div>
                 </header>
                 <div className="rating">
@@ -320,11 +343,11 @@ export function StayDetails() {
                     })}
                 </main>
             </section>
-            <section className="map" id="map">
+            <section className="map">
                 <h2>Where you'll be</h2>
                 <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                <GoogleMap/>
-                
+                <GoogleMap />
+
 
             </section>
         </section >
