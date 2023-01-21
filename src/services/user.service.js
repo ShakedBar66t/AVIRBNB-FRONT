@@ -1,3 +1,4 @@
+import { promised } from 'q'
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 
@@ -51,12 +52,16 @@ async function update({_id, score}) {
 async function login(userCred) {
     const users = await storageService.query(USER_STORAGE_KEY)
     console.log('usersss',users,'usercred',userCred)
-    const user = users.find(user => user.email === userCred.email)
+    const user = users.find(user => user.email === userCred.email && user.password===userCred.password)
     // const user = users.find(user => user.username === userCred.username)
     // const user = await httpService.post('auth/login', userCred)
     if (user) {
         // socketService.login(user._id)
         return saveLocalUser(user)
+    }
+
+    else{
+        return Promise.reject('Invalid Login')
     }
 }
 async function signup(userCred) {

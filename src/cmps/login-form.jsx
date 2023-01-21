@@ -27,7 +27,7 @@ const theme = createTheme({
   }
 })
 
-  const handleSubmit = (event) => {
+async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const currUser = {
@@ -41,13 +41,43 @@ const theme = createTheme({
     }
     if(isSignUpModal){
     console.log('this is curr user',currUser)
-    signup(currUser).then(onCloseLoginModal)
+    signup(currUser)
+    .then(onCloseLoginModal)
+    .catch(err=>{
+      console.log('damn',err)
+    })
     return
   }
 
   login(currUser).then(onCloseLoginModal)
+  .catch(setIsValid)
   
   };
+  // const  handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const currUser = {
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //     fullname: data.get('fullname'),
+  //   }
+  //   validate(currUser)
+  //   if(isValid){
+  //     return
+  //   }
+  //   if(isSignUpModal){
+  //   console.log('this is curr user',currUser)
+  //   signup(currUser)
+  //   .then(onCloseLoginModal)
+  //   .catch(err=>{
+  //     console.log('damn',err)
+  //   })
+  //   return
+  // }
+
+  // login(currUser).then(onCloseLoginModal)
+  
+  // };
 
   function validate(user){
     if (!user.email.includes('@') || !user.email.includes('.')){
@@ -57,7 +87,7 @@ const theme = createTheme({
       setIsValid('Password should have 8 to 16 characters')
       return 
     }
-    if(!user?.fullname?.includes(' ') ){
+    if(user?.fullname?.includes(' ') ===true){
       setIsValid('Invalid full name')
       return 
     }

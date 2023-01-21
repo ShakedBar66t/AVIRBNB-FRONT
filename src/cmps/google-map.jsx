@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { stayService } from "../services/stay.service"
 import GoogleMapReact from 'google-map-react';
 
+
 const AnyReactComponent = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>;
 const Loc1 = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>
 const Loc2 = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>

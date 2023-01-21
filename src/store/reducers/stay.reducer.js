@@ -6,10 +6,12 @@ export const ADD_TO_STAYT = 'ADD_TO_STAYT'
 export const CLEAR_STAYT = 'CLEAR_STAYT'
 export const UNDO_REMOVE_STAY = 'UNDO_REMOVE_STAY'
 export const REMOVE_FROM_STAYT = 'REMOVE_FROM_STAYT'
+export const TOGGLE_FILTER_MODAL = 'TOGGLE_FILTER_MODAL'
 
 const initialState = {
     stays: [],
     stayt: [],
+    isFilterModalOpen: false,
     lastRemovedStay: null
 }
 
@@ -47,6 +49,9 @@ export function stayReducer(state = initialState, action) {
             if (state.lastRemovedStay) {
                 newState = { ...state, stays: [...state.stays, state.lastRemovedStay], lastRemovedStay: null }
             }
+            break
+        case TOGGLE_FILTER_MODAL:
+            newState = { ...state, isFilterModalOpen: !state.isFilterModalOpen }
             break
         default:
     }

@@ -23,6 +23,7 @@ export async function removeUser(userId) {
         store.dispatch({ type: REMOVE_USER, userId })
     } catch (err) {
         console.log('UserActions: err in removeUser', err)
+        throw err
     }
 }
 
@@ -36,6 +37,7 @@ export async function login(credentials) {
         return user
     } catch (err) {
         console.log('Cannot login', err)
+        
         throw err
     }
 }

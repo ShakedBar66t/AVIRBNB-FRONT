@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux"
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
+import { CgOptions } from "react-icons/cg";
+
+import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
+import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
+
+
 export function LabelsFilter() {
+    const dispatch = useDispatch()
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayCount, setDisplayCount] = useState(4);
     const [displayNext, setDisplayNext] = useState(true);
+
     const stayLabels = [
         { name: 'By the lake', src: 'lake' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
         { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' }, { name: 'Historical homes', src: 'historical-homes' },
@@ -30,8 +39,14 @@ export function LabelsFilter() {
         }
     }
 
-    return (
-        <div className="carousel stay-index-layout">
+    function handleSettingClick() {
+        dispatch({ type: TOGGLE_FILTER_MODAL })
+        dispatch({ type: TOGGLE_IS_SHADOW })
+    }
+
+    return (<div className="carousel-container stay-index-layout">
+
+        <div className="carousel ">
             <div className="carousel-inner">
                 {
                     stayLabels.map((label, index) => {
@@ -50,48 +65,10 @@ export function LabelsFilter() {
                 <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
             </div>
             <div className='btn-container next'>
-            <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
+                <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
             </div>
-            {/* <div>setting</div> */}
         </div>
+        <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
+    </div>
     );
 };
-// 
-
-        // <div className="carousel">
-        //     <button className="prev-btn" onClick={handlePrevClick}>Prev</button>
-        //     <div className="carousel-group">
-        //         {stayLabels.map((label, index) => (
-        //             <button className={`label-filter-btn ${index >= currentIndex && index < currentIndex + partSize ? '' : 'hidden'}`} key={index}>
-        //                 <img src={require(`../assets/labels-logos/${label.src}.jpg`)} />
-        //                 <span>{label.name}</span>
-        //             </button>
-        //         ))}
-        //     </div>
-        //     <button className="next-btn" onClick={handleNextClick}>Next</button>
-        // </div>
-
-
-
-
-    // return (
-    //     <div>
-
-    //         {/* <img className="toy-preview-img" src={pic} /> */}
-    //         {/* <img src={img} /> */}
-
-    //         {/* {stayLabels.map((label, index) => {
-    //             return < button key={index} > <span>{label}</span></button>
-
-    //         })} */}
-
-    //     </div >
-
-
-
-
-
-// {name: Castles}, {name:  Amzaing pools}, {name: Mansions},
-// {name: Ski-in/out}, {name: Luxe}, {name: OMG!}, {name: Grand pianos}, {name: Houserboats},
-// {name: Top of the world}, {name: Islands}, {name: New}, {name: Tranding}, {name: Cabins}, {name: Boats}, {name: Tiny homes}, {name: Tropical},
-// {name: Bed & breakfasts}, {name: Design}, {name: Beachfront}, {name: Farms}, {name: Arctic}, {name: Caves}, {name: Play}, {name: Iconic cities}]
