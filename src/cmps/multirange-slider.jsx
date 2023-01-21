@@ -2,17 +2,17 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 // import "./multiRangeSlider.css";
 
-const MultiRangeSlider = ({ min, max, onChange }) => {
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
-    const minValRef = useRef(min);
-    const maxValRef = useRef(max);
+const MultiRangeSlider = ({ minPrice, maxPrice, onChange }) => {
+    const [minVal, setMinVal] = useState(minPrice);
+    const [maxVal, setMaxVal] = useState(maxPrice);
+    const minValRef = useRef(minPrice);
+    const maxValRef = useRef(maxPrice);
     const range = useRef(null);
 
     // Convert to percentage
     const getPercent = useCallback(
-        (value) => Math.round(((value - min) / (max - min)) * 100),
-        [min, max]
+        (value) => Math.round(((value - minPrice) / (maxPrice - minPrice)) * 100),
+        [minPrice, maxPrice]
     );
 
     // Set width of the range to decrease from the left side
@@ -36,17 +36,17 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
         }
     }, [maxVal, getPercent]);
 
-    // Get min and max values when their state changes
+    // Get minPrice and maxPrice values when their state changes
     useEffect(() => {
-        onChange({ min: minVal, max: maxVal });
+        onChange({ minPrice: minVal, maxPrice: maxVal });
     }, [minVal, maxVal, onChange]);
 
     return (
         <div className="container">
             <input
                 type="range"
-                min={min}
-                max={max}
+                min={minPrice}
+                max={maxPrice}
                 value={minVal}
                 onChange={(event) => {
                     const value = Math.min(Number(event.target.value), maxVal - 1);
@@ -54,12 +54,12 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
                     minValRef.current = value;
                 }}
                 className="thumb thumb--left"
-                style={{ zIndex: minVal > max - 100 && "5" }}
+                style={{ zIndex: minVal > maxPrice - 100 && "5" }}
             />
             <input
                 type="range"
-                min={min}
-                max={max}
+                min={minPrice}
+                max={maxPrice}
                 value={maxVal}
                 onChange={(event) => {
                     const value = Math.max(Number(event.target.value), minVal + 1);
@@ -80,8 +80,8 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
 };
 
 MultiRangeSlider.propTypes = {
-    min: PropTypes.number.isRequired,
-    max: PropTypes.number.isRequired,
+    minPrice: PropTypes.number.isRequired,
+    maxPrice: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired
 };
 

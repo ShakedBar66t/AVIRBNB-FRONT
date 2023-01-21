@@ -57,9 +57,9 @@
         align-items: center;
         position: absolute;
         height: 80px;
-        width: 15px;
-        background-color: rgba(255, 255, 255, 1);
-        box-shadow: -10px 10px 30px 10px rgb(231 227 227);
+        width: 30px;
+        background-color: rgba(255, 255, 255, 0.6);
+        background-image: linear-gradient(to right, rgb(255 255 255 / 0), white 40px);
 
         &.next {
             right: 0;

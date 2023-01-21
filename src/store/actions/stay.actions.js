@@ -1,9 +1,9 @@
-import { stayService } from '../../services/stay.service.js';
-import { userService } from '../../services/user.service.js';
-import { store } from '../store.js';
+import { stayService } from '../../services/stay.service.js'
+import { userService } from '../../services/user.service.js'
+import { store } from '../store.js'
 import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
-import { ADD_STAY, ADD_TO_STAYT, CLEAR_STAYT, REMOVE_STAY, REMOVE_FROM_STAYT, SET_STAYS, UNDO_REMOVE_STAY, UPDATE_STAY } from "../reducers/stay.reducer.js";
-import { SET_SCORE } from '../reducers/user.reducer.js';
+import { ADD_STAY, ADD_TO_STAYT, CLEAR_STAYT, REMOVE_STAY, REMOVE_FROM_STAYT, SET_STAYS, UNDO_REMOVE_STAY, UPDATE_STAY } from "../reducers/stay.reducer.js"
+import { SET_SCORE } from '../reducers/user.reducer.js'
 
 // Action Creators:
 export function getActionRemoveStay(stayId) {
@@ -24,6 +24,46 @@ export function getActionUpdateStay(stay) {
         stay
     }
 }
+
+// export async function loadStays(filterByParams) {
+//     console.log(filterByParams)
+//     if (!filterByParams) {
+//         try {
+//             const stays = await stayService.query()
+
+//             store.dispatch({
+//                 type: SET_STAYS,
+//                 stays
+//             })
+
+//         } catch (err) {
+//             console.log('Cannot load stays', err)
+//             throw err
+//         }
+//     }
+//     else {
+//         let filterBy = filterByParams.split('&').reduce((acc, param) => {
+//             const [key, value] = param.split('=')
+//             if (key === 'amenities' && value) {
+//                 acc[key] = value.split(',')
+//             } else {
+//                 acc[key] = value
+//             }
+//             return acc
+//         }, {})
+//         try {
+//             const stays = await stayService.query(filterBy)
+//             store.dispatch({
+//                 type: SET_STAYS,
+//                 stays
+//             })
+//         } catch (err) {
+//             console.log('Cannot load stays', err)
+//             throw err
+//         }
+//     }
+// }
+
 
 export async function loadStays() {
     try {
@@ -77,14 +117,14 @@ export async function addStay(stay) {
 // }
 
 export async function updateStay(stay) {
-    try{
+    try {
         const savedStay = await stayService.save(stay)
         console.log('Updated Stay:', savedStay)
         store.dispatch(getActionUpdateStay(savedStay))
         return savedStay
 
     }
-    catch(err){
+    catch (err) {
         console.log('Cannot save stay', err)
         throw err
     }
@@ -140,7 +180,7 @@ export function onRemoveStayOptimistic(stayId) {
 
     stayService.remove(stayId)
         .then(() => {
-            console.log('Server Reported - Deleted Succesfully');
+            console.log('Server Reported - Deleted Succesfully')
         })
         .catch(err => {
             showErrorMsg('Cannot remove stay')
