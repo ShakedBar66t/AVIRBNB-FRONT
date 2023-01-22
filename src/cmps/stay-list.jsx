@@ -1,4 +1,3 @@
-
 import { StayPreview } from "./stay-preview"
 
 export function StayList({stays,onToggleLike}){

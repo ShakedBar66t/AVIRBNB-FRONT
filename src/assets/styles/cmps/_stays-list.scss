@@ -1,17 +1,12 @@
 .stay-list{
     display: grid;
-   
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-
-    // grid-template-columns: repeat(auto-fill, minmax(max(240px, 350px), 1fr));
-    // grid-template-columns: repeat(auto-fill, minmax(max(240px, 350px), 1fr));
-    // grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
-    gap: 24px;
+    column-gap: 24px;
+    row-gap: 36px;
     margin-top: 176px;
+
     @include for-ultrawide-layout {
         // grid-template-columns: repeat(6, minmax(260px, 500px));
-     
         grid-template-columns: repeat(6,1fr);
-       
     }
 }

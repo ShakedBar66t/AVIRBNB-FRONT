@@ -154,7 +154,7 @@ function _createStay() {
     ]
     const stayTypes = ['Entire place', 'Private rooms', 'Hotel rooms', 'Shared rooms']
 
-    const stayAmenities = [{ name: 'Cleaning products', icon: <MdOutlineCleaningServices /> }, 'Shampoo', 'Body soap', 'Hot water',
+    const stayAmenities = [ 'Cleaning products' , 'Shampoo', 'Body soap', 'Hot water',
         'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
@@ -202,10 +202,6 @@ function _createStay() {
             }
         }
     }
-
-
-
-
 
     return {
         _id: utilService.makeId(),

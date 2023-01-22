@@ -8,8 +8,6 @@ import { StayDetails } from './pages/stay-details'
 import { useSelector } from 'react-redux'
 import { LoginModal } from './cmps/login-modal.jsx'
 import { FilterModal } from './cmps/filter-modal.jsx'
-
-
 import { HostHome } from './pages/host-home-page'
 import { HostIndex } from './pages/host-index'
 import { UserTrips } from './pages/user-trips'
@@ -44,7 +42,3 @@ export function RootCmp() {
         </div >
     )
 }
-
-
-
-

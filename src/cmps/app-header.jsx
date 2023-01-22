@@ -131,11 +131,8 @@ export function AppHeader() {
                 {(user)&&< button onClick={()=>{navigate(`/user/${user._id}`)}}>Account </button>}
                 <button onClick={()=>{
                     if(!user){
-
                         toggleLoginModal()
                         toggleUserModal()
-
-                        
                         return
                     }
                     navigate('/host/home')

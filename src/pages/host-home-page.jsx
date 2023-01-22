@@ -1,11 +1,10 @@
 import { SiAirbnb } from 'react-icons/si'
 import { useNavigate } from 'react-router'
 import { AppFooter } from '../cmps/app-footer'
+
 export function HostHome(){
     const navigate = useNavigate()
-
     return <section className='host-home-page'>
-
         <div className='logo' onClick={()=>{navigate('/explore')}}><SiAirbnb/></div>
         <div className='page-cont'>
             <p>HOST AN EXPERIENCE ON AVIRBNB </p>

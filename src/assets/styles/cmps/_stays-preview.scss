@@ -1,62 +1,53 @@
 .stay-preview {
     position: relative;
-    // aspect-ratio: 0.77/1;
     font-family: Circular;
     font-size: 1rem;
     line-height: 20px;
     
-
     &:hover {
-
         & .img-preview-paging-btns {
             opacity: 1;
         }
     }
 
-
-    // .img-carousel{
-    //     display: flex;
-
-    //     overflow: hidden;
-    //     // width: 100%;
-    //     aspect-ratio: 1/0.95;
-    //     .stay-preview-img{
-    //         // width: 100%;
-    //         position: absolute;
-    //         aspect-ratio: 1/0.95;
-    //         border-radius: 10px;
-    //     }
-    // }
-
     .stay-preview-img {
         width: 100%;
         aspect-ratio: 1/0.95;
         border-radius: 10px;
-      
-
     }
 
     .img-preview-paging-btns {
         position: absolute;
-        top: 37.5%;
+        top: 36%;
         border-radius: 50%;
-        background-color: rgba($color: $clr6, $alpha: 0.9);
+        background-color: rgba($color: $clr6, $alpha: 0.75);
         color: $clr7;
-        padding: 8px;
+        padding: 6px 9px;
         font-size: 14px;
         margin: 0;
         text-align: center;
         opacity: 0;
-        transition: opacity 0.2s;
+        transition:  0.4s;
 
+        &:hover{
+            background-color: rgba($color: $clr6, $alpha: 1);
+            padding: 8px 10.5px;            
+        }
     }
 
     .prev-img-preview-btn {
-        left: 5%;
+        left: 12px;
+
+        &:hover{
+            left: 10px; 
+        }
     }
 
     .next-img-preview-btn {
-        right: 5%;
+        right: 12px;
+        &:hover{
+            right: 10px; 
+        }
     }
 
     .liked{
@@ -68,17 +59,9 @@
     
     .like-btn {
         position: absolute;
-        top: 10px;
+        top: 15px;
         right: 10px;
-        font-size: 24px;
-        line-height: 20px;
-        font-weight: 600;
-        cursor: pointer;
-
-        // .heart-fa {
-
-        //     color: rgba($color: $clr7, $alpha: 0.7);
-        // }
+        font-size: 1.5rem;
 
         .reg-heart-fa {
             line-height: 20px;
@@ -89,24 +72,23 @@
 
     .curr-img-indication {
         position: absolute;
-        bottom: 33%;
-        left: 38%;
-
-
+        bottom: 110px;
+        left: 45%;
+     font-size: 40px ;
+     
     }
 
-    .prev-loc {
+    .prev-price {
         color: $clr7;
+        margin-top: 7px;
+       
     }
 
     .prev-loc-rate {
         display: flex;
         justify-content: space-between;
-        font-weight: 500;
-
-
-
-
+        margin-top: 7px;
+        // font-weight: 500;
     }
 
     .prev-host-name,
@@ -114,96 +96,17 @@
         color: $clr8;
     }
 
-    .prev-price {
-        color: $clr7;
-
-        margin-top: 10px;
-    }
-
     p {
         margin-bottom: 0;
+        font-weight: 400;
     }
-
-
 }
-
-// .slick-slider.slick-initialized {
-//     // position: relative;
-//     z-index: 0;
-
-// }
-
-// .slick-arrow.slick-prev{
-//     border: none;
-//     position: absolute;
-//     top:50%;
-//     font-size: 24px;
-//     height: 50px;
-//     z-index: 2;
-//     width: 100px;
-//    left: 0;
-// }
-
-// .slick-arrow.slick-prev::before {
-//     background-color: aqua;
-
-//     font-size: 24px;
-//     position: absolute;
-//     top: 50%;
-//     left: 0px;
-    
-//     height: 50px;
-//     z-index: 3 !important;
-//     // // width: 100px;
-// }
-
-// .slick-arrow.slick-next::before {
-//     // background-color: blue;
-//     // background: none;
-//     border: none;
-//     position: absolute;
-//     top: 50%;
-//     font-size: 24px;
-//     height: 50px;
-//     z-index: 2;
-//     width: 100px;
-//     right: 0;
-// }
-
-
-// .slick-dots li {
-//     margin: 0 auto;
-//     padding: 0px;
-//     bottom: 30px;
-
-// }
-
-// .slick-dots li.slick-active button:before {
-//     color: white
-// }
-
-// .slick-dots li button::before {
-//     font-size: 10px;
-//     margin-inline-start: 0px;
-//     color: $clr5;
-//     bottom: 100px;
-
-// }
-
 
 
 .slick-slider {
     position: relative;
   border-radius: 10px;
   overflow: hidden;
-//   width: 100% !important;
-    // height: 100%;
-    // .preview-slider {
-    //     border-radius: 15px;
-    //     max-height: 215px;
-    //     overflow: hidden;
-    //     width: 100%;
-    // }
 
     button {
         margin: -5px 0;
@@ -251,57 +154,3 @@
             opacity: 1;
         }
     }}
-
-// .slick-slider {
-//     position: relative;
-//     // height: 100%;
-//     button {
-//         margin: -5px 0;
-//     }
-//     &:hover {
-//         .slick-prev {
-//             opacity: 1;
-//         }
-//         .slick-next {
-//             opacity: 1;
-//         }
-//     }
-//     div {
-//         max-height: 270px;
-//     }
-//     .slick-prev:before,
-//     .slick-next:before {
-//         font-size: 30px !important;
-//     }
-//     .slick-prev,
-//     .slick-next {
-//         position: absolute;
-//         top: 50%;
-//         left: 0px;
-//         z-index: 5;
-//         opacity: 0;
-//         transform: translateY(-50%);
-//     }
-//     .slick-next {
-//         right: 10px;
-//         left: unset;
-//     }
-//     .slick-dots {
-//         bottom: 10px;
-//         li.slick-active button::before {
-//             color: whitesmoke;
-//         }
-//     }
-//     div {
-//         height: 100%;
-//         width: 100%;
-//         margin: 0 0;
-//         padding: 0 0;
-//         border-radius: 15px;
-//         img {
-//             height: 100%;
-//             border-radius: 15px;
-//             object-fit: cover;
-//         }
-//     }
-// }

@@ -1,6 +1,5 @@
 .login-modal {
     position: fixed;
-    top: 10%;
     z-index: 6;
     background-color: $clr6;
     width: 100vw;
@@ -9,18 +8,14 @@
     border-radius: 10px;
     left: 0;
     right: 0;
-    margin: auto;
-    
+    margin: auto;  
     opacity: 0;
-
     color: $clr7;
     font-family: Circular;
-
 
     &>*:not(.full) {
         padding: 0 24px;
     }
-
 
     &.open {
         opacity: 1;
@@ -33,10 +28,7 @@
         top: 100vh;
     }
 
-
-
     @include for-narrow-layout {
-
         width: 568px;
     }
 
@@ -45,20 +37,15 @@
         align-items: center;
         margin: 12px 0;
 
-
         h2 {
             margin: auto;
             font-size: 1rem;
             padding: 12px;
-
-
-
         }
 
         button {
             top: 24px;
             position: absolute;
-
         }
     }
 
@@ -67,14 +54,11 @@
     }
 
     .main-login-cont {
-        // margin: 24px 0;
-
         main {
             padding: 0;
         }
-
         h3 {
-            font-size: 22px;
+            font-size: rem(22px);
         }
     }
 
@@ -91,18 +75,14 @@
     .login-btn {
         width: 100%;
         padding: 1rem;
-
         border-radius: 8px;
-        // margin: 16px 0;
         border: none;
         color: $clr6;
-        cursor: pointer;
         background-image: $bgclr1;
     }
 
     .or-p {
         position: absolute;
-        // left: 0;
         background-color: $clr6;
         right: 50%;
         font-size: 0.8rem;
@@ -117,7 +97,7 @@
             width: 100%;
             margin-top: 1rem;
             padding: 13px;
-            font-size: 14px;
+            font-size: rem(14px);
             color: $clr7;
             border-radius: 10px;
             background: none;
@@ -128,14 +108,11 @@
             &:hover {
                 background-color: darken($color: $clr6, $amount: 5%);
             }
-
             span {
-                font-size: 20px;
+                font-size: rem(20px);
                 position: absolute;
                 left: 20px;
             }
         }
     }
-
-
 }
