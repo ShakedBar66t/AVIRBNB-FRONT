@@ -8,7 +8,7 @@ const ORDER_STORAGE_KEY = 'orderDB'
 export const orderService = {
     // query,
     // getById,
-    // save,
+    save,
     // remove,
     // addOrderMsg,
     getEmptyOrder,
@@ -37,17 +37,17 @@ window.cs = orderService
 //     await storageService.remove(ORDER_STORAGE_KEY, orderId)
 // }
 
-// async function save(order) {
-//     var savedOrder
-//     if (order._id) {
-//         savedOrder = await storageService.put(ORDER_STORAGE_KEY, order)
-//     } else {
-//         // Later, owner is set by the backend
-//         order.owner = userService.getLoggedinUser()
-//         savedOrder = await storageService.post(ORDER_STORAGE_KEY, order)
-//     }
-//     return savedOrder
-// }
+async function save(order) {
+    var savedOrder
+    if (order._id) {
+        savedOrder = await storageService.put(ORDER_STORAGE_KEY, order)
+    } else {
+        // Later, owner is set by the backend
+        // order.owner = userService.getLoggedinUser()
+        savedOrder = await storageService.post(ORDER_STORAGE_KEY, order)
+    }
+    return savedOrder
+}
 
 // async function addOrderMsg(orderId, txt) {
 //     // Later, this is all done by the backend

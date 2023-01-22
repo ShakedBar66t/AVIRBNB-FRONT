@@ -45,8 +45,6 @@ export function LoginModal() {
         <hr className="full" />
         <main className="main-login-cont" action="">
             <h3 >Welcome to Avirbnb</h3>
-            {/* {(!isSignUpModal) && <SignInForm />}
-           {(isSignUpModal) && < SignUpForm/>} */}
             < SignInForm onCloseLoginModal={onCloseLoginModal} />
             
             <p className='or-p'>OR</p> 

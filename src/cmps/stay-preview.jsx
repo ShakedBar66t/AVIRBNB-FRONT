@@ -140,12 +140,10 @@ export function StayPreview({ stay,onToggleLike }) {
     function checkIfLikedByUser(){
         const indexOfuser = stay.likedByUsers.findIndex(currUser=>currUser._id===user?._id)
         if(indexOfuser > -1 ){
-            // setHeartColor('#ff385c')
             return 'liked'
             
         }
         else{
-            // setHeartColor('rgba($color: $clr7, $alpha: 0.7)')
             return 'unliked'
         }
     }
@@ -158,13 +156,9 @@ export function StayPreview({ stay,onToggleLike }) {
         <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
 
         <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>
-        <button className="like-btn clear-btn" onClick={()=>{onToggleLike(stay).then((ans)=>{
-            console.log('is liked,',ans)
-            // checkIfLikedByUser()
-            // console.log(isLikedByUser=== true && !!user)
-            setIsLikedByUser(prev=>!prev)
-        })}}
-        ><FaRegHeart className="reg-heart-fa" /></button>
+        <button className="like-btn clear-btn" onClick={(ev)=>{onToggleLike(ev,stay).then((ans)=>setIsLikedByUser(prev=>!prev))}}
+            ><FaRegHeart className="reg-heart-fa" /></button>
+   
 
         {( currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
             ev.stopPropagation()
