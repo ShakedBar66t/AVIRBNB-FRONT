@@ -21,6 +21,7 @@ import { toggleLoginModal } from '../store/user.actions.js'
 import createCssVarsProvider from "@mui/system/cssVars/createCssVarsProvider"
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
+import { AppHeader } from "../cmps/app-header"
 const { RangePicker } = DatePicker
 
 
@@ -105,6 +106,7 @@ export function StayDetails() {
 
     return (stay) &&
         <section className="stay-details full secondary-container">
+            <AppHeader/>
             <div className="stay-header">
                 <h1>Name :{stay.name}</h1>
                 <div className="stay-header-links">

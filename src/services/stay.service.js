@@ -129,7 +129,7 @@ function getEmptyStay() {
 function _createStays() {
     let stays = utilService.loadFromStorage(STAY_STORAGE_KEY) || []
     if (!stays || !stays.length) {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 50; i++) {
 
             const stay = _createStay()
             stays.push(stay)
@@ -211,7 +211,7 @@ function _createStay() {
         _id: utilService.makeId(),
         name: utilService.makeLorem(3),
         type: stayTypes[utilService.getRandomIntInclusive(0, stayTypes.length - 1)],
-        price: utilService.getRandomIntInclusive(100, 1300),
+        price: utilService.getRandomIntInclusive(100, 800),
         capacity: utilService.getRandomIntInclusive(2, 12),
         imgUrls: [imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
         imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
