@@ -17,7 +17,10 @@ import { orderService } from "../services/order.service"
 // import "antd/dist/antd"
 import { DatePicker } from "antd";
 import { moment } from "moment"
+import { toggleLoginModal } from '../store/user.actions.js'
 import createCssVarsProvider from "@mui/system/cssVars/createCssVarsProvider"
+import { addOrder } from "../store/actions/order.actions"
+import { useSelector } from "react-redux"
 const { RangePicker } = DatePicker
 
 
@@ -37,6 +40,7 @@ export function StayDetails() {
     const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
     const [dates, setDates] = useState([])
     const [order,setOrder] = useState(orderService.getEmptyOrder())
+    const user = useSelector(storeState => storeState.userModule.user)
 
     //   const orders = [
 //     {
@@ -86,7 +90,16 @@ export function StayDetails() {
     }
 
     function  ReserveOrder(){
-        
+        if(!user){
+            toggleLoginModal()
+            return
+        }
+        else{
+            const newOrder = {...order,guests:guests,hostId:stay.host._id,stay:{_id:stay._id,name:stay.name,price:stay.price},buyer:{_id:user._id,fullname:user.fullname}}
+            console.log('new order!!!!!!!!',newOrder)
+
+            addOrder(newOrder).then(res=>prompt('great'))
+        }
     }
 
 
