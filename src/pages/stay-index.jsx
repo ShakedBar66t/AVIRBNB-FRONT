@@ -65,8 +65,8 @@ export function StayIndex() {
         console.log(`TODO Adding msg to stay`)
     }
 
-    async function onToggleLike(stay) {
-
+    async function onToggleLike(ev,stay) {
+        ev.stopPropagation()
         if (!user) {
             toggleLoginModal()
             return

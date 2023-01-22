@@ -27,13 +27,14 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const stayAmenities = [{ name: 'Cleaning products', icon: <MdOutlineCleaningServices /> }, 'Shampoo', 'Body soap', 'Hot water',
+    const stayAmenities = [ 'Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
         'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
 
-
+        const guestsTypes = [{type:'adults',txt:'Ages 13 or above'},{type:'children',txt:'Ages 2-12'}
+        ,{type:'infants',txt:'Under 2'},{type:'pets',txt:'Service animals?'}]
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
@@ -42,32 +43,6 @@ export function StayDetails() {
     const [dates, setDates] = useState([])
     const [order,setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
-
-    //   const orders = [
-//     {
-//       "_id": "o1225",
-//       "hostId": "u102",
-//       "buyer": {
-//         "_id": "u101",
-//         "fullname": "User 1"
-//       },
-//       "totalPrice": 160,
-//       "startDate": "2025/10/15",
-//       "endDate": "2025/10/17",
-//       "guests": {
-//         "adults": 2,
-//         "kids": 1
-//       },
-//       "stay": {
-//         "_id": "h102",
-//         "name": "House Of Uncle My",
-//         "price": 80.00
-//       },
-//       "msgs": [],
-//       "status": "pending" // pending, approved
-//     }
-//   ]
-
 
     useEffect(() => {
         loadStay()
@@ -254,169 +229,23 @@ export function StayDetails() {
 
                         </div>
                         {(isGuestModal) && <div className="guests-modal">
-                            <div className="guests-type-input">
-                                <div>
-                                    <p>Adults</p>
-                                    <small>Ages 13 or above</small>
-                                </div>
-                                <div className="guests-type-input-value">
-                                    {/* {` ${(guests.adults===0)? 'disabled':''}`} */}
-                                    <button type="button" className="clear-btn" disabled={!guests.adults} onClick={() => { handleGuestsInput('adults', -1) }}><IoRemoveCircleOutline /></button>
-                                    <span>{guests.adults}</span>
-                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('adults', 1) }}><IoAddCircleOutline /></button>
-                                </div>
 
-                            </div>
-
-                            <div className="guests-type-input">
-                                <div>
-                                    <p>Children</p>
-                                    <small>Ages 2-12</small>
+                        {guestsTypes.map(type=>{
+                                return <div className="guests-type-input" key={type.type}>
+                                    <div>
+                                    <p>{type.type}</p>
+                                    <small>{type.txt}</small>
+                                    </div>
+                                    <div className="guests-type-input-value">
+                                    <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
+                                    <span>{guests[type.type]}</span>
+                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
+                                    </div>
+                                    
                                 </div>
-                                <div className="guests-type-input-value">
-                                    <button type="button" className="clear-btn" disabled={!guests.children} onClick={() => { handleGuestsInput('children', -1) }}><IoRemoveCircleOutline /></button>
-                                    <span>{guests.children}</span>
-                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('children', 1) }}><IoAddCircleOutline /></button>
-                                </div>
-                            </div>
-                            <div className="guests-type-input">
-                                <div>
-                                    <p>Infants</p>
-                                    <small>Under 2</small>
-                                </div>
-                                <div className="guests-type-input-value">
-                                    <button type="button" className="clear-btn" disabled={!guests.infants} onClick={() => { handleGuestsInput('infants', -1) }}><IoRemoveCircleOutline /></button>
-                                    <span>{guests.infants}</span>
-                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('infants', 1) }}><IoAddCircleOutline /></button>
-                                </div>
-                            </div>
-                            <div className="guests-type-input">
-                                <div>
-                                    <p>Pets</p>
-                                    <small>Service animals?</small>
-                                </div>
-                                <div className="guests-type-input-value">
-                                    <button type="button" className="clear-btn" disabled={!guests.pets} onClick={() => { handleGuestsInput('pets', -1) }}><IoRemoveCircleOutline /></button>
-                                    <span>{guests.pets}</span>
-                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput('pets', 1) }}><IoAddCircleOutline /></button>
-                                </div>
-                            </div>
+                               })}
+                    
                         </div>}
-                        {/* <div className="picker-container">
-                            <div className="check-in picker">
-                                <label htmlFor="check-in">CHECK-IN</label>
-                                <input type="text" placeholder="MM/DD/YYYY" />
-                            </div>
-                            <section className="date-picker-container">
-                                <div className="el-date-editor">
-                                    <Example />
-                                </div>
-                            </section>
-                        </div>
-                        <div className="btn-container">
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="content">
-                            </div> 
-                        </div> */}
 
                         <button className="action-btn" type="button" onClick={()=>{
                             ReserveOrder()
