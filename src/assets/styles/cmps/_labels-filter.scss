@@ -66,6 +66,8 @@
 
         }
 
+
+
         .prev-btn,
         .next-btn {
             position: absolute;
@@ -95,7 +97,9 @@
             left: 0;
 
             &.hidden {
-                display: none;
+                &.hidden {
+                    display: none;
+                }
             }
         }
     }

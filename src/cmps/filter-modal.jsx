@@ -54,6 +54,7 @@ export function FilterModal() {
         const type = ev.currentTarget.getAttribute('name')
         setFilterBy({ ...filterBy, type })
 
+        // console.log(filterBy)
     }
 
     const handleAmenityChange = (amenity) => (e) => {
@@ -65,17 +66,19 @@ export function FilterModal() {
         console.log(filterBy)
     }
 
+
     function onCloseFilterModal() {
         dispatch({ type: TOGGLE_FILTER_MODAL })
         dispatch({ type: TOGGLE_IS_SHADOW })
     }
 
+
     function onSubmit(ev) {
         ev.preventDefault()
         const { minPrice, maxPrice, bedrooms, type, beds, bathrooms, amenities } = filterBy
-        const filterByQuery = `?minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&type=${type}&beds=${beds}&bathrooms=${bathrooms}&amenities=${amenities.join(',')}`
+        const queryParams = `isParams=true&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&type=${type}&beds=${beds}&bathrooms=${bathrooms}&amenities=${amenities.join(',')}`
         onCloseFilterModal()
-        navigate(`/explore/${filterByQuery}`)
+        navigate(`/explore?${queryParams}`)
     }
 
 

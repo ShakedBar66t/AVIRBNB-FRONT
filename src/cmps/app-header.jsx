@@ -1,22 +1,25 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
-import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL,REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 
 
 
 export function AppHeader() {
+
+    const params = useParams()
+    const { stayId } = params
 
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
@@ -84,18 +87,19 @@ export function AppHeader() {
         dispatch({ type: TOGGLE_LOGIN_MODAL })
         dispatch({ type: TOGGLE_IS_SHADOW })
         dispatch({ type: REFRESH_LOGIN_MODAL })
-            setTimeout(() => {
-                dispatch({ type: REFRESH_LOGIN_MODAL })
-            }, 500);
+        setTimeout(() => {
+            dispatch({ type: REFRESH_LOGIN_MODAL })
+        }, 500);
     }
 
 
     return (
-        <header className="app-header full stay-index-layout">
-            <nav >
+
+        <header className="app-header full stay-index-layout ">
+            <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
-                    <span className='header-logo-text'>virbnb</span>
+                    <span className='header-logo-text'>avirbnb</span>
                 </div>
                 <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     <div className='filter-btns' onClick={toggleFilterModal}>
@@ -115,27 +119,27 @@ export function AppHeader() {
                 </div>
             </nav>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
-                { (!user) &&<button onClick={()=>{
+                {(!user) && <button onClick={() => {
 
                     toggleUserModal()
                     toggleLoginModal()
-                } }>Log in </button>}
-                {(!user) && <button onClick={()=>{
+                }}>Log in </button>}
+                {(!user) && <button onClick={() => {
                     toggleUserModal()
                     toggleLoginModal('signup')
-                    }}>Sign up </button>}
+                }}>Sign up </button>}
                 {(user) && <button >Notifications </button>}
-                {(user) && <button onClick={()=>navigate('/user/trip')} >Trips </button>}
+                {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
                 {(user) && <button >Wishlists </button>}
                 <hr />
-                {(user)&&< button onClick={()=>{navigate(`/user/${user._id}`)}}>Account </button>}
-                <button onClick={()=>{
-                    if(!user){
+                {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
+                <button onClick={() => {
+                    if (!user) {
 
                         toggleLoginModal()
                         toggleUserModal()
 
-                        
+
                         return
                     }
                     navigate('/host/home')
@@ -154,8 +158,8 @@ export function AppHeader() {
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
+                {!stayId && <LabelsFilter />}
             </div>
-            <LabelsFilter />
         </header>
     )
 }

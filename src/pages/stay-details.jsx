@@ -27,7 +27,7 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const stayAmenities = [{ name: 'Cleaning products', icon: <MdOutlineCleaningServices /> }, 'Shampoo', 'Body soap', 'Hot water',
+    const stayAmenities = ['Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
         'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
@@ -40,38 +40,38 @@ export function StayDetails() {
     const [isGuestModal, ToggleGuestModal] = useState(false)
     const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
     const [dates, setDates] = useState([])
-    const [order,setOrder] = useState(orderService.getEmptyOrder())
+    const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
 
     //   const orders = [
-//     {
-//       "_id": "o1225",
-//       "hostId": "u102",
-//       "buyer": {
-//         "_id": "u101",
-//         "fullname": "User 1"
-//       },
-//       "totalPrice": 160,
-//       "startDate": "2025/10/15",
-//       "endDate": "2025/10/17",
-//       "guests": {
-//         "adults": 2,
-//         "kids": 1
-//       },
-//       "stay": {
-//         "_id": "h102",
-//         "name": "House Of Uncle My",
-//         "price": 80.00
-//       },
-//       "msgs": [],
-//       "status": "pending" // pending, approved
-//     }
-//   ]
+    //     {
+    //       "_id": "o1225",
+    //       "hostId": "u102",
+    //       "buyer": {
+    //         "_id": "u101",
+    //         "fullname": "User 1"
+    //       },
+    //       "totalPrice": 160,
+    //       "startDate": "2025/10/15",
+    //       "endDate": "2025/10/17",
+    //       "guests": {
+    //         "adults": 2,
+    //         "kids": 1
+    //       },
+    //       "stay": {
+    //         "_id": "h102",
+    //         "name": "House Of Uncle My",
+    //         "price": 80.00
+    //       },
+    //       "msgs": [],
+    //       "status": "pending" // pending, approved
+    //     }
+    //   ]
 
 
     useEffect(() => {
         loadStay()
-        
+
     }, [])
 
     async function loadStay() {
@@ -85,28 +85,28 @@ export function StayDetails() {
 
     function handleGuestsInput(type, diff) {
         setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
-        
-        
+
+
         console.log(guests)
     }
 
-    function  ReserveOrder(){
-        if(!user){
+    function ReserveOrder() {
+        if (!user) {
             toggleLoginModal()
             return
         }
-        else{
-            const newOrder = {...order,guests:guests,hostId:stay.host._id,stay:{_id:stay._id,name:stay.name,price:stay.price},buyer:{_id:user._id,fullname:user.fullname}}
-            console.log('new order!!!!!!!!',newOrder)
+        else {
+            const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
+            console.log('new order!!!!!!!!', newOrder)
 
-            addOrder(newOrder).then(res=>prompt('great'))
+            addOrder(newOrder).then(res => prompt('great'))
         }
     }
 
 
-    return (stay) &&
+    return (stay) && <div className="details">
+        <AppHeader />
         <section className="stay-details full secondary-container">
-            <AppHeader/>
             <div className="stay-header">
                 <h1>Name :{stay.name}</h1>
                 <div className="stay-header-links">
@@ -220,19 +220,19 @@ export function StayDetails() {
                                 <RangePicker
                                     onChange={(values) => {
 
-                                    // const value1 = moment(values[0]).format('DD-MM-YYYY')
-                                  const  time1 = values[0].$d
-                                   const date = new Date(time1)
-                                   const day = 1000*60*60*24
+                                        // const value1 = moment(values[0]).format('DD-MM-YYYY')
+                                        const time1 = values[0].$d
+                                        const date = new Date(time1)
+                                        const day = 1000 * 60 * 60 * 24
 
-                                //    const dateStart = date.getTime()
-                                   const dateStart = values[0].$d.getTime()
-                                   const dateEnd = values[1].$d.getTime()
-                                    const daysCount = Math.round((dateEnd-dateStart)/(day))
-                                    const totalPrice = daysCount*stay.price
-                                    console.log('valuesss!!!!',totalPrice)
-                                    setOrder({...order,totalPrice:totalPrice,startDate:values[0].$d,endDate:values[1].$d,totalNights:daysCount})
-                                    // setDates(values)
+                                        //    const dateStart = date.getTime()
+                                        const dateStart = values[0].$d.getTime()
+                                        const dateEnd = values[1].$d.getTime()
+                                        const daysCount = Math.round((dateEnd - dateStart) / (day))
+                                        const totalPrice = daysCount * stay.price
+                                        console.log('valuesss!!!!', totalPrice)
+                                        setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
+                                        // setDates(values)
 
                                     }}
                                 />
@@ -302,126 +302,10 @@ export function StayDetails() {
                                 </div>
                             </div>
                         </div>}
-                        {/* <div className="picker-container">
-                            <div className="check-in picker">
-                                <label htmlFor="check-in">CHECK-IN</label>
-                                <input type="text" placeholder="MM/DD/YYYY" />
-                            </div>
-                            <section className="date-picker-container">
-                                <div className="el-date-editor">
-                                    <Example />
-                                </div>
-                            </section>
-                        </div>
-                        <div className="btn-container">
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="cell"></div>
-                            <div className="content">
-                            </div> 
-                        </div> */}
-
-                        <button className="action-btn" type="button" onClick={()=>{
+                        <button className="action-btn" type="button" onClick={() => {
                             ReserveOrder()
                         }}>
-                             Reserve 
+                            Reserve
                         </button>
 
                         <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
@@ -513,4 +397,5 @@ export function StayDetails() {
             <AppFooter />
         </section >
 
+    </div>
 }

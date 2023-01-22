@@ -7,6 +7,12 @@
     width: 100%;
     z-index: 1;
     background-color: $clr6;
+    grid-column: 1/-1;
+
+
+    &>* {
+        grid-column: 2;
+    }
 
     &.open {
         height: 120px;
@@ -54,6 +60,8 @@
         position: relative;
         width: 100%;
         z-index: 1;
+        grid-column: 2;
+        grid-row: 1;
 
         & button {
 
@@ -68,6 +76,7 @@
         height: 36px;
         width: 102px;
         flex: 1 0 140px;
+        cursor: pointer;
 
         .header-logo {
             cursor: pointer;
