@@ -14,9 +14,10 @@ import { GrDown, GrUp } from 'react-icons/gr'
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { fontWeight } from "@mui/system"
 
-import "antd/dist/antd"
+// import "antd/dist/antd"
 import { DatePicker } from "antd";
 import { moment } from "moment"
+import dayjs from "dayjs"
 const {RangePicker} = DatePicker
 
 
@@ -39,6 +40,7 @@ export function StayDetails() {
 
     useEffect(() => {
         loadStay()
+        
     }, [])
 
     async function loadStay() {
@@ -173,8 +175,12 @@ export function StayDetails() {
                                     // const value1 = moment(values[0]).format('DD-MM-YYYY')
                                   const  time1 = values[0].$d
                                    const date = new Date(time1)
-                                   const date1 = date.getTime()
-                                    console.log('valuesss!!!!',date1)
+                                   const day = 1000*60*60*24
+                                //    const dateStart = date.getTime()
+                                   const dateStart = values[0].$d.getTime()
+                                   const dateEnd = values[1].$d.getTime()
+                                    const daysCount = (dateEnd-dateStart)/(day)
+                                    console.log('valuesss!!!!',daysCount)
                                     setDates(values)
 
                                 }}

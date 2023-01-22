@@ -38,15 +38,16 @@ export function RootCmp() {
                     <Route path="/user/:id" element={<UserDetails />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />
-                    <Route path="/explore/:filterByQuery" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />
+                    <Route path="/explore/:filterByQuery" element={<StayIndex />} />
                     <Route path="/host/home" element={<HostHome />} />
                     <Route path="/host" element={<HostIndex />} />
                 </Routes>
 
             </main>
             <FilterModal />
-            {(isLoginModalOpen) && <LoginModal />}
+            <LoginModal />
+            {/* {(isLoginModalOpen) && <LoginModal />} */}
             {/* {(isLoginModalOpen)&& <LoginModal />} */}
             {/* <AppFooter /> */}
         </div >

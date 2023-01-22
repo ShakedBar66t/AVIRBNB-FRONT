@@ -151,11 +151,11 @@ export function StayPreview({ stay,onToggleLike }) {
     }
 
     return <article className="stay-preview"
-        // onClick={() => { navigate(`/explore/${stay._id}`) }}
+        onClick={() => { navigate(`/explore/${stay._id}`) }}
     
     >
-        <PreviewImgCarousel stay={stay}/>
-        {/* <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" /> */}
+        {/* <PreviewImgCarousel stay={stay}/> */}
+        <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
 
         <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>
         <button className="like-btn clear-btn" onClick={()=>{onToggleLike(stay).then((ans)=>{
@@ -166,7 +166,7 @@ export function StayPreview({ stay,onToggleLike }) {
         })}}
         ><FaRegHeart className="reg-heart-fa" /></button>
 
-        {/* {( currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
+        {( currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
             ev.stopPropagation()
             setCurrImgUrlIdx(prev => prev - 1)
         }}>
@@ -176,14 +176,14 @@ export function StayPreview({ stay,onToggleLike }) {
             <button className="img-preview-paging-btns next-img-preview-btn clear-btn" onClick={(ev) => {
                 ev.stopPropagation()
                 setCurrImgUrlIdx(prev => prev + 1)
-            }}><FaAngleRight /></button>} */}
+            }}><FaAngleRight /></button>}
 
-        {/* <div className="curr-img-indication flex">
+        <div className="curr-img-indication flex">
             {stay.imgUrls.map((imgurl, idx) => {
                 const dotClr = (currImgUrlIdx === idx) ? "white" : "rgba(255, 255, 255,0.7)"
                 return <div key={imgurl + idx} style={{ fontSize: "50px", color: dotClr }}>.</div>
             })}
-        </div> */}
+        </div>
 
         <div onClick={() => { navigate(`/explore/${stay._id}`) }} >
             <div className="prev-loc-rate">
@@ -205,7 +205,7 @@ export function StayPreview({ stay,onToggleLike }) {
 
 // import { useNavigate } from "react-router-dom"
 // import { useState } from "react";
-
+// import { useSelector } from "react-redux";
 // import { FaRegHeart, FaHeart } from "react-icons/fa";
 // import { FaAngleLeft } from "react-icons/fa";
 // import { FaAngleRight } from "react-icons/fa";
@@ -216,10 +216,11 @@ export function StayPreview({ stay,onToggleLike }) {
 
 
 
-// export function StayPreview({ stay }) {
+// export function StayPreview({ stay,onToggleLike }) {
 //     const navigate = useNavigate()
-  
+//     const [isLikedByUser,setIsLikedByUser] = useState(false)
 //     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
+//     const user = useSelector(storeState => storeState.userModule.user)
 
 //     function getDateString(){
 
@@ -249,7 +250,7 @@ export function StayPreview({ stay,onToggleLike }) {
 //     >
 //         <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
 //         <button className="like-btn clear-btn"><FaHeart className="heart-fa" /></button>
-//         <button className="like-btn clear-btn"><FaRegHeart className="reg-heart-fa" /></button>
+//         <button className="like-btn clear-btn" onClick={}><FaRegHeart className="reg-heart-fa" /></button>
 
 //         {( currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
 //             ev.stopPropagation()
