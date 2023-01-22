@@ -5,13 +5,13 @@ import { AppHeader } from '../cmps/app-header'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
 import { PreviewImgCarousel } from '../cmps/img-carousel.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
 
 export function StayIndex() {
-
+    const location = useLocation()
     const stays = useSelector(storeState => storeState.stayModule.stays)
     const user = useSelector(storeState => storeState.userModule.user)
     const [searchParams, setSearchParams] = useSearchParams()
@@ -20,7 +20,8 @@ export function StayIndex() {
     console.log(queryFilterBy)
 
     useEffect(() => {
-        loadStays(queryFilterBy)
+        if (location.pathname === '/explore') loadStays()
+        else loadStays(queryFilterBy)
     }, [searchParams])
 
     async function onRemoveStay(stayId) {

@@ -33,10 +33,10 @@ function getAvrStayRating(reviews) {
     return (totalRate / reviews.length).toFixed(2)
 }
 
-async function query(filterBy = getDefaultFilter()) {
+async function query(filterBy) {
+
     const stays = await storageService.query(STAY_STORAGE_KEY)
-    console.log(stays)
-    console.log(filterBy)
+    if (!filterBy) return stays
     let filteredStays = stays.filter(stay => stay.price >= filterBy.minPrice && stay.price <= filterBy.maxPrice)
 
     // if (filterBy.bedrooms) {
@@ -51,9 +51,9 @@ async function query(filterBy = getDefaultFilter()) {
     // if (filterBy.bathrooms) {
     //     filteredStays = filteredStays.filter(stay => stay.bathrooms === filterBy.bathrooms)
     // }
-    // if (filterBy.amenities.length) {
-    //     filteredStays = filteredStays.filter(stay => filterBy.amenities.every(amenity => stay.amenities.includes(amenity)))
-    // }
+    if (filterBy.amenities.length) {
+        filteredStays = filteredStays.filter(stay => filterBy.amenities.every(amenity => stay.amenities.includes(amenity)))
+    }
     return (filteredStays)
 }
 
