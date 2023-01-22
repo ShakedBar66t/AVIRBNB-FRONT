@@ -26,8 +26,14 @@ export function getActionUpdateStay(stay) {
 }
 
 export async function loadStays(filterByParams) {
-    console.log(filterByParams, 'in actions')
-    // if (!filterByParams) {
+    const check = (filterByParams) => {
+        for (const key in filterByParams) {
+            if (filterByParams[key]) return true;
+        }
+        return false;
+    }
+    console.log(check)
+    // if(check )
     try {
         const stays = await stayService.query(filterByParams)
 

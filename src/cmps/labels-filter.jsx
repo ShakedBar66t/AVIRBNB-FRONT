@@ -61,9 +61,10 @@ export function LabelsFilter() {
                     })
                 }
             </div>
-            <div className='btn-container prev '>
-                <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+            {(currentIndex) && <div className={`'btn-container prev'`}>
+                <button className={`prev-btn  ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
             </div>
+            }
             <div className='btn-container next'>
                 <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
             </div>

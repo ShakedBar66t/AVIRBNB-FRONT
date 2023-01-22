@@ -27,26 +27,26 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const stayAmenities = [ 'Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
+    const stayAmenities = ['Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
         'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
 
-        const guestsTypes = [{type:'adults',txt:'Ages 13 or above'},{type:'children',txt:'Ages 2-12'}
-        ,{type:'infants',txt:'Under 2'},{type:'pets',txt:'Service animals?'}]
+    const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
+        , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
     const [isGuestModal, ToggleGuestModal] = useState(false)
     const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
     const [dates, setDates] = useState([])
-    const [order,setOrder] = useState(orderService.getEmptyOrder())
+    const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         loadStay()
-        
+
     }, [])
 
     async function loadStay() {
@@ -60,28 +60,28 @@ export function StayDetails() {
 
     function handleGuestsInput(type, diff) {
         setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
-        
-        
+
+
         console.log(guests)
     }
 
-    function  ReserveOrder(){
-        if(!user){
+    function ReserveOrder() {
+        if (!user) {
             toggleLoginModal()
             return
         }
-        else{
-            const newOrder = {...order,guests:guests,hostId:stay.host._id,stay:{_id:stay._id,name:stay.name,price:stay.price},buyer:{_id:user._id,fullname:user.fullname}}
-            console.log('new order!!!!!!!!',newOrder)
+        else {
+            const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
+            console.log('new order!!!!!!!!', newOrder)
 
-            addOrder(newOrder).then(res=>prompt('great'))
+            addOrder(newOrder).then(res => prompt('great'))
         }
     }
 
 
-    return (stay) &&
+    return (stay) && <div className="details">
+        <AppHeader />
         <section className="stay-details full secondary-container">
-            <AppHeader/>
             <div className="stay-header">
                 <h1>Name :{stay.name}</h1>
                 <div className="stay-header-links">
@@ -195,10 +195,10 @@ export function StayDetails() {
                                 <RangePicker
                                     onChange={(values) => {
 
-                                    // const value1 = moment(values[0]).format('DD-MM-YYYY')
-                                  const  time1 = values[0].$d
-                                   const date = new Date(time1)
-                                   const day = 1000*60*60*24
+                                        // const value1 = moment(values[0]).format('DD-MM-YYYY')
+                                        const time1 = values[0].$d
+                                        const date = new Date(time1)
+                                        const day = 1000 * 60 * 60 * 24
 
                                 //    const dateStart = date.getTime()
                                    const dateStart = values[0].$d.getTime()
@@ -230,27 +230,27 @@ export function StayDetails() {
                         </div>
                         {(isGuestModal) && <div className="guests-modal">
 
-                        {guestsTypes.map(type=>{
+                            {guestsTypes.map(type => {
                                 return <div className="guests-type-input" key={type.type}>
                                     <div>
-                                    <p>{type.type}</p>
-                                    <small>{type.txt}</small>
+                                        <p>{type.type}</p>
+                                        <small>{type.txt}</small>
                                     </div>
                                     <div className="guests-type-input-value">
-                                    <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
-                                    <span>{guests[type.type]}</span>
-                                    <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
+                                        <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
+                                        <span>{guests[type.type]}</span>
+                                        <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
                                     </div>
-                                    
+
                                 </div>
-                               })}
-                    
+                            })}
+
                         </div>}
 
-                        <button className="action-btn" type="button" onClick={()=>{
+                        <button className="action-btn" type="button" onClick={() => {
                             ReserveOrder()
                         }}>
-                             Reserve 
+                            Reserve
                         </button>
 
                         <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
@@ -342,4 +342,5 @@ export function StayDetails() {
             <AppFooter />
         </section >
 
+    </div>
 }
