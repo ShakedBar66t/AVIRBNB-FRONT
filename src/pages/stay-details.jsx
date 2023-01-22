@@ -48,7 +48,7 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    console.log('datesssssss!!!!!',dates)
+    console.log('datesssssss!!!!!', dates)
     // console.log(stay.reviews[0].by.imgUrl)
 
     function handleGuestsInput(type, diff) {
@@ -167,10 +167,10 @@ export function StayDetails() {
                             </div>
                         </header>
                         <div className="order-input">
-                            <div className="date-input"> 
-                            {/* <input type="text" /> */}
-                                <RangePicker 
-                                onChange={(values)=> {
+                            <div className="date-input">
+                                {/* <input type="text" /> */}
+                                <RangePicker
+                                    onChange={(values) => {
 
                                     // const value1 = moment(values[0]).format('DD-MM-YYYY')
                                   const  time1 = values[0].$d
@@ -183,18 +183,18 @@ export function StayDetails() {
                                     console.log('valuesss!!!!',daysCount)
                                     setDates(values)
 
-                                }}
+                                    }}
                                 />
                                 {/* <DatePicker/> */}
                             </div>
                             <div className="guests-input">
                                 <small>Guests max capacity of {stay.capacity}</small>
-                                <p style={{fontSize:'14px', fontWeight:'bold'}}>
-                                    {(guests.adults)? <span>{guests.adults + ' Adults'}</span>: '' }
-                                    {(guests.children)? <span>{" " + guests.children + ' Children'}</span>: ''}
+                                <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                    {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
+                                    {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
                                     {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
                                     {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
-                                   
+
 
                                 </p>
                                 <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
