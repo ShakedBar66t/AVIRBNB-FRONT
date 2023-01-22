@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useState } from "react"
 import { stayService } from "../services/stay.service"
 
@@ -13,18 +14,21 @@ export function HostIndex() {
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
 
-    const urls = []
     function handleChange({ target }) {
         const { name: field, value } = target
-        // console.log(target)
-        setStay(({ ...stay, [field]: value }))
-        console.log(stay)
+        if (field === 'name') {
+            setStay(({ ...stay, [field]: value }))
+        }
         if (field === 'country' || field === 'city' || field === 'address') {
             stay.loc[field] = value
         }
         if (field === 'imgUrls') {
             setStay(prevStay => ({ ...prevStay, imgUrls: [prevStay.imgUrls, value] }))
         }
+        if (field === 'capacity' || field === 'price') {
+            setStay(({ ...stay, [field]: value }))
+        }
+        console.log(stay)
     }
 
 
@@ -129,11 +133,11 @@ export function HostIndex() {
                             <label htmlFor="capacity">Capacity
                                 <input type="text"
                                     name="capacity"
-                                    
-                                    
+                                    value={stay.capacity}
+                                    onChange={handleChange}
                                 />
                             </label>
-                            <label htmlFor="stay-type">Stay-type:
+                            <label htmlFor="stay-type">Stay-typ e:
                                 <select name="stay-type">
                                     <option value=""></option>
                                     <option value="entire-place">Entire Place</option>
@@ -141,18 +145,14 @@ export function HostIndex() {
                                     <option value="shared-room">Shared Room</option>
                                 </select>
                             </label>
-                            <label htmlFor="propety-type">Property Type:
-                                <select name="propety-type">
-                                    <option value=""></option>
-                                    <option value="stay">Stay</option>
-                                    <option value="apartment">Apartment</option>
-                                    <option value="guest-stay">Guest stay</option>
-                                    <option value="hotel">Hotel</option>
-                                </select>
-                            </label>
                             <label>
                                 Price:
-                                <input type="text" style={{ width: '40px' }} />
+                                <input type="text"
+                                    style={{ width: '40px' }}
+                                    value={stay.price}
+                                    onChange={handleChange}
+                                    name="price"
+                                />
                                 /night
                             </label>
                         </div>
@@ -164,7 +164,7 @@ export function HostIndex() {
                             <h2>Amenities</h2>
                             <div className="stay-amenities">
                                 {stayAmenities.map((amenity) => {
-                                    return <div style={{ display: 'flex', gap: '13px' }}>
+                                    return <div style={{ display: 'flex', gap: '13px' }} key={amenity}>
                                         <input type="checkbox" />
                                         <label>{amenity}</label>
                                     </div>
