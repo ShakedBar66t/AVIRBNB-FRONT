@@ -1,8 +1,6 @@
 .details {
     & .app-header {
         position: static;
-        display: grid;
-        grid-template-columns: 80px 1fr 80px;
 
         & .user-nav-container {
             padding: 0;
