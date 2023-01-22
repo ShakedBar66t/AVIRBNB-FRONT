@@ -8,13 +8,14 @@ import {  grey, pink } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer';
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { login,signup } from '../store/user.actions';
 export  function SignInForm({onCloseLoginModal}) {
 
   const [isValid,setIsValid] = useState('')
   const dispatch = useDispatch()
   const isSignUpModal = useSelector(storeState => storeState.userModule.isSignUpModal)
+  const elInputRef = useRef()
 
 const theme = createTheme({
   palette: {
@@ -30,6 +31,11 @@ const theme = createTheme({
 async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(event.currentTarget[0].value)
+    
+      // elInputRef.current = ''
+//  event.currentTarget[0].value = ''
+
     const currUser = {
       email: data.get('email'),
       password: data.get('password'),
@@ -49,7 +55,12 @@ async function handleSubmit(event) {
     return
   }
 
-  login(currUser).then(onCloseLoginModal)
+  login(currUser).then(()=>{
+    // elInputRef.current.reset()
+   
+   
+    onCloseLoginModal()
+  })
   .catch(setIsValid)
   
   };
@@ -119,6 +130,7 @@ async function handleSubmit(event) {
               name="fullname"
               autoComplete="fullname"
               color='secondary'
+              
             />}
 
             <TextField
@@ -129,6 +141,8 @@ async function handleSubmit(event) {
               name="email"
               autoComplete="email"
               color='secondary'
+              ref={elInputRef}
+              
             />
             <TextField
               required

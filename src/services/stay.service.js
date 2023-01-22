@@ -111,7 +111,7 @@ async function addStayMsg(stayId, txt) {
 function getEmptyStay() {
     return {
         id: '',
-        name: 'Susita-' + (Date.now() % 1000),
+        name: '',
         type: '',
         price: utilService.getRandomIntInclusive(1000, 9000),
         imgUrls: [],
