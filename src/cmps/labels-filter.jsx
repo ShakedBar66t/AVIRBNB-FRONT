@@ -63,6 +63,14 @@ export function LabelsFilter() {
                     })
                 }
             </div>
+<<<<<<< HEAD
+            <div className='btn-container prev '>
+                <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+            </div>
+            <div className='btn-container next'>
+                <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
+            </div>
+=======
             
             {/* <div className={'btn-container prev '}>
                 <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
@@ -83,6 +91,7 @@ export function LabelsFilter() {
                 <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
                  {/* <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button> */}
             </div>}
+>>>>>>> e3c8dba07bbd1e9cbb744284c1056ab5bdbc8e7b
         </div>
         <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
     </div>
