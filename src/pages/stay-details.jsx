@@ -17,7 +17,7 @@ import { fontWeight } from "@mui/system"
 import "antd/dist/antd"
 import { DatePicker } from "antd";
 import { moment } from "moment"
-const {RangePicker} = DatePicker
+const { RangePicker } = DatePicker
 
 
 export function StayDetails() {
@@ -46,7 +46,7 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    console.log('datesssssss!!!!!',dates)
+    console.log('datesssssss!!!!!', dates)
     // console.log(stay.reviews[0].by.imgUrl)
 
     function handleGuestsInput(type, diff) {
@@ -165,30 +165,30 @@ export function StayDetails() {
                             </div>
                         </header>
                         <div className="order-input">
-                            <div className="date-input"> 
-                            {/* <input type="text" /> */}
-                                <RangePicker 
-                                onChange={(values)=> {
+                            <div className="date-input">
+                                {/* <input type="text" /> */}
+                                <RangePicker
+                                    onChange={(values) => {
 
-                                    // const value1 = moment(values[0]).format('DD-MM-YYYY')
-                                  const  time1 = values[0].$d
-                                   const date = new Date(time1)
-                                   const date1 = date.getTime()
-                                    console.log('valuesss!!!!',date1)
-                                    setDates(values)
+                                        // const value1 = moment(values[0]).format('DD-MM-YYYY')
+                                        const time1 = values[0].$d
+                                        const date = new Date(time1)
+                                        const date1 = date.getTime()
+                                        console.log('valuesss!!!!', date1)
+                                        setDates(values)
 
-                                }}
+                                    }}
                                 />
                                 {/* <DatePicker/> */}
                             </div>
                             <div className="guests-input">
                                 <small>Guests max capacity of {stay.capacity}</small>
-                                <p style={{fontSize:'14px', fontWeight:'bold'}}>
-                                    {(guests.adults)? <span>{guests.adults + ' Adults'}</span>: '' }
-                                    {(guests.children)? <span>{" " + guests.children + ' Children'}</span>: ''}
+                                <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                    {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
+                                    {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
                                     {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
                                     {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
-                                   
+
 
                                 </p>
                                 <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
