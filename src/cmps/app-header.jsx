@@ -10,7 +10,7 @@ import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
 import { useDispatch } from 'react-redux'
-import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL } from '../store/reducers/user.reducer'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL,REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 
@@ -83,6 +83,10 @@ export function AppHeader() {
         }
         dispatch({ type: TOGGLE_LOGIN_MODAL })
         dispatch({ type: TOGGLE_IS_SHADOW })
+        dispatch({ type: REFRESH_LOGIN_MODAL })
+            setTimeout(() => {
+                dispatch({ type: REFRESH_LOGIN_MODAL })
+            }, 500);
     }
 
 

@@ -27,6 +27,7 @@ import { UserTrips } from './pages/user-trips'
 export function RootCmp() {
 
     const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
+    const isRefreshedLoginModal = useSelector(storeState => storeState.userModule.isRefreshedLoginModal)
 
     return (
         <div>
@@ -46,8 +47,8 @@ export function RootCmp() {
 
             </main>
             <FilterModal />
-            <LoginModal />
-            {/* {(isLoginModalOpen) && <LoginModal />} */}
+            {/* <LoginModal /> */}
+            {(isRefreshedLoginModal) && <LoginModal />}
             {/* {(isLoginModalOpen)&& <LoginModal />} */}
             {/* <AppFooter /> */}
         </div >
