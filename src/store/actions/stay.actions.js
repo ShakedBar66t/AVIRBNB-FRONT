@@ -25,49 +25,11 @@ export function getActionUpdateStay(stay) {
     }
 }
 
-// export async function loadStays(filterByParams) {
-//     console.log(filterByParams)
-//     if (!filterByParams) {
-//         try {
-//             const stays = await stayService.query()
-
-//             store.dispatch({
-//                 type: SET_STAYS,
-//                 stays
-//             })
-
-//         } catch (err) {
-//             console.log('Cannot load stays', err)
-//             throw err
-//         }
-//     }
-//     else {
-//         let filterBy = filterByParams.split('&').reduce((acc, param) => {
-//             const [key, value] = param.split('=')
-//             if (key === 'amenities' && value) {
-//                 acc[key] = value.split(',')
-//             } else {
-//                 acc[key] = value
-//             }
-//             return acc
-//         }, {})
-//         try {
-//             const stays = await stayService.query(filterBy)
-//             store.dispatch({
-//                 type: SET_STAYS,
-//                 stays
-//             })
-//         } catch (err) {
-//             console.log('Cannot load stays', err)
-//             throw err
-//         }
-//     }
-// }
-
-
-export async function loadStays() {
+export async function loadStays(filterByParams) {
+    console.log(filterByParams, 'in actions')
+    // if (!filterByParams) {
     try {
-        const stays = await stayService.query()
+        const stays = await stayService.query(filterByParams)
 
         store.dispatch({
             type: SET_STAYS,
@@ -78,8 +40,46 @@ export async function loadStays() {
         console.log('Cannot load stays', err)
         throw err
     }
-
 }
+// else {
+//     let filterBy = filterByParams.split('&').reduce((acc, param) => {
+//         const [key, value] = param.split('=')
+//         if (key === 'amenities' && value) {
+//             acc[key] = value.split(',')
+//         } else {
+//             acc[key] = value
+//         }
+//         return acc
+//     }, {})
+//     try {
+//         const stays = await stayService.query(filterBy)
+//         store.dispatch({
+//             type: SET_STAYS,
+//             stays
+//         })
+//     } catch (err) {
+//         console.log('Cannot load stays', err)
+//         throw err
+//     }
+//     }
+// }
+
+
+// export async function loadStays() {
+//     try {
+//         const stays = await stayService.query()
+
+//         store.dispatch({
+//             type: SET_STAYS,
+//             stays
+//         })
+
+//     } catch (err) {
+//         console.log('Cannot load stays', err)
+//         throw err
+//     }
+
+// }
 
 export async function removeStay(stayId) {
     try {
@@ -190,3 +190,4 @@ export function onRemoveStayOptimistic(stayId) {
             })
         })
 }
+

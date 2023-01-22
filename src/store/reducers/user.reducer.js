@@ -11,6 +11,7 @@ export const SET_SCORE = 'SET_SCORE'
 export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL'
 export const TOGGLE_IS_SHADOW = 'TOGGLE_IS_SHADOW'
 export const TOGGLE_IS_SIGNUP_MODAL = 'TOGGLE_IS_SIGNUP_MODAL'
+export const REFRESH_LOGIN_MODAL = 'REFRESH_LOGIN_MODAL'
 
 const initialState = {
     count: 10,
@@ -20,6 +21,7 @@ const initialState = {
     isShadow: false,
     watchedUser: null,
     isSignUpModal: false,
+    isRefreshedLoginModal:true,
 }
 
 export function userReducer(state = initialState, action) {
@@ -36,6 +38,9 @@ export function userReducer(state = initialState, action) {
             break
         case TOGGLE_LOGIN_MODAL:
             newState = { ...state, isLoginModalOpen: !state.isLoginModalOpen }
+            break
+        case REFRESH_LOGIN_MODAL:
+            newState = { ...state, isRefreshedLoginModal: !state.isRefreshedLoginModal }
             break
         case TOGGLE_IS_SIGNUP_MODAL:
             newState = { ...state, isSignUpModal: !state.isSignUpModal }
