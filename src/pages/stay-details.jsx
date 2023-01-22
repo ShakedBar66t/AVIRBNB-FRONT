@@ -75,6 +75,7 @@ export function StayDetails() {
     }
 
     console.log('datesssssss!!!!!', dates)
+    console.log(stay)
     // console.log(stay.reviews[0].by.imgUrl)
 
     function handleGuestsInput(type, diff) {

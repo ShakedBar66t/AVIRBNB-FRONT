@@ -12,7 +12,7 @@ const initialState = {
     stays: [],
     stayt: [],
     isFilterModalOpen: false,
-    lastRemovedStay: null
+    lastRemovedStay: null,
 }
 
 export function stayReducer(state = initialState, action) {

@@ -5,7 +5,7 @@ import { AppHeader } from '../cmps/app-header'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
 import { PreviewImgCarousel } from '../cmps/img-carousel.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
@@ -14,11 +14,14 @@ export function StayIndex() {
 
     const stays = useSelector(storeState => storeState.stayModule.stays)
     const user = useSelector(storeState => storeState.userModule.user)
-    const { filterByParams } = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
+
+    console.log(queryFilterBy)
 
     useEffect(() => {
-        loadStays(filterByParams)
-    }, [])
+        loadStays(queryFilterBy)
+    }, [searchParams])
 
     async function onRemoveStay(stayId) {
         try {
@@ -87,10 +90,6 @@ export function StayIndex() {
     return <section className='stay-index stay-index-layout'>
         <AppHeader />
         <StayList stays={stays} onToggleLike={onToggleLike} />
-        {/* <PreviewImgCarousel imgs={stays[0].imgUrls} /> */}
-
-
-
     </section>
 
 }

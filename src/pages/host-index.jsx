@@ -1,6 +1,10 @@
+import { useState } from "react"
+import { stayService } from "../services/stay.service"
 
 
 export function HostIndex() {
+
+    const [stay, setStay] = useState(stayService.getEmptyStay())
 
     const stayAmenities = [
         'Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
@@ -8,6 +12,20 @@ export function HostIndex() {
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
+
+    const urls = []
+    function handleChange({ target }) {
+        const { name: field, value } = target
+        // console.log(target)
+        setStay(({ ...stay, [field]: value }))
+        console.log(stay)
+        if (field === 'country' || field === 'city' || field === 'address') {
+            stay.loc[field] = value
+        }
+        if (field === 'imgUrls') {
+            setStay(prevStay => ({ ...prevStay, imgUrls: [prevStay.imgUrls, value] }))
+        }
+    }
 
 
     return <section className="host-index secondary-container">
@@ -18,25 +36,38 @@ export function HostIndex() {
                         <h2>
                             <input
                                 type="text"
-                                placeholder="Stay name" />
+                                placeholder="Stay name"
+                                value={stay.name}
+                                name="name"
+                                onChange={handleChange}
+                            />
                         </h2>
                         <div>
                             <label htmlFor="">
                                 <input
                                     type="text"
                                     placeholder="Enter Country"
+                                    value={stay.loc.country}
+                                    name="country"
+                                    onChange={handleChange}
                                 />
                             </label>
                             <label htmlFor="">
                                 <input
                                     type="text"
                                     placeholder="Enter City"
+                                    value={stay.loc.city}
+                                    name="city"
+                                    onChange={handleChange}
                                 />
                             </label>
                             <label htmlFor="">
                                 <input
                                     type="text"
                                     placeholder="Enter Address"
+                                    value={stay.loc.address}
+                                    name="address"
+                                    onChange={handleChange}
                                 />
                             </label>
                         </div>
@@ -45,19 +76,31 @@ export function HostIndex() {
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                             <label htmlFor="">
                                 <p>Upload Image</p>
-                                <input type="file" hidden />
+                                <input type="file"
+                                    value=''
+                                    name="imgUrls"
+                                    onChange={handleChange}
+                                />
                             </label>
                         </section>
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                             <label htmlFor="">
                                 <p>Upload Image</p>
-                                <input type="file" hidden />
+                                <input type="file"
+                                    value=''
+                                    name="imgUrls"
+                                    onChange={handleChange}
+                                />
                             </label>
                         </section>
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                             <label htmlFor="">
                                 <p>Upload Image</p>
-                                <input type="file" hidden />
+                                <input type="file"
+                                    value=''
+                                    name="imgUrls"
+                                    onChange={handleChange}
+                                />
                             </label>
                         </section>
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>

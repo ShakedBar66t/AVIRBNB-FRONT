@@ -19,6 +19,7 @@ export const stayService = {
     addStayMsg,
     getAvrStayRating,
     getDefaultFilter,
+    getFilterFromSearchParams
 }
 window.cs = stayService
 
@@ -32,35 +33,49 @@ function getAvrStayRating(reviews) {
     return (totalRate / reviews.length).toFixed(2)
 }
 
-// async function query(filterBy = getDefaultFilter()) {
-//     const stays = await storageService.query(STAY_STORAGE_KEY)
-//     console.log(stays)
-//     let filteredStays = stays.filter(stay => stay.price >= filterBy.minPrice && stay.price <= filterBy.maxPrice)
-
-//     if (filterBy.bedrooms) {
-//         filteredStays = filteredStays.filter(stay => stay.bedrooms === filterBy.bedrooms)
-//     }
-//     if (filterBy.type) {
-//         filteredStays = filteredStays.filter(stay => stay.type === filterBy.type)
-//     }
-//     if (filterBy.beds) {
-//         filteredStays = filteredStays.filter(stay => stay.beds === filterBy.beds)
-//     }
-//     if (filterBy.bathrooms) {
-//         filteredStays = filteredStays.filter(stay => stay.bathrooms === filterBy.bathrooms)
-//     }
-//     if (filterBy.amenities.length) {
-//         filteredStays = filteredStays.filter(stay => filterBy.amenities.every(amenity => stay.amenities.includes(amenity)))
-//     }
-//     return (filteredStays)
-// }
-
-
-
 async function query(filterBy = getDefaultFilter()) {
-    return storageService.query(STAY_STORAGE_KEY)
-    // return httpService.get(STAY_STORAGE_KEY, filterBy)
+    const stays = await storageService.query(STAY_STORAGE_KEY)
+    console.log(stays)
+    console.log(filterBy)
+    let filteredStays = stays.filter(stay => stay.price >= filterBy.minPrice && stay.price <= filterBy.maxPrice)
+
+    // if (filterBy.bedrooms) {
+    //     filteredStays = filteredStays.filter(stay => stay.bedrooms === filterBy.bedrooms)
+    // }
+    // if (filterBy.type) {
+    //     filteredStays = filteredStays.filter(stay => stay.type === filterBy.type)
+    // }
+    // if (filterBy.beds) {
+    //     filteredStays = filteredStays.filter(stay => stay.beds === filterBy.beds)
+    // }
+    // if (filterBy.bathrooms) {
+    //     filteredStays = filteredStays.filter(stay => stay.bathrooms === filterBy.bathrooms)
+    // }
+    // if (filterBy.amenities.length) {
+    //     filteredStays = filteredStays.filter(stay => filterBy.amenities.every(amenity => stay.amenities.includes(amenity)))
+    // }
+    return (filteredStays)
 }
+
+function getFilterFromSearchParams(searchParams) {
+    const emptyFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in emptyFilter) {
+        filterBy[field] = searchParams.get(field) || ''
+    }
+    return filterBy
+}
+
+function getDefaultFilter() {
+    return { minPrice: 50, maxPrice: 2000, bedrooms: '', type: '', beds: '', bathrooms: '', amenities: [] }
+}
+
+
+
+// async function query(filterBy = getDefaultFilter()) {
+//     return storageService.query(STAY_STORAGE_KEY)
+// return httpService.get(STAY_STORAGE_KEY, filterBy)
+// }
 
 function getById(stayId) {
     return storageService.get(STAY_STORAGE_KEY, stayId)
@@ -96,7 +111,7 @@ async function addStayMsg(stayId, txt) {
 function getEmptyStay() {
     return {
         id: '',
-        name: 'Susita-' + (Date.now() % 1000),
+        name: '',
         type: '',
         price: utilService.getRandomIntInclusive(1000, 9000),
         imgUrls: [],
@@ -196,27 +211,27 @@ function _createStay() {
         _id: utilService.makeId(),
         name: utilService.makeLorem(3),
         type: stayTypes[utilService.getRandomIntInclusive(0, stayTypes.length - 1)],
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        capacity:utilService.getRandomIntInclusive(2,12),
-        imgUrls:[imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
-        imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
-        imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
-        imgs[utilService.getRandomIntInclusive(0, imgs.length-1)],
-        imgs[utilService.getRandomIntInclusive(0, imgs.length-1)]],
-        summary:utilService.makeLorem(15),
-       amenities: [stayAmenities[utilService.getRandomIntInclusive(0,stayAmenities.length-1)],
-       stayAmenities[utilService.getRandomIntInclusive(0,stayAmenities.length-1)],
-       stayAmenities[utilService.getRandomIntInclusive(0,stayAmenities.length-1)],
-       stayAmenities[utilService.getRandomIntInclusive(0,stayAmenities.length-1)]],
-       labels:[stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)],
-       stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)],
-       stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length-1)]],
-       host:{ _id:utilService.makeId(),fullname:'moshe ha gadol',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6q9BznG8oztRJPy6U0iowu827IrJA4u-mzpk9jRyyWsES4La3RBP-SxuSxr8DuOffDB4&usqp=CAU'},
-       loc:demoLocs[utilService.getRandomIntInclusive(0,demoLocs.length-1)],
-       reviews:[getDemoReview(),getDemoReview(),getDemoReview(),getDemoReview()],
-       likedByUsers:[{_id:utilService.makeId(),fullname:'Kinki Uncle',imgUrl:'https://preview.redd.it/8rfj7dyr4co91.jpg?auto=webp&s=fb9d08619d652e5c27086d16f15133fcb327928e'},
-       {_id:utilService.makeId(),fullname:'Asi Sassi',imgUrl:'https://i.pinimg.com/736x/93/45/89/934589f3aa2f266b260de8bfeb3ae1ab.jpg'},
-       {_id:utilService.makeId(),fullname:'mr ass',imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvM7m3XNTKot6plKwCy6tn56-1Rqxj4P8eMNJQl8BfSKgTdtcBIe45t_7BlIm6R9VdQE&usqp=CAU'}]
+        price: utilService.getRandomIntInclusive(100, 1300),
+        capacity: utilService.getRandomIntInclusive(2, 12),
+        imgUrls: [imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
+        imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
+        imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
+        imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)],
+        imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)]],
+        summary: utilService.makeLorem(15),
+        amenities: [stayAmenities[utilService.getRandomIntInclusive(0, stayAmenities.length - 1)],
+        stayAmenities[utilService.getRandomIntInclusive(0, stayAmenities.length - 1)],
+        stayAmenities[utilService.getRandomIntInclusive(0, stayAmenities.length - 1)],
+        stayAmenities[utilService.getRandomIntInclusive(0, stayAmenities.length - 1)]],
+        labels: [stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length - 1)],
+        stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length - 1)],
+        stayLabels[utilService.getRandomIntInclusive(0, stayLabels.length - 1)]],
+        host: { _id: utilService.makeId(), fullname: 'moshe ha gadol', imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6q9BznG8oztRJPy6U0iowu827IrJA4u-mzpk9jRyyWsES4La3RBP-SxuSxr8DuOffDB4&usqp=CAU' },
+        loc: demoLocs[utilService.getRandomIntInclusive(0, demoLocs.length - 1)],
+        reviews: [getDemoReview(), getDemoReview(), getDemoReview(), getDemoReview()],
+        likedByUsers: [{ _id: utilService.makeId(), fullname: 'Kinki Uncle', imgUrl: 'https://preview.redd.it/8rfj7dyr4co91.jpg?auto=webp&s=fb9d08619d652e5c27086d16f15133fcb327928e' },
+        { _id: utilService.makeId(), fullname: 'Asi Sassi', imgUrl: 'https://i.pinimg.com/736x/93/45/89/934589f3aa2f266b260de8bfeb3ae1ab.jpg' },
+        { _id: utilService.makeId(), fullname: 'mr ass', imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvM7m3XNTKot6plKwCy6tn56-1Rqxj4P8eMNJQl8BfSKgTdtcBIe45t_7BlIm6R9VdQE&usqp=CAU' }]
     }
 }
 //       "loc": {
@@ -369,8 +384,4 @@ function _createStay() {
 //  const userStays = stayService.query({ownerId: loggeinUser._id})
 //  loggeinUser.isOwner = userStays.length > 0
 
-
-function getDefaultFilter() {
-    return { minPrice: 50, maxPrice: 2000, bedrooms: '', type: '', beds: '', bathrooms: '', amenities: [] }
-}
 
