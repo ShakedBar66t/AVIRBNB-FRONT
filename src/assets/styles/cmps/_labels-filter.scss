@@ -231,7 +231,8 @@
         width: 200%;
         display: grid;
         // grid-template-columns: ;
-        grid-template-columns: repeat(auto-fill, 64px);
+        grid-template-columns: repeat(28, 64px);
+        // grid-template-columns: repeat(auto-fill, 64px);
         padding: 0;
         // justify-content: start;
         justify-items: start;
