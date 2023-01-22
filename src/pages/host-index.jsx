@@ -106,13 +106,21 @@ export function HostIndex() {
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                             <label htmlFor="">
                                 <p>Upload Image</p>
-                                <input type="file" hidden />
+                                <input type="file"
+                                    value=''
+                                    name="imgUrls"
+                                    onChange={handleChange}
+                                />
                             </label>
                         </section>
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                             <label htmlFor="">
                                 <p>Upload Image</p>
-                                <input type="file" hidden />
+                                <input type="file"
+                                    value=''
+                                    name="imgUrls"
+                                    onChange={handleChange}
+                                />
                             </label>
                         </section>
                     </section>
@@ -121,6 +129,8 @@ export function HostIndex() {
                             <label htmlFor="capacity">Capacity
                                 <input type="text"
                                     name="capacity"
+                                    
+                                    
                                 />
                             </label>
                             <label htmlFor="stay-type">Stay-type:

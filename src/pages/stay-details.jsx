@@ -13,12 +13,12 @@ import { AppFooter } from "../cmps/app-footer"
 import { GrDown, GrUp } from 'react-icons/gr'
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { fontWeight } from "@mui/system"
-
+import { orderService } from "../services/order.service"
 // import "antd/dist/antd"
 import { DatePicker } from "antd";
 import { moment } from "moment"
-import dayjs from "dayjs"
-const {RangePicker} = DatePicker
+import createCssVarsProvider from "@mui/system/cssVars/createCssVarsProvider"
+const { RangePicker } = DatePicker
 
 
 export function StayDetails() {
@@ -36,6 +36,32 @@ export function StayDetails() {
     const [isGuestModal, ToggleGuestModal] = useState(false)
     const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
     const [dates, setDates] = useState([])
+    const [order,setOrder] = useState(orderService.getEmptyOrder())
+
+    //   const orders = [
+//     {
+//       "_id": "o1225",
+//       "hostId": "u102",
+//       "buyer": {
+//         "_id": "u101",
+//         "fullname": "User 1"
+//       },
+//       "totalPrice": 160,
+//       "startDate": "2025/10/15",
+//       "endDate": "2025/10/17",
+//       "guests": {
+//         "adults": 2,
+//         "kids": 1
+//       },
+//       "stay": {
+//         "_id": "h102",
+//         "name": "House Of Uncle My",
+//         "price": 80.00
+//       },
+//       "msgs": [],
+//       "status": "pending" // pending, approved
+//     }
+//   ]
 
 
     useEffect(() => {
@@ -54,7 +80,13 @@ export function StayDetails() {
 
     function handleGuestsInput(type, diff) {
         setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
+        
+        
         console.log(guests)
+    }
+
+    function  ReserveOrder(){
+        
     }
 
 
@@ -177,12 +209,15 @@ export function StayDetails() {
                                   const  time1 = values[0].$d
                                    const date = new Date(time1)
                                    const day = 1000*60*60*24
+
                                 //    const dateStart = date.getTime()
                                    const dateStart = values[0].$d.getTime()
                                    const dateEnd = values[1].$d.getTime()
-                                    const daysCount = (dateEnd-dateStart)/(day)
-                                    console.log('valuesss!!!!',daysCount)
-                                    setDates(values)
+                                    const daysCount = Math.round((dateEnd-dateStart)/(day))
+                                    const totalPrice = daysCount*stay.price
+                                    console.log('valuesss!!!!',totalPrice)
+                                    setOrder({...order,totalPrice:totalPrice,startDate:values[0].$d,endDate:values[1].$d,totalNights:daysCount})
+                                    // setDates(values)
 
                                     }}
                                 />
@@ -365,17 +400,19 @@ export function StayDetails() {
                             <div className="cell"></div>
                             <div className="cell"></div>
                             <div className="content">
-                                <button className="action-btn">
-                                    <span>Reserve</span>
-                                </button>
                             </div> 
-                         </div> */}
+                        </div> */}
 
+                        <button className="action-btn" type="button" onClick={()=>{
+                            ReserveOrder()
+                        }}>
+                             Reserve 
+                        </button>
 
                         <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
                             <div className="prices">
-                                <p>${stay.price} x 0 nights</p>
+                                <p>${stay.price} x {order.totalNights} nights</p>
                                 <p>0$</p>
                                 <p>Cleaning fee</p>
                                 <p>0$</p>
@@ -384,7 +421,7 @@ export function StayDetails() {
                             </div>
                             <div className="total">
                                 <p>Total</p>
-                                <p>0$</p>
+                                <p>{order.totalPrice}$</p>
                             </div>
                         </div>
                     </form>
