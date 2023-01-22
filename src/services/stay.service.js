@@ -115,14 +115,15 @@ function getEmptyStay() {
         type: '',
         price: utilService.getRandomIntInclusive(1000, 9000),
         imgUrls: [],
-        price: 0,
+        price: '',
         summary: '',
         amenities: [],
         labels: [],
         host: {},
         loc: {},
         reviews: [],
-        likedByUsers: []
+        likedByUsers: [],
+        capacity: ''
     }
 }
 
