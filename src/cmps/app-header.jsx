@@ -20,9 +20,10 @@ export function AppHeader() {
 
     const params = useParams()
     const { stayId } = params
-    const location = useLocation();
+    const location = useLocation()
     const isTripPage = (location.pathname === '/user/trip') ? true : false
-    console.log(isTripPage);
+    console.log(isTripPage)
+    console.log(!stayId)
 
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
@@ -92,7 +93,7 @@ export function AppHeader() {
         dispatch({ type: REFRESH_LOGIN_MODAL })
         setTimeout(() => {
             dispatch({ type: REFRESH_LOGIN_MODAL })
-        }, 500);
+        }, 500)
     }
 
 
@@ -158,12 +159,12 @@ export function AppHeader() {
                     <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
                 </div>
                 <div className='filter-modal-middle-btns'>
-                    {/* <div className='inner-btns-container middle'> */}
-                    <div className='inner-btn-wrapper'>
-                        <button className='inner-btns-container middle'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
-                        <button className='inner-btns-container middle'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
+                    <div className='inner-btns-container middle'>
+                        <div className='inner-btn-wrapper'>
+                            <button className='inner-btns-container middle'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
+                            <button className='inner-btns-container middle'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
+                        </div>
                     </div>
-                    {/* </div> */}
                 </div>
                 <div className='filter-modal-right-btns'>
                     <div className='inner-btn-wrapper'>
@@ -173,10 +174,9 @@ export function AppHeader() {
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            <div className='labels-container'>
-
-                {!stayId || !isTripPage && <LabelsFilter />}
-            </div>
+            {(!isTripPage) && <div className='labels-container'>
+                {(!stayId) && <LabelsFilter />}
+            </div>}
         </header >
     )
 }
