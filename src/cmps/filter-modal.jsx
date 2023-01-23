@@ -164,7 +164,7 @@ export function FilterModal() {
                     <div className='type-filter-main-container'>
                         <span className='filter-type-title'>Type of place</span>
                         <div className='type-filter-sub-container'>
-                            {placeTypes.map(({ name, label, description }) => (
+                            {placeTypes.map(({ name, label, desc }) => (
                                 <div key={name} className='type-btns-container'>
                                     <div className='type-btns-inner'>
                                         <div className='checkbox-wrapper'>
@@ -178,7 +178,7 @@ export function FilterModal() {
                                         </div>
                                         <label className='type-btns-inner-text'>
                                             {label}
-                                            <span>{description}</span>
+                                            <span>{desc}</span>
                                         </label>
                                     </div>
                                 </div>

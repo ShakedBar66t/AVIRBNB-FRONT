@@ -5,7 +5,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useEffect, useState } from 'react'
-
+import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
@@ -19,22 +19,33 @@ import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 export function AppHeader() {
 
     const params = useParams()
-    const { stayId } = params
-    const location = useLocation()
-    const isTripPage = (location.pathname === '/user/trip') ? true : false
-    console.log(isTripPage)
-    console.log(!stayId)
-
     const dispatch = useDispatch()
-    const [userModal, setUserModal] = useState(false)
-    const [searchModal, setSearchModal] = useState(false)
-    const [searchModalExpended, setSearchModalExpended] = useState(false)
+    const location = useLocation()
     const navigate = useNavigate()
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
-
     const user = useSelector(storeState => storeState.userModule.user)
+
+    const [userModal, setUserModal] = useState(false)
+    const [searchModal, setSearchModal] = useState(false)
+    const [searchModalExpended, setSearchModalExpended] = useState(false)
+    const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
+    const { stayId } = params
+    const isTripPage = (location.pathname === '/user/trip') ? true : false
+
+    const countries = [
+        { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
+        { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
+        { country: 'Italy', label: 'Italy', image: require('../assets/img/italy.jpg') },
+        { country: 'United Stated', label: 'United Stated', image: require('../assets/img/usa.jpg') },
+        { country: 'France', label: 'France', image: require('../assets/img/france.jpg') },
+        { country: 'South America', label: 'South America', image: require('../assets/img/southAmerica.jpg') },
+    ]
+
+    const guestsTypes = [
+        { type: 'Adults', txt: 'Ages 13 or above' }, { type: 'Children', txt: 'Ages 2-12' }
+        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
     async function onLogin(credentials) {
         try {
             const user = await login(credentials)
@@ -86,10 +97,12 @@ export function AppHeader() {
         }, 500)
     }
 
-    function handleSearchModalClick(ev) {
+    function handleGuestsInput(type, diff) {
+        setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
 
+
+        console.log(guests)
     }
-
 
     return (
         <header className={(stayId || isTripPage) ? 'app-header full secondary-container' : 'app-header full stay-index-layout'}>
@@ -150,9 +163,22 @@ export function AppHeader() {
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' onClick={() => setSearchModalExpended(!searchModalExpended)}>
-                    <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
+                    <button className='inner-btns-container left'><span className='upper-text'>Where</span><input type='text' placeholder="Search destinations" className='lower-text'></input></button>
                     <div className={`where-modal-extended ${searchModalExpended ? 'open' : ''}`}>
-                        {/* Your left modal content here */}
+                        <div className='where-modal-inner'>
+                            <span className='where-modal-inner-title'>Search by region</span>
+                            <div className='cards-container'>
+                                {countries.map((place, index) => {
+                                    return <div key={index} className='place-card'>
+                                        <div className='place-card-inner'>
+                                            <img src={place.image} />
+                                            <span>{place.label}</span>
+                                        </div>
+                                    </div>
+                                })}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div className='filter-modal-middle-btns'>
@@ -161,51 +187,38 @@ export function AppHeader() {
                             <span className='border-between'>
 
                             </span>
-                            <button className='date-btn right'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
+                            <button className='date-btn right'><span className='upper-text'>Check in</span><span className='lower-text'>Add dates</span> </button>
                             <span>
                             </span>
-                            <button className='date-btn left'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
+                            <button className='date-btn left'><span className='upper-text'>Check out</span><span className='lower-text'>Add dates</span> </button>
                         </div>
                     </div>
                     <div className={`when-modal-extended ${searchModalExpended ? 'open' : ''}`}>
-                        {/* Your middle modal content here */}
+
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
                     <div className='inner-btn-wrapper'>
-                        <button className='inner-btns-container right'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
+                        <button className='inner-btns-container right'><span className='upper-text'>Who</span><span className='lower-text'>Add guests</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
                     <div className={`who-modal-extended ${searchModalExpended ? 'open' : ''}`}>
-                        {/* Your right modal content here */}
-                    </div>
+                        {guestsTypes.map((type, index) => {
+                            return <div className="guests-type-input" key={type.type}>
+                                <div className='guest-type-text-containter'>
+                                    <span className='upper-text'>{type.type}</span>
+                                    <span className={`lower-text ${(index === 3) ? 'last' : ''}`} >{type.txt}</span >
+                                </div>
+                                <div className="guests-type-input-value">
+                                    <button type="button" className={`clear-btn `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline className={`btn-icon ${guests[type.type] ? 'allowed' : 'denied'}`} /></button>
+                                    <span className='type-count'>{guests[type.type]}</span>
+                                    <button type="button" className={`clear-btn `} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline className={`btn-icon ${+guests[type.type] === 0} ? '' : 'denied'`} /></button>
+                                </div>
+
+                            </div>
+                        })}                    </div>
                 </div>
             </div>
-
-            {/* <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
-                <div className='filter-modal-left-btns' onClick={() => setSearchModalExpended(!searchModalExpended)}>
-                    <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
-                </div>
-                <div className='filter-modal-middle-btns'>
-                    <div className='inner-btns-container middle'>
-                        <div className='inner-btn-wrapper middle'>
-                            <span className='border-between'>
-
-                            </span>
-                            <button className='date-btn right'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
-                            <span>
-                            </span>
-                            <button className='date-btn left'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
-                        </div>
-                    </div>
-                </div>
-                <div className='filter-modal-right-btns'>
-                    <div className='inner-btn-wrapper'>
-                        <button className='inner-btns-container right'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
-                        <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
-                    </div>
-                </div>
-            </div> */}
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             {(!isTripPage) && <div className='labels-container'>
                 {(!stayId) && <LabelsFilter />}

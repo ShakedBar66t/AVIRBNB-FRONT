@@ -472,7 +472,6 @@
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        // background-color: $clr6;
         border-radius: 35px;
         flex-grow: 1;
 
@@ -496,6 +495,36 @@
     }
 }
 
+.upper-text {
+    font-size: rem(13px);
+    line-height: rem(16px);
+    font-weight: 600;
+    color: $clr7;
+    text-align: left;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.lower-text {
+    text-align: left;
+    font-size: rem(14px);
+    line-height: rem(18px);
+    color: #717171;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    &.last {
+        cursor: pointer;
+        color: rgb(94, 94, 94);
+        font-weight: 600;
+        text-decoration: underline
+    }
+}
+
+
 .filter-modal-left-btns,
 .filter-modal-middle-btns,
 .filter-modal-right-btns {
@@ -510,7 +539,6 @@
     background-color: $clr6;
     top: 100%;
     left: 0;
-    // background-color: red;
 
     border-radius: 32px;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 4%),
@@ -526,28 +554,123 @@
 .where-modal-extended {
     width: 494px;
     height: 474px;
+
 }
 
-.inner-button-top {
-    font-size: rem(13px);
-    line-height: rem(16px);
-    font-weight: 600;
-    color: $clr7;
-    text-align: left;
-    width: 100%;
+.where-modal-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+
+    & span {
+        margin-left: 13px;
+        align-self: flex-start;
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 18px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
 }
 
-.inner-button-bottom {
-    text-align: left;
-    font-size: rem(14px);
-    line-height: rem(18px);
-    color: #717171;
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
+.cards-container {
+    display: grid;
+    width: 406px;
+    height: 340px;
+    column-gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 24px;
+    margin-bottom: 15px;
+
+    & img {
+        border-radius: 10px;
+        border: $bs1;
+
+        &:hover {
+            border: 1px solid black;
+        }
+    }
+
+    & .place-card-inner {}
+
+    & span {
+        color: $clr7;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 }
 
+.who-modal-extended {
+    position: absolute;
+    background-color: $clr6;
+    width: 406px;
+    height: 314px;
+
+    .guests-type-input {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 4px 16px 0;
+        border-bottom: 1px solid $clr8;
+
+
+        & .guest-type-text-containter {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        & .upper-text {
+            font-size: rem(16px);
+            margin-bottom: 2px;
+        }
+
+        &-value {
+            align-self: end;
+            display: flex;
+            align-items: center;
+
+            & button {
+                &:hover {
+                    & .allowed {
+                        color: black;
+                    }
+                }
+            }
+
+            .btn-icon {
+                display: block;
+                height: 32px;
+                width: 32px;
+                color: #717171;
+                font-size: 1.4rem;
+                font-weight: 100;
+                cursor: pointer;
+
+                &.denied {
+                    cursor: not-allowed;
+                    color: lightgray;
+
+                    // &:hover {
+                    //     color: lightgray
+                    // }
+                }
+            }
+
+            span {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+}
 
 ////////// extended modals 
 // .where-modal-extended {
