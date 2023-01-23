@@ -320,14 +320,14 @@
 .filter-modal {
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 70px;
     position: fixed;
-    background-color: #ebebeb;
+    // background-color: #ebebeb;
     margin: auto 0;
     top: 60px;
     left: 23%;
     opacity: 0;
-    border: $bs1;
+    border: 1px solid red;
     border-radius: 35px;
     transform: scale(0.6) translateY(-100%);
     transition: all 0.3s ease-in-out;
@@ -343,9 +343,6 @@
 
     & .filter-modal-middle-btns,
     & .filter-modal-left-btns {
-        // flex: 1 0 140px;
-        display: flex;
-        height: 64px;
         justify-content: space-evenly;
         align-items: center;
     }
@@ -353,19 +350,47 @@
     & .filter-modal-left-btns {
         width: 327px;
         display: flex;
-        align-items: center;
     }
 
     & .filter-modal-middle-btns {
         width: 260px;
-        // flex: 1 0 140px;
+
+        & .left-btns-where {
+            & input {
+                border: none;
+            }
+        }
+
+        & button {
+            border-radius: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
     }
 
-    & .left-btns-where {
+    & .inner-btns-container {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        align-self: center;
+        padding: 10px 24px;
+
+        &:hover {
+            background-color: $bgh1;
+        }
+
+        &.right {
+            justify-content: flex-start;
+        }
+
+        &.middle {
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        &.left {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
 
         & input {
             border: none;
@@ -375,61 +400,47 @@
     & .filter-modal-right-btns {
         width: 260px;
         display: flex;
-        padding: 0 8px;
-        // justify-content: space-between;
+        flex-direction: column;
 
-        & .right-btns-who {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            width: 145;
-            padding: 14px 24px;
-            justify-self: flex-start;
-        }
 
-        & .inner-button-top {
-            font-size: rem(12px);
-            line-height: rem(16px);
-            font-weight: 600;
-            color: $clr7;
-        }
-
-        & .inner-button-bottom {
-            text-align: left;
-            font-size: rem(14px);
-            line-height: rem(18px);
-            color: #717171;
-            font-weight: 400;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-        }
 
         & .search-btn {
-            justify-self: flex-end;
+            align-self: center;
+            background-color: $clr1;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
         }
 
-
     }
 
-
-
-    & .search-btn {
-        align-self: center;
-        background-color: $clr1;
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-    }
-
-    & button {
-        // width: 70%;
+    & .inner-btn-wrapper {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        background-color: $clr6;
+        padding: 0 8px 0 0;
         border-radius: 16px;
-        // flex-grow: 1;
-        transition: background-color 0.3s ease-in-out;
-
-        &:hover {
-            background-color: $bgh1;
-        }
     }
+}
+
+.inner-button-top {
+    font-size: rem(12px);
+    line-height: rem(16px);
+    font-weight: 600;
+    color: $clr7;
+    text-align: left;
+    width: 100%;
+}
+
+.inner-button-bottom {
+    text-align: left;
+    font-size: rem(14px);
+    line-height: rem(18px);
+    color: #717171;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }

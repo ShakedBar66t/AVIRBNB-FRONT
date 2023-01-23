@@ -150,15 +150,21 @@ export function AppHeader() {
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''}`}>
                 <div className='filter-modal-left-btns'>
-                    <button className='left-btns-where'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
+                    <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
                 </div>
                 <div className='filter-modal-middle-btns'>
-                    <button>Check in </button>
-                    <button>Check out </button>
+                    <div className='inner-btns-container middle'>
+                        <div className='inner-btn-wrapper'>
+                            <button>Check in </button>
+                            <button>Check out </button>
+                        </div>
+                    </div>
                 </div>
                 <div className='filter-modal-right-btns'>
-                    <button className='right-btns-who'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
-                    <button className='search-btn'><FaSearch color='white' /></button>
+                    <div className='inner-btn-wrapper'>
+                        <button className='inner-btns-container right'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
+                        <button className='search-btn'><FaSearch color='white' /></button>
+                    </div>
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
