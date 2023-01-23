@@ -1,8 +1,177 @@
+// .carousel-container {
+//     position: relative;
+//     display: flex;
+   
+
+//     .setting-btn {
+//         // position: absolute;
+//         right: 0;
+//         justify-self: start;
+//         height: 48px;
+//         width: 90px;
+//         align-self: center;
+//         border: 1px solid lightgray;
+//         border-radius: 12px;
+//         font-size: rem(12px);
+//         line-height: rem(16px);
+//         font-weight: 700;
+//         flex-shrink: 0;
+        
+
+//         & span {
+//             display: flex;
+//             align-items: center;
+//             justify-content: space-evenly;
+//         }
+
+//         & .setting-icon {
+//             height: 16px;
+//             width: 16px;
+//             font-size: rem(16px);
+//         }
+
+//         &:hover {
+//             cursor: pointer;
+//         }
+//     }
+// }
+
+// .carousel {
+//     flex-grow: 1;
+//     flex-shrink: 0;
+//     grid-column: 1 / 3;
+//     position: relative;
+//     width: 95%;
+//     overflow: hidden;
+//     display: flex;
+//     height: 80px;
+//     align-items: center;
+//     text-align: center;
+//     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+//     font-weight: 600;
+
+//     .carousel-inner {
+//         position: relative;
+//         display: flex;
+//         flex-direction: row;
+//         width: 200%;
+//         left: 30px;
+//     }
+
+//     .btn-container {
+//         display: flex;
+//         align-items: center;
+//         position: absolute;
+//         height: 80px;
+//         width: 30px;
+//         background-color: rgba(255, 255, 255, 0.6);
+//         background-image: linear-gradient(to right, rgb(255 255 255 / 0), white 40px);
+
+//         &.next {
+//             right: 0;
+
+//         }
+
+//         &.prev {
+//             left: 0;
+//         }
+
+
+
+//         .prev-btn,
+//         .next-btn {
+//             position: absolute;
+//             height: 30px;
+//             width: 30px;
+//             border: 1px solid rgb(146, 146, 146);
+//             border-radius: 50%;
+//             transition: 0.4s;
+//             background-color: #fff;
+//             font-size: rem(18px);
+
+//             &:hover {
+//                 box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.3);
+//                 cursor: pointer;
+//             }
+//         }
+
+//         .next-btn {
+//             right: 0;
+
+//             &.hidden {
+//                 display: none;
+//             }
+//         }
+
+//         .prev-btn {
+//             left: 0;
+
+//             &.hidden {
+//                 &.hidden {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
+
+//     .carousel-group {
+//         display: flex;
+//         flex-direction: column;
+//         position: relative;
+//         transition: transform 0.5s ease;
+//     }
+
+//     .label-filter-btn {
+//         width: 60px;
+//         height: 70px;
+//         margin-right: 20px;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         margin-top: 5px;
+//         transition: color 0.5s ease;
+//         color: $clr8;
+
+//         & span {
+//             line-height: rem(16px);
+//             padding-top: 5px;
+//             font-size: rem(14px);
+//         }
+
+//         & img {
+//             height: 26px;
+//             width: 26px;
+//         }
+
+//         &:hover {
+//             transform: 1s ease;
+//             color: black;
+//             cursor: pointer;
+//             border-bottom: 3px $clr8 solid;
+//             transition: color 0.5s ease;
+//         }
+//     }
+
+// }
+
+
+
+
+
+
+
+
+
+
 .carousel-container {
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    gap: 24px;
+   
 
     .setting-btn {
-        position: absolute;
+        // position: absolute;
         right: 0;
         justify-self: start;
         height: 48px;
@@ -13,6 +182,8 @@
         font-size: rem(12px);
         line-height: rem(16px);
         font-weight: 700;
+        grid-column: 2;
+        grid-row: 1;
 
         & span {
             display: flex;
@@ -35,21 +206,38 @@
 .carousel {
     grid-column: 1 / 3;
     position: relative;
-    width: 95%;
+    // width: 95%;
     overflow: hidden;
     display: flex;
     height: 80px;
-    align-items: center;
+    // align-items: center;
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
+    grid-column: 1;
+    grid-row: 1;
+    // display: grid;
+   
+    // grid-template-columns: repeat(auto-fill, 64px);
+    // padding: 0;
+ 
+    // justify-items: start;
+    
 
     .carousel-inner {
         position: relative;
         display: flex;
         flex-direction: row;
         width: 200%;
-        left: 30px;
+        display: grid;
+        // grid-template-columns: ;
+        grid-template-columns: repeat(28, 64px);
+        // grid-template-columns: repeat(auto-fill, 64px);
+        padding: 0;
+        // justify-content: start;
+        justify-items: start;
+        gap: 36px;
+        // left: 30px;
     }
 
     .btn-container {
@@ -64,6 +252,10 @@
         &.next {
             right: 0;
 
+        }
+
+        &.prev {
+            left: 0;
         }
 
 
@@ -126,6 +318,7 @@
             line-height: rem(16px);
             padding-top: 5px;
             font-size: rem(14px);
+            white-space: nowrap;
         }
 
         & img {
@@ -143,3 +336,153 @@
     }
 
 }
+// .carousel-container {
+//     position: relative;
+   
+
+//     .setting-btn {
+//         position: absolute;
+//         right: 0;
+//         justify-self: start;
+//         height: 48px;
+//         width: 90px;
+//         align-self: center;
+//         border: 1px solid lightgray;
+//         border-radius: 12px;
+//         font-size: rem(12px);
+//         line-height: rem(16px);
+//         font-weight: 700;
+
+//         & span {
+//             display: flex;
+//             align-items: center;
+//             justify-content: space-evenly;
+//         }
+
+//         & .setting-icon {
+//             height: 16px;
+//             width: 16px;
+//             font-size: rem(16px);
+//         }
+
+//         &:hover {
+//             cursor: pointer;
+//         }
+//     }
+// }
+
+// .carousel {
+//     grid-column: 1 / 3;
+//     position: relative;
+//     width: 95%;
+//     overflow: hidden;
+//     display: flex;
+//     height: 80px;
+//     align-items: center;
+//     text-align: center;
+//     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+//     font-weight: 600;
+
+//     .carousel-inner {
+//         position: relative;
+//         display: flex;
+//         flex-direction: row;
+//         width: 200%;
+//         left: 30px;
+//     }
+
+//     .btn-container {
+//         display: flex;
+//         align-items: center;
+//         position: absolute;
+//         height: 80px;
+//         width: 30px;
+//         background-color: rgba(255, 255, 255, 0.6);
+//         background-image: linear-gradient(to right, rgb(255 255 255 / 0), white 40px);
+
+//         &.next {
+//             right: 0;
+
+//         }
+
+//         &.prev {
+//             left: 0;
+//         }
+
+
+
+//         .prev-btn,
+//         .next-btn {
+//             position: absolute;
+//             height: 30px;
+//             width: 30px;
+//             border: 1px solid rgb(146, 146, 146);
+//             border-radius: 50%;
+//             transition: 0.4s;
+//             background-color: #fff;
+//             font-size: rem(18px);
+
+//             &:hover {
+//                 box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.3);
+//                 cursor: pointer;
+//             }
+//         }
+
+//         .next-btn {
+//             right: 0;
+
+//             &.hidden {
+//                 display: none;
+//             }
+//         }
+
+//         .prev-btn {
+//             left: 0;
+
+//             // &.hidden {
+//             //     &.hidden {
+//             //         display: none;
+//             //     }
+//             // }
+//         }
+//     }
+
+//     .carousel-group {
+//         display: flex;
+//         flex-direction: column;
+//         position: relative;
+//         transition: transform 0.5s ease;
+//     }
+
+//     .label-filter-btn {
+//         width: 60px;
+//         height: 70px;
+//         margin-right: 20px;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         margin-top: 5px;
+//         transition: color 0.5s ease;
+//         color: $clr8;
+
+//         & span {
+//             line-height: rem(16px);
+//             padding-top: 5px;
+//             font-size: rem(14px);
+//         }
+
+//         & img {
+//             height: 26px;
+//             width: 26px;
+//         }
+
+//         &:hover {
+//             transform: 1s ease;
+//             color: black;
+//             cursor: pointer;
+//             border-bottom: 3px $clr8 solid;
+//             transition: color 0.5s ease;
+//         }
+//     }
+
+// }

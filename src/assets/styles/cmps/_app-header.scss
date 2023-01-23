@@ -90,6 +90,11 @@
             color: $clr1;
             font-size: rem(22px);
             font-weight: bold;
+            display: none;
+
+            @include for-normal-layout {
+                display: block;
+            }
         }
     }
 
@@ -152,8 +157,8 @@
             width: 32px;
 
             .fa-search {
-                margin-top: 1px;
                 font-size: rem(12px);
+                margin-top: 1px;
             }
         }
 
@@ -217,6 +222,32 @@
         color: $clr6;
     }
 
+}
+
+//// details appheader /////
+.filter-btns-details {
+    width: 300px;
+    padding: 0 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .search-btn {
+        background-color: $clr1;
+        border-radius: 50%;
+        height: 32px;
+        width: 32px;
+    }
+
+    & span {
+        padding: 0 16px;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 }
 
 /////// modals ////////

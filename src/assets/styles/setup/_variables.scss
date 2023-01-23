@@ -9,12 +9,12 @@ $clr7: #222222;
 $clr8: lighten($color: $clr7, $amount: 40%);
 $clr9: #ff385c;
 $bgclr1: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
-rgb(241, 37, 75) 0%,
-rgb(230, 30, 77) 27.5%,
-rgb(227, 28, 95) 40%,
-rgb(215, 4, 102) 57.5%,
-rgb(189, 30, 89) 75%,
-rgb(189, 30, 89) 100%);
+        rgb(241, 37, 75) 0%,
+        rgb(230, 30, 77) 27.5%,
+        rgb(227, 28, 95) 40%,
+        rgb(215, 4, 102) 57.5%,
+        rgb(189, 30, 89) 75%,
+        rgb(189, 30, 89) 100%);
 
 
 // Bg-color-hover
@@ -27,6 +27,7 @@ $bs1: 1px solid lightgray;
 // dont touch its for the index and its mesured by yoni
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 745px;
+$medium-breakpoint: 950px;
 $normal-breakpoint: 1125px;
 $wide-breakpoint: 1390px;
 $ultra-wide-breakpoint: 1920px;

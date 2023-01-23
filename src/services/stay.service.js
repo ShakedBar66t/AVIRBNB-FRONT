@@ -204,10 +204,6 @@ function _createStay() {
         }
     }
 
-
-
-
-
     return {
         _id: utilService.makeId(),
         name: utilService.makeLorem(3),

@@ -94,20 +94,22 @@ export function AppHeader() {
 
 
     return (
-
-        <header className="app-header full stay-index-layout ">
+        <header className={stayId ? 'app-header full secondary-container' : 'app-header full stay-index-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
                 <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
-                    <div className='filter-btns' onClick={toggleFilterModal}>
+                    {stayId && <div className='filter-btns-details'><span> Start your search </span>
+                        <button className='search-btn'><FaSearch className='fa-search' /></button>
+                    </div>}
+                    {!stayId && <div className='filter-btns' onClick={toggleFilterModal}>
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
                         <button className='guest-filter '>Add guests </button>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
-                    </div>
+                    </div>}
                 </div>
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
@@ -135,11 +137,8 @@ export function AppHeader() {
                 {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
                 <button onClick={() => {
                     if (!user) {
-
                         toggleLoginModal()
                         toggleUserModal()
-
-
                         return
                     }
                     navigate('/host/home')

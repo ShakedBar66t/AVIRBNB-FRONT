@@ -200,18 +200,18 @@ export function StayDetails() {
                                         const date = new Date(time1)
                                         const day = 1000 * 60 * 60 * 24
 
-                                        //    const dateStart = date.getTime()
-                                        const dateStart = values[0].$d.getTime()
-                                        const dateEnd = values[1].$d.getTime()
-                                        const daysCount = Math.round((dateEnd - dateStart) / (day))
-                                        const totalPrice = daysCount * stay.price
-                                        console.log('valuesss!!!!', totalPrice)
-                                        setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
-                                        // setDates(values)
+                                //    const dateStart = date.getTime()
+                                   const dateStart = values[0].$d.getTime()
+                                   const dateEnd = values[1].$d.getTime()
+                                    const daysCount = Math.round((dateEnd-dateStart)/(day))
+                                    const totalPrice = daysCount*stay.price
+                                    console.log('valuesss!!!!',totalPrice)
+                                    setOrder({...order,totalPrice:totalPrice,startDate:values[0].$d,endDate:values[1].$d,totalNights:daysCount}) }}/>
+                                    
 
-                                    }}
-                                />
-                                {/* <DatePicker/> */}
+                                   
+                                
+                              
                             </div>
                             <div className="guests-input">
                                 <small>Guests max capacity of {stay.capacity}</small>
