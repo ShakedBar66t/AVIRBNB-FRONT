@@ -1,6 +1,7 @@
 .details {
     & .app-header {
         position: static;
+        margin-top: -3px;
 
         & .user-nav-container {
             padding: 0;
@@ -19,14 +20,14 @@
     }
 
     .reviews {
-        margin-top: 32px;
+        margin-top: 36px;
         border-top: 1px solid #dddddd;
         padding-block: 48px;
         border-bottom: 1px solid #dddddd;
         scroll-margin-top: 88px;
 
         header {
-            font-size: 1.375em;
+              font-size: 1.375em;
             margin-bottom: 32px;
 
             a {
