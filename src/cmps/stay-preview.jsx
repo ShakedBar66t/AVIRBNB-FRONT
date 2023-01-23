@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { stayService } from "../services/stay.service";
 import { utilService } from "../services/util.service";
 import { PreviewImgCarousel } from "./img-carousel";
+import { padding } from "@mui/system";
 
 export function StayPreview({ stay,onToggleLike }) {
     const navigate = useNavigate()
