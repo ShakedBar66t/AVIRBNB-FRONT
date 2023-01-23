@@ -17,7 +17,6 @@ export function LabelsFilter() {
     const totalWidth = ElCarousel1?.current?.offsetWidth
     const displayedWidth = (ElCarousel?.current?.offsetWidth - 114)
 
-
     const stayLabels = [
         { name: 'Play', src: 'play' },{ name: 'Iconic cities', src: 'iconic' },  { name: 'Caves', src: 'cave' },
          { name: 'By the lake', src: 'lake' },{ name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
@@ -68,7 +67,6 @@ export function LabelsFilter() {
        }
     }
 
-
     return (<div className="carousel-container  " ref={ElCarousel}>
         <div className="carousel ">
             <div className="carousel-inner" ref={ElCarousel1} >
@@ -100,4 +98,3 @@ export function LabelsFilter() {
     </div>
     )
 }
-;
