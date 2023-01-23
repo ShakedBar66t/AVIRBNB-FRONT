@@ -20,6 +20,9 @@ export function AppHeader() {
 
     const params = useParams()
     const { stayId } = params
+    const location = useLocation();
+    const isTripPage = (location.pathname === '/user/trip') ? true : false
+    console.log(isTripPage);
 
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
@@ -94,13 +97,14 @@ export function AppHeader() {
 
 
     return (
-        <header className={stayId ? 'app-header full secondary-container' : 'app-header full stay-index-layout'}>
+        <header className={(stayId || isTripPage) ? 'app-header full secondary-container' : 'app-header full stay-index-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
-                <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
+
+                {!isTripPage && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     {stayId && <div className='filter-btns-details'><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
@@ -111,6 +115,7 @@ export function AppHeader() {
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
                 </div>
+                }
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
                         <button className='host-btn'>Avirbnb your home</button>
@@ -121,7 +126,7 @@ export function AppHeader() {
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
+            <div className={`user-modal ${userModal ? 'open' : ''} ${stayId || isTripPage ? 'on-details-layout' : 'stay-index-layout'}`}>
                 {(!user) && <button onClick={() => {
 
                     toggleUserModal()
@@ -153,12 +158,12 @@ export function AppHeader() {
                     <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
                 </div>
                 <div className='filter-modal-middle-btns'>
-                    <div className='inner-btns-container middle'>
-                        <div className='inner-btn-wrapper'>
-                            <button>Check in </button>
-                            <button>Check out </button>
-                        </div>
+                    {/* <div className='inner-btns-container middle'> */}
+                    <div className='inner-btn-wrapper'>
+                        <button className='inner-btns-container middle'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
+                        <button className='inner-btns-container middle'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
                     </div>
+                    {/* </div> */}
                 </div>
                 <div className='filter-modal-right-btns'>
                     <div className='inner-btn-wrapper'>
@@ -170,7 +175,7 @@ export function AppHeader() {
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
-                {!stayId && <LabelsFilter />}
+                {!stayId || !isTripPage && <LabelsFilter />}
             </div>
         </header >
     )

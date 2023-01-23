@@ -37,10 +37,10 @@ export function FilterModal() {
         setFilterBy({ ...filterBy, [name]: num, minPrice: rangeRef.current.min, maxPrice: rangeRef.current.max })
     }
     console.log(filterBy)
-    
+
     const handleRangeChange = ({ minPrice, maxPrice }) => {
         if (rangeRef.current) rangeRef.current = { minPrice, maxPrice }
-        setFilterBy({ ...filterBy, minPrice, maxPrice })
+        // setFilterBy({ ...filterBy, minPrice, maxPrice })
     }
 
 
@@ -106,7 +106,8 @@ export function FilterModal() {
                                     <MultiRangeSlider
                                         minPrice={0}
                                         maxPrice={800}
-                                        onChange={handleRangeChange} />
+                                        onChange={handleRangeChange}
+                                    />
                                 </div>
                             </div>
                             <div className='inputs-container'>
@@ -217,7 +218,7 @@ export function FilterModal() {
                                                 key={`bedrooms-${number}`}
                                                 className={`rooms-beds-num-btn ${filterBy.bedrooms === number ? 'selected' : ''}`}
                                                 onClick={(ev) => handleClick(ev, number)}
-                                                // style={{backgroundColor:`${filterBy.bedrooms === number ? 'blue' : 'red'}`}}
+                                            // style={{backgroundColor:`${filterBy.bedrooms === number ? 'blue' : 'red'}`}}
                                             >
                                                 {number}
                                             </button>

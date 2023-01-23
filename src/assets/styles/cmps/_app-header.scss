@@ -286,6 +286,11 @@
         z-index: 3;
         display: flex;
         justify-content: space-between;
+
+    }
+
+    &.on-details-layout {
+        right: 45%;
     }
 
     & button {
@@ -323,18 +328,22 @@
     height: 70px;
     position: fixed;
     // background-color: #ebebeb;
-    margin: auto 0;
-    top: 60px;
-    left: 23%;
+    margin: auto;
     opacity: 0;
-    border: 1px solid red;
+    border: 1px solid lightgray;
     border-radius: 35px;
     transform: scale(0.6) translateY(-100%);
     transition: all 0.3s ease-in-out;
+    // transition: transform 0.3s, ease-in-out;
     pointer-events: auto;
+    top: 60px;
+    right: 0;
+    left: 0;
+    max-width: 450px;
 
     &.open {
-        left: 23%;
+
+        max-width: 870px;
         z-index: 2;
         opacity: 1;
         transform: scale(1) translateY(30%);
@@ -354,42 +363,44 @@
 
     & .filter-modal-middle-btns {
         width: 260px;
-
-        & .left-btns-where {
-            & input {
-                border: none;
-            }
-        }
-
-        & button {
-            border-radius: 16px;
-            transition: background-color 0.3s ease-in-out;
-        }
     }
 
     & .inner-btns-container {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        padding: 10px 24px;
+        justify-content: space-evenly;
+        border-radius: 35px;
+        height: 100%;
+        padding: 8px 4px;
 
-        &:hover {
-            background-color: $bgh1;
-        }
+        &:hover {}
 
         &.right {
-            justify-content: flex-start;
+            padding: 8px 24px;
         }
 
         &.middle {
             flex-direction: row;
-            justify-content: space-evenly;
+
+            & button {
+                height: 50%;
+                border-right: 1px solid lightgray;
+                padding: 14px 24px;
+
+                &:hover {
+                    border-radius: 35px;
+                    height: 100%;
+                    background-color: inherit;
+                }
+            }
         }
 
         &.left {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+
+            // justify-content: space-evenly;
+            padding: 8px 20px;
+            border-radius: 35px;
         }
 
         & input {
@@ -402,16 +413,13 @@
         display: flex;
         flex-direction: column;
 
-
-
         & .search-btn {
             align-self: center;
             background-color: $clr1;
             border-radius: 50%;
-            height: 40px;
-            width: 40px;
+            height: 48px;
+            width: 48px;
         }
-
     }
 
     & .inner-btn-wrapper {
@@ -419,19 +427,25 @@
         height: 100%;
         width: 100%;
         justify-content: space-between;
+        align-items: center;
         background-color: $clr6;
         padding: 0 8px 0 0;
-        border-radius: 16px;
+        border-radius: 35px;
+
+        &:hover {
+            background-color: $bgh1;
+        }
     }
 }
 
 .inner-button-top {
-    font-size: rem(12px);
+    font-size: rem(13px);
     line-height: rem(16px);
     font-weight: 600;
     color: $clr7;
     text-align: left;
     width: 100%;
+    // margin-bottom: 5px;
 }
 
 .inner-button-bottom {
