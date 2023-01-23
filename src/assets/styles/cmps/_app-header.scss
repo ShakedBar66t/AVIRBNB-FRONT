@@ -372,7 +372,8 @@
         justify-content: space-evenly;
         border-radius: 35px;
         height: 100%;
-        padding: 8px 4px;
+        border: 1px solid lightgray;
+        background-color: none;
 
         &:hover {}
 
@@ -381,12 +382,11 @@
         }
 
         &.middle {
-            flex-direction: row;
+            flex-direction: column;
 
             & button {
-                height: 50%;
-                border-right: 1px solid lightgray;
-                padding: 14px 24px;
+                // height: 50%;
+                padding: 8px 24px;
 
                 &:hover {
                     border-radius: 35px;
@@ -429,8 +429,8 @@
         justify-content: space-between;
         align-items: center;
         background-color: $clr6;
-        padding: 0 8px 0 0;
         border-radius: 35px;
+        flex-grow: 1;
 
         &:hover {
             background-color: $bgh1;
