@@ -28,7 +28,7 @@ export function AppHeader() {
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)
     const [searchModal, setSearchModal] = useState(false)
-    const [loginModal, setLoginModal] = useState(false)
+    const [searchModalExpended, setSearchModalExpended] = useState(false)
     const navigate = useNavigate()
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
@@ -68,16 +68,6 @@ export function AppHeader() {
         setSearchModal(!searchModal)
     }
 
-    // function toggleLoginModal(signup) {
-    //     if(signup==='signup'){
-    //         dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
-    //     }
-    //     toggleUserModal()
-    //     setLoginModal(!loginModal)
-    //     dispatch({ type: TOGGLE_LOGIN_MODAL })
-    //     dispatch({ type: TOGGLE_IS_SHADOW })
-    // }
-
     function handelShadowClick() {
         if (searchModal) {
             setSearchModal(!searchModal)
@@ -94,6 +84,10 @@ export function AppHeader() {
         setTimeout(() => {
             dispatch({ type: REFRESH_LOGIN_MODAL })
         }, 500)
+    }
+
+    function handleSearchModalClick(ev) {
+
     }
 
 
@@ -154,25 +148,64 @@ export function AppHeader() {
                 <button>Help </button>
                 {(user) && <button onClick={() => { logout() }}>Log out</button>}
             </div>
-            <div className={`filter-modal ${searchModal ? 'open' : ''}`}>
-                <div className='filter-modal-left-btns'>
+            <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
+                <div className='filter-modal-left-btns' onClick={() => setSearchModalExpended(!searchModalExpended)}>
+                    <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
+                    <div className={`where-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                        {/* Your left modal content here */}
+                    </div>
+                </div>
+                <div className='filter-modal-middle-btns'>
+                    <div className='inner-btns-container middle'>
+                        <div className='inner-btn-wrapper middle'>
+                            <span className='border-between'>
+
+                            </span>
+                            <button className='date-btn right'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
+                            <span>
+                            </span>
+                            <button className='date-btn left'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
+                        </div>
+                    </div>
+                    <div className={`when-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                        {/* Your middle modal content here */}
+                    </div>
+                </div>
+                <div className='filter-modal-right-btns'>
+                    <div className='inner-btn-wrapper'>
+                        <button className='inner-btns-container right'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
+                        <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
+                    </div>
+                    <div className={`who-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                        {/* Your right modal content here */}
+                    </div>
+                </div>
+            </div>
+
+            {/* <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
+                <div className='filter-modal-left-btns' onClick={() => setSearchModalExpended(!searchModalExpended)}>
                     <button className='inner-btns-container left'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
                 </div>
                 <div className='filter-modal-middle-btns'>
                     <div className='inner-btns-container middle'>
-                        <div className='inner-btn-wrapper'>
-                            <button className='inner-btns-container middle'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
-                            <button className='inner-btns-container middle'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
+                        <div className='inner-btn-wrapper middle'>
+                            <span className='border-between'>
+
+                            </span>
+                            <button className='date-btn right'><span className='inner-button-top'>Check in</span><span className='inner-button-bottom'>Add dates</span> </button>
+                            <span>
+                            </span>
+                            <button className='date-btn left'><span className='inner-button-top'>Check out</span><span className='inner-button-bottom'>Add dates</span> </button>
                         </div>
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
                     <div className='inner-btn-wrapper'>
                         <button className='inner-btns-container right'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
-                        <button className='search-btn'><FaSearch color='white' /></button>
+                        <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             {(!isTripPage) && <div className='labels-container'>
                 {(!stayId) && <LabelsFilter />}
