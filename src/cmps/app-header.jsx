@@ -120,6 +120,7 @@ export function AppHeader() {
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '30px', height: '30px' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
+            <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
             <div className={`user-modal stay-index-layout ${userModal ? 'open' : ''}`}>
                 {(!user) && <button onClick={() => {
 
@@ -148,17 +149,23 @@ export function AppHeader() {
                 {(user) && <button onClick={() => { logout() }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''}`}>
-                <button>where </button>
-                <button>Check in </button>
-                <button>Check out </button>
-                <button>Who </button>
-                <button className='search-btn'><FaSearch color='white' /></button>
+                <div className='filter-modal-left-btns'>
+                    <button className='left-btns-where'><span className='inner-button-top'>Where</span><input type='text' placeholder="Search destinations" className='inner-button-bottom'></input></button>
+                </div>
+                <div className='filter-modal-middle-btns'>
+                    <button>Check in </button>
+                    <button>Check out </button>
+                </div>
+                <div className='filter-modal-right-btns'>
+                    <button className='right-btns-who'><span className='inner-button-top'>Who</span><span className='inner-button-bottom'>Add guests</span></button>
+                    <button className='search-btn'><FaSearch color='white' /></button>
+                </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
             <div className='labels-container'>
 
                 {!stayId && <LabelsFilter />}
             </div>
-        </header>
+        </header >
     )
 }

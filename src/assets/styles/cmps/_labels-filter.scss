@@ -1,7 +1,7 @@
 // .carousel-container {
 //     position: relative;
 //     display: flex;
-   
+
 
 //     .setting-btn {
 //         // position: absolute;
@@ -16,7 +16,7 @@
 //         line-height: rem(16px);
 //         font-weight: 700;
 //         flex-shrink: 0;
-        
+
 
 //         & span {
 //             display: flex;
@@ -168,7 +168,7 @@
     display: grid;
     grid-template-columns: 1fr 90px;
     gap: 24px;
-   
+
 
     .setting-btn {
         // position: absolute;
@@ -217,12 +217,12 @@
     grid-column: 1;
     grid-row: 1;
     // display: grid;
-   
+
     // grid-template-columns: repeat(auto-fill, 64px);
     // padding: 0;
- 
+
     // justify-items: start;
-    
+
 
     .carousel-inner {
         position: relative;
@@ -231,7 +231,7 @@
         width: 200%;
         display: grid;
         // grid-template-columns: ;
-        grid-template-columns: repeat(auto-fill, 64px);
+        grid-template-columns: repeat(28, 64px);
         padding: 0;
         // justify-content: start;
         justify-items: start;
@@ -335,9 +335,10 @@
     }
 
 }
+
 // .carousel-container {
 //     position: relative;
-   
+
 
 //     .setting-btn {
 //         position: absolute;

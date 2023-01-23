@@ -12,6 +12,10 @@ export function LabelsFilter() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayCount, setDisplayCount] = useState(4);
     const [displayNext, setDisplayNext] = useState(true);
+    // let carouselSpin = currentIndex * 100
+    // const carouselRef = useRef(null)
+
+    console.log(window.innerWidth)
 
     const stayLabels = [
         { name: 'Play', src: 'play' },{ name: 'Iconic cities', src: 'iconic' },  { name: 'Caves', src: 'cave' },
@@ -53,7 +57,7 @@ export function LabelsFilter() {
                 {
                     stayLabels.map((label, index) => {
                         return (
-                            <div key={index} className="carousel-group" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                            <div key={index} className="carousel-group" style={{ transform: `translateX(-${currentIndex * 100}px)` }}>
                                 <div className="label-filter-btn">
                                     <img src={require(`../assets/labels-logos/${label.src}.jpg`)} />
                                     <span>{label.name}</span>
@@ -63,14 +67,6 @@ export function LabelsFilter() {
                     })
                 }
             </div>
-<<<<<<< HEAD
-            <div className='btn-container prev '>
-                <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
-            </div>
-            <div className='btn-container next'>
-                <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button>
-            </div>
-=======
             
             {/* <div className={'btn-container prev '}>
                 <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
@@ -91,7 +87,6 @@ export function LabelsFilter() {
                 <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
                  {/* <button className={`next-btn ${(currentIndex >= stayLabels.length - displayCount * 3) ? 'hidden' : ''}`} onClick={handleNext}> <BiChevronRight /></button> */}
             </div>}
->>>>>>> e3c8dba07bbd1e9cbb744284c1056ab5bdbc8e7b
         </div>
         <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
     </div>

@@ -20,8 +20,8 @@
     }
 }
 
-@mixin medium-breakpoint {
-    @media (min-width: calc($medium-breakpoint )) {
+@mixin for-header-brakepoint {
+    @media (max-width: calc($medium-breakpoint)) {
         @content;
     }
 }

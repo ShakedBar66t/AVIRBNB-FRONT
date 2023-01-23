@@ -9,11 +9,6 @@
     background-color: $clr6;
     grid-column: 1/-1;
 
-
-    &>* {
-        grid-column: 2;
-    }
-
     &.open {
         height: 120px;
     }
@@ -29,7 +24,7 @@
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    .background-shadow {
+    & .background-shadow {
         top: 80px;
         left: 0;
         height: 100vh;
@@ -78,13 +73,18 @@
         flex: 1 0 140px;
         cursor: pointer;
 
-        .header-logo {
+        @include for-header-brakepoint {
+            flex: 0 1 0px;
+            margin-right: 24px;
+        }
+
+        & .header-logo {
             cursor: pointer;
             height: 100%;
             width: 36px;
         }
 
-        .header-logo-text {
+        & .header-logo-text {
             font-family: Cereal;
             align-self: center;
             color: $clr1;
@@ -101,7 +101,7 @@
     .filter-container {
         border-radius: 25px;
         box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.15);
-        transition: 0.3s;
+        transition: 0.1s ease;
         height: 48px;
         align-items: center;
         display: flex;
@@ -126,23 +126,23 @@
             border-right: 1px solid rgba(211, 211, 211);
         }
 
-        .guest-filter {
+        & .guest-filter {
             font-weight: 400;
             color: $clr8
         }
 
-        .location-filter {
+        & .location-filter {
             border-radius: 40px 4px 4px 40px;
             padding-left: 8px;
             padding-right: 8px;
         }
 
-        .search-filter {
+        & .search-filter {
             border-radius: 4px 40px 40px 4px;
         }
 
-        .host-btn,
-        .lang-btn {
+        & .host-btn,
+        & .lang-btn {
             border-radius: 16px;
 
             &:hover {
@@ -150,13 +150,13 @@
             }
         }
 
-        .search-btn {
+        & .search-btn {
             background-color: $clr1;
             border-radius: 50%;
             height: 32px;
             width: 32px;
 
-            .fa-search {
+            & .fa-search {
                 font-size: rem(12px);
                 margin-top: 1px;
             }
@@ -211,17 +211,34 @@
             box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.3);
         }
 
-        .fa-user-circle {
+        & .fa-user-circle {
             height: 30px;
             width: 30px;
             color: gray;
         }
     }
 
-    .fa-search {
+    & .fa-search {
         color: $clr6;
     }
 
+}
+
+.header-opened {
+    position: absolute;
+    // background-color: rebeccapurple;
+    top: 0px;
+    height: 80px;
+    width: 100%;
+    z-index: 0;
+    margin: auto 0;
+    transition: top 0.3s ease;
+
+    &.open {
+        z-index: 2;
+        top: 80px;
+        background-color: white;
+    }
 }
 
 //// details appheader /////
@@ -263,10 +280,10 @@
     right: 35px;
     top: 70px;
     display: none;
-    z-index: 2;
     box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
 
     &.open {
+        z-index: 3;
         display: flex;
         justify-content: space-between;
     }
@@ -301,30 +318,103 @@
 }
 
 .filter-modal {
+    display: flex;
+    justify-content: space-between;
     height: 60px;
-    width: 600px;
-    background-color: $clr6;
+    position: fixed;
+    background-color: #ebebeb;
+    margin: auto 0;
+    top: 60px;
+    left: 23%;
+    opacity: 0;
     border: $bs1;
     border-radius: 35px;
-    padding: 5px 0;
-    position: fixed;
-    top: 60px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
+    transform: scale(0.6) translateY(-100%);
     transition: all 0.3s ease-in-out;
-
-    display: flex;
-    min-width: 0;
     pointer-events: auto;
 
     &.open {
+        left: 23%;
         z-index: 2;
         opacity: 1;
-        transform: scale(1.2) translateY(30%) translateX(-45%)
+        transform: scale(1) translateY(30%);
     }
 
-    .search-btn {
+
+    & .filter-modal-middle-btns,
+    & .filter-modal-left-btns {
+        // flex: 1 0 140px;
+        display: flex;
+        height: 64px;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    & .filter-modal-left-btns {
+        width: 327px;
+        display: flex;
+        align-items: center;
+    }
+
+    & .filter-modal-middle-btns {
+        width: 260px;
+        // flex: 1 0 140px;
+    }
+
+    & .left-btns-where {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-self: center;
+
+        & input {
+            border: none;
+        }
+    }
+
+    & .filter-modal-right-btns {
+        width: 260px;
+        display: flex;
+        padding: 0 8px;
+        // justify-content: space-between;
+
+        & .right-btns-who {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: 145;
+            padding: 14px 24px;
+            justify-self: flex-start;
+        }
+
+        & .inner-button-top {
+            font-size: rem(12px);
+            line-height: rem(16px);
+            font-weight: 600;
+            color: $clr7;
+        }
+
+        & .inner-button-bottom {
+            text-align: left;
+            font-size: rem(14px);
+            line-height: rem(18px);
+            color: #717171;
+            font-weight: 400;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        & .search-btn {
+            justify-self: flex-end;
+        }
+
+
+    }
+
+
+
+    & .search-btn {
         align-self: center;
         background-color: $clr1;
         border-radius: 50%;
@@ -333,8 +423,9 @@
     }
 
     & button {
-        width: 70%;
+        // width: 70%;
         border-radius: 16px;
+        // flex-grow: 1;
         transition: background-color 0.3s ease-in-out;
 
         &:hover {
