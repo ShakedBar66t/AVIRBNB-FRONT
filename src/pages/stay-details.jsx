@@ -22,6 +22,7 @@ import createCssVarsProvider from "@mui/system/cssVars/createCssVarsProvider"
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
+import { AiFillFlag } from "react-icons/ai"
 const { RangePicker } = DatePicker
 
 
@@ -83,19 +84,27 @@ export function StayDetails() {
         <AppHeader />
         <section className="stay-details full secondary-container">
             <div className="stay-header">
-                <h1>Name :{stay.name}</h1>
+                <h1>{stay.name}</h1>
                 <div className="stay-header-links">
+                    <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar   /> 4.9·<span>20 reviews</span></h2>
+                            <h2><FaStar /> 4.9·<span>20 reviews</span></h2>
                         </div>
                         <span>·</span>
                         <h2><span className="loc">New York, United States</span></h2>
+                    </div>
                     <div className="share-save-action">
                         <span className="share-stay">
-                            <h2> <IoShareOutline /> <span>Share</span></h2>
+                            <h2 className="share-btn">
+                                <div className="share-icon"><IoShareOutline /></div>
+                                <span className="share-txt">Share</span>
+                            </h2>
                         </span>
                         <span className="save-stay">
-                            <h2> <BsHeart /> <span>Save</span></h2>
+                            <h2 className="save-btn">
+                                <div className="save-icon"><BsHeart /></div>
+                                <span className="save-txt">Save</span>
+                            </h2>
                         </span>
                     </div>
                 </div>
@@ -140,32 +149,52 @@ export function StayDetails() {
                         <img className="host-image" src={stay.host.imgUrl} />
                     </div>
                     <div className="user-stay-info">
-                        <BsTrophy />
-                        <div>
-                            <p>{stay.host.fullname} is a Superhost</p>
-                            <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
+                        <div className="user-achievement">
+                            <div className="achievement-icon">
+                                <BsTrophy />
+                            </div>
+                            <div>
+                                <p>{stay.host.fullname} is a Superhost</p>
+                                <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
+                            </div>
                         </div>
-                        <SlLocationPin />
-                        <div>
-                            <p>Great location</p>
-                            <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
+                        <div className="user-achievement">
+                            <div className="achievement-icon">
+                                <SlLocationPin />
+                            </div>
+                            <div>
+                                <p>Great location</p>
+                                <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
+                            </div>
                         </div>
-                        <HiOutlineKey />
-                        <div>
-                            <p>Great check-in experience</p>
-                            <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
+                        <div className="user-achievement">
+                            <div className="achievement-icon">
+                                <HiOutlineKey />
+                            </div>
+                            <div>
+                                <p>Great check-in experience</p>
+                                <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
+                            </div>
                         </div>
                     </div>
                     <div className="air-cover">
                         <h3>
-                            <span style={{ color: 'red' }}>avir</span>cover
+                            <span style={{ color: '#ff385c' }}>avir</span>cover
                         </h3>
-                        <p>
+                        <p style={{ marginBottom: '8px' }}>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                        </p>
+                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder' }}>
+                            Learn More
                         </p>
                     </div>
                     <div className="summary">
-                        If the dates you wish are not available, we have other options in the same location. You can find them on my profile. My goal is for you to have your days with the most comfort i can propose. I want you to taste all the feelings in Porto, as our food, as our best places, our best pointviews. I just love to help you enjoying this beautiful city :
+                        <p>
+                            {stay.summary}
+                        </p>
+                        <p style={{ marginTop: '16px', textDecoration: 'underline', fontWeight: 'bold' }}>
+                            Show more
+                        </p>
                     </div>
                     <div className="amenities-container">
                         <h2>What this place offers </h2>
@@ -200,18 +229,14 @@ export function StayDetails() {
                                         const date = new Date(time1)
                                         const day = 1000 * 60 * 60 * 24
 
-                                //    const dateStart = date.getTime()
-                                   const dateStart = values[0].$d.getTime()
-                                   const dateEnd = values[1].$d.getTime()
-                                    const daysCount = Math.round((dateEnd-dateStart)/(day))
-                                    const totalPrice = daysCount*stay.price
-                                    console.log('valuesss!!!!',totalPrice)
-                                    setOrder({...order,totalPrice:totalPrice,startDate:values[0].$d,endDate:values[1].$d,totalNights:daysCount}) }}/>
-                                    
-
-                                   
-                                
-                              
+                                        //    const dateStart = date.getTime()
+                                        const dateStart = values[0].$d.getTime()
+                                        const dateEnd = values[1].$d.getTime()
+                                        const daysCount = Math.round((dateEnd - dateStart) / (day))
+                                        const totalPrice = daysCount * stay.price
+                                        console.log('valuesss!!!!', totalPrice)
+                                        setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
+                                    }} />
                             </div>
                             <div className="guests-input">
                                 <small>Guests max capacity of {stay.capacity}</small>
@@ -246,14 +271,15 @@ export function StayDetails() {
                             })}
 
                         </div>}
+                        <div className="btn-container">
+                            <button className="action-btn" type="button" onClick={() => {
+                                ReserveOrder()
+                            }}>
+                                Reserve
+                            </button>
+                        </div>
 
-                        <button className="action-btn" type="button" onClick={() => {
-                            ReserveOrder()
-                        }}>
-                            Reserve
-                        </button>
-
-                        <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
+                        {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
                             <div className="prices">
                                 <p>${stay.price} x {order.totalNights} nights</p>
@@ -267,8 +293,16 @@ export function StayDetails() {
                                 <p>Total</p>
                                 <p>{order.totalPrice}$</p>
                             </div>
-                        </div>
+                        </div> */}
                     </form>
+                    <div className="stay-report">
+                        <h2>
+                            <div className="report-icon">
+                                <AiFillFlag />
+                            </div>
+                            Report this listing
+                        </h2>
+                    </div>
                 </section>
             </div>
             <section className="reviews">
