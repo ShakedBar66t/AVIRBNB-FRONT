@@ -1,8 +1,6 @@
 .details {
     & .app-header {
         position: static;
-        display: grid;
-        grid-template-columns: 80px 1fr 80px;
 
         & .user-nav-container {
             padding: 0;
@@ -80,7 +78,7 @@
         grid-template: repeat(2, 275px)/2fr 1fr 1fr;
         border-radius: 20px;
         gap: 8px;
-        margin-bottom: 15px;
+        padding-top: 24px;
     }
 
     .img-details0 {
@@ -120,8 +118,12 @@
         }
 
         .content>* {
-            padding-block: 32px;
+            padding-block: 45px;
             border-bottom: 1px solid #dddddd;
+        }
+
+        .user-stay-info {
+            padding-top: 10px;
         }
 
         .aminities-container {
@@ -137,16 +139,15 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 24px;
-            margin-top: 32px;
-            margin-left: 8.3333333333%;
+            gap: 42px;
+            margin-top: 44px;
             border: 1px solid rgb(221, 221, 221);
             border-radius: 12px;
             padding: 24px;
             position: sticky;
             top: 128px;
             box-shadow: #0000001f 0 6px 16px;
-            width: 350px;
+            width: 373px;
             // max-width: 400px;
 
             .btn-container {
@@ -201,14 +202,14 @@
                             rgb(189, 30, 89) 100%);
                 }
 
-                .action-btn {
-                    padding: 0 0;
-                    margin: 0 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: transparent;
-                    border: none;
-                }
+                // .action-btn {
+                //     padding: 0 0;
+                //     margin: 0 0;
+                //     width: 100%;
+                //     height: 100%;
+                //     background-color: transparent;
+                //     border: none;
+                // }
 
                 span {
                     padding: 0 0;
@@ -252,6 +253,7 @@
         header {
             display: flex;
             justify-content: space-between;
+            margin-top: 6px;
         }
 
         h4 {
@@ -515,6 +517,7 @@ h3 {
 }
 
 .stay-header {
+    padding-top: 24px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -522,11 +525,9 @@ h3 {
     h1 {
         color: #222222;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        margin: 0;
         font-size: 1.625em;
         font-weight: 600;
-        padding: 0 0 24px;
-        margin-bottom: 7px;
+        margin-bottom: 4px;
     }
 
     h2 {
@@ -545,6 +546,8 @@ h3 {
         display: flex;
         align-items: center;
         gap: 4px;
+        vertical-align: text-bottom;
+        margin-top: 5px;
     }
 
     .review-totals {
@@ -585,7 +588,7 @@ h3 {
 
 @media (max-width:1130px) {
     .secondary-container {
-        grid-template-columns: 40px 1fr 40px;
+        grid-template-columns: 42px 1fr 42px;
     }
 }
 
@@ -607,8 +610,13 @@ h3 {
 
 @media (max-height: 1100px) {
     .stay-details .img-container {
-        grid-template: repeat(2, minmax(150px, 25vh))/ 2fr 1fr 1fr;
+        grid-template: repeat(2, minmax(160px, 26vh))/ 2fr 1fr 1fr;
     }
+
+    .secondary-container {
+        grid-template-columns: 329px 1fr 330px;
+    }
+
 }
 
 @media (max-width: 740px) {
@@ -746,6 +754,7 @@ h3 {
             // color: white !important;
         }
     }
+
 
 
 
