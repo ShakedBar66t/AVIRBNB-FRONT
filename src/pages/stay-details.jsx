@@ -85,11 +85,11 @@ export function StayDetails() {
             <div className="stay-header">
                 <h1>Name :{stay.name}</h1>
                 <div className="stay-header-links">
-                    <div className="review-totals">
-                        <h2><FaStar />4.9·<span>20 reviews</span></h2>
-                    </div>
-                    <span>·</span>
-                    <h2><span>New York, United States</span></h2>
+                        <div className="review-totals">
+                            <h2><FaStar   /> 4.9·<span>20 reviews</span></h2>
+                        </div>
+                        <span>·</span>
+                        <h2><span className="loc">New York, United States</span></h2>
                     <div className="share-save-action">
                         <span className="share-stay">
                             <h2> <IoShareOutline /> <span>Share</span></h2>
@@ -108,7 +108,7 @@ export function StayDetails() {
                 })}
             </div>
             <div className="full">
-                <header className="details-header full secondary-container">
+                {/* <header className="details-header full secondary-container">
                     <section className="secondary-container">
                         <nav className="details-nav">
                             <a href="#photos">Photos</a>
@@ -128,7 +128,7 @@ export function StayDetails() {
                             <button className="btn-reserve">Reserve</button>
                         </div>
                     </section>
-                </header>
+                </header> */}
             </div>
             <div className="stay-info">
                 <section className="content">
