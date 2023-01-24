@@ -6,6 +6,8 @@ import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useEffect, useState } from 'react'
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
+import { GoDash, GoPlus } from "react-icons/go";
+import { BiMinus } from "react-icons/bi";
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
@@ -164,9 +166,9 @@ export function AppHeader() {
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' onClick={() => setSearchModalExpended(!searchModalExpended)}>
                     <button className='inner-btns-container left'><span className='upper-text'>Where</span><input type='text' placeholder="Search destinations" className='lower-text'></input></button>
-                    <div className={`where-modal-extended ${searchModalExpended ? 'open' : ''}`}>
-                        <div className='where-modal-inner'>
-                            <span className='where-modal-inner-title'>Search by region</span>
+                    <div className={`location-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                        <div className='location-modal-inner'>
+                            <span className='location-modal-inner-title'>Search by region</span>
                             <div className='cards-container'>
                                 {countries.map((place, index) => {
                                     return <div key={index} className='place-card'>
@@ -180,21 +182,19 @@ export function AppHeader() {
                         </div>
 
                     </div>
+                    <div className={`date-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                    </div>
                 </div>
                 <div className='filter-modal-middle-btns'>
                     <div className='inner-btns-container middle'>
                         <div className='inner-btn-wrapper middle'>
-                            <span className='border-between'>
-
-                            </span>
                             <button className='date-btn right'><span className='upper-text'>Check in</span><span className='lower-text'>Add dates</span> </button>
                             <span>
+                                <span className='border-between-middle'></span>
                             </span>
                             <button className='date-btn left'><span className='upper-text'>Check out</span><span className='lower-text'>Add dates</span> </button>
+                            <span className='border-between-right'></span>
                         </div>
-                    </div>
-                    <div className={`when-modal-extended ${searchModalExpended ? 'open' : ''}`}>
-
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
@@ -202,7 +202,7 @@ export function AppHeader() {
                         <button className='inner-btns-container right'><span className='upper-text'>Who</span><span className='lower-text'>Add guests</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
-                    <div className={`who-modal-extended ${searchModalExpended ? 'open' : ''}`}>
+                    <div className={`guests-modal-extended ${searchModalExpended ? 'open' : ''}`}>
                         {guestsTypes.map((type, index) => {
                             return <div className="guests-type-input" key={type.type}>
                                 <div className='guest-type-text-containter'>
@@ -210,9 +210,9 @@ export function AppHeader() {
                                     <span className={`lower-text ${(index === 3) ? 'last' : ''}`} >{type.txt}</span >
                                 </div>
                                 <div className="guests-type-input-value">
-                                    <button type="button" className={`clear-btn `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline className={`btn-icon ${guests[type.type] ? 'allowed' : 'denied'}`} /></button>
+                                    <button type="button" className={`guests-btn ${guests[type.type] === 0 ? 'denied' : 'allowed'} `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><GoDash className={`btn-icon `} /></button>
                                     <span className='type-count'>{guests[type.type]}</span>
-                                    <button type="button" className={`clear-btn `} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline className={`btn-icon ${+guests[type.type] === 0} ? '' : 'denied'`} /></button>
+                                    <button type="button" className={`guests-btn allowed`} onClick={() => { handleGuestsInput(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
                                 </div>
 
                             </div>

@@ -235,7 +235,7 @@
 
     &.open {
         z-index: 2;
-        top: 82px;
+        top: 80px;
         background-color: white;
     }
 }
@@ -383,6 +383,8 @@
 
             &:hover {
                 background: none;
+
+
             }
         }
 
@@ -400,7 +402,17 @@
             }
         }
 
-        .border-between {}
+        .border-between {
+
+            &-right,
+            &-middle,
+            &-left {
+
+                width: 1px;
+                height: 30px;
+                background: lightgray;
+            }
+        }
 
         &.left {
             padding: 8px 20px;
@@ -475,6 +487,14 @@
         border-radius: 35px;
         flex-grow: 1;
 
+        &:hover {
+
+            & .border-between-right,
+            & .border-between-middle {
+                display: none;
+            }
+        }
+
         & .date-btn {
             display: flex;
             flex-direction: column;
@@ -495,35 +515,7 @@
     }
 }
 
-.upper-text {
-    font-size: rem(13px);
-    line-height: rem(16px);
-    font-weight: 600;
-    color: $clr7;
-    text-align: left;
-    width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.lower-text {
-    text-align: left;
-    font-size: rem(14px);
-    line-height: rem(18px);
-    color: #717171;
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-    &.last {
-        cursor: pointer;
-        color: rgb(94, 94, 94);
-        font-weight: 600;
-        text-decoration: underline
-    }
-}
-
+////////// extended modals 
 
 .filter-modal-left-btns,
 .filter-modal-middle-btns,
@@ -531,14 +523,13 @@
     position: relative;
 }
 
-.where-modal-extended,
-.when-modal-extended,
-.who-modal-extended {
+.location-modal-extended,
+.date-modal-extended,
+.guests-modal-extended {
     display: none;
     position: absolute;
     background-color: $clr6;
     top: 100%;
-    left: 0;
 
     border-radius: 32px;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 4%),
@@ -551,13 +542,14 @@
     }
 }
 
-.where-modal-extended {
+.location-modal-extended {
     width: 494px;
     height: 474px;
+    left: 0;
 
 }
 
-.where-modal-inner {
+.location-modal-inner {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -608,17 +600,18 @@
     }
 }
 
-.who-modal-extended {
+.guests-modal-extended {
     position: absolute;
     background-color: $clr6;
     width: 406px;
-    height: 314px;
+    height: 402px;
+    right: 0;
 
     .guests-type-input {
         display: flex;
         justify-content: space-between;
-        padding: 16px 4px 16px 0;
-        border-bottom: 1px solid $clr8;
+        padding: 24px 4px 24px 0;
+        border-bottom: $bs1;
 
 
         & .guest-type-text-containter {
@@ -636,45 +629,94 @@
             align-self: end;
             display: flex;
             align-items: center;
+            width: 104px;
+            justify-content: space-around;
 
-            & button {
-                &:hover {
-                    & .allowed {
-                        color: black;
-                    }
-                }
-            }
-
-            .btn-icon {
-                display: block;
+            & .guests-btn {
+                border-radius: 50%;
                 height: 32px;
                 width: 32px;
-                color: #717171;
-                font-size: 1.4rem;
-                font-weight: 100;
-                cursor: pointer;
+                border: $bs1;
+
+                &.allowed:hover {
+                    border-color: black;
+
+                    & .btn-icon {
+                        color: black;
+                        // cursor: not-allowed;
+                    }
+                }
+
 
                 &.denied {
                     cursor: not-allowed;
                     color: lightgray;
 
-                    // &:hover {
-                    //     color: lightgray
-                    // }
+                    .btn-icon {
+                        color: lightgray;
+
+                        &:hover {
+                            color: lightgray;
+                            cursor: not-allowed;
+                        }
+                    }
+
+                    &:hover {
+                        color: lightgray;
+                        cursor: not-allowed;
+                    }
                 }
             }
 
-            span {
-                font-size: 1.4rem;
+            .btn-icon {
+                margin-left: 1px;
+                display: block;
+                color: #717171;
+                font-size: 1rem;
+                font-weight: 100;
+                cursor: pointer;
+
+            }
+
+            .type-count {
+                font-size: rem(16px);
+                font-weight: 200;
+                font-family: Roboto;
             }
         }
     }
 
 }
 
-////////// extended modals 
-// .where-modal-extended {
-//     background-color: red;
-//     width: 494px;
-//     height: 474px;
-// }
+
+
+////////// global classes
+
+.upper-text {
+    font-size: rem(13px);
+    line-height: rem(16px);
+    font-weight: 600;
+    color: $clr7;
+    text-align: left;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.lower-text {
+    text-align: left;
+    font-size: rem(14px);
+    line-height: rem(18px);
+    color: #717171;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    &.last {
+        cursor: pointer;
+        color: rgb(94, 94, 94);
+        font-weight: 600;
+        text-decoration: underline
+    }
+}
