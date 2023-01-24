@@ -366,7 +366,7 @@ export function StayDetails() {
             <section className="map">
                 <h2>Where you'll be</h2>
                 <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                <GoogleMap />
+                {/* <GoogleMap /> */}
 
 
             </section>
