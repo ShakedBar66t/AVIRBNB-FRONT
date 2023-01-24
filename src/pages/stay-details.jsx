@@ -68,7 +68,7 @@ export function StayDetails() {
         console.log(guests)
     }
 
-    function ReserveOrder() {
+    function reserveOrder() {
         if (!user) {
             toggleLoginModal()
             return
@@ -76,6 +76,7 @@ export function StayDetails() {
         else {
             const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
             console.log('new order!!!!!!!!', newOrder)
+            
 
             addOrder(newOrder).then(res => prompt('great'))
         }
@@ -274,7 +275,7 @@ export function StayDetails() {
 
                         </div>}
                         <ColorForButton txt={'Reserve'}
-                        ReserveOrder={ReserveOrder}/>
+                        reserveOrder={reserveOrder}/>
 
                         {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>

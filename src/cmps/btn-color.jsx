@@ -1,5 +1,5 @@
-export function ColorForButton({ txt, ReserveOrder }) {
-    return <div className="btn-container">
+export function ColorForButton({ txt, reserveOrder }) {
+    return <div className="btn-container" onClick={reserveOrder}>
         <div className="cell"></div>
         <div className="cell"></div>
         <div className="cell"></div>
@@ -101,9 +101,8 @@ export function ColorForButton({ txt, ReserveOrder }) {
         <div className="cell"></div>
         <div className="cell"></div>
         <div className="content">
-            <button className="action-btn" type="button" onClick={() => {
-                ReserveOrder()
-            }}>
+            <button className="action-btn" type="button"  >
+                
                 <span>{txt}</span>
             </button>
         </div>
