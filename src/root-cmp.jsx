@@ -11,6 +11,8 @@ import { FilterModal } from './cmps/filter-modal.jsx'
 import { HostHome } from './pages/host-home-page'
 import { HostIndex } from './pages/host-index'
 import { UserTrips } from './pages/user-trips'
+import { MoblieFooter } from './cmps/mobile-footer.jsx'
+
 
 
 export function RootCmp() {
@@ -35,7 +37,7 @@ export function RootCmp() {
 
             </main>
             <FilterModal />
-
+            <MoblieFooter/>
             {(isRefreshedLoginModal) && <LoginModal />}
 
         </div >
