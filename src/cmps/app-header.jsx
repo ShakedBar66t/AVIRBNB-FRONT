@@ -22,8 +22,8 @@ export function AppHeader() {
     const { stayId } = params
     const location = useLocation()
     const isTripPage = (location.pathname === '/user/trip') ? true : false
-    console.log(isTripPage)
-    console.log(!stayId)
+    // console.log(isTripPage)
+    // console.log(!stayId)
 
     const dispatch = useDispatch()
     const [userModal, setUserModal] = useState(false)

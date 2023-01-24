@@ -36,10 +36,10 @@ export function FilterModal() {
         const { name } = ev.target
         setFilterBy({ ...filterBy, [name]: num, minPrice: rangeRef.current.min, maxPrice: rangeRef.current.max })
     }
-    console.log(filterBy)
-
+    
     const handleRangeChange = ({ minPrice, maxPrice }) => {
         if (rangeRef.current) rangeRef.current = { minPrice, maxPrice }
+        console.log(filterBy)
         // setFilterBy({ ...filterBy, minPrice, maxPrice })
     }
 

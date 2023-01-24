@@ -30,12 +30,12 @@ export function LabelsFilter() {
         , { name: 'Arctic', src: 'arctic' },
         ,]
 
-    console.log(currentIndex, 'index!!!')
+    // console.log(currentIndex, 'index!!!')
     // window.innerWidth
-    console.log('cont', ElCarousel?.current?.offsetWidth - 114)
-    console.log('total', ElCarousel1?.current?.offsetWidth)
-    console.log('transi', currentIndex * 100)
-    console.log('gay?', (ElCarousel1?.current?.offsetWidth - (ElCarousel?.current?.offsetWidth - 114)) % 400)
+    // console.log('cont', ElCarousel?.current?.offsetWidth - 114)
+    // console.log('total', ElCarousel1?.current?.offsetWidth)
+    // console.log('transi', currentIndex * 100)
+    // console.log('asasa?', (ElCarousel1?.current?.offsetWidth - (ElCarousel?.current?.offsetWidth - 114)) % 400)
 
     const handleNext = () => {
         if (currentIndex + displayCount < stayLabels.length) {
@@ -56,13 +56,13 @@ export function LabelsFilter() {
     }
 
     function IsLastNextClick() {
-        console.log((currentIndex * 100), 'index', ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400)))
+        // console.log((currentIndex * 100), 'index', ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400)))
         if ((currentIndex * 100) === ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400) + 400)) {
-            console.log('last')
+            // console.log('last')
             return ((totalWidth - displayedWidth) + 70)
         }
         else {
-            console.log('notlast')
+            // console.log('notlast')
             return (currentIndex * 100)
         }
     }

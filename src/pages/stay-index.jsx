@@ -17,7 +17,7 @@ export function StayIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
 
-    console.log(queryFilterBy)
+    // console.log(queryFilterBy)
 
     useEffect(() => {
         if (location.pathname === '/explore') loadStays()
