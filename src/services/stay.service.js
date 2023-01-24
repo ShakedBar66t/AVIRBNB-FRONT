@@ -67,7 +67,7 @@ function getFilterFromSearchParams(searchParams) {
 }
 
 function getDefaultFilter() {
-    return { minPrice: 50, maxPrice: 2000, bedrooms: '', type: '', beds: '', bathrooms: '', amenities: [], isParams: false }
+    return { minPrice: 50, maxPrice: 2000, bedrooms: '', type: [], beds: '', bathrooms: '', amenities: [], isParams: false }
 }
 
 

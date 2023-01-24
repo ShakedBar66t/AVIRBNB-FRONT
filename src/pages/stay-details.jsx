@@ -37,6 +37,7 @@ export function StayDetails() {
 
     const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
         , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
+
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
