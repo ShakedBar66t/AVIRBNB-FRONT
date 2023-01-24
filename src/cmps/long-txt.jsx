@@ -15,6 +15,6 @@ export function LongTxt({ txt, length }) {
 
     return <div>
         <p>{getTxtToShow(isLongTxtShown, txt, length)}</p>
-        {txt.length > length && <button onClick={onToggleLongTxt}>{isLongTxtShown ? 'Read Less' : 'Read More'}</button>}
+        {txt.length > length && <button onClick={onToggleLongTxt}>{isLongTxtShown ? 'Show Less' : 'Show More'}</button>}
     </div>
 }
