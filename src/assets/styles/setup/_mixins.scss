@@ -19,6 +19,11 @@
         @content;
     }
 }
+@mixin for-midium-layout {
+    @media (min-width: calc($medium-breakpoint )) {
+        @content;
+    }
+}
 
 @mixin for-header-brakepoint {
     @media (max-width: calc($medium-breakpoint)) {

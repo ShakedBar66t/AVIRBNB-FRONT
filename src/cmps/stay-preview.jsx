@@ -25,6 +25,7 @@ export function StayPreview({ stay,onToggleLike }) {
       const startingDay = new Date(startingDate).getDate()
 
     const endDate = startingDate + day*5
+   
     const endingMonth = utilService.getMonthName(new Date(endDate))
     const endingDay = new Date(endDate).getDate()
      return <p className="prev-date">{`${startingMonth} ${startingDay}- ${(startingMonth===endingMonth)? '': endingMonth} ${endingDay} `}</p>

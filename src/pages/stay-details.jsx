@@ -75,7 +75,7 @@ export function StayDetails() {
             return
         }
         else {
-            const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
+            const newOrder = { ...order, guests: guests, host:{_id:stay.host._id,fullname:stay.host.fullname} , stay: { _id: stay._id, name: stay.name, price: stay.price,imgUrl:stay.imgUrls[0],loc:stay.loc }, buyer: { _id: user._id, fullname: user.fullname } }
             console.log('new order!!!!!!!!', newOrder)
             
 
