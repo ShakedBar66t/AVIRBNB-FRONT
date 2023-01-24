@@ -87,7 +87,7 @@ export function StayIndex() {
         }
     }
 
-    return <section className='stay-index stay-index-layout'>
+    return <section className='stay-index main-layout'>
         <AppHeader />
         <StayList stays={stays} onToggleLike={onToggleLike} />
     </section>

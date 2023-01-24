@@ -1,4 +1,54 @@
+.trips-container {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    @include for-trip-wide-layout {
+      
+        grid-template-columns: 1fr 1600px 1fr;
+    }
 
-.qeqweqw{
-    color: green;
+    >* {
+        grid-column: 2;
+    }
+
+    .full {
+        grid-column: 1 / -1;
+    }
+
+    .side-start {
+        grid-column: 1 / -2;
+    }
+
+    .side-end {
+        grid-column: -1 / 2;
+    }
+
+    .app-header {
+
+        padding: 0 40px;
+        margin-top: 0;
+
+
+        @include for-trip-wide-layout {
+            padding: 0 calc((100vw - 1540px) / 2);
+        }
+    }
+
+    .trips-main-cont{
+        padding: 0 80px;
+
+        h2{
+            padding: 32px 0;
+            font-size: 2rem;
+            border-bottom: $bs1;
+        }
+    }
+
+
+    // @include for-narrow-layout {
+
+    //     grid-template-columns: 40px 1fr 40px;
+    // }
+
+
+
 }
