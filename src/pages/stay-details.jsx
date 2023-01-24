@@ -169,19 +169,6 @@ export function StayDetails() {
                         <img className="host-image" src={stay.host.imgUrl} />
                     </div>
                     <div className="user-stay-info">
-                        {achievements.map((achievement, index) => (
-                            <div key={index} className="user-achievement">
-                                <div className="achievement-icon">
-                                    {achievement.icon}
-                                </div>
-                                <div>
-                                    <h1>{achievement.title}</h1>
-                                    <p className="subtext">{achievement.subtext}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {/* <div className="user-stay-info">
                         <div className="user-achievement">
                             <div className="achievement-icon">
                                 <BsTrophy />
@@ -209,7 +196,7 @@ export function StayDetails() {
                                 <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                     <div className="air-cover">
                         <h3>
                             <span style={{ color: '#ff385c' }}>avir</span>cover

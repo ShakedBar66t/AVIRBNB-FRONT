@@ -6,7 +6,7 @@ import { userService } from './user.service.js'
 const ORDER_STORAGE_KEY = 'orderDB'
 
 export const orderService = {
-    // query,
+    query,
     // getById,
     save,
     // remove,
@@ -16,17 +16,17 @@ export const orderService = {
 window.cs = orderService
 
 
-// async function query(user) {
-//     var orders = await storageService.query(ORDER_STORAGE_KEY)
-//     if (user) {
-//         const regex = new RegExp(filterBy.txt, 'i')
-//         orders = orders.filter(order => regex.test(order.vendor) || regex.test(order.description))
-//     }
-//     // if (filterBy.price) {
-//     //     orders = orders.filter(order => order.price <= filterBy.price)
-//     // }
-//     return orders
-// }
+async function query(user=userService.getLoggedinUser()) {
+    var orders = await storageService.query(ORDER_STORAGE_KEY)  
+    console.log('order!!@231312',orders)
+    console.log('userid',user._id,'buterid',orders[0].buyer._id)
+    if (user) {
+        orders = orders.filter(order => order.buyer._id === user._id)
+        console.log('filtersd orders',orders)
+    }
+    return orders
+}
+
 // async function query(filterBy = { txt: '', price: 0 }) {
 //     var orders = await storageService.query(ORDER_STORAGE_KEY)
 //     if (filterBy.txt) {

@@ -25,19 +25,20 @@ export function getActionUpdateOrder(order) {
     }
 }
 
-export async function loadOrders(filterByParams) {
-    console.log(filterByParams, 'in actions')
-    // if (!filterByParams) {
+export async function loadOrders() {
+   
     try {
-        const orders = await orderService.query(filterByParams)
+        const orders = await orderService.query()
+        console.log('orders!!!!!!!!!!!!!!!!!!!!!!!!',orders)
 
         store.dispatch({
             type: SET_ORDERS,
             orders
         })
+        
 
     } catch (err) {
-        console.log('Cannot load orders', err)
+        // console.log('Cannot load orders', err)
         throw err
     }
 }

@@ -23,7 +23,7 @@ export default function GoogleMap() {
     async function loadStay() {
         const stay = await stayService.getById(stayId)
         setStay(stay)
-        setCoordinates({ lat: stay.loc.lat, lng: stay.loc.lng })
+        setCoordinates({ lat: stay.loc.lat, lng: stay.loc.lan })
     }
 
     // console.log('stay from google', stay.loc.lat)
@@ -36,7 +36,7 @@ export default function GoogleMap() {
 
     return (stay) &&
         // Important! Always set the container height explicitly
-        <div style={{ height: '70vh', width: '90%', margin: 'auto' }}>
+        <div style={{ height: '70vh', width: '100%', margin: 'auto' }}>
             <GoogleMapReact
                 onClick={handleClick}
                 bootstrapURLKeys={{ key: "AIzaSyC0TgvRwhSTyPNxupAu8iGt6ViO7EET43Q" }}

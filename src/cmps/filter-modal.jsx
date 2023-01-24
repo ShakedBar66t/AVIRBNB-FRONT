@@ -191,7 +191,7 @@ export function FilterModal() {
                     <div className='rooms-beds-btns-filter'>
                         <div className='inner-numbers-container-wrapper'>
                             {filterOptions.map(({ name, label, value }) => (
-                                <div className='inner-numbers-container'>
+                                <div className='inner-numbers-container' key={label+value}>
                                     <span>{label}</span>
                                     <div className='btns-container'>
                                         <button
@@ -227,6 +227,7 @@ export function FilterModal() {
                             <div className='property-type-btns-container'>
                                 {propertyTypes.map(({ name, label, image }) => (
                                     <button
+                                        key={image}
                                         onClick={handlePropertyTypeClick}
                                         name={name}
                                         className={`property-type-filter-btn ${filterBy.propertyType === name ? 'selected' : ''}`}

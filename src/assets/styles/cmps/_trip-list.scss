@@ -1,0 +1,18 @@
+.trip-list-container {
+    color: $clr7;
+    // margin-top: 500px;
+    margin: 32px 0;
+    
+
+    .trip-list-title {
+        font-size: 22px;
+        margin: 32px 0;
+    }
+
+    .trip-list {
+       
+        display: grid;
+        gap: 32px;
+
+    }
+}
