@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { stayService } from "../services/stay.service"
-import { IoShareOutline } from 'react-icons/io5'
+import { IoShareOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
 import { BsHeart, BsTrophy } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
@@ -24,6 +24,7 @@ import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
 import { AiFillFlag } from "react-icons/ai"
 import { ColorForButton } from "../cmps/btn-color"
+import { LongTxt } from "../cmps/long-txt"
 const { RangePicker } = DatePicker
 
 
@@ -90,10 +91,10 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar /> 4.9·<span>20 reviews</span></h2>
+                            <h2><FaStar /> {stayService.getAvrStayRating(stay.reviews)}·<span>{stay.reviews.length} reviews · </span></h2>
                         </div>
                         <span>·</span>
-                        <h2><span className="loc">New York, United States</span></h2>
+                        <h2><span className="loc">{stay.loc.address}</span></h2>
                     </div>
                     <div className="share-save-action">
                         <span className="share-stay">
@@ -146,9 +147,9 @@ export function StayDetails() {
                     <div className="subtitle">
                         <div>
                             <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
-                            <span>{stay.capacity} guests · 1 bathroom · 2 bedrooms </span>
+                            <span>{stay.capacity} guests · {stay.bathrooms} bathrooms · {stay.bedrooms} bedrooms </span>
                         </div>
-                        <img className="host-image" src={stay.host.imgUrl} />
+                        <img className="host-image" src={stay.host.pictureUrl} />
                     </div>
                     <div className="user-stay-info">
                         <div className="user-achievement">
@@ -183,10 +184,10 @@ export function StayDetails() {
                         <h3>
                             <span style={{ color: '#ff385c' }}>avir</span>cover
                         </h3>
-                        <p style={{ marginBottom: '8px' }}>
+                        <p style={{ marginBottom: '8px', lineHeight: '20px' }}>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                         </p>
-                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder' }}>
+                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder', marginTop: '16px' }}>
                             Learn More
                         </p>
                     </div>
@@ -216,8 +217,8 @@ export function StayDetails() {
                             <div className="review-totals">
                                 <FaStar />
                                 {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                <span>4.8 ·</span>
-                                <a href="">20 reviews</a>
+                                <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                                <a href="">{stay.reviews.length} reviews</a>
                             </div>
                         </header>
                         <div className="order-input">
@@ -274,7 +275,7 @@ export function StayDetails() {
 
                         </div>}
                         <ColorForButton txt={'Reserve'}
-                        ReserveOrder={ReserveOrder}/>
+                            ReserveOrder={ReserveOrder} />
 
                         {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
@@ -357,7 +358,7 @@ export function StayDetails() {
                                 <span>Rated: {review.rate} <FaStar /></span>
                             </div>
                             <p className="review-text text0">
-                                {review.txt}
+                                <LongTxt txt={review.txt} length={100}/>
                             </p>
                         </div>
                     })}
@@ -365,11 +366,36 @@ export function StayDetails() {
             </section>
             <section className="map">
                 <h2>Where you'll be</h2>
+                <GoogleMap />
                 <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                {/* <GoogleMap /> */}
-
-
             </section>
+            <div className="host-info" style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+                <div className="host-details">
+                    <div>
+                        <img className="host-image" src={stay.host.pictureUrl} />
+                    </div>
+                    <div>
+                        <h1>Hosted by {stay.host.fullname}</h1>
+                        <h2>{stay.host.location}</h2>
+                    </div>
+                </div>
+                <div className="host-rating">
+                    <div className="host-reviews">
+                        <div>
+                            <FaStar />
+                        </div>
+                        <div style={{marginLeft: '8px'}}>
+                            {stay.reviews.length} reviews
+                        </div>
+                    </div>
+                    <div className="host-verified" >
+                        {stay.host.isSuperhost ? <div ><IoShieldCheckmarkSharp/><span style={{marginLeft: '8px'}}>Identity verified</span></div> : ""}
+                    </div>
+                </div>
+                <div className="host-about">
+                    <h3>{stay.host.about}</h3>
+                </div>
+            </div>
             <AppFooter />
         </section >
 
