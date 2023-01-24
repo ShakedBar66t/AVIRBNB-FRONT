@@ -107,7 +107,7 @@ export function AppHeader() {
     }
 
     return (
-        <header className={(stayId || isTripPage) ? 'app-header full secondary-container' : 'app-header full stay-index-layout'}>
+        <header className={(stayId || isTripPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />

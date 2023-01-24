@@ -17,7 +17,7 @@ export function StayIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
 
-    console.log(queryFilterBy)
+    // console.log(queryFilterBy)
 
     useEffect(() => {
         if (location.pathname === '/explore') loadStays()
@@ -87,7 +87,7 @@ export function StayIndex() {
         }
     }
 
-    return <section className='stay-index stay-index-layout'>
+    return <section className='stay-index main-layout'>
         <AppHeader />
         <StayList stays={stays} onToggleLike={onToggleLike} />
     </section>

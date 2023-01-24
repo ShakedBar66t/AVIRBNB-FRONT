@@ -1,8 +1,16 @@
+import { useSelector } from "react-redux";
 import { AppHeader } from "../cmps/app-header";
+import {orderService} from "../services/order.service"
 
 export function UserTrips(){
-    return <section className="secondary-container">
+
+    const user = useSelector(storeState => storeState.userModule.user)
+
+
+    return <section className="trips-container">
         <AppHeader/>
-        <div>trips</div>
+        <main className="trips-main-cont" style={{marginTop:'80px'}}>
+            <h2 >Trips</h2>
+        </main>
     </section>
 }
