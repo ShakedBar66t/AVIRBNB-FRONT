@@ -13,7 +13,6 @@ export function FilterModal() {
     // setup
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [checked, setChecked] = useState(false)
     const [selectedButton, setSelectedButton] = useState(null)
     const [amenitiesShown, setAmenitiesShown] = useState(false)
     const [filterBy, setFilterBy] = useState(stayService.getDefaultFilter)
@@ -21,13 +20,33 @@ export function FilterModal() {
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
 
     // data
+    const values = [12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25]
+    const numbers = [1, 2, 3, 4, 5, 6, 7, '8+']
+
     const stayAmenities = ['Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
         'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
         'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
         'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
-    const values = [12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25, 12, 13, 15, 14, 8, 19, 20, 15, 25]
-    const numbers = [1, 2, 3, 4, 5, 6, 7, '8+']
+
+    const filterOptions = [
+        { name: 'Bedrooms', label: 'Bedrooms', value: null },
+        { name: 'Beds', label: 'Beds', value: null },
+        { name: 'Bathrooms', label: 'Bathrooms', value: null }
+    ]
+
+    const propertyTypes = [
+        { name: 'House', label: 'House', image: require('../assets/labels-logos/house.jpg') },
+        { name: 'Apartment', label: 'Apartment', image: require('../assets/labels-logos/apartment.jpg') },
+        { name: 'Guesthouse', label: 'Guesthouse', image: require('../assets/labels-logos/guesthouse.jpg') },
+        { name: 'Hotel', label: 'Hotel', image: require('../assets/labels-logos/hotel.jpg') }
+    ]
+
+    const placeTypes = [
+        { name: 'Entire place', label: 'Entire place', desc: 'A place all to yourself' },
+        { name: 'Private room', label: 'Private room', desc: 'Your own room in a home or a hotel, plus some shared common spaces' },
+        { name: 'Shared room', label: 'Shared room', desc: 'A sleeping space and common areas that may be shared with others' }
+    ]
 
     // functions
 
@@ -36,15 +55,16 @@ export function FilterModal() {
         const { name } = ev.target
         setFilterBy({ ...filterBy, [name]: num, minPrice: rangeRef.current.min, maxPrice: rangeRef.current.max })
     }
-    
-    const handleRangeChange = ({ minPrice, maxPrice }) => {
+    console.log(filterBy)
+
+    function handleRangeChange({ minPrice, maxPrice }) {
         if (rangeRef.current) rangeRef.current = { minPrice, maxPrice }
-        console.log(filterBy)
-        // setFilterBy({ ...filterBy, minPrice, maxPrice })
     }
 
+    function handlePlaceTypeClick(placeType) {
+    }
 
-    const handlePropertyTypeClick = (ev) => {
+    function handlePropertyTypeClick(ev) {
         const previousSelectedButton = selectedButton
         if (previousSelectedButton) {
             previousSelectedButton.classList.remove('selected')
@@ -53,25 +73,22 @@ export function FilterModal() {
         ev.currentTarget.classList.add('selected')
         const type = ev.currentTarget.getAttribute('name')
         setFilterBy({ ...filterBy, type })
-
-        // console.log(filterBy)
     }
 
-    const handleAmenityChange = (amenity) => (e) => {
-        if (e.target.checked) {
-            setFilterBy({ ...filterBy, amenities: [...filterBy.amenities, amenity] });
-        } else {
-            setFilterBy({ ...filterBy, amenities: filterBy.amenities.filter(a => a !== amenity) });
+    function handleAmenityChange(amenity) {
+        return function (e) {
+            if (e.target.checked) {
+                setFilterBy({ ...filterBy, amenities: [...filterBy.amenities, amenity] })
+            } else {
+                setFilterBy({ ...filterBy, amenities: filterBy.amenities.filter(a => a !== amenity) })
+            }
         }
-        console.log(filterBy)
     }
-
 
     function onCloseFilterModal() {
         dispatch({ type: TOGGLE_FILTER_MODAL })
         dispatch({ type: TOGGLE_IS_SHADOW })
     }
-
 
     function onSubmit(ev) {
         ev.preventDefault()
@@ -80,7 +97,6 @@ export function FilterModal() {
         onCloseFilterModal()
         navigate(`/explore?${queryParams}`)
     }
-
 
     return (
         <div className={`modal-container ${(isFilterModalOpen) ? 'open' : ''}`}>
@@ -148,133 +164,58 @@ export function FilterModal() {
                     <div className='type-filter-main-container'>
                         <span className='filter-type-title'>Type of place</span>
                         <div className='type-filter-sub-container'>
-                            <div className='type-btns-container'>
-                                <div className='type-btns-inner'>
-                                    <div className='checkbox-wrapper'>
-                                        <input
-                                            type='checkbox'
-                                            style={{ backgroundColor: 'white', color: 'black' }}
-                                        />
-                                    </div>
-                                    <label className='type-btns-inner-text'>
-                                        Entire place
-                                        <span>A place all to yourself</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div className='type-btns-container'>
+                            {placeTypes.map(({ name, label, desc }) => (
+                                <div key={name} className='type-btns-container'>
+                                    <div className='type-btns-inner'>
+                                        <div className='checkbox-wrapper'>
+                                            <input
 
-                                <div className='type-btns-inner'>
-                                    <div className='checkbox-wrapper'>
-
-                                        <input
-                                            type='checkbox'
-                                            style={{ backgroundColor: 'white', color: 'black' }}
-                                        />
+                                                type='checkbox'
+                                                color='white'
+                                                // checked={filterBy.placeType.includes(name)}
+                                                onChange={() => handlePlaceTypeClick(name)}
+                                            />
+                                        </div>
+                                        <label className='type-btns-inner-text'>
+                                            {label}
+                                            <span>{desc}</span>
+                                        </label>
                                     </div>
-                                    <label className='type-btns-inner-text'>
-                                        Private room
-                                        <span>Your own room in a home or a hotel, plus some shared common spaces</span>
-                                    </label>
                                 </div>
-                            </div>
-                            <div className='type-btns-container'>
-                                <div className='type-btns-inner'>
-                                    <div className='checkbox-wrapper'>
-
-                                        <input
-                                            type='checkbox'
-                                            style={{ backgroundColor: 'white', color: 'black' }}
-                                        />
-                                    </div>
-                                    <label className='type-btns-inner-text'>
-                                        Shared room
-                                        <span>A sleeping space and common areas that may be shared with others</span>
-                                    </label>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
-
 
                     <div className='titles-gap'></div>
                     <span className='filter-type-title'>Rooms and beds</span>
                     <div className='rooms-beds-btns-filter'>
                         <div className='inner-numbers-container-wrapper'>
-                            <div className='inner-numbers-container'>
-                                <span>Bedrooms</span>
-                                <div className='btns-container'>
-                                    <button
-                                        className={`rooms-beds-any-btn ${!filterBy.bedrooms ? 'selected' : ''}`}
-                                        onClick={() => setFilterBy({ ...filterBy, bedrooms: null })}
-                                    >
-                                        Any
-                                    </button>
-                                    {numbers.map((number) => {
-                                        return (
-                                            <button
-                                                name='bedrooms'
-                                                value={number}
-                                                key={`bedrooms-${number}`}
-                                                className={`rooms-beds-num-btn ${filterBy.bedrooms === number ? 'selected' : ''}`}
-                                                onClick={(ev) => handleClick(ev, number)}
-                                            // style={{backgroundColor:`${filterBy.bedrooms === number ? 'blue' : 'red'}`}}
-                                            >
-                                                {number}
-                                            </button>
-                                        )
-                                    })}
+                            {filterOptions.map(({ name, label, value }) => (
+                                <div className='inner-numbers-container'>
+                                    <span>{label}</span>
+                                    <div className='btns-container'>
+                                        <button
+                                            className={`rooms-beds-any-btn ${!filterBy[name] ? 'selected' : ''}`}
+                                            onClick={() => setFilterBy({ ...filterBy, [name]: null })}
+                                        >
+                                            Any
+                                        </button>
+                                        {numbers.map((number) => {
+                                            return (
+                                                <button
+                                                    name={name}
+                                                    value={number}
+                                                    key={`${name}-${number}`}
+                                                    className={`rooms-beds-num-btn ${filterBy[name] === number ? 'selected' : ''}`}
+                                                    onClick={(ev) => handleClick(ev, number)}
+                                                >
+                                                    {number}
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div className='inner-numbers-container'>
-                                <span>Beds</span>
-                                <div className='btns-container'>
-                                    <button
-                                        className={`rooms-beds-any-btn ${!filterBy.beds ? 'selected' : ''}`}
-                                        onClick={() => setFilterBy({ ...filterBy, beds: null })}
-                                    >
-                                        Any
-                                    </button>
-                                    {numbers.map((number) => {
-                                        return (
-                                            <button
-                                                name='beds'
-                                                value={number}
-                                                key={`beds-${number}`}
-                                                className={`rooms-beds-num-btn ${filterBy.beds === number ? 'selected' : ''}`}
-                                                onClick={(ev) => handleClick(ev, number)}
-                                            >
-                                                {number}
-                                            </button>
-                                        )
-                                    })}
-                                </div>
-                            </div>
-                            <div className='inner-numbers-container'>
-                                <span>Bathrooms</span>
-                                <div className='btns-container'>
-                                    <button
-                                        className={`rooms-beds-any-btn ${!filterBy.bathrooms ? 'selected' : ''}`}
-                                        onClick={() => setFilterBy({ ...filterBy, bathrooms: null })}
-                                    >
-                                        Any
-                                    </button>
-                                    {numbers.map((number) => {
-                                        return (
-                                            <button
-                                                name='bathrooms'
-                                                value={number}
-                                                key={`bathrooms-${number}`}
-                                                className={`rooms-beds-num-btn ${filterBy.bathrooms === number ? 'selected' : ''}`}
-                                                onClick={(ev) => handleClick(ev, number)}
-                                            >
-                                                {number}
-                                            </button>
-                                        )
-                                    })}
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
@@ -283,26 +224,22 @@ export function FilterModal() {
 
                         <div className='property-type-filter-container'>
                             <span className='filter-type-title'> Property type</span>
-
                             <div className='property-type-btns-container'>
-                                <button onClick={handlePropertyTypeClick} name={'House'} className='property-type-filter-btn'>
-                                    <div className='inner-btn-div'><img src={require(`../assets/labels-logos/house.jpg`)} >
-                                    </img><span>House</span></div>
-                                </button>
-                                <button onClick={handlePropertyTypeClick} name={'Apartment'} className='property-type-filter-btn'>
-                                    <div className='inner-btn-div'><img src={require(`../assets/labels-logos/apartment.jpg`)} >
-                                    </img><span>Apartment</span></div>
-                                </button>
-                                <button onClick={handlePropertyTypeClick} name={'Guesthouse'} className='property-type-filter-btn'>
-                                    <div className='inner-btn-div'><img src={require(`../assets/labels-logos/guesthouse.jpg`)} >
-                                    </img><span>Guesthouse</span></div>
-                                </button>
-                                <button onClick={handlePropertyTypeClick} name={'Hotel'} className='property-type-filter-btn'>
-                                    <div className='inner-btn-div'><img src={require(`../assets/labels-logos/hotel.jpg`)} >
-                                    </img><span>Hotel</span></div>
-                                </button>
+                                {propertyTypes.map(({ name, label, image }) => (
+                                    <button
+                                        onClick={handlePropertyTypeClick}
+                                        name={name}
+                                        className={`property-type-filter-btn ${filterBy.propertyType === name ? 'selected' : ''}`}
+                                    >
+                                        <div className='inner-btn-div'>
+                                            <img src={image} />
+                                            <span>{label}</span>
+                                        </div>
+                                    </button>
+                                ))}
                             </div>
                         </div>
+
                     </div>
 
                 </div>

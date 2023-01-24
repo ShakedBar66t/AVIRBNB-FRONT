@@ -30,13 +30,6 @@ export function LabelsFilter() {
         , { name: 'Arctic', src: 'arctic' },
         ,]
 
-    // console.log(currentIndex, 'index!!!')
-    // window.innerWidth
-    // console.log('cont', ElCarousel?.current?.offsetWidth - 114)
-    // console.log('total', ElCarousel1?.current?.offsetWidth)
-    // console.log('transi', currentIndex * 100)
-    // console.log('asasa?', (ElCarousel1?.current?.offsetWidth - (ElCarousel?.current?.offsetWidth - 114)) % 400)
-
     const handleNext = () => {
         if (currentIndex + displayCount < stayLabels.length) {
             setCurrentIndex(currentIndex + displayCount);

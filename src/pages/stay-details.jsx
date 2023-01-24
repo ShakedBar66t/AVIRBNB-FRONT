@@ -23,6 +23,7 @@ import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
 import { AiFillFlag } from "react-icons/ai"
+import { ColorForButton } from "../cmps/btn-color"
 const { RangePicker } = DatePicker
 
 
@@ -36,6 +37,7 @@ export function StayDetails() {
 
     const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
         , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
+
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
@@ -140,9 +142,9 @@ export function StayDetails() {
                 </header> */}
             </div>
             <div className="stay-info">
-                <section className="content">
+                <section className="avir-content">
                     <div className="subtitle">
-                        <div className="">
+                        <div>
                             <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
                             <span>{stay.capacity} guests · 1 bathroom · 2 bedrooms </span>
                         </div>
@@ -154,7 +156,7 @@ export function StayDetails() {
                                 <BsTrophy />
                             </div>
                             <div>
-                                <p>{stay.host.fullname} is a Superhost</p>
+                                <h1>{stay.host.fullname} is a Superhost</h1>
                                 <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
                             </div>
                         </div>
@@ -163,7 +165,7 @@ export function StayDetails() {
                                 <SlLocationPin />
                             </div>
                             <div>
-                                <p>Great location</p>
+                                <h1>Great location</h1>
                                 <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
                             </div>
                         </div>
@@ -172,7 +174,7 @@ export function StayDetails() {
                                 <HiOutlineKey />
                             </div>
                             <div>
-                                <p>Great check-in experience</p>
+                                <h1>Great check-in experience</h1>
                                 <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
                             </div>
                         </div>
@@ -271,13 +273,8 @@ export function StayDetails() {
                             })}
 
                         </div>}
-                        <div className="btn-container">
-                            <button className="action-btn" type="button" onClick={() => {
-                                ReserveOrder()
-                            }}>
-                                Reserve
-                            </button>
-                        </div>
+                        <ColorForButton txt={'Reserve'}
+                        ReserveOrder={ReserveOrder}/>
 
                         {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
