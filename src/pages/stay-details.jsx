@@ -38,6 +38,23 @@ export function StayDetails() {
     const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
         , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
 
+    const achievements = [
+        {
+            icon: <BsTrophy />,
+            title: "Superhost",
+            subtext: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!"
+        },
+        {
+            icon: <SlLocationPin />,
+            title: "Great location",
+            subtext: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!"
+        },
+        {
+            icon: <HiOutlineKey />,
+            title: "Great check-in experience",
+            subtext: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!"
+        }
+    ]
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
@@ -57,8 +74,8 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    console.log('datesssssss!!!!!', dates)
-    console.log(stay)
+    // console.log('datesssssss!!!!!', dates)
+    // console.log(stay)
     // console.log(stay.reviews[0].by.imgUrl)
 
     function handleGuestsInput(type, diff) {
@@ -76,7 +93,7 @@ export function StayDetails() {
         else {
             const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
             console.log('new order!!!!!!!!', newOrder)
-            
+
 
             addOrder(newOrder).then(res => prompt('great'))
         }
@@ -152,6 +169,19 @@ export function StayDetails() {
                         <img className="host-image" src={stay.host.imgUrl} />
                     </div>
                     <div className="user-stay-info">
+                        {achievements.map((achievement, index) => (
+                            <div key={index} className="user-achievement">
+                                <div className="achievement-icon">
+                                    {achievement.icon}
+                                </div>
+                                <div>
+                                    <h1>{achievement.title}</h1>
+                                    <p className="subtext">{achievement.subtext}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {/* <div className="user-stay-info">
                         <div className="user-achievement">
                             <div className="achievement-icon">
                                 <BsTrophy />
@@ -179,7 +209,7 @@ export function StayDetails() {
                                 <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="air-cover">
                         <h3>
                             <span style={{ color: '#ff385c' }}>avir</span>cover
@@ -275,7 +305,7 @@ export function StayDetails() {
 
                         </div>}
                         <ColorForButton txt={'Reserve'}
-                        reserveOrder={reserveOrder}/>
+                            reserveOrder={reserveOrder} />
 
                         {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
