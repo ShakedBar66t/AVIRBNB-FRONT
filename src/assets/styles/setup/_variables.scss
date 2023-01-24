@@ -11,12 +11,12 @@ $clr8: #717171;
 $clr9: #ff385c;
 $clr10: #FF5A5F;
 $bgclr1: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
-        rgb(241, 37, 75) 0%,
-        rgb(230, 30, 77) 27.5%,
-        rgb(227, 28, 95) 40%,
-        rgb(215, 4, 102) 57.5%,
-        rgb(189, 30, 89) 75%,
-        rgb(189, 30, 89) 100%);
+                rgb(241, 37, 75) 0%,
+                rgb(230, 30, 77) 27.5%,
+                rgb(227, 28, 95) 40%,
+                rgb(215, 4, 102) 57.5%,
+                rgb(189, 30, 89) 75%,
+                rgb(189, 30, 89) 100%);
 
 
 // Bg-color-hover
@@ -24,7 +24,9 @@ $bgh1: #d3d3d34d;
 
 // Border-setting-app-header
 $bs1: 1px solid lightgray;
-
+$bs2: 1px solid black;
+// Font-families
+$ff1: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 // Breakpoints
 // dont touch its for the index and its mesured by yoni
 $mobile-breakpoint: 460px;

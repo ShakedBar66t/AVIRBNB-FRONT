@@ -816,6 +816,7 @@ p {
     .secondary-container {
         grid-template-columns: 24px 1fr 24px;
     }
+
     .details-header {
         border-top: 1px solid #dddddd;
         display: grid;
@@ -869,11 +870,13 @@ p {
     .app-footer {
         display: none;
     }
+
     .app-header {
         .filter-container {
             display: none !important;
         }
     }
+
     .stay-details {
 
         .stay-report {
@@ -928,7 +931,7 @@ p {
 
 }
 
-@media (max-width:375px ) {
+@media (max-width:375px) {
 
     .secondary-container {
         grid-template-columns: 40px 300px 40px;
@@ -1003,8 +1006,13 @@ p {
 
 }
 
+
+.ant-picker-panel-container {
+    background-color: red;
+}
+
 .ant-picker-body {
-    width: 1000px !important;
+    width: 2000px !important;
     font-size: 14px;
 
     .ant-picker-content {
@@ -1025,15 +1033,17 @@ p {
                 color: black;
             }
 
-
-
-
-            // background-color: black;
-            // color: white !important;
         }
     }
 
-
+    // .ant-picker-panel-layout {
+    //     margin-left: 0px;
+    //     border: 1px red solid;
+    //     width: 800px;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
 
     // th,

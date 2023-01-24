@@ -21,7 +21,7 @@
         font-size: rem(14px);
         line-height: rem(18px);
         font-weight: 600;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: $ff1;
     }
 
     & .background-shadow {
@@ -378,13 +378,13 @@
         height: 100%;
         background: none;
 
+
+
         &.right {
             padding: 8px 24px;
 
             &:hover {
                 background: none;
-
-
             }
         }
 
@@ -420,17 +420,26 @@
 
             &:hover {
                 background-color: $bgh1;
+            }
 
-                & input {
-                    background: none;
+            & input {
+                border: none;
+                background-color: transparent;
+
+                &:focus {
+                    outline: none;
                 }
             }
         }
 
-        & input {
-            border: none;
-            border-color: rebeccapurple;
-            background-color: inherit;
+        &.selected {
+            background-color: $clr6;
+            box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+            cursor: pointer;
+
+            &:hover {
+                background-color: $clr6;
+            }
         }
     }
 
@@ -507,8 +516,24 @@
             &.right,
             &.left {
 
+                .selected {
+                    background-color: $clr6;
+                    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $clr6;
+                    }
+                }
+
                 &:hover {
                     background-color: #9a9a9a32;
+                }
+
+                &.selected {
+                    :hover {
+                        background-color: transparent;
+                    }
                 }
             }
         }
@@ -563,7 +588,7 @@
         font-size: 14px;
         font-weight: 700;
         line-height: 18px;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: $ff1;
 
     }
 }
@@ -582,7 +607,7 @@
         border: $bs1;
 
         &:hover {
-            border: 1px solid black;
+            border: $bs2;
         }
     }
 
@@ -596,7 +621,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         font-weight: 400;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: $ff1;
     }
 }
 
@@ -643,7 +668,6 @@
 
                     & .btn-icon {
                         color: black;
-                        // cursor: not-allowed;
                     }
                 }
 
@@ -688,7 +712,156 @@
 
 }
 
+.date-modal-extended {
+    left: 0;
+    height: 510px;
+    width: 870px;
+    padding: 18px 28px 10px 28px;
 
+    & .date-modal-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+.calender-type-btns {
+    width: 303px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #ebebeb;
+    transition: all 0.3s ease-in-out;
+
+    & .btns-wrapper {
+        display: flex;
+        background-color: transparent;
+        width: 100%;
+        padding: 5px;
+
+        & button {
+            background-color: transparent;
+            flex-grow: 1;
+            border-radius: 20px;
+            font-size: rem(14px);
+            line-height: rem(18px);
+            font-weight: 600;
+            transform: scale(1);
+            transition: all 0.3s ease-in-out;
+            font-family: $ff1;
+
+            &.selected {
+                transform: scale(0.9);
+                transform: scale(1);
+                background-color: $clr6;
+                box-shadow: $bs1;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.header-calender {
+    height: 1px;
+    width: 1px;
+    visibility: hidden;
+    transition: none !important;
+}
+
+.header-calender-dropdown {
+    position: relative !important;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    left: 0 !important;
+    z-index: 1;
+    transition: 0 !important;
+    width: 800px;
+    margin: auto !important;
+
+    .ant-picker-panel-container {
+        width: 780px;
+        box-shadow: none;
+
+        .ant-picker-content {
+            width: 336px;
+            border-radius: 50%;
+
+            th {
+                color: $clr8;
+                font-family: $ff1;
+                font-weight: 600;
+                font-size: 13px;
+            }
+
+            td {}
+
+            td::before {
+                ////// הקו האפור שמחבר בין התאריך התחלה לסוף
+                // border-radius: 50%;
+                background: #f7f7f7;
+            }
+
+            td::after {}
+        }
+    }
+
+    .ant-picker-panel-layout {
+        display: flex;
+    }
+
+    .ant-picker-panels {
+        justify-content: space-between;
+        width: 700px;
+
+    }
+
+    .ant-picker-header-view {
+        pointer-events: none;
+    }
+
+    .ant-picker-cell {
+        :hover {
+            border: $bs2;
+        }
+    }
+
+    .ant-picker-cell-inner {
+        transition: 0s !important;
+        background: none !important;
+
+
+        :hover {
+            // background-color: black;
+        }
+    }
+
+    .ant-picker-panels {
+        width: 780px;
+        padding: 0 27px;
+    }
+
+    .ant-picker-header {
+        border: none;
+    }
+
+    .ant-picker-header-super-prev-btn,
+    .ant-picker-header-super-next-btn {
+        display: none;
+    }
+
+    .ant-picker-header-view {
+        font-size: rem(16px);
+        line-height: rem(20px);
+        font-weight: 600;
+        font-family: $ff1;
+    }
+
+}
 
 ////////// global classes
 
@@ -699,7 +872,9 @@
     color: $clr7;
     text-align: left;
     width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    pointer-events: none;
+
+    font-family: $ff1;
 }
 
 .lower-text {
@@ -711,7 +886,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: $ff1;
+    pointer-events: none;
+
+    &.input {
+        pointer-events: auto;
+    }
 
     &.last {
         cursor: pointer;
