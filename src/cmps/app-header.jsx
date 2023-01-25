@@ -1,13 +1,8 @@
 import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import routes from '../routes'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
-import { LoginSignup } from './login-signup.jsx'
 import { useEffect, useState } from 'react'
-import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { GoDash, GoPlus } from "react-icons/go"
-import { BiMinus } from "react-icons/bi"
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { LabelsFilter } from './labels-filter'
@@ -33,16 +28,17 @@ export function AppHeader() {
     const [userModal, setUserModal] = useState(false)
     const [searchModal, setSearchModal] = useState(false)
     const [searchModalExpended, setSearchModalExpended] = useState(false)
-    const [locationModal, setLocationModal] = useState(false)
+    const [isLocationModalOpen, setIsLocationModalOpen] = useState(false)
     const [dateModal, setDateModal] = useState(false)
     const [isCheckedInSelected, setIsCheckedInSelected] = useState(3)
     const [flexibleDates, setFlexibleDates] = useState(false)
-    const [guestsModal, setGuestsModal] = useState(false)
-    const [calenderOpen, setCalenderOpen] = useState(false)
+    const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+    const [isCalenderOpen, setIsCalenderOpen] = useState(false)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
-
+    const [inputValue, setInputValue] = useState('')
     const { stayId } = params
+    const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
@@ -82,10 +78,10 @@ export function AppHeader() {
     }
 
     function handelShadowClick() {
-        setCalenderOpen(false)
-        setLocationModal(false)
+        setIsCalenderOpen(false)
+        setIsLocationModalOpen(false)
         setDateModal(false)
-        setGuestsModal(false)
+        setIsGuestsModalOpen(false)
         if (searchModal) {
             setSearchModal(!searchModal)
             return
@@ -145,30 +141,30 @@ export function AppHeader() {
         switch (name) {
             case 'guests':
                 setIsCheckedInSelected(3)
-                setCalenderOpen(false)
-                setLocationModal(false)
+                setIsCalenderOpen(false)
+                setIsLocationModalOpen(false)
                 setDateModal(false)
-                setGuestsModal(!guestsModal)
+                setIsGuestsModalOpen(!isGuestsModalOpen)
                 break
             case 'location':
                 setIsCheckedInSelected(3)
-                setCalenderOpen(false)
+                setIsCalenderOpen(false)
                 setDateModal(false)
-                setGuestsModal(false)
-                setLocationModal(!locationModal)
+                setIsGuestsModalOpen(false)
+                setIsLocationModalOpen(!isLocationModalOpen)
                 break
             case 'date-1':
                 setIsCheckedInSelected(1)
-                setCalenderOpen(!calenderOpen)
-                setLocationModal(false)
-                setGuestsModal(false)
+                setIsCalenderOpen(!isCalenderOpen)
+                setIsLocationModalOpen(false)
+                setIsGuestsModalOpen(false)
                 setDateModal(!dateModal)
                 break
             case 'date-2':
                 setIsCheckedInSelected(2)
-                setCalenderOpen(!calenderOpen)
-                setLocationModal(false)
-                setGuestsModal(false)
+                setIsCalenderOpen(!isCalenderOpen)
+                setIsLocationModalOpen(false)
+                setIsGuestsModalOpen(false)
                 setDateModal(!dateModal)
                 break
             default:
@@ -176,19 +172,26 @@ export function AppHeader() {
         }
     }
 
+    function handlePlaceCardClick  (location)  {
+        setInputValue(location)
+      }
+
+      function handleInputChange(){
+        
+      }
     return (
-        <header className={(stayId || isTripPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
+        <header className={(stayId || isTripPage||id) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
 
-                {!isTripPage && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
-                    {stayId && <div className='filter-btns-details'><span> Start your search </span>
+                {(!isTripPage&&!id)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
+                    {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
-                    {!stayId && <div className='filter-btns' onClick={toggleFilterModal}>
+                    {!stayId&& <div className='filter-btns' onClick={toggleFilterModal}>
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
                         <button className='guest-filter '>Add guests </button>
@@ -235,14 +238,20 @@ export function AppHeader() {
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' >
-                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${locationModal ? 'selected' : ''}`} ><span className='upper-text'>Where</span>
-                        <input name='location' type='text' placeholder="Search destinations" className='lower-text input'></input></button>
-                    <div className={`location-modal-extended ${locationModal ? 'open' : ''}`}>
+                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where</span>
+                        <input 
+                        name='location'
+                         type='text'
+                          placeholder="Search destinations" 
+                          value={inputValue}
+                           className='lower-text input'
+                           onChange={()=>handleInputChange()}></input></button>
+                    <div className={`location-modal-extended ${isLocationModalOpen ? 'open' : ''}`}>
                         <div className='location-modal-inner'>
                             <span className='location-modal-inner-title'>Search by region</span>
                             <div className='cards-container'>
                                 {countries.map((place, index) => {
-                                    return <div key={index} className='place-card'>
+                                    return <div key={index} className='place-card' onClick={() => handlePlaceCardClick(place.label)}>
                                         <div className='place-card-inner'>
                                             <img src={place.image} />
                                             <span>{place.label}</span>
@@ -263,7 +272,7 @@ export function AppHeader() {
                             </div>
                             <div className='calenders-container'>
                                 <div className='left-calender'>
-                                    <RangePicker format="MMMM D, YYYY" open={calenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
+                                    <RangePicker format="MMMM D, YYYY" open={isCalenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
                                         onChange={(values) => {
 
                                             // const value1 = moment(values[0]).format('DD-MM-YYYY')
@@ -299,13 +308,13 @@ export function AppHeader() {
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
-                    <div className={`inner-btn-wrapper ${guestsModal ? 'selected' : ''}`}>
+                    <div className={`inner-btn-wrapper ${isGuestsModalOpen ? 'selected' : ''}`}>
                         <button className={`inner-btns-container right`} name='guests' onClick={(ev) => handleExpendedModalClick(ev)}>
                             <span className='upper-text'>Who</span>
                             <span className='lower-text'>{lowerGuestsText}</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
-                    <div className={`guests-modal-extended ${guestsModal ? 'open' : ''}`}>
+                    <div className={`guests-modal-extended ${isGuestsModalOpen ? 'open' : ''}`}>
                         {guestsTypes.map((type, index) => {
                             return <div className="guests-type-input" key={type.type}>
                                 <div className='guest-type-text-containter'>
@@ -324,7 +333,7 @@ export function AppHeader() {
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            {(!isTripPage) && <div className='labels-container'>
+            {(!isTripPage&&!id)  && <div className='labels-container'>
                 {(!stayId) && <LabelsFilter />}
             </div>}
         </header >
