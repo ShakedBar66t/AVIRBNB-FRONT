@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import { uploadImg } from "../services/cloudinary-service"
 import { stayService } from "../services/stay.service"
 
 
@@ -15,6 +16,7 @@ export function HostIndex() {
         'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
 
     function handleChange({ target }) {
+        console.log(target.files[0])
         const { name: field, value } = target
         if (field === 'name') {
             setStay(({ ...stay, [field]: value }))
@@ -22,8 +24,9 @@ export function HostIndex() {
         if (field === 'country' || field === 'city' || field === 'address') {
             stay.loc[field] = value
         }
-        if (field === 'imgUrls') {
-            setStay(prevStay => ({ ...prevStay, imgUrls: [prevStay.imgUrls, value] }))
+        if (field === 'imgUrls' && target.files && target.files[0]) {
+            uploadImg(target.files[0])
+            setStay(prevStay => ({ ...prevStay, imgUrls: [...prevStay.imgUrls, value] }));
         }
         if (field === 'capacity' || field === 'price') {
             setStay(({ ...stay, [field]: value }))
@@ -88,7 +91,7 @@ export function HostIndex() {
                             </label>
                         </section>
                         <section className="img-upload" style={{ backgroundImage: 'url(undefined)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
-                            <label htmlFor="">
+                            <label htmlFor="imgUrls">
                                 <p>Upload Image</p>
                                 <input type="file"
                                     value=''
