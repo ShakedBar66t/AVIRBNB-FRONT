@@ -12,6 +12,7 @@ import { HostHome } from './pages/host-home-page'
 import { HostIndex } from './pages/host-index'
 import { UserTrips } from './pages/user-trips'
 import { MoblieFooter } from './cmps/mobile-footer.jsx'
+import { HostDashBoard } from './pages/host-dashboard.jsx'
 
 
 
@@ -33,6 +34,7 @@ export function RootCmp() {
                     <Route path="/explore/:stayId" element={<StayDetails />} />
                     <Route path="/host/home" element={<HostHome />} />
                     <Route path="/host" element={<HostIndex />} />
+                    <Route path="/host/dashboard" element={<HostDashBoard />} />
                 </Routes>
 
             </main>

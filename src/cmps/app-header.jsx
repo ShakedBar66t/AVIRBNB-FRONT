@@ -201,7 +201,7 @@ export function AppHeader() {
                 }
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn'>Avirbnb your home</button>
+                        <button className='host-btn' onClick={()=>navigate('/host/dashboard')}>Avirbnb your home</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
