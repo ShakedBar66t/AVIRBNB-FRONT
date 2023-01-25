@@ -26,8 +26,6 @@ export default function GoogleMap() {
         setCoordinates({ lat: stay.loc.lat, lng: stay.loc.lan })
     }
 
-    // console.log('stay from google', stay.loc.lat)
-
     const zoom = 11
 
     const handleClick = ({ lat, lng }) => {
@@ -35,7 +33,6 @@ export default function GoogleMap() {
     }
 
     return (stay) &&
-        // Important! Always set the container height explicitly
         <div style={{ height: '70vh', width: '100%', margin: 'auto' }}>
             <GoogleMapReact
                 onClick={handleClick}
@@ -45,8 +42,6 @@ export default function GoogleMap() {
                 defaultZoom={zoom}
             >
                 <AnyReactComponent
-                    // lat={coorinates.lat}
-                    // lng={coorinates.lng}
                     {...coordinates}
                     text="📍"
                 />
