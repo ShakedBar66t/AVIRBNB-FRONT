@@ -37,9 +37,12 @@ export function UserDetails() {
       <AppHeader/>
 
     <main className='user-deatils-cont'>
+      <header>
+
       <h2>Account</h2>
       <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>,Go to profile</span></p>
-    {/* {(page==='setting') ?  <UserSetting/> : ''} */}
+      </header>
+    {(page==='setting') ?  <UserSetting/> : ''}
     {/* {(page==='edit') ?  <UserEdit/> : ''} */}
       
       
