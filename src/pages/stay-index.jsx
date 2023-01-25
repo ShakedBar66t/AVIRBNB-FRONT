@@ -8,6 +8,7 @@ import { stayService } from '../services/stay.service.js'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
+import { LabelsFilter } from '../cmps/labels-filter.jsx'
 
 export function StayIndex() {
     const location = useLocation()
@@ -16,7 +17,6 @@ export function StayIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
 
-    // console.log(queryFilterBy)
 
     useEffect(() => {
         if (location.pathname === '/explore') loadStays()
@@ -64,7 +64,7 @@ export function StayIndex() {
         console.log(`TODO Adding msg to stay`)
     }
 
-    async function onToggleLike(ev,stay) {
+    async function onToggleLike(ev, stay) {
         ev.stopPropagation()
         if (!user) {
             toggleLoginModal()
@@ -88,6 +88,7 @@ export function StayIndex() {
 
     return <section className='stay-index main-layout'>
         <AppHeader />
+        <LabelsFilter />
         <StayList stays={stays} onToggleLike={onToggleLike} />
     </section>
 

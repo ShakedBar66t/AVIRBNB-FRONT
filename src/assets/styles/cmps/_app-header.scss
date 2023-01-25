@@ -329,7 +329,7 @@
     position: fixed;
     margin: auto;
     opacity: 0;
-    border: 1px solid lightgray;
+    border: $bs1;
     border-radius: 35px;
     transform: scale(0.6) translateY(-100%);
     transition: 0.4s ease;
@@ -657,8 +657,6 @@
         }
     }
 
-    & .place-card-inner {}
-
     & span {
         color: $clr7;
         font-size: rem(14px);
@@ -741,7 +739,7 @@
             .btn-icon {
                 margin-left: 1px;
                 display: block;
-                color: #717171;
+                color: $clr8;
                 font-size: 1rem;
                 font-weight: 100;
                 cursor: pointer;
@@ -811,38 +809,14 @@
     }
 }
 
+
+////////////////////////////////////////////// CALENDER CMP
+//////////////// date picker 
 .header-calender {
-    //////////////// date picker 
     height: 1px;
     width: 1px;
     visibility: hidden;
     transition: none !important;
-}
-
-// .ant-calendar-date-panel .ant-calendar-selected-day .ant-calendar-date,
-// .ant-calendar-date-panel .ant-calendar-selected-start-date .ant-calendar-date,
-// .ant-calendar-date-panel .ant-calendar-selected-end-date .ant-calendar-date {
-//     background-color: black !important;
-//     ;
-//     color: white !important;
-//     ;
-//     border-radius: 50% !important;
-//     ;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
-    // background-color: black;
-    // color: white;
-    // border-radius: 50%;
-}
-
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
-    background-color: red;
 }
 
 ////// check in
@@ -860,7 +834,7 @@
     border-radius: 50%;
 
     &:hover {
-        border-color: #717171;
+        border-color: $clr8;
     }
 }
 
@@ -868,7 +842,7 @@
     border-radius: 50%;
 
     &:hover {
-        border-color: #717171;
+        border-color: $clr8;
     }
 }
 
@@ -878,23 +852,11 @@
     background-color: rgba(211, 211, 211, 0.432)
 }
 
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range {
-    // background-color: yellow !important;
-}
-
-.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-in-range {
-    background-color: aqua;
-}
-
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
     height: 40px !important;
     width: 40px !important;
     background-color: rgba(211, 211, 211, 0.432)
-}
-
-.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-in-range .ant-picker-cell-in-view.ant-picker-cell-range.ant-picker-cell-in-range-hover::before {
-    background-color: red !important;
 }
 
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before,
@@ -907,15 +869,6 @@
 
     background-color: rgba(211, 211, 211, 0.432) !important;
 }
-
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range.ant-picker-cell-in-range-hover::before {}
-
-:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown.ant-picker-cell-in-view .ant-picker-cell-in-range .ant-picker-cell-range-hover-start .ant-picker-cell-inner::after {
-    background-color: yellow !important;
-}
-
-// :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::after {
-// }
 
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
     border: 2px solid $clr7;
@@ -940,22 +893,11 @@
             width: 336px;
             border-radius: 50%;
 
-            // th {
-            //     color: $clr8;
-            //     font-family: $ff1;
-            //     font-size: 13px;
-            // }
-
             td {
                 font-weight: 600;
                 height: 40px !important;
             }
 
-            td::before {
-                //// הקו האפור שמחבר בין התאריך התחלה לסוף
-                // border-radius: 50%;
-                // background: #f7f7f7;
-            }
         }
     }
 
@@ -977,7 +919,6 @@
 
         :hover {
             border-radius: 50%;
-            // border: $bs2;
         }
     }
 
@@ -987,10 +928,6 @@
         height: 40px !important;
         width: 40px !important;
         border-radius: 50%;
-
-        :hover {
-            // background-color: black;
-        }
     }
 
 
@@ -1017,10 +954,6 @@
 
 }
 
-.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-range-start.ant-picker-cell-selected {
-    background-color: red;
-}
-
 ////////// global classes
 
 .upper-text {
@@ -1040,7 +973,7 @@
     text-align: left;
     font-size: rem(14px);
     line-height: rem(18px);
-    color: #717171;
+    color: $clr8;
     font-weight: 400;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1055,7 +988,7 @@
 
     &.last {
         cursor: pointer;
-        color: rgb(94, 94, 94);
+        color: rgb(2, 1, 1);
         font-weight: 600;
         text-decoration: underline
     }
