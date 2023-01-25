@@ -232,7 +232,7 @@ input[type=number]::-webkit-outer-spin-button {
             color: currentColor;
             width: 24px;
             height: 24px;
-            border: 1px solid lightgray;
+            border: $bs1;
             border-radius: 0.15em;
             transform: translateY(-0.075em);
         }
@@ -315,7 +315,7 @@ input[type=number]::-webkit-outer-spin-button {
         }
 
         & .rooms-beds-num-btn {
-            border: 1px solid lightgray;
+            border: $bs1;
             background-color: inherit;
             width: 60px;
 
@@ -368,7 +368,7 @@ input[type=number]::-webkit-outer-spin-button {
         padding: 16px;
         border-radius: 20px;
         background-color: $clr6;
-        border: 1px solid lightgray;
+        border: $bs1;
 
         &.selected {
             background-color: #f7f7f7

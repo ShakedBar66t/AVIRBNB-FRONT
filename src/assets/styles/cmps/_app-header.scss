@@ -66,11 +66,6 @@
         }
     }
 
-    .labels-container{
-        &.hidden{
-            display: none;
-        }
-    }
     .logo-container {
         display: flex;
         height: 36px;
@@ -325,11 +320,8 @@
     }
 
 }
-// position: absolute;
-//     right: 10px;
-//     top: 10px;
-//     background: red;
-//     border-radius: 50%;
+
+
 .filter-modal {
     display: flex;
     justify-content: space-between;
@@ -337,7 +329,7 @@
     position: fixed;
     margin: auto;
     opacity: 0;
-    border: 1px solid lightgray;
+    border: $bs1;
     border-radius: 35px;
     transform: scale(0.6) translateY(-100%);
     transition: 0.4s ease;
@@ -497,6 +489,40 @@
         }
     }
 
+    .clear-value-btn {
+        z-index: 10;
+        position: absolute;
+        background: #ebebeb;
+        border-radius: 50%;
+        height: 19px;
+        width: 19px;
+        right: 0px;
+        top: 10px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        visibility: hidden;
+
+        &.shown {
+            visibility: visible;
+        }
+
+        &.date {
+            right: -10px;
+
+        }
+
+        &.guests {
+            right: 0;
+        }
+
+        &:hover {
+            box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
+        }
+
+    }
+
     & .inner-btn-wrapper {
         display: flex;
         height: 100%;
@@ -631,8 +657,6 @@
         }
     }
 
-    & .place-card-inner {}
-
     & span {
         color: $clr7;
         font-size: rem(14px);
@@ -715,7 +739,7 @@
             .btn-icon {
                 margin-left: 1px;
                 display: block;
-                color: #717171;
+                color: $clr8;
                 font-size: 1rem;
                 font-weight: 100;
                 cursor: pointer;
@@ -785,11 +809,69 @@
     }
 }
 
+
+////////////////////////////////////////////// CALENDER CMP
+//////////////// date picker 
 .header-calender {
     height: 1px;
     width: 1px;
     visibility: hidden;
     transition: none !important;
+}
+
+////// check in
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner {
+    background-color: $clr7;
+}
+
+///// check out
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background-color: $clr7;
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single):not(.ant-picker-cell-range-start) .ant-picker-cell-inner {
+
+    border-radius: 50%;
+
+    &:hover {
+        border-color: $clr8;
+    }
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single):not(.ant-picker-cell-range-end) .ant-picker-cell-inner {
+    border-radius: 50%;
+
+    &:hover {
+        border-color: $clr8;
+    }
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+    height: 40px !important;
+    width: 48px !important;
+    background-color: rgba(211, 211, 211, 0.432)
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
+    height: 40px !important;
+    width: 40px !important;
+    background-color: rgba(211, 211, 211, 0.432)
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before,
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start.ant-picker-cell-range-hover::before,
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end.ant-picker-cell-range-hover::before,
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single).ant-picker-cell-range-hover-start::before,
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single).ant-picker-cell-range-hover-end::before,
+.ant-picker-panel>:not(.ant-picker-date-panel) :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start::before,
+.ant-picker-panel>:not(.ant-picker-date-panel) :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end::before {
+
+    background-color: rgba(211, 211, 211, 0.432) !important;
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border: 2px solid $clr7;
 }
 
 .header-calender-dropdown {
@@ -811,22 +893,11 @@
             width: 336px;
             border-radius: 50%;
 
-            th {
-                color: $clr8;
-                font-family: $ff1;
+            td {
                 font-weight: 600;
-                font-size: 13px;
+                height: 40px !important;
             }
 
-            td {}
-
-            td::before {
-                ////// הקו האפור שמחבר בין התאריך התחלה לסוף
-                // border-radius: 50%;
-                background: #f7f7f7;
-            }
-
-            td::after {}
         }
     }
 
@@ -845,20 +916,20 @@
     }
 
     .ant-picker-cell {
+
         :hover {
-            border: $bs2;
+            border-radius: 50%;
         }
     }
 
     .ant-picker-cell-inner {
         transition: 0s !important;
-        background: none !important;
-
-
-        :hover {
-            // background-color: black;
-        }
+        padding-top: 8px;
+        height: 40px !important;
+        width: 40px !important;
+        border-radius: 50%;
     }
+
 
     .ant-picker-panels {
         width: 780px;
@@ -886,6 +957,7 @@
 ////////// global classes
 
 .upper-text {
+    position: relative;
     font-size: rem(13px);
     line-height: rem(16px);
     font-weight: 600;
@@ -901,7 +973,7 @@
     text-align: left;
     font-size: rem(14px);
     line-height: rem(18px);
-    color: #717171;
+    color: $clr8;
     font-weight: 400;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -916,7 +988,7 @@
 
     &.last {
         cursor: pointer;
-        color: rgb(94, 94, 94);
+        color: rgb(2, 1, 1);
         font-weight: 600;
         text-decoration: underline
     }

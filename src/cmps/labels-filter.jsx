@@ -1,21 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
-import { CgOptions } from "react-icons/cg";
+import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
+import { CgOptions } from "react-icons/cg"
 
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
 
 export function LabelsFilter() {
     const dispatch = useDispatch()
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [displayCount, setDisplayCount] = useState(4);
-    const [displayNext, setDisplayNext] = useState(true);
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [displayCount, setDisplayCount] = useState(4)
+    const [displayNext, setDisplayNext] = useState(true)
     const ElCarousel = useRef(null)
     const ElCarousel1 = useRef(null)
     const totalWidth = ElCarousel1?.current?.offsetWidth
     const displayedWidth = (ElCarousel?.current?.offsetWidth - 114)
+    const [isLabelsFilterSticky, setIsLabelsFilterSticky] = useState(false)
 
+
+    // className={`labers-filter-wrapper ${isLabelsFilterSticky ? 'sticky' : ''}`}
+    // style={{ top: isLabelsFilterSticky ? '100px' : '0' }}
     const stayLabels = [
         { name: 'Play', src: 'play' }, { name: 'Iconic cities', src: 'iconic' }, { name: 'Caves', src: 'cave' },
         { name: 'By the lake', src: 'lake' }, { name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
@@ -29,18 +33,32 @@ export function LabelsFilter() {
         , { name: 'Arctic', src: 'arctic' },
         ,]
 
-    const handleNext = () => {
+    function handleNext() {
         if (currentIndex + displayCount < stayLabels.length) {
-            setCurrentIndex(currentIndex + displayCount);
+            setCurrentIndex(currentIndex + displayCount)
         }
-
     }
 
-    const handlePrev = () => {
+    function handlePrev() {
         if (currentIndex - displayCount >= 0) {
-            setCurrentIndex(currentIndex - displayCount);
+            setCurrentIndex(currentIndex - displayCount)
         }
     }
+
+    useEffect(() => {
+        function handleScroll() {
+            if (window.scrollY > 25) {
+                setIsLabelsFilterSticky(false)
+            } else {
+                setIsLabelsFilterSticky(true)
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            console.log(isLabelsFilterSticky)
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     function handleSettingClick() {
         dispatch({ type: TOGGLE_FILTER_MODAL })
@@ -56,34 +74,38 @@ export function LabelsFilter() {
         }
     }
 
-    return (<div className="carousel-container  " ref={ElCarousel}>
-        <div className="carousel ">
-            <div className="carousel-inner" ref={ElCarousel1} >
-                {
-                    stayLabels.map((label, index) => {
-                        return (
-                            <div key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
+    return (<div className={`carousel-container-wrapper full `}>
 
-                                <div className="label-filter-btn" >
-                                    <img src={require(`../assets/labels-logos/${label.src}.jpg`)} />
-                                    <span>{label.name}</span>
+
+        <div className={`carousel-container main-layout ${isLabelsFilterSticky ? 'sticky' : 'fixed'} `} ref={ElCarousel}>
+            <div className="carousel ">
+                <div className="carousel-inner" ref={ElCarousel1} >
+                    {
+                        stayLabels.map((label, index) => {
+                            return (
+                                <div key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
+
+                                    <div className="label-filter-btn" >
+                                        <img src={require(`../assets/labels-logos/${label.src}.jpg`)} />
+                                        <span>{label.name}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
+
+                {(currentIndex) ? <div className={'btn-container prev '}>
+                    <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+                </div> : ''}
+
+                {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
+                    <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
+
+                </div>}
             </div>
-
-            {(currentIndex) ? <div className={'btn-container prev '}>
-                <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
-            </div> : ''}
-
-            {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
-                <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
-
-            </div>}
+            <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
         </div>
-        <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
     </div>
     )
 }
