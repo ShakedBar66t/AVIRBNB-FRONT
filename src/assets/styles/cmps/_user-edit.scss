@@ -1,0 +1,48 @@
+.user-edit {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 10px;
+    font-family: cereal;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    .edit-section {
+        padding: 10px;
+        background-color: #f3f3f3;
+        border-radius: 10px;
+
+        .user-info {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+
+            .user-image {
+                text-align: center;
+                img {
+                    opacity: 1;
+                    width: 400px;
+                    border-radius: 200px;
+                }
+                img:hover {
+                    opacity: 0.5;
+                    filter: brightness(50%);
+                }
+            }
+        }
+    }
+}
+
+.image-container:hover .change-picture-text {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.change-picture-text {
+    display: none;
+}

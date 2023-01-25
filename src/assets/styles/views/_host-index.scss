@@ -1,14 +1,17 @@
-
-.app-header {
-    .filter-container {
-        display: none !important;
-    }
-    .carousel-container {
-        display: none;
-    }
-    .user-nav-container {
-        .host-lng-container {
+.host-index {
+    .app-header {
+        .filter-container {
             display: none;
+        }
+
+        .carousel-container {
+            display: none;
+        }
+
+        .user-nav-container {
+            .host-lng-container {
+                display: none;
+            }
         }
     }
 }
@@ -156,7 +159,7 @@
 }
 
 @media (max-width: 460px) {
-    .app-header{
+    .app-header {
         display: none;
     }
 
@@ -168,6 +171,7 @@
 @media (max-width: 650px) {
     .stay-edit {
         margin-bottom: 80px;
+
         .edit-section {
             max-width: calc(100vw - 48px);
 
