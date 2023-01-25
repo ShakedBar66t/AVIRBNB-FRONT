@@ -260,7 +260,7 @@ export function AppHeader() {
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '30px', height: '30px' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px',borderRadius:'50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>

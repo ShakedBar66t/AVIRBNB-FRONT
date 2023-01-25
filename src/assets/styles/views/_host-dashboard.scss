@@ -1,0 +1,53 @@
+.host-dashboard {
+
+    margin-top: 80px;
+    padding: 0 24px;
+    color: $clr7;
+
+    @include for-mobile-layout {
+        padding: 0 40px;
+    }
+
+    @include for-trip-wide-layout {
+        padding: 0 80px;
+    }
+
+    h2 {
+        padding: 36px 0 24px;
+        font-size: 2rem;
+        border-bottom: $bs1;
+    }
+
+    .dashboard-main {
+        width: 100%;
+        display: flex;
+        margin-top: 1rem;
+        gap: 2rem;
+    }
+
+}
+
+.statistics-container {
+    width: 40%;
+    height: 500px;
+    position: sticky;
+    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+    border-radius: 8px;
+}
+
+.orders-container {
+    width: 60%;
+    height: 500px;
+    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+    border-radius: 8px;
+
+    div{
+        div{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    
+  
+}

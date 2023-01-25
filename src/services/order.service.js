@@ -18,10 +18,17 @@ window.cs = orderService
 
 async function query(user=userService.getLoggedinUser()) {
     var orders = await storageService.query(ORDER_STORAGE_KEY)  
-    console.log('order!!@231312',orders)
-    console.log('userid',user._id,'buterid',orders[0].buyer._id)
+    // console.log('order!!@231312',orders)
+    // console.log('userid',user._id,'buterid',orders[0].buyer._id)
+    console.log('user!!!!!!!',user)
     if (user) {
-        orders = orders.filter(order => order.buyer._id === user._id)
+
+        if(user.forHost){
+            orders = orders.filter(order => order.host._id === user.user._id) 
+        }
+        else{
+            orders = orders.filter(order => order.buyer._id === user.user._id)
+        }
         console.log('filtersd orders',orders)
     }
     return orders
