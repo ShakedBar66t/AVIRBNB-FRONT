@@ -5,7 +5,6 @@ import { CgOptions } from "react-icons/cg";
 
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
-import { Carousel } from 'bootstrap';
 
 export function LabelsFilter() {
     const dispatch = useDispatch()
@@ -49,13 +48,10 @@ export function LabelsFilter() {
     }
 
     function IsLastNextClick() {
-        // console.log((currentIndex * 100), 'index', ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400)))
         if ((currentIndex * 100) === ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400) + 400)) {
-            // console.log('last')
             return ((totalWidth - displayedWidth) + 70)
         }
         else {
-            // console.log('notlast')
             return (currentIndex * 100)
         }
     }
