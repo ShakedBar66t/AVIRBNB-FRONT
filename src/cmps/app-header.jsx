@@ -39,6 +39,7 @@ export function AppHeader() {
     const [flexibleDates, setFlexibleDates] = useState(false)
     const [guestsModal, setGuestsModal] = useState(false)
     const [calenderOpen, setCalenderOpen] = useState(false)
+    const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
 
     const { stayId } = params
@@ -103,6 +104,39 @@ export function AppHeader() {
     }
 
 
+
+    function handleGuestsInput(type, value) {
+        let newGuests = { ...guests }
+        newGuests[type] += value
+        setguests(newGuests)
+        let addedText = false
+
+        let text = ''
+        if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
+            text = 'Add guests'
+        } else {
+            if (newGuests.Adults + newGuests.Children > 0) {
+                text += `${newGuests.Adults + newGuests.Children} guests`
+                addedText = true
+            }
+            if (newGuests.Pets > 0) {
+                if (addedText) {
+                    text += ', '
+                }
+                text += ` ${newGuests.Pets} pets`
+                addedText = true
+            }
+            if (newGuests.Infants > 0) {
+                if (addedText) {
+                    text += ', '
+                }
+                text += ` ${newGuests.Infants} infants`
+            }
+        }
+        setLowerGuestsText(text)
+    }
+
+
     function handleExpendedModalClick({ target }) {
         const name = target.name
         if (!searchModalExpended) setSearchModalExpended(!searchModalExpended)
@@ -140,13 +174,6 @@ export function AppHeader() {
             default:
                 break
         }
-    }
-
-    function handleGuestsInput(type, diff) {
-        setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
-
-
-        console.log(guests)
     }
 
     return (
@@ -272,8 +299,10 @@ export function AppHeader() {
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
-                    <div className='inner-btn-wrapper'>
-                        <button className={`inner-btns-container right ${guestsModal ? 'selected' : ''}`} name='guests' onClick={(ev) => handleExpendedModalClick(ev)}><span className='upper-text'>Who</span><span className='lower-text'>Add guests</span></button>
+                    <div className={`inner-btn-wrapper ${guestsModal ? 'selected' : ''}`}>
+                        <button className={`inner-btns-container right`} name='guests' onClick={(ev) => handleExpendedModalClick(ev)}>
+                            <span className='upper-text'>Who</span>
+                            <span className='lower-text'>{lowerGuestsText}</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
                     <div className={`guests-modal-extended ${guestsModal ? 'open' : ''}`}>
@@ -286,11 +315,12 @@ export function AppHeader() {
                                 <div className="guests-type-input-value">
                                     <button type="button" className={`guests-btn ${guests[type.type] === 0 ? 'denied' : 'allowed'} `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><GoDash className={`btn-icon `} /></button>
                                     <span className='type-count'>{guests[type.type]}</span>
-                                    <button type="button" className={`guests-btn allowed`} onClick={() => { handleGuestsInput(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
+                                    <button type="button" className={`guests-btn allowed`} name={type.type === 'Pets' ? 'pets' : ''} onClick={() => { handleGuestsInput(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
                                 </div>
 
                             </div>
-                        })}                    </div>
+                        })}
+                    </div>
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>

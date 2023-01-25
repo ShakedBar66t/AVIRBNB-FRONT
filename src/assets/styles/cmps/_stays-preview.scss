@@ -3,19 +3,20 @@
     font-family: Circular;
     font-size: 1rem;
     line-height: 20px;
-    
+
     &:hover {
         & .img-preview-paging-btns {
             opacity: 1;
         }
     }
+
     // .prev-carousel{
     //     display: flex;
     //     // width: 100%;
     //     // aspect-ratio: 1/0.95;
     //     overflow: hidden;
 
-       
+
     //     .stay-preview-img {
     //         width: 100%;
     //         aspect-ratio: 1/0.95;
@@ -40,36 +41,38 @@
         margin: 0;
         text-align: center;
         opacity: 0;
-        transition:  0.4s;
+        transition: 0.4s;
 
-        &:hover{
+        &:hover {
             background-color: rgba($color: $clr6, $alpha: 1);
-            padding: 8px 10.5px;            
+            padding: 8px 10.5px;
         }
     }
 
     .prev-img-preview-btn {
         left: 12px;
 
-        &:hover{
-            left: 10px; 
+        &:hover {
+            left: 10px;
         }
     }
 
     .next-img-preview-btn {
         right: 12px;
-        &:hover{
-            right: 10px; 
+
+        &:hover {
+            right: 10px;
         }
     }
 
-    .liked{
+    .liked {
         color: #ff385c;
     }
-    .unliked{
-        color:rgba($color: $clr7, $alpha: 0.7);
+
+    .unliked {
+        color: rgba($color: $clr7, $alpha: 0.7);
     }
-    
+
     .like-btn {
         position: absolute;
         top: 15px;
@@ -87,14 +90,12 @@
         position: absolute;
         bottom: 110px;
         left: 45%;
-     font-size: 40px ;
-     
+        font-size: 40px;
     }
 
     .prev-price {
         color: $clr7;
         margin-top: 7px;
-       
     }
 
     .prev-loc-rate {
@@ -113,56 +114,3 @@
         font-weight: 400;
     }
 }
-
-
-.slick-slider {
-    position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-
-    button {
-        margin: -5px 0;
-    }
-    &:hover {
-        .slick-prev {
-            opacity: 1;
-        }
-        .slick-next {
-            opacity: 1;
-        }
-    }
-    div {
-        max-height: 270px;
-    }
-    .slick-prev:before,
-    .slick-next:before {
-        font-size: 30px !important;
-    }
-    .slick-prev,
-    .slick-next {
-        position: absolute;
-        top: 55%;
-        left: 0px;
-        z-index: 5;
-        opacity: 0;
-        transform: translateY(-55%);
-    }
-    .slick-next {
-        right: 10px;
-        left: unset;
-    }
-    .slick-dots {
-        bottom: 5px;
-        li{
-            margin: 0;
-        }
-        li button::before {
-            color: $clr6 !important;
-            font-size: 8px;
-            opacity: 0.6;
-            
-        }
-        li.slick-active button::before {
-            opacity: 1;
-        }
-    }}
