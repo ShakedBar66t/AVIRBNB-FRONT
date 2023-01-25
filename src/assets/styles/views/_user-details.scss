@@ -1,7 +1,22 @@
 .user-details {
-    .user-img {
-        height: 200px;
-        width: 200px;
-        background-size: contain;
-    }
+
+    .app-header {
+        display: none;
+        @include for-mobile-layout {
+            display: grid;
+            grid-template-columns: 64px 1fr 64px;
+        }
+
+        @include for-trip-wide-layout {
+            grid-template-columns: 1fr 1280px 1fr;
+
+        }
+    }    // .user-img {
+        .user-deatils-cont{
+            margin-top:80px;
+        }
+    //     height: 200px;
+    //     width: 200px;
+    //     background-size: contain;
+    // }
 }
