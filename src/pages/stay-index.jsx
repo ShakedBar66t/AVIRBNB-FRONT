@@ -7,7 +7,6 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
-import { PreviewImgCarousel } from '../cmps/img-carousel.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
 
 export function StayIndex() {

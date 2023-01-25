@@ -10,24 +10,16 @@
         }
     }
 
-    // .prev-carousel{
-    //     display: flex;
-    //     // width: 100%;
-    //     // aspect-ratio: 1/0.95;
-    //     overflow: hidden;
+    .prev-carousel{
+        display: flex;
+        overflow: hidden;
 
-
-    //     .stay-preview-img {
-    //         width: 100%;
-    //         aspect-ratio: 1/0.95;
-    //         border-radius: 10px;
-    //     }
-    // }
-
-    .stay-preview-img {
-        width: 100%;
-        aspect-ratio: 1/0.95;
-        border-radius: 10px;
+        .stay-preview-img {
+            width: 100%;
+            aspect-ratio: 1/0.95;
+            border-radius: 10px;
+            transition: 0.3s ease-in;
+        }
     }
 
     .img-preview-paging-btns {
@@ -96,6 +88,7 @@
     .prev-price {
         color: $clr7;
         margin-top: 7px;
+        font-weight: lighter;
     }
 
     .prev-loc-rate {
