@@ -170,29 +170,6 @@ export function StayDetails() {
                     return <img src={img} key={index}/>
                 })}
             </div>
-            <div className="full">
-                {/* <header className="details-header full secondary-container">
-                    <section className="secondary-container">
-                        <nav className="details-nav">
-                            <a href="#photos">Photos</a>
-                            <a href="#amenities">Amenities</a>
-                            <a href="#reviews">Reviews</a>
-                            <a href="#map">Map</a>
-                        </nav>
-                        <div className="reserve-container">
-                            <div className="reserve-info-container">
-                                <p>${stay.price} <span>night</span></p>
-                                <div className="review-totals">
-                                    <FaStar />
-                                    <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
-                                    <a href="#reviews">{stay.reviews.length} reviews</a>
-                                </div>
-                            </div>
-                            <button className="btn-reserve">Reserve</button>
-                        </div>
-                    </section>
-                </header> */}
-            </div>
             <div className="stay-info">
                 <section className="avir-content">
                     <div className="subtitle">
