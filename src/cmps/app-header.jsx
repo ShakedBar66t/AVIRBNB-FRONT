@@ -1,25 +1,26 @@
 import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { login, logout, signup } from '../store/user.actions.js'
 import { useEffect, useRef, useState } from 'react'
 import { GoDash, GoPlus } from "react-icons/go"
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
+import { DatePicker } from "antd"
 import { LabelsFilter } from './labels-filter'
-import { useDispatch } from 'react-redux'
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { stayService } from '../services/stay.service'
+import { login, logout, signup } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
-import { DatePicker } from "antd"
-const { RangePicker } = DatePicker
 
 
 export function AppHeader() {
-
+    
     const params = useParams()
     const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
+    const { RangePicker } = DatePicker
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
@@ -42,12 +43,13 @@ export function AppHeader() {
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
     
+    // final filterBy
+    const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader) 
+
     const { stayId } = params
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
     const isHostDashboardPage = (location.pathname === '/host/dashboard') ? true : false
-
-    console.log(isHostDashboardPage)
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
         { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
@@ -208,8 +210,61 @@ export function AppHeader() {
         const daysCount = Math.round((dateEnd - dateStart) / (dayInMilliseconds))
       }
 
+      
+
+      function handleFilterByChange(type, value) {
+        let newFilterBy = { ...filterBy }
+      
+        if (type === 'guests') {
+          let addedText = false
+          let text = ''
+          newFilterBy[type][value] += 1
+      
+          if (newFilterBy[type].Adults + newFilterBy[type].Children + newFilterBy[type].Infants + newFilterBy[type].Pets === 0) {
+            text = 'Add guests'
+          } else {
+            if (newFilterBy[type].Adults + newFilterBy[type].Children > 0) {
+              text += `${newFilterBy[type].Adults + newFilterBy[type].Children} guests`
+              addedText = true
+            }
+            if (newFilterBy[type].Pets > 0) {
+              if (addedText) {
+                text += ', '
+              }
+              text += ` ${newFilterBy[type].Pets} pets`
+              addedText = true
+            }
+            if (newFilterBy[type].Infants > 0) {
+              if (addedText) {
+                text += ', '
+              }
+              text += ` ${newFilterBy[type].Infants} infants`
+            }
+          }
+          setLowerGuestsText(text)
+        } else if (type === 'checkInOutDates') {
+          const checkIn = new Date(value[0].$d)
+          const checkOut = new Date(value[1].$d)
+          const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })        
+          const checkInDay = checkIn.getDate()
+          const checkOutMonth = checkOut.toLocaleString('en-US', { month: 'short' })
+          const checkOutDay = checkOut.getDate()
+          const formattedCheckIn = `${checkInMonth} ${checkInDay}`
+          const formattedCheckOut = `${checkOutMonth} ${checkOutDay}`
+          newFilterBy[type] = { checkIn: formattedCheckIn, checkOut: formattedCheckOut }
+          const dayInMilliseconds = 1000 * 60 * 60 * 24
+          const dateStart = value[0].$d.getTime()
+          const dateEnd = value[1].$d.getTime()
+          const daysCount = Math.round((dateEnd - dateStart) / (dayInMilliseconds))
+        } else {
+          newFilterBy[type] = value
+        }
+      
+        setFilterBy(newFilterBy)
+        console.log(filterBy)
+      }
     return (
-        <header className={(stayId || isTripPage||id ||isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
+        <header className={(stayId ||isTripPage||id ||isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
@@ -303,7 +358,7 @@ export function AppHeader() {
                             <div className='calenders-container'>
                                 <div className='left-calender'>
                                     <RangePicker  format="MMM D" open={isCalenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
-                                        onChange={(values) => handleDateChange(values)}/>
+                                        onChange={(values) => handleFilterByChange(values)}/>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +376,7 @@ export function AppHeader() {
                                 <span className='upper-text'>Check out</span><span className='lower-text'>{`${checkInOutDates.checkOut? checkInOutDates.checkOut:'Add dates'}`}</span> </button>
                             <span className='border-between-right'></span>
                         </div>
-                    </div>
+                </div>
                 </div>
                 <div className='filter-modal-right-btns'>
                     <div className={`inner-btn-wrapper ${isGuestsModalOpen ? 'selected' : ''}`}>
@@ -338,9 +393,9 @@ export function AppHeader() {
                                     <span className={`lower-text ${(index === 3) ? 'last' : ''}`} >{type.txt}</span >
                                 </div>
                                 <div className="guests-type-input-value">
-                                    <button type="button" className={`guests-btn ${guests[type.type] === 0 ? 'denied' : 'allowed'} `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><GoDash className={`btn-icon `} /></button>
+                                    <button type="button" className={`guests-btn ${guests[type.type] === 0 ? 'denied' : 'allowed'} `} disabled={!guests[type.type]} onClick={() => { handleFilterByChange(type.type, -1) }}><GoDash className={`btn-icon `} /></button>
                                     <span className='type-count'>{guests[type.type]}</span>
-                                    <button type="button" className={`guests-btn allowed`} name={type.type === 'Pets' ? 'pets' : ''} onClick={() => { handleGuestsInput(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
+                                    <button type="button" className={`guests-btn allowed`} name={type.type === 'Pets' ? 'pets' : ''} onClick={() => { handleFilterByChange(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
                                 </div>
 
                             </div>
@@ -349,7 +404,7 @@ export function AppHeader() {
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            {(!isTripPage&&!id)  && <div className='labels-container'>
+            {((!isTripPage&&!id))  && <div className={`labels-container ${(isHostDashboardPage)? 'hidden':''}`}>
                 {(!stayId) && <LabelsFilter />}
             </div>}
         </header >
