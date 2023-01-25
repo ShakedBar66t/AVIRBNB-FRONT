@@ -25,10 +25,10 @@ export function getActionUpdateOrder(order) {
     }
 }
 
-export async function loadOrders() {
+export async function loadOrders(user) {
    
     try {
-        const orders = await orderService.query()
+        const orders = await orderService.query(user)
         console.log('orders!!!!!!!!!!!!!!!!!!!!!!!!',orders)
 
         store.dispatch({

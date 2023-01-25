@@ -32,6 +32,50 @@
 }
 
 
+.trips-main-cont {
+    @include for-mobile-layout {
+        margin-top: 80px;
+    }
+}
+
+.order-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: auto;
+
+    @include for-mobile-layout {
+        min-height: 120vh;
+        grid-template-columns: 24px 1fr 24px;
+    }
+
+    @include for-trip-wide-layout {
+        grid-template-columns: 1fr 1600px 1fr;
+    }
+
+    >* {
+        grid-column: 2;
+    }
+
+    .full {
+        grid-column: 1 / -1; 
+    }
+
+    .app-header {
+        display: none;
+
+        @include for-mobile-layout {
+            display: grid;
+            grid-template-columns: 64px 1fr 64px;
+        }
+
+        @include for-trip-wide-layout {
+            grid-template-columns: 1fr 1440px 1fr;
+
+        }
+    }
+}
+
+
 
 
 

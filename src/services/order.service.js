@@ -21,7 +21,14 @@ async function query(user=userService.getLoggedinUser()) {
     console.log('order!!@231312',orders)
     console.log('userid',user._id,'buterid',orders[0].buyer._id)
     if (user) {
-        orders = orders.filter(order => order.buyer._id === user._id)
+
+        if(user.forHost){
+            orders = orders.filter(order => order.host._id === user._id) 
+        }
+        else{
+
+            orders = orders.filter(order => order.buyer._id === user._id)
+        }
         console.log('filtersd orders',orders)
     }
     return orders

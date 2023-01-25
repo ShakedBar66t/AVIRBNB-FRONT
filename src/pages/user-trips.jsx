@@ -23,7 +23,7 @@ export function UserTrips() {
 
     async function OnloadUserOrders() {
         try {
-          const  currUserOrders = await loadOrders()
+          const  currUserOrders = await loadOrders({user:userService.getLoggedinUser(),forHost:false})
           console.log(currUserOrders,'prder!!!!!!!!!')
             setUserTrips(currUserOrders)
 
@@ -35,7 +35,7 @@ export function UserTrips() {
 
     console.log('trips', userTrips)
 
-    return <section className="trips-container">
+    return <section className="order-layout">
         <AppHeader />
         <main className="trips-main-cont" >
             <h2 >Trips</h2>
