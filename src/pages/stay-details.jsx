@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { stayService } from "../services/stay.service"
-import { IoShareOutline } from 'react-icons/io5'
+import { stayAmenities, stayService } from "../services/stay.service"
+import { IoShareOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
 import { BsHeart, BsTrophy } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
@@ -28,12 +28,6 @@ const { RangePicker } = DatePicker
 
 
 export function StayDetails() {
-
-    const stayAmenities = ['Cleaning products', 'Shampoo', 'Body soap', 'Hot water',
-        'Shower gel', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades',
-        'Ethernet connection', 'TV with standard cable', 'Crib', 'High chair', 'AC - split type ductless system',
-        'Heating', 'Fire extinguisher', 'First aid kit', 'Refrigerator', 'Microwave', 'Kitchen', 'Mini fridge',
-        'Freezer', 'Stove', 'Oven', 'Hot water kettle', 'Coffee maker: pour-over coffee', 'Wine glasses', 'Dining table']
 
     const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
         , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
@@ -74,8 +68,60 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    // console.log('datesssssss!!!!!', dates)
-    // console.log(stay)
+    const stayAmenities = [
+        { name: 'TV', image: require('../assets/amenities-logos/TV.png') },
+        { name: 'Internet', image: require('../assets/amenities-logos/Internet.png') },
+        { name: 'Wifi', image: require('../assets/amenities-logos/Wifi.png') },
+        { name: 'Air conditioning', image: require('../assets/amenities-logos/Air conditioning.png') },
+        { name: 'Pool', image: require('../assets/amenities-logos/Pool.png') },
+        { name: 'Kitchen', image: require('../assets/amenities-logos/Kitchen.png') },
+        { name: 'Doorman', image: require('../assets/amenities-logos/Doorman.png') },
+        { name: 'Gym', image: require('../assets/amenities-logos/Gym.png') },
+        { name: 'Elevator', image: require('../assets/amenities-logos/Elevator.png') },
+        { name: 'Heating', image: require('../assets/amenities-logos/Heating.png') },
+        { name: 'Washer', image: require('../assets/amenities-logos/Washer.png') },
+        { name: 'Dryer', image: require('../assets/amenities-logos/Dryer.png') },
+        { name: 'Smoke detector', image: require('../assets/amenities-logos/Smoke detector.png') },
+        { name: 'First aid kit', image: require('../assets/amenities-logos/First aid kit.png') },
+        { name: 'Fire extinguisher', image: require('../assets/amenities-logos/Fire extinguisher.png') },
+        { name: 'Essentials', image: require('../assets/amenities-logos/Essentials.png') },
+        { name: 'Shampoo', image: require('../assets/amenities-logos/Shampoo.png') },
+        { name: '24-hour check-in', image: require('../assets/amenities-logos/24-hour check-in.png') },
+        { name: 'Hangers', image: require('../assets/amenities-logos/Hangers.png') },
+        { name: 'Hair dryer', image: require('../assets/amenities-logos/Hair dryer.png') },
+        { name: 'Iron', image: require('../assets/amenities-logos/Iron.png') },
+        { name: 'Laptop friendly workspace', image: require('../assets/amenities-logos/Laptop friendly workspace.png') },
+        { name: 'Self check-in', image: require('../assets/amenities-logos/Self check-in.png') },
+        { name: 'Hot water', image: require('../assets/amenities-logos/Hot water.png') },
+        { name: 'Bed linens', image: require('../assets/amenities-logos/Bed linens.png') },
+        { name: 'Beachfront', image: require('../assets/amenities-logos/Beachfront.png') },
+        { name: 'Microwave', image: require('../assets/amenities-logos/Microwave.png') },
+        { name: 'Coffee maker', image: require('../assets/amenities-logos/Coffee maker.png') },
+        { name: 'Refrigerator', image: require('../assets/amenities-logos/Refrigerator.png') },
+        { name: 'Dishes and silverware', image: require('../assets/amenities-logos/Dishes and silverware.png') },
+        { name: 'Cooking basics', image: require('../assets/amenities-logos/Cooking basics.png') },
+        { name: 'Stove', image: require('../assets/amenities-logos/Stove.png') },
+        { name: 'Babysitter recommendations', image: require('../assets/amenities-logos/Babysitter recommendations.png') },
+        { name: 'Step-free access', image: require('../assets/amenities-logos/Step-free access.png') },
+        { name: 'Luggage dropoff allowed', image: require('../assets/amenities-logos/Luggage dropoff allowed.png') },
+        { name: 'Indoor fireplace', image: require('../assets/amenities-logos/Indoor fireplace.png') },
+        { name: 'Extra pillows and blankets', image: require('../assets/amenities-logos/Extra pillows and blankets.png') },
+        { name: 'Wide entryway', image: require('../assets/amenities-logos/Wide entryway.png') },
+        { name: 'Keypad', image: require('../assets/amenities-logos/Keypad.png') },
+        { name: 'Pocket wifi', image: require('../assets/amenities-logos/Pocket wifi.png') },
+        { name: 'Ethernet connection', image: require('../assets/amenities-logos/Ethernet connection.png') },
+        { name: 'Private bathroom', image: require('../assets/amenities-logos/Private bathroom.png') },
+        { name: 'How water kettle', image: require('../assets/amenities-logos/How water kettle.png') },
+        { name: 'Fireplace guards', image: require('../assets/amenities-logos/Fireplace guards.png') },
+        // { name: 'Heated towel rack', image: require('../assets/amenities-logos/Hot towel rack.png') },
+        { name: 'Building staff', image: require('../assets/amenities-logos/Building staff.png') },
+        { name: 'Accessible-height toilet', image: require('../assets/amenities-logos/Accessible-height toilet.png') },
+        { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
+        // { name: 'Toilet', image: require('../assets/amenities-logos/toilet.png') }
+    ];
+
+    console.log('datesssssss!!!!!', dates)
+    console.log(stay)
     // console.log(stay.reviews[0].by.imgUrl)
 
     function handleGuestsInput(type, diff) {
@@ -91,7 +137,7 @@ export function StayDetails() {
             return
         }
         else {
-            const newOrder = { ...order, guests: guests, hostId: stay.host._id, stay: { _id: stay._id, name: stay.name, price: stay.price }, buyer: { _id: user._id, fullname: user.fullname } }
+            const newOrder = { ...order, guests: guests, host: { _id: stay.host._id, fullname: stay.host.fullname }, stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc }, buyer: { _id: user._id, fullname: user.fullname } }
             console.log('new order!!!!!!!!', newOrder)
 
 
@@ -158,143 +204,145 @@ export function StayDetails() {
                         </div>
                     </section>
                 </header> */}
-            </div>
-            <div className="stay-info">
-                <section className="avir-content">
-                    <div className="subtitle">
-                        <div>
-                            <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
-                            <span>{stay.capacity} guests · 1 bathroom · 2 bedrooms </span>
-                        </div>
-                        <img className="host-image" src={stay.host.imgUrl} />
-                    </div>
-                    <div className="user-stay-info">
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <BsTrophy />
-                            </div>
+                </div>
+                <div className="stay-info">
+                    <section className="avir-content">
+                        <div className="subtitle">
                             <div>
-                                <h1>{stay.host.fullname} is a Superhost</h1>
-                                <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
+                                <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
+                                <span>{stay.capacity} guests · {stay.bathrooms} bathrooms · {stay.bedrooms} bedrooms </span>
                             </div>
+                            <img className="host-image" src={stay.host.pictureUrl} />
                         </div>
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <SlLocationPin />
-                            </div>
-                            <div>
-                                <h1>Great location</h1>
-                                <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
-                            </div>
-                        </div>
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <HiOutlineKey />
-                            </div>
-                            <div>
-                                <h1>Great check-in experience</h1>
-                                <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="air-cover">
-                        <h3>
-                            <span style={{ color: '#ff385c' }}>avir</span>cover
-                        </h3>
-                        <p style={{ marginBottom: '8px' }}>
-                            Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
-                        </p>
-                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder' }}>
-                            Learn More
-                        </p>
-                    </div>
-                    <div className="summary">
-                        <p>
-                            {stay.summary}
-                        </p>
-                        <p style={{ marginTop: '16px', textDecoration: 'underline', fontWeight: 'bold' }}>
-                            Show more
-                        </p>
-                    </div>
-                    <div className="amenities-container">
-                        <h2>What this place offers </h2>
-                        <div className="stay-amenities">
-                            {stay.amenities.map((amenity, index) => {
-                                return <div className="amenities-list" key={index}>
-                                    <div>{amenity}</div>
+                        <div className="user-stay-info">
+                            <div className="user-achievement">
+                                <div className="achievement-icon">
+                                    <BsTrophy />
                                 </div>
-                            })}
+                                <div>
+                                    <h1>{stay.host.fullname} is a Superhost</h1>
+                                    <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
+                                </div>
+                            </div>
+                            <div className="user-achievement">
+                                <div className="achievement-icon">
+                                    <SlLocationPin />
+                                </div>
+                                <div>
+                                    <h1>Great location</h1>
+                                    <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
+                                </div>
+                            </div>
+                            <div className="user-achievement">
+                                <div className="achievement-icon">
+                                    <HiOutlineKey />
+                                </div>
+                                <div>
+                                    <h1>Great check-in experience</h1>
+                                    <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </section>
-                <section className="reserve-modal">
-                    <form >
-                        <header>
-                            <h4><span>{stay.price + '$ '} </span> night</h4>
-                            <div className="review-totals">
-                                <FaStar />
-                                {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                <span>4.8 ·</span>
-                                <a href="">20 reviews</a>
-                            </div>
-                        </header>
-                        <div className="order-input">
-                            <div className="date-input">
-                                {/* <input type="text" /> */}
-                                <RangePicker
-                                    onChange={(values) => {
-
-                                        // const value1 = moment(values[0]).format('DD-MM-YYYY')
-                                        const time1 = values[0].$d
-                                        const date = new Date(time1)
-                                        const day = 1000 * 60 * 60 * 24
-
-                                        //    const dateStart = date.getTime()
-                                        const dateStart = values[0].$d.getTime()
-                                        const dateEnd = values[1].$d.getTime()
-                                        const daysCount = Math.round((dateEnd - dateStart) / (day))
-                                        const totalPrice = daysCount * stay.price
-                                        console.log('valuesss!!!!', totalPrice)
-                                        setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
-                                    }} />
-                            </div>
-                            <div className="guests-input">
-                                <small>Guests max capacity of {stay.capacity}</small>
-                                <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                                    {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
-                                    {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
-                                    {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
-                                    {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
-
-
-                                </p>
-                                <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
-                                    {(isGuestModal) ? <GrUp /> : <GrDown />}</button>
-                            </div>
-
+                        <div className="air-cover">
+                            <h3>
+                                <span style={{ color: '#ff385c' }}>avir</span>cover
+                            </h3>
+                            <p style={{ marginBottom: '8px', lineHeight: '20px' }}>
+                                Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                            </p>
+                            <p style={{ textDecoration: 'underline', fontWeight: 'bolder', marginTop: '16px' }}>
+                                Learn More
+                            </p>
                         </div>
-                        {(isGuestModal) && <div className="guests-modal">
-
-                            {guestsTypes.map(type => {
-                                return <div className="guests-type-input" key={type.type}>
-                                    <div>
-                                        <p>{type.type}</p>
-                                        <small>{type.txt}</small>
+                        <div className="summary">
+                            <p>
+                                {stay.summary}
+                            </p>
+                            <p style={{ marginTop: '16px', textDecoration: 'underline', fontWeight: 'bold' }}>
+                                Show more
+                            </p>
+                        </div>
+                        <div className="amenities-container">
+                            <h2>What this place offers </h2>
+                            <div className="stay-amenities">
+                                {stayAmenities.map((amenity, image, index) => {
+                                    return <div className="amenities-list" key={index}>
+                                        <img src={require(`../assets/amenities-logos/${amenity.name}.png`)} />
+                                        <h1>{amenity.name}</h1>
                                     </div>
-                                    <div className="guests-type-input-value">
-                                        <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
-                                        <span>{guests[type.type]}</span>
-                                        <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
+                                })}
+                            </div>
+                        </div>
+                    </section>
+                    <section className="reserve-modal">
+                        <div className="sticky-modal">
+                            <form >
+                                <header>
+                                    <h4><span>{stay.price + '$ '} </span> night</h4>
+                                    <div className="review-totals">
+                                        <FaStar />
+                                        {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
+                                        <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                                        <a href="">{stay.reviews.length} reviews</a>
+                                    </div>
+                                </header>
+                                <div className="order-input">
+                                    <div className="date-input">
+                                        {/* <input type="text" /> */}
+                                        <RangePicker
+                                            onChange={(values) => {
+
+                                                // const value1 = moment(values[0]).format('DD-MM-YYYY')
+                                                const time1 = values[0].$d
+                                                const date = new Date(time1)
+                                                const day = 1000 * 60 * 60 * 24
+
+                                                //    const dateStart = date.getTime()
+                                                const dateStart = values[0].$d.getTime()
+                                                const dateEnd = values[1].$d.getTime()
+                                                const daysCount = Math.round((dateEnd - dateStart) / (day))
+                                                const totalPrice = daysCount * stay.price
+                                                console.log('valuesss!!!!', totalPrice)
+                                                setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
+                                            }} />
+                                    </div>
+                                    <div className="guests-input">
+                                        <small>Guests max capacity of {stay.capacity}</small>
+                                        <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                            {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
+                                            {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
+                                            {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
+                                            {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
+
+
+                                        </p>
+                                        <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
+                                            {(isGuestModal) ? <GrUp /> : <GrDown />}</button>
                                     </div>
 
                                 </div>
-                            })}
+                                {(isGuestModal) && <div className="guests-modal">
 
-                        </div>}
-                        <ColorForButton txt={'Reserve'}
-                            reserveOrder={reserveOrder} />
+                                    {guestsTypes.map(type => {
+                                        return <div className="guests-type-input" key={type.type}>
+                                            <div>
+                                                <p>{type.type}</p>
+                                                <small>{type.txt}</small>
+                                            </div>
+                                            <div className="guests-type-input-value">
+                                                <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
+                                                <span>{guests[type.type]}</span>
+                                                <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
+                                            </div>
 
-                        {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
+                                        </div>
+                                    })}
+
+                                </div>}
+                                <ColorForButton txt={'Reserve'}
+                                    reserveOrder={reserveOrder} />
+
+                                {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
                             <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
                             <div className="prices">
                                 <p>${stay.price} x {order.totalNights} nights</p>
@@ -309,87 +357,153 @@ export function StayDetails() {
                                 <p>{order.totalPrice}$</p>
                             </div>
                         </div> */}
-                    </form>
-                    <div className="stay-report">
-                        <h2>
-                            <div className="report-icon">
-                                <AiFillFlag />
+                            </form >
+                            <div className="stay-report">
+                                <h2>
+                                    <div className="report-icon">
+                                        <AiFillFlag />
+                                    </div>
+                                    Report this listing
+                                </h2>
                             </div>
-                            Report this listing
-                        </h2>
+                        </div >
+                    </section >
+                </div >
+                <section className="reviews">
+                    <header>
+                        <div className="review-totals">
+                            <FaStar />
+                            <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                            <a href="">{stay.reviews.length} reviews </a>
+                        </div >
+                    </header >
+                    <div className="rating">
+                        <p>Cleanliness</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.966666666666667">
+                            </progress>
+                            5.0
+                        </span>
+                        <p>Check-in</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.466666666666667">
+                            </progress>
+                            4.5
+                        </span>
+                        <p>Location</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.333333333333333">
+                            </progress>
+                            4.3
+                        </span>
+                        <p>Communication</p>
+                        <span className="progress-container">
+                            <progress max="5" value="3.6666666666666665">
+                            </progress>
+                            3.7
+                        </span>
+                        <p>Accuracy</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.266666666666667">
+                            </progress>
+                            4.3
+                        </span>
+                        <p>Value</p>
+                        <span className="progress-container">
+                            <progress max="5" value="3.9333333333333336">
+                            </progress>
+                            3.9
+                        </span>
                     </div>
+                    <main className="review-container">
+                        {stay.reviews.map((review, index) => {
+                            return <div className="review-preview" key={index}>
+                                <div className="mini-user-details">
+                                    <img src={review.by.imgUrl} />
+                                    <p>{review.by.fullname}</p>
+                                    <span>Rated: {review.rate} <FaStar /></span>
+                                </div>
+                                <section className="review-text">
+                                    <LongTxt txt={review.txt} length={100} />
+                                </section>
+                            </div>
+                        })}
+                    </main>
+                </section >
+                <section className="map">
+                    <h2>Where you'll be</h2>
+                    <GoogleMap />
+                    <h3>{stay.loc.city}, {stay.loc.country}</h3>
                 </section>
-            </div>
-            <section className="reviews">
-                <header>
-                    <div className="review-totals">
-                        <FaStar />
-                        <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
-                        <a href="">{stay.reviews.length} reviews </a>
-                    </div>
-                </header>
-                <div className="rating">
-                    <p>Cleanliness</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.966666666666667">
-                        </progress>
-                        5.0
-                    </span>
-                    <p>Check-in</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.466666666666667">
-                        </progress>
-                        4.5
-                    </span>
-                    <p>Location</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.333333333333333">
-                        </progress>
-                        4.3
-                    </span>
-                    <p>Communication</p>
-                    <span className="progress-container">
-                        <progress max="5" value="3.6666666666666665">
-                        </progress>
-                        3.7
-                    </span>
-                    <p>Accuracy</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.266666666666667">
-                        </progress>
-                        4.3
-                    </span>
-                    <p>Value</p>
-                    <span className="progress-container">
-                        <progress max="5" value="3.9333333333333336">
-                        </progress>
-                        3.9
-                    </span>
-                </div>
-                <main className="review-container">
-                    {stay.reviews.map((review, index) => {
-                        return <div className="review-preview" key={index}>
-                            <div className="mini-user-details">
-                                <img src={review.by.imgUrl} />
-                                <p>{review.by.fullname}</p>
-                                <span>Rated: {review.rate} <FaStar /></span>
-                            </div>
-                            <p className="review-text text0">
-                                {review.txt}
-                            </p>
+                <div className="host-info" style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+                    <div className="host-details">
+                        <div>
+                            {stay.host.imgUrl ?
+                                <img className="host-image" src={stay.host.imgUrl} /> : ''
+                            }
                         </div>
-                    })}
-                </main>
-            </section>
-            <section className="map">
-                <h2>Where you'll be</h2>
-                <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                {/* <GoogleMap /> */}
-
-
-            </section>
-            <AppFooter />
+                        <div>
+                            <h1>Hosted by {stay.host.fullname}</h1>
+                            <h2>{stay.host.location}</h2>
+                        </div>
+                    </div>
+                    <div className="rating">
+                        <p>Cleanliness</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.966666666666667">
+                            </progress>
+                            5.0
+                        </span>
+                        <p>Check-in</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.466666666666667">
+                            </progress>
+                            4.5
+                        </span>
+                        <p>Location</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.333333333333333">
+                            </progress>
+                            4.3
+                        </span>
+                        <p>Communication</p>
+                        <span className="progress-container">
+                            <progress max="5" value="3.6666666666666665">
+                            </progress>
+                            3.7
+                        </span>
+                        <p>Accuracy</p>
+                        <span className="progress-container">
+                            <progress max="5" value="4.266666666666667">
+                            </progress>
+                            4.3
+                        </span>
+                        <p>Value</p>
+                        <span className="progress-container">
+                            <progress max="5" value="3.9333333333333336">
+                            </progress>
+                            3.9
+                        </span>
+                    </div>
+                    <div className="host-rating">
+                        <div className="host-reviews">
+                            <div>
+                                <FaStar />
+                            </div>
+                            <div style={{ marginLeft: '8px' }}>
+                                {stay.reviews.length} reviews
+                            </div>
+                        </div>
+                        <div className="host-verified" >
+                            {stay.host.isSuperhost ? <div ><IoShieldCheckmarkSharp /><span style={{ marginLeft: '8px' }}>Identity verified</span></div> : ""}
+                        </div>
+                    </div>
+                    <div className="host-about">
+                        <h3>{stay.host.about}</h3>
+                    </div>
+                </div >
+                <AppFooter />
         </section >
 
-    </div>
+    </div >
 }

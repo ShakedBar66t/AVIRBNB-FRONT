@@ -73,12 +73,8 @@
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 24px;
-
-
-
             }
         }
-
     }
 
     .map {
@@ -103,9 +99,7 @@
             font-size: 22px;
             line-height: 26px;
         }
-
         border-bottom: 1px solid #dddddd;
-
     }
 
     h3 {
@@ -210,7 +204,6 @@
     }
 
     .stay-info {
-
         display: flex;
         justify-content: space-between;
 
@@ -229,7 +222,6 @@
             h3 {
                 margin-bottom: -12px;
             }
-
         }
     }
 
@@ -252,6 +244,22 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             line-height: 20px;
+
+            img {
+                width: 20px;
+                height: 20px;
+                margin-right: 20px;
+            }
+
+            .amenities-list {
+                display: flex;
+                flex-direction: row;
+                margin-top: 3px;
+
+                h1 {
+                    font-weight: 100;
+                }
+            }
         }
     }
 

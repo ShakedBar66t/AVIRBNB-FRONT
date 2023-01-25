@@ -37,7 +37,7 @@ export function UserTrips() {
 
     return <section className="trips-container">
         <AppHeader />
-        <main className="trips-main-cont" style={{ marginTop: '80px' }}>
+        <main className="trips-main-cont" >
             <h2 >Trips</h2>
             {(!orders.length) && <section>
 
@@ -52,7 +52,6 @@ export function UserTrips() {
 
             {( orders.length) ? <TripList trips={orders}/> : ''}
                                 
-           
         </main>
         <AppFooter/>
     </section>

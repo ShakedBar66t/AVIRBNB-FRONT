@@ -1,0 +1,30 @@
+.mobile-footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $clr6;
+    width: 100vw;
+    font-family: Circular;
+    padding: 0.8rem 24px 1rem;
+    color: $clr8;
+    border-top: $bs1;
+
+    nav {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        text-align: center;
+
+        .active {
+            color: $clr9;
+        }
+    }
+
+    a {
+        color: $clr8;
+        text-decoration: none;
+    }
+
+    @include for-mobile-layout {
+        display: none;
+    }
+}
