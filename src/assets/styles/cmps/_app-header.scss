@@ -66,6 +66,11 @@
         }
     }
 
+    .labels-container{
+        &.hidden{
+            display: none;
+        }
+    }
     .logo-container {
         display: flex;
         height: 36px;
@@ -109,7 +114,7 @@
         opacity: 1;
 
         &.closed {
-            opacity: 0;
+            visibility: hidden;
         }
 
         &:hover {
@@ -320,7 +325,11 @@
     }
 
 }
-
+// position: absolute;
+//     right: 10px;
+//     top: 10px;
+//     background: red;
+//     border-radius: 50%;
 .filter-modal {
     display: flex;
     justify-content: space-between;

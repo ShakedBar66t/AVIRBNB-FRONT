@@ -11,6 +11,7 @@ import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, REFRESH_L
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { DatePicker } from "antd"
+import { stayService } from '../services/stay.service.js'
 const { RangePicker } = DatePicker
 
 
@@ -42,10 +43,14 @@ export function AppHeader() {
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
     
+    // final filterBy
+    const [filterBy,setFilterBy]=useState(stayService.getDefaultFilterForHeader)
     const { stayId } = params
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
+    const isHostDashboardPage = (location.pathname === '/host/dashboard') ? true : false
 
+    console.log(isHostDashboardPage)
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
         { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
@@ -190,7 +195,7 @@ export function AppHeader() {
         else setInputValue(target.value)
       }
 
-      function handleDateChange  (values)  {
+    function handleDateChange  (values)  {
         const checkIn = new Date(values[0].$d)
         const checkOut = new Date(values[1].$d)
         const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })        
@@ -207,14 +212,14 @@ export function AppHeader() {
       }
 
     return (
-        <header className={(stayId || isTripPage||id) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
+        <header className={(stayId || isTripPage||id ||isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
 
-                {(!isTripPage&&!id)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
+                {(!isTripPage&&!id&&!isHostDashboardPage)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
@@ -232,11 +237,11 @@ export function AppHeader() {
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '30px', height: '30px' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px',borderRadius:'50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className={`user-modal ${userModal ? 'open' : ''} ${stayId || isTripPage ? 'on-details-layout' : 'stay-index-layout'}`}>
+            <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage)? 'on-details-layout' : 'stay-index-layout'}`}>
                 {(!user) && <button onClick={() => {
 
                     toggleUserModal()
@@ -264,8 +269,9 @@ export function AppHeader() {
                 {(user) && <button onClick={() => { logout() }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
+                
                 <div className='filter-modal-left-btns' >
-                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where</span>
+                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where   <button>x</button></span>
                         <input 
                          ref={inputRef}
                         name='location'
@@ -273,7 +279,9 @@ export function AppHeader() {
                           placeholder="Search destinations" 
                           value={inputValue}
                            className='lower-text input'
-                           onChange={(ev)=>handleInputChange(ev)}></input></button>
+                           onChange={(ev)=>handleInputChange(ev)}>
+                          
+                                </input></button>
                     <div className={`location-modal-extended ${isLocationModalOpen ? 'open' : ''}`}>
                         <div className='location-modal-inner'>
                             <span className='location-modal-inner-title'>Search by region</span>
@@ -347,7 +355,7 @@ export function AppHeader() {
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            {(!isTripPage&&!id)  && <div className='labels-container'>
+            {((!isTripPage&&!id))  && <div className={`labels-container ${(isHostDashboardPage)? 'hidden':''}`}>
                 {(!stayId) && <LabelsFilter />}
             </div>}
         </header >

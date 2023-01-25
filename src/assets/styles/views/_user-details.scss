@@ -1,5 +1,7 @@
 .user-details {
-
+    color: $clr7;
+    font-weight: lighter;
+    font-family: Circular;
     .app-header {
         display: none;
         @include for-mobile-layout {
@@ -11,12 +13,102 @@
             grid-template-columns: 1fr 1280px 1fr;
 
         }
-    }    // .user-img {
+    }    
         .user-deatils-cont{
-            margin-top:80px;
+           display: grid;
+           grid-template-columns: 1fr;
+            margin-top:16px ;
+
+            @include for-narrow-layout {
+                margin-top:160px ;
+            }
+
+            @include for-mobile-layout {
+                grid-template-columns: 24px 1fr 24px;
+    
+            }
+            @include for-narrow-layout {
+                grid-template-columns: 40px 1fr 40px;
+    
+            }
+            @include for-normal-layout {
+                grid-template-columns: 1fr 1032px 1fr;
+            }
+           
+            >* {
+                grid-column: 2;
+            } 
+            
+            header{
+                font-weight: 700;
+                h2{
+                    font-size: 1.5rem;
+                    padding-bottom: 0.8rem;
+                    @include for-narrow-layout {
+                        font-size: 2rem;
+            
+                    }
+                }
+
+                p{
+                    font-size: rem(18px);
+                    margin-bottom: 40px;
+                    
+                }
+                p :nth-child(2){
+                    font-weight: lighter;
+                }
+                p :nth-child(3){
+                    border-bottom: 2px solid $clr7;
+                    cursor: pointer;
+                }
+                
+            }
+
+            .setting-cards-cont{
+                display: grid;
+                    grid-template-columns:  1fr;
+                    gap: 1.5rem;
+
+                    @include for-narrow-layout {
+                        grid-template-columns: 1fr 1fr;
+            
+                    }
+
+                svg{
+                    font-size: 4rem;
+                    
+                }
+
+                h4{
+                    font-size: 2rem; 
+                }
+                .setting-prev{
+                    aspect-ratio: 16/9;
+                    padding: 0.5rem;
+                    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+                    border-radius: 8px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    margin-bottom: 5px;
+
+                    @include for-mobile-layout {
+                        aspect-ratio: 16/7;
+                       
+            
+                    }
+                    @include for-narrow-layout {
+                        aspect-ratio: 16/9;
+            
+                    }
+
+                    p{
+                        font-size: rem(18px);
+                        margin: 0.8rem 0;
+                    }
+                }
+            }
         }
-    //     height: 200px;
-    //     width: 200px;
-    //     background-size: contain;
-    // }
 }
