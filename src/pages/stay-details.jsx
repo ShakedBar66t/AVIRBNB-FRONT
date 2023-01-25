@@ -1,23 +1,18 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { stayAmenities, stayService } from "../services/stay.service"
+import { stayService } from "../services/stay.service"
 import { IoShareOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
 import { BsHeart, BsTrophy } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
 import { HiOutlineKey } from 'react-icons/hi'
-import { MdOutlineCleaningServices } from 'react-icons/md'
-import { Example } from "../cmps/date-picker"
 import GoogleMap from "../cmps/google-map"
 import { AppFooter } from "../cmps/app-footer"
 import { GrDown, GrUp } from 'react-icons/gr'
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
-import { fontWeight } from "@mui/system"
 import { orderService } from "../services/order.service"
 import { DatePicker } from "antd";
-import { moment } from "moment"
 import { toggleLoginModal } from '../store/user.actions.js'
-import createCssVarsProvider from "@mui/system/cssVars/createCssVarsProvider"
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
@@ -142,7 +137,7 @@ export function StayDetails() {
 
 
     return (stay) && <div className="details">
-        <AppHeader  />
+        <AppHeader />
         <section className="stay-details full secondary-container">
             <div className="stay-header">
                 <h1>{stay.name}</h1>
@@ -172,9 +167,7 @@ export function StayDetails() {
             </div>
             <div className="img-container">
                 {stay.imgUrls.map((img, index) => {
-                    return <div className={`img-details${index}`} key={index}>
-                        <img src={img} className={`img-details${index}`} />
-                    </div>
+                    return <img src={img} key={index}/>
                 })}
             </div>
             <div className="full">
@@ -497,7 +490,7 @@ export function StayDetails() {
                     <h3>{stay.host.about}</h3>
                 </div>
             </div >
-            <AppFooter />
+            {/* <AppFooter /> */}
         </section >
 
     </div >

@@ -26,6 +26,8 @@ export default function GoogleMap() {
         setCoordinates({ lat: stay.loc.lat, lng: stay.loc.lan })
     }
 
+    console.log(stay)
+
     const zoom = 11
 
     const handleClick = ({ lat, lng }) => {
