@@ -281,7 +281,7 @@
             border-radius: 12px;
             padding: 24px;
             box-shadow: #0000001f 0 6px 16px;
-            width: 373px;
+            max-width: 400px;
 
             .btn-container {
                 position: relative;
@@ -879,11 +879,6 @@ p {
         display: none;
     }
 
-    .app-header {
-        .filter-container {
-            display: none !important;
-        }
-    }
 
     .stay-details {
 
@@ -911,6 +906,24 @@ p {
 
             >*:not(:first-child) {
                 display: none;
+            }
+        }
+
+        .reviews {
+
+            .rating {
+                grid-template: repeat(3,1fr)/repeat(2,1fr);
+            }
+        }
+
+        .stay-info {
+
+            .amenities-container {
+
+                .stay-amenities {
+                    grid-template-columns: 1fr;
+                }
+
             }
         }
     }
