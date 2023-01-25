@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { stayService } from "../services/stay.service";
 import { utilService } from "../services/util.service";
 
-
 export function StayPreview({ stay, onToggleLike }) {
     const navigate = useNavigate()
     const [heartColor, setHeartColor] = useState('rgba($color: $clr7, $alpha: 0.7)')
@@ -19,9 +18,7 @@ export function StayPreview({ stay, onToggleLike }) {
         const startingDate = Date.now() + (utilService.getRandomIntInclusive(0, 14) * day)
         const startingMonth = utilService.getMonthName(new Date(startingDate))
         const startingDay = new Date(startingDate).getDate()
-
         const endDate = startingDate + day * 5
-
         const endingMonth = utilService.getMonthName(new Date(endDate))
         const endingDay = new Date(endDate).getDate()
         return <p className="prev-date">{`${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `}</p>
@@ -40,12 +37,11 @@ export function StayPreview({ stay, onToggleLike }) {
     return <article className="stay-preview"
         onClick={() => { navigate(`/explore/${stay._id}`) }}>
 
-        {/* <div className="prev-carousel" style={{ transform: `translateX(-${currImgUrlIdx * 100}%)` }}>
-            {stay.imgUrls.map(imgUrl=>{
-                return  <img className="stay-preview-img" src={imgUrl} alt="" />
+        <div className="prev-carousel" >
+            {stay.imgUrls.map(imgUrl => {
+                return <img className="stay-preview-img" src={imgUrl} alt="" style={{ transform: `translateX(-${currImgUrlIdx * 100}%)` }} />
             })}
-        </div> */}
-        <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
+        </div>
 
         <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>
         <button className="like-btn clear-btn" onClick={(ev) => { onToggleLike(ev, stay).then((ans) => setIsLikedByUser(prev => !prev)) }}
@@ -82,7 +78,6 @@ export function StayPreview({ stay, onToggleLike }) {
             <p className="prev-host-name">{"Hosted by " + (stay.host.fullname.slice(0, stay.host.fullname.indexOf(' ')))}</p>
             <PrevDateStr />
             <p className="prev-price">{'$' + stay.price + ' night'}</p>
-
         </div>
     </article>
 }
