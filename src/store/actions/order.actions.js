@@ -29,7 +29,7 @@ export async function loadOrders(user) {
    
     try {
         const orders = await orderService.query(user)
-        console.log('orders!!!!!!!!!!!!!!!!!!!!!!!!',orders)
+        // console.log('orders!!!!!!!!!!!!!!!!!!!!!!!!',orders)
 
         store.dispatch({
             type: SET_ORDERS,

@@ -1,129 +1,86 @@
-// .trips-main-cont {
-//     @include for-mobile-layout {
-//         margin-top: 80px;
-//     }
-// }
+.trips-main-cont {
+    padding: 0 24px;
 
-// .trips-container {
-//     display: grid;
-//     grid-template-columns: 1fr;
-//     height: auto;
-
-//     @include for-mobile-layout {
-//         min-height: 120vh;
-//         grid-template-columns: 24px 1fr 24px;
-//     }
-
-//     @include for-trip-wide-layout {
-//         grid-template-columns: 1fr 1600px 1fr;
-//     }
-
-//     >* {
-//         grid-column: 2;
-//     }
-
-//     .full {
-//         grid-column: 1 / -1; 
-//     }
-
-//     .app-header {
-//         display: none;
-
-//         @include for-mobile-layout {
-//             display: grid;
-//             grid-template-columns: 64px 1fr 64px;
-//         }
-
-//         @include for-trip-wide-layout {
-//             grid-template-columns: 1fr 1440px 1fr;
-
-//         }
-//     }
-
-    .trips-main-cont {
-        padding: 0 24px;
-
-        @include for-mobile-layout {
-            padding: 0 40px;
-        }
-
-        @include for-trip-wide-layout {
-            padding: 0 80px;
-        }
-
-        h2 {
-            padding: 36px 0 24px;
-            font-size: 2rem;
-            border-bottom: $bs1;
-        }
+    @include for-mobile-layout {
+        padding: 0 40px;
     }
 
-    .no-trips-cont {
-        font-family: Circular;
-        margin: 32px 0 24px;
-        color: $clr7;
+    @include for-trip-wide-layout {
+        padding: 0 80px;
+    }
+
+    h2 {
+        padding: 36px 0 24px;
+        font-size: 2rem;
         border-bottom: $bs1;
-        font-size: rem(14px);
+    }
+}
 
-        @include for-narrow-layout {
-            font-size: 1rem;
-        }
+.no-trips-cont {
+    font-family: Circular;
+    margin: 32px 0 24px;
+    color: $clr7;
+    border-bottom: $bs1;
+    font-size: rem(14px);
 
-        h3 {
-            font-family: Circular;
-            font-size: rem(18px);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-
-            @include for-narrow-layout {
-                font-size: rem(22px);
-            }
-        }
-
-        button {
-            margin: 16px 0 48px;
-            padding: 13px 23px;
-            border: 1px solid $clr7;
-            border-radius: 8px;
-            font-weight: bolder;
-            width: 161px;
-            height: 47px;
-
-            &:hover {
-                background-color: darken($color: $clr6, $amount: 5%);
-            }
-        }
+    @include for-narrow-layout {
+        font-size: 1rem;
     }
 
-    .bug-report {
-        font-weight: 0 !important;
-        color: $clr7;
-        font-size: rem(12px);
+    h3 {
         font-family: Circular;
-        margin-bottom: 48px;
-
-        @include for-mobile-layout {
-            margin-bottom: 80vh;
-        }
+        font-size: rem(18px);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
 
         @include for-narrow-layout {
-            font-size: rem(14px);
-        }
-
-        span {
-            border-bottom: 1px solid $clr7;
-            font-weight: 700;
+            font-size: rem(22px);
         }
     }
 
-    .app-footer{
-        grid-template-columns: 80px  1fr 80px;
-        @include for-trip-wide-layout {
-            grid-template-columns: 1fr 1440px 1fr;
+    button {
+        margin: 16px 0 48px;
+        padding: 13px 23px;
+        border: 1px solid $clr7;
+        border-radius: 8px;
+        font-weight: bolder;
+        width: 161px;
+        height: 47px;
 
-        }
-        .footer-options{
-            justify-content: space-between;
+        &:hover {
+            background-color: darken($color: $clr6, $amount: 5%);
         }
     }
-// }
+}
+
+.bug-report {
+    font-weight: 0 !important;
+    color: $clr7;
+    font-size: rem(12px);
+    font-family: Circular;
+    margin-bottom: 48px;
+
+    @include for-mobile-layout {
+        margin-bottom: 80vh;
+    }
+
+    @include for-narrow-layout {
+        font-size: rem(14px);
+    }
+
+    span {
+        border-bottom: 1px solid $clr7;
+        font-weight: 700;
+    }
+}
+
+.app-footer {
+    grid-template-columns: 80px 1fr 80px;
+    @include for-trip-wide-layout {
+        grid-template-columns: 1fr 1440px 1fr;
+    }
+
+    .footer-options {
+        justify-content: space-between;
+    }
+}
