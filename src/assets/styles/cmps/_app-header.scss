@@ -66,6 +66,11 @@
         }
     }
 
+    .labels-container{
+        &.hidden{
+            display: none;
+        }
+    }
     .logo-container {
         display: flex;
         height: 36px;
