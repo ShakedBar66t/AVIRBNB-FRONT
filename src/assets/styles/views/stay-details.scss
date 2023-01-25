@@ -895,6 +895,34 @@ p {
 
 @media (max-width: 650px) {
 
+  .user-stay-info{
+    // grid-template-columns: 1fr;
+    // white-space: wrap;
+    max-width: calc(100vw - 48px);
+  }
+
+  .air-cover{
+    max-width: calc(100vw - 48px);
+  }
+  .summary{
+    max-width: calc(100vw - 48px);
+  }
+  .subtitle{
+    max-width: calc(100vw - 48px);
+  }
+
+  .map{
+    max-width: calc(100vw - 48px);
+  }
+
+.rating  {
+    max-width: calc(100vw - 48px);
+}
+
+.reviews{
+    max-width: calc(100vw - 48px);
+}
+
     .app-footer {
         display: none;
     }
@@ -914,13 +942,14 @@ p {
         }
 
         .img-container {
-
+            width: 100vw;
             grid-column: 1/-1;
 
             :first-child {
                 border-radius: 0;
                 grid-column: 1/-1;
-                aspect-ratio: 667/444;
+                max-width:100%;
+                // aspect-ratio: 667/444;
             }
 
             >*:not(:first-child) {

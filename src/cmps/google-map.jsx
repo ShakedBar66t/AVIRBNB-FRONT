@@ -35,7 +35,7 @@ export default function GoogleMap() {
     }
 
     return (stay) &&
-        <div style={{ height: '70vh', width: '100%', margin: 'auto' }}>
+        <div style={{  width: '100%', margin: 'auto' ,aspectRatio:'4 / 4'}}>
             <GoogleMapReact
                 onClick={handleClick}
                 bootstrapURLKeys={{ key: "AIzaSyC0TgvRwhSTyPNxupAu8iGt6ViO7EET43Q" }}
