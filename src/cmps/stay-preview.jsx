@@ -45,6 +45,11 @@ export function StayPreview({ stay,onToggleLike }) {
         onClick={() => { navigate(`/explore/${stay._id}`) }}>
     
         {/* <PreviewImgCarousel stay={stay}/> */}
+        {/* <div className="prev-carousel" style={{ transform: `translateX(-${currImgUrlIdx * 100}%)` }}>
+            {stay.imgUrls.map(imgUrl=>{
+                return  <img className="stay-preview-img" src={imgUrl} alt="" />
+            })}
+        </div> */}
         <img className="stay-preview-img" src={stay.imgUrls[currImgUrlIdx]} alt="" />
 
         <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>

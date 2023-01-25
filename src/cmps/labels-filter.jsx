@@ -20,7 +20,7 @@ export function LabelsFilter() {
     const stayLabels = [
         { name: 'Play', src: 'play' }, { name: 'Iconic cities', src: 'iconic' }, { name: 'Caves', src: 'cave' },
         { name: 'By the lake', src: 'lake' }, { name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
-        { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' },, { name: 'Boats', src: 'boats' }, { name: 'Beachfront', src: 'beach' }, { name: 'Cabins', src: 'cabin' }, { name: 'Historical homes', src: 'historical-homes' },
+        { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' }, { name: 'Boats', src: 'boats' }, { name: 'Beachfront', src: 'beach' }, { name: 'Cabins', src: 'cabin' }, { name: 'Historical homes', src: 'historical-homes' },
         { name: 'Luxe', src: 'luxe' }, { name: 'Ski-in/out', src: 'ski' }, { name: 'OMG!', src: 'omg' },
         { name: 'Grand pianos', src: 'piano' }, { name: 'Houseboats', src: 'houseboats' }, { name: 'Mountains', src: 'top' }, { name: 'Islands', src: 'islands' },
         { name: 'New', src: 'new' }, { name: 'Trending', src: 'trending' },

@@ -1014,8 +1014,13 @@ p {
 
 }
 
+
+.ant-picker-panel-container {
+    background-color: red;
+}
+
 .ant-picker-body {
-    width: 1000px !important;
+    width: 2000px !important;
     font-size: 14px;
 
     .ant-picker-content {
@@ -1036,15 +1041,17 @@ p {
                 color: black;
             }
 
-
-
-
-            // background-color: black;
-            // color: white !important;
         }
     }
 
-
+    // .ant-picker-panel-layout {
+    //     margin-left: 0px;
+    //     border: 1px red solid;
+    //     width: 800px;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
 
     // th,
