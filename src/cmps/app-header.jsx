@@ -45,7 +45,9 @@ export function AppHeader() {
     const { stayId } = params
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
+    const isHostDashboardPage = (location.pathname === '/host/dashboard') ? true : false
 
+    console.log(isHostDashboardPage)
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
         { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
@@ -190,7 +192,7 @@ export function AppHeader() {
         else setInputValue(target.value)
       }
 
-      function handleDateChange  (values)  {
+    function handleDateChange  (values)  {
         const checkIn = new Date(values[0].$d)
         const checkOut = new Date(values[1].$d)
         const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })        
@@ -207,14 +209,14 @@ export function AppHeader() {
       }
 
     return (
-        <header className={(stayId || isTripPage||id) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
+        <header className={(stayId || isTripPage||id ||isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
 
-                {(!isTripPage&&!id)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
+                {(!isTripPage&&!id&&!isHostDashboardPage)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
@@ -236,7 +238,7 @@ export function AppHeader() {
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className={`user-modal ${userModal ? 'open' : ''} ${stayId || isTripPage ? 'on-details-layout' : 'stay-index-layout'}`}>
+            <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage)? 'on-details-layout' : 'stay-index-layout'}`}>
                 {(!user) && <button onClick={() => {
 
                     toggleUserModal()
