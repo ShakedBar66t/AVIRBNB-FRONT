@@ -382,6 +382,7 @@
 
         &.right {
             padding: 8px 24px;
+            width: 145px;
 
             &:hover {
                 background: none;
@@ -496,6 +497,16 @@
         border-radius: 35px;
         flex-grow: 1;
 
+        &.selected {
+            background-color: $clr6;
+            box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+            cursor: pointer;
+
+            &:hover {
+                background-color: $clr6;
+            }
+        }
+
         &:hover {
 
             & .border-between-right,
@@ -516,7 +527,7 @@
             &.right,
             &.left {
 
-                .selected {
+                &.selected {
                     background-color: $clr6;
                     box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
                     cursor: pointer;
@@ -885,6 +896,7 @@
     font-weight: 400;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     width: 100%;
     font-family: $ff1;
     pointer-events: none;
