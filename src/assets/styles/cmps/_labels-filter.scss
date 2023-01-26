@@ -15,7 +15,8 @@
     }
     @include for-wide-layout {
         padding: 0 80px;
-    }
+    } 
+    
     &.sticky {
         position: sticky;
         transition: top 1s ease;
