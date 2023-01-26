@@ -1,9 +1,28 @@
+.host-index {
+    .app-header {
+        .filter-container {
+            display: none;
+        }
+
+        .carousel-container {
+            display: none;
+        }
+
+        .user-nav-container {
+            .host-lng-container {
+                display: none;
+            }
+        }
+    }
+}
+
 .stay-edit {
     display: grid;
     grid-template-columns: 1fr;
     margin-top: 10px;
     font-family: cereal;
     margin-bottom: 10px;
+    margin-top: 90px;
 
     .edit-section {
         padding: 10px;
@@ -124,6 +143,11 @@
 
     label {
         margin-block: 10px;
+        width: 80%;
+
+        input {
+            width: 70%;
+        }
     }
 
     input {
@@ -131,5 +155,81 @@
         outline: 0;
         font-family: inherit;
         border-bottom: 1px solid rgb(215, 215, 215);
+    }
+}
+
+@media (max-width: 460px) {
+    .app-header {
+        display: none;
+    }
+
+    .stay-edit {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 650px) {
+    .stay-edit {
+        margin-bottom: 80px;
+
+        .edit-section {
+            max-width: calc(100vw - 48px);
+
+            .stay-info {
+                .img-container {
+                    grid-template: 1fr/ 1fr;
+
+                    :first-child {
+                        border-radius: 0;
+                    }
+
+                    :nth-child(5) {
+                        border-radius: 0;
+                    }
+
+                    :nth-child(3) {
+                        border-radius: 0;
+                    }
+                }
+
+                .stay-name {
+                    div {
+                        gap: 10px;
+                        width: 100%;
+                        flex-direction: column;
+
+                        input {
+                            font-size: 16px;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .stay-description {
+                    .amenities-container {
+                        h2 {
+                            margin-top: 10px;
+                        }
+
+                        .stay-amenities {
+                            grid-template-columns: 1fr 1fr;
+                            width: 100%;
+                            font-size: 10px;
+                        }
+                    }
+                }
+
+                .stay-description>*:not(:last-child) {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                label {
+                    select {
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
     }
 }

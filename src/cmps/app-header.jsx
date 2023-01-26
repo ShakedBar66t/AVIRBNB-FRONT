@@ -42,9 +42,9 @@ export function AppHeader() {
     const [isCalenderOpen, setIsCalenderOpen] = useState(false)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
-    
+
     // final filterBy
-    const [filterBy,setFilterBy]=useState(stayService.getDefaultFilterForHeader)
+    const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader)
     const { stayId } = params
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
@@ -64,13 +64,6 @@ export function AppHeader() {
         { type: 'Adults', txt: 'Ages 13 or above' }, { type: 'Children', txt: 'Ages 2-12' }
         , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
 
-        useEffect(() => {
-            if (!window.google) {
-              // load the google maps API
-            } else {
-              initAutocomplete(inputRef.current)
-            }
-          }, [])
 
     useEffect(() => {
         const handleWheel = (event) => {
@@ -166,14 +159,14 @@ export function AppHeader() {
                 setIsGuestsModalOpen(false)
                 setIsLocationModalOpen(!isLocationModalOpen)
                 break
-            case 'date-1':
+            case 'checkIn':
                 setIsCheckedInSelected(1)
                 setIsCalenderOpen(!isCalenderOpen)
                 setIsLocationModalOpen(false)
                 setIsGuestsModalOpen(false)
                 setIsDateModalOpen(!isDateModalOpen)
                 break
-            case 'date-2':
+            case 'checkOut':
                 setIsCheckedInSelected(2)
                 setIsCalenderOpen(!isCalenderOpen)
                 setIsLocationModalOpen(false)
@@ -185,20 +178,16 @@ export function AppHeader() {
         }
     }
 
-    function initAutocomplete(input) {
-        const autocomplete = new window.google.maps.places.Autocomplete(input)
-      }
+    function handleInputChange({ target }, location) {
 
-    function handleInputChange  ({target},location)  {
-        
-        if(location)        setInputValue(location)
+        if (location) setInputValue(location)
         else setInputValue(target.value)
-      }
+    }
 
-    function handleDateChange  (values)  {
+    function handleDateChange(values) {
         const checkIn = new Date(values[0].$d)
         const checkOut = new Date(values[1].$d)
-        const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })        
+        const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })
         const checkInDay = checkIn.getDate()
         const checkOutMonth = checkOut.toLocaleString('en-US', { month: 'short' })
         const checkOutDay = checkOut.getDate()
@@ -209,21 +198,44 @@ export function AppHeader() {
         const dateStart = values[0].$d.getTime()
         const dateEnd = values[1].$d.getTime()
         const daysCount = Math.round((dateEnd - dateStart) / (dayInMilliseconds))
-      }
+    }
 
+    function handleClearValue(ev) {
+        console.log('clear active')
+        ev.stopPropagation();
+        ev.preventDefault();
+        const name = ev.target.name;
+
+        switch (name) {
+            case 'location':
+                setInputValue('');
+                break;
+            case 'checkIn':
+                setCheckInOutDates({ checkIn: '', checkOut: checkInOutDates.checkOut });
+                break;
+            case 'checkOut':
+                setCheckInOutDates({ checkIn: checkInOutDates.checkIn, checkOut: '' });
+                break;
+            case 'guests':
+                setLowerGuestsText('');
+                break;
+            default:
+                break;
+        }
+    }
     return (
-        <header className={(stayId || isTripPage||id ||isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
+        <header className={(stayId || isTripPage || id || isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
                     <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
 
-                {(!isTripPage&&!id&&!isHostDashboardPage)  && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
+                {(!isTripPage && !id && !isHostDashboardPage) && <div className={`filter-container ${searchModal ? 'closed' : ''}`}>
                     {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
-                    {!stayId&& <div className='filter-btns' onClick={toggleFilterModal}>
+                    {!stayId && <div className='filter-btns' onClick={toggleFilterModal}>
                         <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
                         <button className='time-filter'>Any week <span className='seperator-span'></span></button>
                         <button className='guest-filter '>Add guests </button>
@@ -233,15 +245,15 @@ export function AppHeader() {
                 }
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn' onClick={()=>navigate('/host/dashboard')}>Avirbnb your home</button>
+                        <button className='host-btn' onClick={() => navigate('/host/dashboard')}>{`${user ? 'Switch to hosting' : 'Avirbnb your home'}`}</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px',borderRadius:'50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage)? 'on-details-layout' : 'stay-index-layout'}`}>
+            <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
                 {(!user) && <button onClick={() => {
 
                     toggleUserModal()
@@ -269,25 +281,26 @@ export function AppHeader() {
                 {(user) && <button onClick={() => { logout().then(currUser=>{navigate('/explore')}) }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
-                
+
                 <div className='filter-modal-left-btns' >
-                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where   <button>x</button></span>
-                        <input 
-                         ref={inputRef}
-                        name='location'
-                         type='text'
-                          placeholder="Search destinations" 
-                          value={inputValue}
-                           className='lower-text input'
-                           onChange={(ev)=>handleInputChange(ev)}>
-                          
-                                </input></button>
+                    <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where
+                        <span name='location' onClick={(ev) => handleClearValue(ev)} className={`clear-value-btn input ${isLocationModalOpen ? 'shown' : ''}`}>x</span> </span>
+                        <input
+                            ref={inputRef}
+                            name='location'
+                            type='text'
+                            placeholder="Search destinations"
+                            value={inputValue}
+                            className='lower-text input'
+                            onChange={(ev) => handleInputChange(ev)}>
+                        </input>
+                    </button>
                     <div className={`location-modal-extended ${isLocationModalOpen ? 'open' : ''}`}>
                         <div className='location-modal-inner'>
                             <span className='location-modal-inner-title'>Search by region</span>
                             <div className='cards-container'>
                                 {countries.map((place, index) => {
-                                    return <div key={index} className='place-card' onClick={(ev) => handleInputChange(ev,place.label)}>
+                                    return <div key={index} className='place-card' onClick={(ev) => handleInputChange(ev, place.label)}>
                                         <div className='place-card-inner'>
                                             <img src={place.image} />
                                             <span>{place.label}</span>
@@ -308,8 +321,8 @@ export function AppHeader() {
                             </div>
                             <div className='calenders-container'>
                                 <div className='left-calender'>
-                                    <RangePicker  format="MMM D" open={isCalenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
-                                        onChange={(values) => handleDateChange(values)}/>
+                                    <RangePicker format="MMM D" open={isCalenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
+                                        onChange={(values) => handleDateChange(values)} />
                                 </div>
                             </div>
                         </div>
@@ -318,13 +331,23 @@ export function AppHeader() {
                 <div className='filter-modal-middle-btns '  >
                     <div className={`inner-btns-container middle `}>
                         <div className='inner-btn-wrapper middle'>
-                            <button className={`date-btn right ${isCheckedInSelected === 1 ? 'selected' : ''}`} name='date-1' onClick={(ev) => handleExpendedModalClick(ev)} >
-                                <span name='date' className='upper-text'>Check in</span><span name='date' className='lower-text'>{`${checkInOutDates.checkIn? checkInOutDates.checkIn:'Add dates'}`}</span> </button>
+                            <button className={`date-btn right ${isCheckedInSelected === 1 ? 'selected' : ''}`} name='checkIn' onClick={(ev) => handleExpendedModalClick(ev)} >
+                                <span name='date' className='upper-text'>
+                                    Check in
+                                    <span name={'checkIn'} className={`clear-value-btn date ${isCheckedInSelected === 1 ? 'shown' : ''}`}
+                                        onClick={(ev) => handleClearValue(ev)} >x</span>
+                                </span>
+                                <span name='date' className='lower-text'>{`${checkInOutDates.checkIn ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
-                            <button className={`date-btn left ${isCheckedInSelected === 2 ? 'selected' : ''}`} name='date-2' onClick={(ev) => handleExpendedModalClick(ev)}>
-                                <span className='upper-text'>Check out</span><span className='lower-text'>{`${checkInOutDates.checkOut? checkInOutDates.checkOut:'Add dates'}`}</span> </button>
+                            <button className={`date-btn left ${isCheckedInSelected === 2 ? 'selected' : ''}`} name='checkOut' onClick={(ev) => handleExpendedModalClick(ev)}>
+                                <span className='upper-text'>
+                                    Check out
+                                    <span name={'checkOut'} className={`clear-value-btn date ${isCheckedInSelected === 2 ? 'shown' : ''}`}
+                                        onClick={(ev) => handleClearValue(ev)} >x</span>
+                                </span>
+                                <span className='lower-text'>{`${checkInOutDates.checkOut ? checkInOutDates.checkOut : 'Add dates'}`}</span> </button>
                             <span className='border-between-right'></span>
                         </div>
                     </div>
@@ -332,7 +355,11 @@ export function AppHeader() {
                 <div className='filter-modal-right-btns'>
                     <div className={`inner-btn-wrapper ${isGuestsModalOpen ? 'selected' : ''}`}>
                         <button className={`inner-btns-container right`} name='guests' onClick={(ev) => handleExpendedModalClick(ev)}>
-                            <span className='upper-text'>Who</span>
+                            <span className='upper-text'>
+                                Who
+                                <span name='guests' onClick={(ev) => handleClearValue(ev)} className={`clear-value-btn ' ${isGuestsModalOpen ? 'shown' : ''}`}>
+                                    x
+                                </span></span>
                             <span className='lower-text'>{lowerGuestsText}</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
@@ -355,8 +382,8 @@ export function AppHeader() {
                 </div>
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            {((!isTripPage&&!id))  && <div className={`labels-container ${(isHostDashboardPage)? 'hidden':''}`}>
-                {(!stayId) && <LabelsFilter />}
+            {((!isTripPage && !id)) && <div className={`labels-container ${(isHostDashboardPage) ? 'hidden' : ''}`}>
+                {/* {(!stayId) && <LabelsFilter />} */}
             </div>}
         </header >
     )

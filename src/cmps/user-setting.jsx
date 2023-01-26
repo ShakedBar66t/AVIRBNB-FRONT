@@ -2,9 +2,11 @@ import { FaRegAddressCard } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { SiAirbnb } from 'react-icons/si'
 import { BsHeart } from 'react-icons/bs'
-export function UserSetting(){
+export function UserSetting({setPage}){
   return  <div className='setting-cards-cont'>
-        <article className="setting-prev">
+        <article className="setting-prev" onClick={() => {
+            setPage('edit')
+        }}>
 
             <div> <FaRegAddressCard/></div>
             <div>

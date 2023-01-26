@@ -113,12 +113,8 @@ export function StayDetails() {
         { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
     ];
 
-
     function handleGuestsInput(type, diff) {
         setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
-
-
-        console.log(guests)
     }
 
     function reserveOrder() {
@@ -134,8 +130,6 @@ export function StayDetails() {
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)
-
-
             addOrder(newOrder).then(res => prompt('great'))
         }
     }
@@ -149,10 +143,10 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar /> 4.9·<span>20 reviews</span></h2>
+                            <h2><FaStar /> {stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2>
                         </div>
                         <span>·</span>
-                        <h2><span className="loc">New York, United States</span></h2>
+                        <h2><span className="loc">{stay.loc.city}, {stay.loc.country}</span></h2>
                     </div>
                     <div className="share-save-action">
                         <span className="share-stay">
@@ -228,17 +222,15 @@ export function StayDetails() {
                         <p>
                             {stay.summary}
                         </p>
-                        <p style={{ marginTop: '16px', textDecoration: 'underline', fontWeight: 'bold' }}>
-                            Show more
-                        </p>
+                        <LongTxt txt={stay.summary} length={20} />
                     </div>
                     <div className="amenities-container">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
-                            {stayAmenities.map((amenity, index) => {
+                            {stay.amenities.map((amenity, image, index) => {
                                 return <div className="amenities-list" key={index}>
-                                    <img src={amenity.image} />
-                                    <h1>{amenity.name}</h1>
+                                    <img src={amenity} />
+                                    <h1>{amenity}</h1>
                                 </div>
                             })}
                         </div>
@@ -252,7 +244,7 @@ export function StayDetails() {
                                 <div className="review-totals">
                                     <FaStar />
                                     {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                                    <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span>
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
                             </header>
@@ -343,7 +335,7 @@ export function StayDetails() {
                 <header>
                     <div className="review-totals">
                         <FaStar />
-                        <span>{stayService.getAvrStayRating(stay.reviews)} ·</span>
+                        <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span>
                         <a href="">{stay.reviews.length} reviews </a>
                     </div >
                 </header >
@@ -416,44 +408,6 @@ export function StayDetails() {
                         <h1>Hosted by {stay.host.fullname}</h1>
                         <h2>{stay.host.location}</h2>
                     </div>
-                </div>
-                <div className="rating">
-                    <p>Cleanliness</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.966666666666667">
-                        </progress>
-                        5.0
-                    </span>
-                    <p>Check-in</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.466666666666667">
-                        </progress>
-                        4.5
-                    </span>
-                    <p>Location</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.333333333333333">
-                        </progress>
-                        4.3
-                    </span>
-                    <p>Communication</p>
-                    <span className="progress-container">
-                        <progress max="5" value="3.6666666666666665">
-                        </progress>
-                        3.7
-                    </span>
-                    <p>Accuracy</p>
-                    <span className="progress-container">
-                        <progress max="5" value="4.266666666666667">
-                        </progress>
-                        4.3
-                    </span>
-                    <p>Value</p>
-                    <span className="progress-container">
-                        <progress max="5" value="3.9333333333333336">
-                        </progress>
-                        3.9
-                    </span>
                 </div>
                 <div className="host-rating">
                     <div className="host-reviews">

@@ -8,6 +8,7 @@ import { showSuccessMsg } from '../services/event-bus.service'
 import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from '../services/socket.service'
 import { AppHeader } from '../cmps/app-header'
 import { UserSetting } from '../cmps/user-setting'
+import { UserEdit } from '../cmps/user-edit'
 
 export function UserDetails() {
 
@@ -42,8 +43,8 @@ export function UserDetails() {
       <h2>Account</h2>
       <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>,Go to profile</span></p>
       </header>
-    {(page==='setting') ?  <UserSetting/> : ''}
-    {/* {(page==='edit') ?  <UserEdit/> : ''} */}
+    {(page==='setting') ?  <UserSetting setPage={setPage}/> : ''}
+    {(page==='edit') ?  <UserEdit setPage={setPage}/> : ''}
       
       
 
