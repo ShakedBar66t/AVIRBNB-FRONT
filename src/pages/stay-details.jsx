@@ -224,7 +224,7 @@ export function StayDetails() {
                         <div className="stay-amenities">
                             {stay.amenities.map((amenity, image, index) => {
                                 return <div className="amenities-list" key={index}>
-                                    <img src={amenity.image} />
+                                    <img src={amenity} />
                                     <h1>{amenity}</h1>
                                 </div>
                             })}
