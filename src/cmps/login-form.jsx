@@ -13,6 +13,7 @@ import { login,signup } from '../store/user.actions';
 export  function SignInForm({onCloseLoginModal}) {
 
   const [isValid,setIsValid] = useState('')
+  const [refreshform] = useState(false)
   const dispatch = useDispatch()
   const isSignUpModal = useSelector(storeState => storeState.userModule.isSignUpModal)
 
@@ -50,7 +51,8 @@ async function handleSubmit(event) {
   }
 
  
-  login(currUser).then(onCloseLoginModal)
+  login(currUser)
+  .then(onCloseLoginModal)
   .catch(setIsValid)
   
   }
