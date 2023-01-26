@@ -1043,8 +1043,9 @@ p {
             justify-content: flex-start;
             font-size: rem(12px);
             width: 100%;
-            font-weight: 400;
+            font-weight: 600;
             font-family: $ff1;
+            padding: 8px 5px;
         }
     }
 
@@ -1062,6 +1063,7 @@ p {
 
         small {
             position: absolute;
+            margin-top: 5px 0;
             top: 0;
         }
     }
@@ -1090,23 +1092,77 @@ p {
     .guests-type-input {
         display: flex;
         justify-content: space-between;
-        // padding-bottom: 5px;
-        margin-bottom: 18px;
-        border-bottom: 1px solid $clr8;
+        padding: 24px 4px 24px 0;
+        border-bottom: $bs1;
+
+
+        & .guest-type-text-containter {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        & .upper-text {
+            font-size: rem(16px);
+            margin-bottom: 2px;
+        }
 
         &-value {
             align-self: end;
             display: flex;
             align-items: center;
+            width: 104px;
+            justify-content: space-around;
 
-            button {
-                font-size: 1.4rem;
-                cursor: pointer;
-                padding-top: 8px;
+            & .guests-btn {
+                border-radius: 50%;
+                height: 32px;
+                width: 32px;
+                border: $bs1;
+
+                &.allowed:hover {
+                    border-color: black;
+
+                    & .btn-icon {
+                        color: black;
+                    }
+                }
+
+
+                &.denied {
+                    cursor: not-allowed;
+                    color: lightgray;
+
+                    .btn-icon {
+                        color: lightgray;
+
+                        &:hover {
+                            color: lightgray;
+                            cursor: not-allowed;
+                        }
+                    }
+
+                    &:hover {
+                        color: lightgray;
+                        cursor: not-allowed;
+                    }
+                }
             }
 
-            span {
-                font-size: 1.4rem;
+            .btn-icon {
+                margin-left: 1px;
+                display: block;
+                color: $clr8;
+                font-size: 1rem;
+                font-weight: 100;
+                cursor: pointer;
+
+            }
+
+            .type-count {
+                font-size: rem(16px);
+                font-weight: 200;
+                font-family: Roboto;
             }
         }
     }

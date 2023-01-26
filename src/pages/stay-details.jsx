@@ -6,9 +6,10 @@ import { BsHeart, BsTrophy } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import { SlLocationPin } from 'react-icons/sl'
 import { HiOutlineKey } from 'react-icons/hi'
+import { GoDash, GoPlus } from "react-icons/go"
+import { GrDown, GrUp } from 'react-icons/gr'
 import GoogleMap from "../cmps/google-map"
 import { AppFooter } from "../cmps/app-footer"
-import { GrDown, GrUp } from 'react-icons/gr'
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { orderService } from "../services/order.service"
 import { DatePicker } from "antd";
@@ -24,8 +25,9 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const guestsTypes = [{ type: 'Adults', txt: 'Age 13+' }, { type: 'Children', txt: 'Ages 2-12' }
-        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Service animals?' }]
+    const guestsTypes = [
+        { type: 'Adults', txt: 'Ages 13 or above' }, { type: 'Children', txt: 'Ages 2-12' }
+        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
 
     const achievements = [
         {
@@ -305,7 +307,7 @@ export function StayDetails() {
                                         }} />
                                 </div>
                                 <div className="guests-input">
-                                    <small>Guests max capacity of {stay.capacity}</small>
+                                    <small>GUESTS</small>
                                     <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
                                         {/* {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
                                         {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
@@ -322,16 +324,16 @@ export function StayDetails() {
                             </div>
                             {(isGuestModal) && <div className="guests-modal">
 
-                                {guestsTypes.map(type => {
+                                {guestsTypes.map((type, index) => {
                                     return <div className="guests-type-input" key={type.type}>
-                                        <div>
-                                            <p>{type.type}</p>
-                                            <small>{type.txt}</small>
+                                        <div className='guest-type-text-containter'>
+                                            <span className='upper-text'>{type.type}</span>
+                                            <span className={`lower-text ${(index === 3) ? 'last' : ''}`} >{type.txt}</span >
                                         </div>
                                         <div className="guests-type-input-value">
-                                            <button type="button" className="clear-btn" disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><IoRemoveCircleOutline /></button>
-                                            <span>{guests[type.type]}</span>
-                                            <button type="button" className="clear-btn" disabled={guests.total === stay.capacity} onClick={() => { handleGuestsInput(type.type, 1) }}><IoAddCircleOutline /></button>
+                                            <button type="button" className={`guests-btn ${guests[type.type] === 0 ? 'denied' : 'allowed'} `} disabled={!guests[type.type]} onClick={() => { handleGuestsInput(type.type, -1) }}><GoDash className={`btn-icon `} /></button>
+                                            <span className='type-count'>{guests[type.type]}</span>
+                                            <button type="button" className={`guests-btn allowed`} name={type.type === 'Pets' ? 'pets' : ''} onClick={() => { handleGuestsInput(type.type, 1) }}><GoPlus className={`btn-icon `} /></button>
                                         </div>
 
                                     </div>
