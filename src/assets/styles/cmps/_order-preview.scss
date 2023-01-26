@@ -11,9 +11,12 @@
         font-size: 1.5rem;
     }
 
-
-    button{
+    .order-actions-btn-container{
         font-size: 1.5rem;
+        color: $clr8;
+        button{
+            font-size: 1.5rem;
+        }
     }
 
     .reserved-at{

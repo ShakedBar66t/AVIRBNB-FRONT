@@ -2,6 +2,7 @@ import { utilService } from "../services/util.service"
 import { GetOrderStatusStyle } from "./order-status"
 
 
+
 function OrderDateString() {
     return <p></p>
 }
@@ -25,8 +26,8 @@ export function OrderPreview({ order, onUpdateOrderStatus }) {
             </div>
         </div>
 
-       {(order.status==='pending') ? <div>
-            <button className="clear-btn approved" onClick={() => onUpdateOrderStatus(order, 'approved')}>Accept  </button>
+       {(order.status==='pending') ? <div className="order-actions-btn-container">
+            <button className="clear-btn approved" onClick={() => onUpdateOrderStatus(order, 'approved')}>Accept  </button> |
             <button className="clear-btn declined" onClick={() => onUpdateOrderStatus(order, 'declined')}>Decline</button>
         </div> : <GetOrderStatusStyle status={status}/> }
     </article>

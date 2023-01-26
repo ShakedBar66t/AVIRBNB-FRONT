@@ -12,27 +12,65 @@ export const orderService = {
     // remove,
     // addOrderMsg,
     getEmptyOrder,
+    getMonthlyIncome,
+    getTotalIncome,
+    getStatusPrec,
 }
 window.cs = orderService
 
 
-async function query(user=userService.getLoggedinUser()) {
-    var orders = await storageService.query(ORDER_STORAGE_KEY)  
+async function query(user = userService.getLoggedinUser()) {
+    var orders = await storageService.query(ORDER_STORAGE_KEY)
     // console.log('order!!@231312',orders)
     // console.log('userid',user._id,'buterid',orders[0].buyer._id)
-    console.log('user!!!!!!!',user)
+    console.log('user!!!!!!!', user)
     if (user) {
 
-        if(user.forHost){
-            orders = orders.filter(order => order.host._id === user.user._id) 
+        if (user.forHost) {
+            orders = orders.filter(order => order.host._id === user.user._id)
         }
-        else{
+        else {
             orders = orders.filter(order => order.buyer._id === user.user._id)
         }
-        console.log('filtersd orders',orders)
+        console.log('filtersd orders', orders)
     }
     return orders
 }
+
+
+function getMonthlyIncome(orders) {
+    const month = 1000 * 60 * 60 * 24 * 30
+
+    const filteredOrders = orders.filter(order => {
+        return (order.reservedAt + month > Date.now() && order.status === 'approved')
+    })
+    const monthlyIncome = filteredOrders.reduce((acc, order) => {
+        return acc += order.totalPrice
+    }, 0)
+    return monthlyIncome
+}
+
+function getTotalIncome(orders) {
+    const filteredOrders = orders.filter(order => (order.status === 'approved'))
+    const totalIncome = filteredOrders.reduce((acc, order) => {
+        return acc += order.totalPrice
+    }, 0)
+    return totalIncome
+}
+
+function getStatusPrec(status,orders){
+    // var pPos = $('#pointspossible').val();
+    // var pEarned = $('#pointsgiven').val();
+    
+    // var perc = ((pEarned/pPos) * 100).toFixed(3);
+    // $('#pointsperc').val(perc)
+
+   const  OrdersCount = orders.filter(order=>order.status===status)
+    const prec = ((OrdersCount.length / orders.length ) *100).toFixed(2)
+    console.log(prec)  
+    return prec
+}
+
 
 // async function query(filterBy = { txt: '', price: 0 }) {
 //     var orders = await storageService.query(ORDER_STORAGE_KEY)
@@ -85,25 +123,25 @@ async function save(order) {
 
 function getEmptyOrder() {
     return {
-            
-      "hostId": '',
-      "totalNights":0,
-      "buyer": {
-        "_id": '',
-        "fullname": ''
-      },
-      "totalPrice": 0,
-      "startDate": '',
-      "endDate": '',
-      "guests": { },
-      "stay": {
-        "_id": "h102",
-        "name": "House Of Uncle My",
-        "price": 0,
-      },
-      "msgs": [],
-      "status": "pending" // pending, approved
-    
+
+        "hostId": '',
+        "totalNights": 0,
+        "buyer": {
+            "_id": '',
+            "fullname": ''
+        },
+        "totalPrice": 0,
+        "startDate": '',
+        "endDate": '',
+        "guests": {},
+        "stay": {
+            "_id": "h102",
+            "name": "House Of Uncle My",
+            "price": 0,
+        },
+        "msgs": [],
+        "status": "pending" // pending, approved
+
     }
 }
 

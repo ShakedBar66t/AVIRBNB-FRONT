@@ -126,7 +126,7 @@ export function StayDetails() {
             const newOrder = {
                 ...order, guests: guests,reservedAt:Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc,avrRate:stay.avrRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)
@@ -143,7 +143,9 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar /> {stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2>
+                            <h2><FaStar />  {stay.avrRate} ·<span>{stay.reviews.length} reviews</span></h2>
+                            {/* <h2><FaStar /> {(stay.avrRate !=='0.00') ? stay.avrRate : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2> */}
+                            {/* <h2><FaStar /> {stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2> */}
                         </div>
                         <span>·</span>
                         <h2><span className="loc">{stay.loc.city}, {stay.loc.country}</span></h2>
@@ -244,7 +246,8 @@ export function StayDetails() {
                                 <div className="review-totals">
                                     <FaStar />
                                     {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span>
+                                    <span>{stay.avrRate  } ·</span>
+                                    {/* <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span> */}
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
                             </header>

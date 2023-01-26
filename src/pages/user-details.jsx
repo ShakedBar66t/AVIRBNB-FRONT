@@ -41,7 +41,7 @@ export function UserDetails() {
       <header>
 
       <h2>Account</h2>
-      <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>,Go to profile</span></p>
+      <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>·Go to profile</span></p>
       </header>
     {(page==='setting') ?  <UserSetting setPage={setPage}/> : ''}
     {(page==='edit') ?  <UserEdit setPage={setPage}/> : ''}

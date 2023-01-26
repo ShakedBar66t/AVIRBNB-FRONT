@@ -5,9 +5,12 @@ import { AppFooter } from "../cmps/app-footer";
 import { AppHeader } from "../cmps/app-header";
 import { DashboardTable } from "../cmps/dashboard-table";
 import { OrderPreview } from "../cmps/order-preview";
-import { userService } from "../services/user.service";
 import { loadOrders } from "../store/actions/order.actions";
 import { updateOrder } from "../store/actions/order.actions"
+import { AiFillStar } from 'react-icons/ai'
+import { userService } from "../services/user.service";
+import { stayService } from "../services/stay.service";
+import { orderService } from "../services/order.service";
 
 export function HostDashBoard() {
 
@@ -37,11 +40,14 @@ export function HostDashBoard() {
 
             await updateOrder({ ...order, status: status })
             alert('updated')
+            
         }
         catch(err){
             console.log(err)
         }
     }
+
+    
 
 
 
@@ -71,12 +77,14 @@ export function HostDashBoard() {
                         </header>
 
                         <div className="statistics-info flex column">
-                            <div className="flex space-between"><p>Monthly earnings</p><p>500$</p></div>
-                            <div className="flex space-between"><p>AverageRating</p><p>3⭐</p></div>
-                            <div className="flex space-between"> <p>Total earnings</p><p>10000$</p></div>
+                        <div className="flex space-between"><p>Average rating</p><p className="pending"
+                         style={{position:'relative',right:'16px'}}>{orders[0].stay.avrRate} 
+                         <AiFillStar style={{position:'absolute',bottom:'5px'}}/></p></div>
+                            <div className="flex space-between"><p>Monthly earnings</p><p className="approved">{ '$'+orderService.getMonthlyIncome(orders)}</p></div>
+                            <div className="flex space-between"> <p>Total earnings</p><p className="approved">{ '$'+orderService.getTotalIncome(orders)}</p></div>
                         </div>
 
-                        <DashboardTable />
+                        <DashboardTable orders={orders} />
                         {/* <div>
                             
                         </div> */}
