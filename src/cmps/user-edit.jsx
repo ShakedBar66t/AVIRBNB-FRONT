@@ -1,45 +1,66 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { BsFillCameraFill } from 'react-icons/bs'
 import { ColorForButton } from "./btn-color"
+import { saveLocalUser, userService } from "../services/user.service"
+import { uploadImg } from "../services/cloudinary-service"
+import { useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { loadUser, updateUser } from "../store/user.actions"
+import { showErrorMsg } from "../services/event-bus.service"
 
 
-export function UserEdit() {
+export function UserEdit({ setPage }) {
 
-    const user = useSelector(storeState => storeState.userModule.user)
-    console.log(user)
 
-    function handleChange() {
+    const { userId } = useParams()
+    const navigate = useNavigate()
+    const [userToEdit, setUserToEdit] = useState(userService.getLoggedinUser())
+    console.log(userToEdit)
 
+    useEffect(() => {
+        if (!userId) return
+        loadUser()
+    }, [])
+
+    function handleEditChange({ target }) {
+        let { name: field, files } = target
+        if (field === 'img') {
+            uploadImg(files[0])
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                setUserToEdit(prevUser => ({ ...prevUser, imgUrl: e.target.result }));
+            }
+            reader.readAsDataURL(files[0]);
+        } else {
+            setUserToEdit(prevUser => ({ ...prevUser, [field]: target.value }))
+        }
     }
-    const [isHovering, setIsHovering] = useState(false)
-    const [imageSrc, setImageSrc] = useState()
 
-    function handleMouseEnter() {
-        setIsHovering(true)
-    }
-
-    function handleMouseLeave() {
-        setIsHovering(false)
-    }
-
-    function reserveOrder(){
-
+    async function onSaveUser(ev) {
+        ev.preventDefault()
+        try {
+            const savedUser = await updateUser(userToEdit)
+            console.log(savedUser)
+            navigate(`/explore`)
+        } catch (err) {
+            showErrorMsg('Cannot edit user', err)
+        }
     }
 
     return <section className="user-edit">
         <section className="edit-section">
-            <form className="user-info">
-                <section className="user-image" onMouseOver={() => document.getElementById('change-picture-text').style.display = "block"} onMouseOut={() => document.getElementById('change-picture-text').style.display = "none"}>
+            <form className="user-info" onSubmit={onSaveUser} >
+                <section className="user-image">
                     <label htmlFor="img">
                         <div className="image-container">
-                            <img src={user.imgUrl} aria-label="User Profile" />
+                            <img src={userToEdit.imgUrl} aria-label="User Profile" onClick={() => { document.getElementById('userImg').click() }} />
                         </div>
                         <input type="file"
                             value=''
                             id="userImg"
                             name="img"
-                            onChange={handleChange}
+                            onChange={handleEditChange}
                             hidden />
                     </label>
                 </section>
@@ -47,10 +68,10 @@ export function UserEdit() {
                     <section className="user-fullname">
                         <label htmlFor="fullname">Full name:
                             <input type="text"
-                                placeholder={user.fullname}
-                                value={user.fullname}
+                                placeholder={userToEdit.fullname}
+                                value={userToEdit.fullname}
                                 name="fullname"
-                                onChange={handleChange}
+                                onChange={handleEditChange}
                             />
                         </label>
                     </section>
@@ -58,14 +79,16 @@ export function UserEdit() {
                     <section className="user-email">
                         <label htmlFor="email">Email:
                             <input type="text"
-                                placeholder={user.email}
+                                placeholder={userToEdit.email}
                                 name="email"
-                                onChange={handleChange}
+                                onChange={handleEditChange}
                             />
                         </label>
                     </section>
                 </section>
-                <ColorForButton txt={'Save'} type="submit" reserveOrder={reserveOrder} />
+                <button type="submit" >
+                    SAVE
+                </button>
             </form>
 
         </section>

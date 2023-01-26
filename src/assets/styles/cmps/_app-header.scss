@@ -492,31 +492,42 @@
     }
 
     .clear-value-btn {
+
         z-index: 10;
         position: absolute;
         background: #ebebeb;
         border-radius: 50%;
         height: 19px;
         width: 19px;
-        right: 0px;
-        top: 10px;
+        right: 44%;
+        top: 25px;
         display: flex;
         justify-content: center;
-        flex-wrap: wrap;
-        align-items: flex-start;
+        line-height: 19px;
+        text-align: center;
         visibility: hidden;
+        font-size: 13px;
+        padding: 3px;
+
+        &.input {
+            right: 20px;
+        }
 
         &.shown {
             visibility: visible;
         }
 
-        &.date {
-            right: -10px;
+        &.checkOut {
+            right: 15px;
 
         }
 
+        &.checkIn {
+            left: 38%;
+        }
+
         &.guests {
-            right: 0;
+            right: 49%;
         }
 
         &:hover {
@@ -826,7 +837,7 @@
     background-color: $clr7;
 }
 
-///// check out
+// ///// check out
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
     background-color: $clr7;
 }
@@ -882,7 +893,7 @@
     display: flex;
     justify-content: center;
     left: 0 !important;
-    z-index: 1;
+    z-index: 10;
     transition: 0 !important;
     width: 800px;
     margin: auto !important;

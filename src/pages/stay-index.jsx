@@ -9,7 +9,6 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { LabelsFilter } from '../cmps/labels-filter.jsx'
-import { HeaderFilter } from '../cmps/header-filter.jsx'
 
 export function StayIndex() {
     const location = useLocation()
@@ -90,7 +89,6 @@ export function StayIndex() {
     return <section className='stay-index main-layout'>
         <AppHeader />
         <LabelsFilter />
-        {/* <HeaderFilter /> */}
         <StayList stays={stays} onToggleLike={onToggleLike} />
     </section>
 
