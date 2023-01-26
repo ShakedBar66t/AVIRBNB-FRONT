@@ -9,10 +9,10 @@ function OrderDateString() {
 
 export function OrderPreview({ order, onUpdateOrderStatus }) {
     const { buyer, status } = order
-    return <article className="order-preview flex align-center space-between">
+    return <article className="order-preview ">
 
         <div className="flex align-center" style={{ gap: '24px' }}>
-            <img style={{ width: '75px', height: '75px', borderRadius: '50%', outline: '1px solid #717171' }} src={buyer.imgUrl} alt="" />
+            <img  src={buyer.imgUrl} alt="" />
 
             <div className="flex column " style={{ gap: '8px' }}>
                 <h4>{buyer.fullname}</h4>

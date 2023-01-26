@@ -207,6 +207,7 @@
         transition: 0.3s;
         border: $bs1;
         border-radius: 21px;
+        position: relative;
 
         &:hover {
             box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.3);
@@ -277,8 +278,8 @@
     padding: 8px 0;
     flex-direction: column;
     justify-content: center;
-    right: 35px;
-    top: 70px;
+    right: 0px;
+    top: 50px;
     display: none;
     box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
 
@@ -290,7 +291,7 @@
     }
 
     &.on-details-layout {
-        right: 45%;
+        // right: 45%;
     }
 
     & button {

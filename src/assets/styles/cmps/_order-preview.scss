@@ -6,23 +6,71 @@
     color: $clr7;
     font-weight: lighter;
     font-family: Circular;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    @include for-normal-layout {
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    @include for-trip-wide-layout {
+        padding: 1.5rem;
+    }
+
+
+    img{
+        border-radius: 50%;
+        width: 75px;
+        height: 75px;
+
+        @include for-normal-layout {
+            width: 65px;
+            height: 65px;
+        }
+    
+        @include for-trip-wide-layout {
+            width: 75px;
+            height: 75px;
+        }
+    }
 
     h4{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        @include for-normal-layout {
+            font-size: 1.5rem;
+        }
     }
 
     .order-actions-btn-container{
         font-size: 1.5rem;
         color: $clr8;
+        
         button{
-            font-size: 1.5rem;
+            font-size: 1rem;
+            @include for-wide-layout {
+                font-size: 1.5rem;
+            }
         }
     }
 
     .reserved-at{
         color: $clr7;
+        font-size: rem(14px);
+  
+        @include for-trip-wide-layout {
+            font-size: 1rem;
+        }
     }
     p{
         color: $clr8;
+        font-size: rem(14px);
+        @include for-wide-layout {
+            font-size: 1rem;
+        }
     }
 }

@@ -1,9 +1,10 @@
 .host-dashboard {
-    margin-top: 80px;
+    margin-top:0px;
     padding: 0 24px;
     color: $clr7;
 
     @include for-mobile-layout {
+        margin-top: 80px;
         padding: 0 40px;
     }
 
@@ -22,18 +23,41 @@
         display: flex;
         margin-top: 2rem;
         gap: 2rem;
+        flex-direction: column-reverse;
+
+        // @include for-mobile-layout {
+        //     margin-top: 2rem;
+        // }
+
+        @include for-midium-layout {
+            flex-direction: row;
+            // padding: 0 40px;
+        }
+    
+        @include for-trip-wide-layout {
+            // padding: 0 80px;
+        }
     }
 
 }
 
 .statistics-container {
-    width: 40%;
+    width: 100%;
+    // width: 40%;
     height: 700px;
-    position: sticky;
+    // position: sticky;
     top: 204px;
     box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
     border-radius: 8px;
     font-family: Circular !important;
+    @include for-midium-layout {
+        width: 50%
+        // padding: 0 40px;
+    }
+    @include for-normal-layout {
+        width: 40%
+     
+    }
 
     header {
         gap: 1rem;
@@ -56,9 +80,20 @@
 }
 
 .orders-list {
-    width: 60%;
+    // width: 60%;
+    width: 100%;
     min-height: 100vh;
     box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
     border-radius: 8px;
     gap: 1rem;
+    @include for-midium-layout {
+        
+        width: 50%;
+        // padding: 0 40px;
+    }
+    @include for-normal-layout {
+    
+        width: 60%;
+        // padding: 0 40px;
+    }
 }
