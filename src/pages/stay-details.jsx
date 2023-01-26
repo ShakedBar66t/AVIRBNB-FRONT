@@ -123,7 +123,12 @@ export function StayDetails() {
             return
         }
         else {
-            const newOrder = { ...order, guests: guests, host: { _id: stay.host._id, fullname: stay.host.fullname }, stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc }, buyer: { _id: user._id, fullname: user.fullname } }
+            const newOrder = {
+                ...order, guests: guests,reservedAt:Date.now(),
+                host: { _id: stay.host._id, fullname: stay.host.fullname },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc },
+                buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
+            }
             console.log('new order!!!!!!!!', newOrder)
             addOrder(newOrder).then(res => prompt('great'))
         }
@@ -224,7 +229,7 @@ export function StayDetails() {
                         <div className="stay-amenities">
                             {stay.amenities.map((amenity, image, index) => {
                                 return <div className="amenities-list" key={index}>
-                                    <img src={amenity.image} />
+                                    <img src={amenity} />
                                     <h1>{amenity}</h1>
                                 </div>
                             })}
