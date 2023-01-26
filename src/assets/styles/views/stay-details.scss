@@ -523,7 +523,7 @@ h2 {
     margin: 0;
     font-weight: 400;
     font-size: 1.625em;
-    padding: 0 0 24px;
+    padding: 0 0 12px;
 }
 
 h3 {
@@ -532,12 +532,13 @@ h3 {
     font-family: cereal;
 }
 
-.subtitle h2 {
+.subtitle-title {
+    font-family: $ff1;
     padding: 0;
     margin-bottom: 7px;
-    font-family: Cereal;
+    font-size: rem(22px);
     text-transform: capitalize;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .review-totals {
@@ -588,6 +589,7 @@ h3 {
 
         .achievement-icon {
             margin-right: 26px;
+            font-size: rem(25px);
         }
 
         h1 {
@@ -1063,7 +1065,7 @@ p {
 
         small {
             position: absolute;
-            margin-top: 5px 0;
+            margin-top: 5px;
             top: 0;
         }
     }

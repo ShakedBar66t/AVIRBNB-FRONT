@@ -114,11 +114,7 @@ export function StayDetails() {
         { name: 'Building staff', image: require('../assets/amenities-logos/Building staff.png') },
         { name: 'Accessible-height toilet', image: require('../assets/amenities-logos/Accessible-height toilet.png') },
         { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
-    ];
-
-    // function handleGuestsInput(type, diff) {
-    //     setGuests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
-    // }
+    ]
 
     function handleGuestsInput(type, value) {
         let newGuests = { ...guests }
@@ -178,8 +174,6 @@ export function StayDetails() {
                     <div className="stay-summary">
                         <div className="review-totals">
                             <h2><FaStar />  {stay.avrRate} ·<span>{stay.reviews.length} reviews</span></h2>
-                            {/* <h2><FaStar /> {(stay.avrRate !=='0.00') ? stay.avrRate : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2> */}
-                            {/* <h2><FaStar /> {stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'}·<span>{stay.reviews.length} reviews</span></h2> */}
                         </div>
                         <span>·</span>
                         <h2><span className="loc">{stay.loc.city}, {stay.loc.country}</span></h2>
@@ -209,7 +203,7 @@ export function StayDetails() {
                 <section className="avir-content">
                     <div className="subtitle">
                         <div>
-                            <h2> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
+                            <h2 className="subtitle-title"> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
                             <span>{stay.capacity} guests · {stay.bathrooms} bathrooms · {stay.bedrooms} bedrooms </span>
                         </div>
                         <img className="host-image" src={stay.host.pictureUrl} />
@@ -308,7 +302,7 @@ export function StayDetails() {
                                 </div>
                                 <div className="guests-input">
                                     <small>GUESTS</small>
-                                    <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                    <p>
                                         {/* {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
                                         {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
                                         {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
