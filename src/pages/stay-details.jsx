@@ -24,8 +24,8 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const guestsTypes = [{ type: 'adults', txt: 'Ages 13 or above' }, { type: 'children', txt: 'Ages 2-12' }
-        , { type: 'infants', txt: 'Under 2' }, { type: 'pets', txt: 'Service animals?' }]
+    const guestsTypes = [{ type: 'Adults', txt: 'Age 13+' }, { type: 'Children', txt: 'Ages 2-12' }
+        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Service animals?' }]
 
     const achievements = [
         {
@@ -48,10 +48,11 @@ export function StayDetails() {
     const { stayId } = params
     const [stay, setStay] = useState(null)
     const [isGuestModal, ToggleGuestModal] = useState(false)
-    const [guests, setguests] = useState({ adults: 1, children: 0, infants: 0, pets: 0, total: 1 })
+    const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 })
     const [dates, setDates] = useState([])
     const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
+    const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
 
     useEffect(() => {
         loadStay()
@@ -113,8 +114,39 @@ export function StayDetails() {
         { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
     ];
 
-    function handleGuestsInput(type, diff) {
-        setguests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
+    // function handleGuestsInput(type, diff) {
+    //     setGuests({ ...guests, [type]: guests[type] + diff, total: guests.total + diff })
+    // }
+
+    function handleGuestsInput(type, value) {
+        let newGuests = { ...guests }
+        let addedText = false
+        let text = ''
+        newGuests[type] += value
+        setGuests(newGuests)
+
+        if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
+            text = 'Add guests'
+        } else {
+            if (newGuests.Adults + newGuests.Children > 0) {
+                text += `${newGuests.Adults + newGuests.Children} guests`
+                addedText = true
+            }
+            if (newGuests.Pets > 0) {
+                if (addedText) {
+                    text += ', '
+                }
+                text += ` ${newGuests.Pets} pets`
+                addedText = true
+            }
+            if (newGuests.Infants > 0) {
+                if (addedText) {
+                    text += ', '
+                }
+                text += ` ${newGuests.Infants} infants`
+            }
+        }
+        setLowerGuestsText(text)
     }
 
     function reserveOrder() {
@@ -124,9 +156,9 @@ export function StayDetails() {
         }
         else {
             const newOrder = {
-                ...order, guests: guests,reservedAt:Date.now(),
+                ...order, guests: guests, reservedAt: Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc,avrRate:stay.avrRate },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc, avrRate: stay.avrRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)
@@ -241,20 +273,21 @@ export function StayDetails() {
                 <section className="reserve-modal">
                     <div className="sticky-modal">
                         <form >
-                            <header>
+                            <header className='sticky-modal-header'>
                                 <h4><span>{stay.price + '$ '} </span> night</h4>
                                 <div className="review-totals">
                                     <FaStar />
                                     {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>{stay.avrRate  } ·</span>
+                                    <span>{stay.avrRate} ·</span>
                                     {/* <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span> */}
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
                             </header>
                             <div className="order-input">
+                                <div className="date-input-header"><span>CHECK-IN</span><span>CHECKOUT</span></div>
                                 <div className="date-input">
                                     {/* <input type="text" /> */}
-                                    <RangePicker
+                                    <RangePicker popupClassName='details-range-picker'
                                         onChange={(values) => {
 
                                             // const value1 = moment(values[0]).format('DD-MM-YYYY')
@@ -274,14 +307,15 @@ export function StayDetails() {
                                 <div className="guests-input">
                                     <small>Guests max capacity of {stay.capacity}</small>
                                     <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                                        {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
+                                        {/* {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
                                         {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
                                         {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
-                                        {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''}
+                                        {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''} */}
 
+                                        {lowerGuestsText}
 
                                     </p>
-                                    <button className="clear-btn" type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
+                                    <button className="guests-btn " type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
                                         {(isGuestModal) ? <GrUp /> : <GrDown />}</button>
                                 </div>
 
