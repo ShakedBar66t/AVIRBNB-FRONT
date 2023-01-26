@@ -30,9 +30,11 @@ function getUsers() {
 
 
 async function save(user) {
-    console.log(user)
+    // console.log(user)
     var savedUser
     if (user._id) {
+        let currUser = await storageService.get(USER_STORAGE_KEY,user._id)
+        user.password = currUser.password
         savedUser = await storageService.put(USER_STORAGE_KEY, user)
         // savedUser = await httpService.put(`user/${user._id}`, user)
 
@@ -43,6 +45,7 @@ async function save(user) {
 
         // savedUser = await httpService.post('stay', stay)
     }
+    console.log('saved user sdaskldsaklJD',savedUser)
     return savedUser
 }
 
@@ -72,6 +75,8 @@ async function login(userCred) {
     const users = await storageService.query(USER_STORAGE_KEY)
     console.log('usersss', users, 'usercred', userCred)
     const user = users.find(user => user.email === userCred.email && user.password === userCred.password)
+    console.log('current user 123',user)
+    
     // const user = users.find(user => user.username === userCred.username)
     // const user = await httpService.post('auth/login', userCred)
     if (user) {

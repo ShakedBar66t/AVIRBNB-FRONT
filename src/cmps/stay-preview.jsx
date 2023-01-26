@@ -39,7 +39,7 @@ export function StayPreview({ stay, onToggleLike }) {
 
         <div className="prev-carousel" >
             {stay.imgUrls.map(imgUrl => {
-                return <img className="stay-preview-img" src={imgUrl} alt="" style={{ transform: `translateX(-${currImgUrlIdx * 100}%)` }} />
+                return <img key={imgUrl} className="stay-preview-img" src={imgUrl} alt="" style={{ transform: `translateX(-${currImgUrlIdx * 100}%)` }} />
             })}
         </div>
 

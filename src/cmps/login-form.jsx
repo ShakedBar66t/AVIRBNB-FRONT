@@ -13,6 +13,7 @@ import { login,signup } from '../store/user.actions';
 export  function SignInForm({onCloseLoginModal}) {
 
   const [isValid,setIsValid] = useState('')
+  const [refreshform] = useState(false)
   const dispatch = useDispatch()
   const isSignUpModal = useSelector(storeState => storeState.userModule.isSignUpModal)
 
@@ -49,7 +50,9 @@ async function handleSubmit(event) {
     return
   }
 
-  login(currUser).then(onCloseLoginModal)
+ 
+  login(currUser)
+  .then(onCloseLoginModal)
   .catch(setIsValid)
   
   }
@@ -119,7 +122,7 @@ async function handleSubmit(event) {
               setIsValid('')
               dispatch({type:TOGGLE_IS_SIGNUP_MODAL})}
               }>{(isSignUpModal)? 'Sign In':'Sign Up'} </span> </p>
-            <button className='login-btn'>Continue</button>
+            <button className='login-btn' type='submit'>Continue</button>
             <p style={{padding:'10px 0' }}>{isValid}</p>
            
           </Box>

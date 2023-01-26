@@ -81,6 +81,7 @@ export async function logout() {
 export async function loadUser(userId) {
     try {
         const user = await userService.getById(userId);
+        console.log(user)
         store.dispatch({ type: SET_WATCHED_USER, user })
     } catch (err) {
         showErrorMsg('Cannot load user')
@@ -103,7 +104,9 @@ export async function updateUser(user) {
     try {
         const savedUser = await userService.save(user)
         console.log('Updated user:', savedUser)
-        store.dispatch(getActionUpdateUser(savedUser))
+        userService.saveLocalUser(savedUser)
+        // store.dispatch(getActionUpdateUser(savedUser))
+        store.dispatch({type:UPDATE_USER, savedUser})
         return savedUser
     }
     catch (err) {
@@ -111,6 +114,19 @@ export async function updateUser(user) {
         throw err
     }
 }
+// export async function updateUser(user) {
+//     console.log('user from actions', user)
+//     try {
+//         const savedUser = await userService.save(user)
+//         console.log('Updated user:', savedUser)
+//         store.dispatch(getActionUpdateUser(savedUser))
+//         return savedUser
+//     }
+//     catch (err) {
+//         console.log('Cannot save stay', err)
+//         throw err
+//     }
+// }
 
 // export function toggleUserModal() {
 //     setUserModal(!userModal)
