@@ -8,9 +8,10 @@ import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { loadUser, updateUser } from "../store/user.actions"
 import { showErrorMsg } from "../services/event-bus.service"
+import { AppFooter } from "./app-footer"
 
 
-export function UserEdit({ setPage }) {
+export function UserEdit() {
 
 
     const { userId } = useParams()
@@ -64,35 +65,36 @@ export function UserEdit({ setPage }) {
                             hidden />
                     </label>
                 </section>
-                <section className="user-details">
-                    <section className="user-fullname">
-                        <label htmlFor="fullname">Full name:
-                            <input type="text"
-                                placeholder={userToEdit.fullname}
-                                value={userToEdit.fullname}
-                                name="fullname"
-                                onChange={handleEditChange}
-                            />
-                        </label>
+                <div className="main-user-info">
+                    <section className="user-details">
+                        <div style={{width: '50%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                            <section className="user-fullname">
+                                <label htmlFor="fullname">Full name:
+                                    <input type="text"
+                                        placeholder={userToEdit.fullname}
+                                        value={userToEdit.fullname}
+                                        name="fullname"
+                                        onChange={handleEditChange}
+                                    />
+                                </label>
+                            </section>
+                            <section className="user-email">
+                                <label htmlFor="email">Email:
+                                    <input type="text"
+                                        placeholder={userToEdit.email}
+                                        name="email"
+                                        onChange={handleEditChange}
+                                    />
+                                </label>
+                            </section>
+                        </div>
+                        <button className="save-btn" type="submit" >
+                            Save
+                        </button>
                     </section>
-
-                    <section className="user-email">
-                        <label htmlFor="email">Email:
-                            <input type="text"
-                                placeholder={userToEdit.email}
-                                name="email"
-                                onChange={handleEditChange}
-                            />
-                        </label>
-                    </section>
-                </section>
-                <button type="submit" >
-                    SAVE
-                </button>
+                </div>
             </form>
-
         </section>
-        
-
+        <AppFooter />
     </section>
 }

@@ -1,15 +1,21 @@
+header {
+    display: none;
+}
+
 .user-edit {
-    display: grid;
-    grid-template-columns: 1fr;
     margin-top: 10px;
     font-family: cereal;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    box-shadow: rgb(0 0 0 / 20%) 0 6px 16px;
+
+    .app-footer {
+        background-color: #f3f3f3;
+        border-top: 0;
+        grid-template-columns: 24px 1fr 24px;
+    }
 
     .edit-section {
         padding: 10px;
         background-color: #f3f3f3;
-        border-radius: 10px;
 
         .user-info {
             display: flex;
@@ -20,6 +26,7 @@
 
             .user-details {
                 display: flex;
+                flex-direction: column;
                 justify-content: space-around;
                 align-items: center;
                 background-color: #f3f3f3;
@@ -30,17 +37,25 @@
 
                     input {
                         margin-left: 10px;
+                        border: 0;
+                        outline: 0;
+                        font-family: inherit;
+                        border-bottom: 1px solid rgb(215, 215, 215);
+                        background-color: inherit;
                     }
                 }
             }
 
             .user-image {
                 text-align: center;
+
                 img {
                     opacity: 1;
                     width: 400px;
                     border-radius: 200px;
+                    outline: 1px solid $clr8;
                 }
+
                 img:hover {
                     opacity: 0.5;
                     filter: brightness(50%);
@@ -48,7 +63,10 @@
             }
         }
     }
+
 }
+
+
 
 .image-container:hover .change-picture-text {
     display: block;
@@ -65,77 +83,30 @@
     display: none;
 }
 
-.btn-container {
-    position: relative;
-    margin-top: 10px;
+.save-btn {
+    background-color: $clr1;
+    width: 30%;
     align-self: center;
-    width: 20%;
-    height: 48px;
-    cursor: pointer;
-    border: none;
-    display: grid;
-    grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+    color: white;
+    border-radius: 10px;
+    height: 30px;
+    border: 0;
+}
 
-    @for $i from 0 to 10 {
-        .cell:nth-child(10n + #{$i + 1}):hover~.content {
-            --positionX: #{$i};
-        }
+.save-btn:hover {
+    box-shadow: rgb(0 0 0 / 10%) 0 6px 16px;
+}
 
-        .cell:nth-child(n + #{10 * $i + 1}):nth-child(-n + #{10 * ($i + 1)}):hover~.content {
-            --positionY: #{$i};
+@media (min-width: 1600px) {
+    .user-edit {
+        .app-footer {
+            grid-template-columns: 1fr 1000px 1fr;
         }
     }
+}
 
-
-    .cell {
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        // border: 1px solid rgba(128, 128, 128, 0.753);
-    }
-
-    .content {
-        --positionX: 0;
-        --positionY: 5;
-
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        border-radius: 8px;
-        width: 100%;
-
-        background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),
-                rgb(241, 37, 75) 0%,
-                rgb(230, 30, 77) 27.5%,
-                rgb(227, 28, 95) 40%,
-                rgb(215, 4, 102) 57.5%,
-                rgb(189, 30, 89) 75%,
-                rgb(189, 30, 89) 100%);
-    }
-
-    .action-btn {
-        padding: 0 0;
-        margin: 0 0;
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
-        border: none;
-
-
-        span {
-            padding: 0 0;
-            margin: 0 0;
-            color: white;
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 600;
-            font-family: sans-serif;
-        }
+@media (min-width: 460px) {
+    .user-details {
+        margin-top: 90px;
     }
 }
