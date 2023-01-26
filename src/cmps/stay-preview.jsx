@@ -78,7 +78,7 @@ export function StayPreview({ stay, onToggleLike }) {
             </div >
             <p className="prev-host-name">{"Hosted by " + (stay.host.fullname.slice(0, stay.host.fullname.indexOf(' ')))}</p>
             <PrevDateStr />
-            <p className="prev-price">{'$' + stay.price + ' night'}</p>
+            <p className="prev-price"> <span style={{fontWeight:'bold'}}>{'$' + stay.price}</span> night</p>
         </div>
     </article>
 }

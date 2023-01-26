@@ -17,7 +17,7 @@
     }
 
     @include for-wide-layout {
-        padding: 0 80px;
+        padding: 0 80px 0 65px;
     }
 
     &.sticky {
@@ -89,6 +89,9 @@
         justify-items: start;
         gap: 36px;
     }
+    // .carousel-inner :first-child {
+    //     text-align: left;
+    // }
 
     .btn-container {
         display: flex;
