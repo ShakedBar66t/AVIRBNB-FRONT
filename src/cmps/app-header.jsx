@@ -65,17 +65,6 @@ export function AppHeader() {
         , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
 
 
-    //         function initAutocomplete(input) {
-    //             const autocomplete = new window.google.maps.places.Autocomplete(input)
-    //         }
-    // useEffect(() => {
-    //     if (!window.google) {
-    //         // load the google maps API
-    //     } else {
-    //         initAutocomplete(inputRef.current)
-    //     }
-    // }, [])
-
     useEffect(() => {
         const handleWheel = (event) => {
             if (searchModal) {
@@ -256,11 +245,11 @@ export function AppHeader() {
                 }
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn' onClick={() => navigate('/host/dashboard')}>Avirbnb your home</button>
+                        <button className='host-btn' onClick={() => navigate('/host/dashboard')}>{`${user ? 'Switch to hosting' : 'Avirbnb your home'}`}</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px',borderRadius:'50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span></button>
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>

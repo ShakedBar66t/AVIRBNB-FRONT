@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 4;
     background-color: $clr6;
     grid-column: 1/-1;
 
@@ -42,7 +42,7 @@
 
         &.login {
             top: 0;
-            z-index: 3;
+            z-index: 5;
             display: block;
             opacity: 1;
         }
@@ -54,7 +54,7 @@
         height: 80px;
         position: relative;
         width: 100%;
-        z-index: 1;
+        z-index: 5;
         grid-column: 2;
         grid-row: 1;
 
@@ -144,6 +144,7 @@
         & .host-btn,
         & .lang-btn {
             border-radius: 16px;
+            white-space: nowrap;
 
             &:hover {
                 background-color: $bgh1;
@@ -267,7 +268,7 @@
 }
 
 /////// modals ////////
-/// 
+
 .user-modal {
     position: absolute;
     width: 240px;
@@ -282,7 +283,7 @@
     box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
 
     &.open {
-        z-index: 3;
+        z-index: 5;
         display: flex;
         justify-content: space-between;
 
@@ -337,6 +338,7 @@
     top: 60px;
     right: 0;
     left: 0;
+    z-index: 4;
     background-color: $clr6;
 
     &.open {

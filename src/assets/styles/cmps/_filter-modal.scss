@@ -226,10 +226,10 @@ input[type=number]::-webkit-outer-spin-button {
 
         input[type="checkbox"] {
             appearance: none;
-            background-color: #fff;
+            // background-color: #fff;
             margin: 0;
             font: inherit;
-            color: currentColor;
+            // color: currentColor;
             width: 24px;
             height: 24px;
             border: $bs1;
@@ -263,6 +263,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     input[type="checkbox"]:checked {
         background-color: black;
+        color: white;
     }
 
 }
