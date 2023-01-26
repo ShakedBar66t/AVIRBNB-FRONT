@@ -257,9 +257,9 @@ export function StayDetails() {
                     <div className="amenities-container">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
-                            {stay.amenities.map((amenity, image, index) => {
+                            {stay.amenities.map((amenity, index) => {
                                 return <div className="amenities-list" key={index}>
-                                    <img src={amenity} />
+                                    {/* <img src={amenityObject.image}/> */}
                                     <h1>{amenity}</h1>
                                 </div>
                             })}

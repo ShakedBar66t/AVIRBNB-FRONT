@@ -88,7 +88,7 @@ export function UserEdit() {
                                 </label>
                             </section>
                         </div>
-                        <button className="save-btn" type="submit" >
+                        <button className="save-edit-btn" type="submit" >
                             Save
                         </button>
                     </section>
