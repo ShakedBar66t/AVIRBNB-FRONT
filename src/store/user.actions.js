@@ -71,6 +71,7 @@ export async function logout() {
             type: SET_USER,
             user: null
         })
+        
     } catch (err) {
         console.log('Cannot logout', err)
         throw err

@@ -1,13 +1,12 @@
 import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { login, logout, signup } from '../store/user.actions.js'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import { GoDash, GoPlus } from "react-icons/go"
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
-import { LabelsFilter } from './labels-filter'
-import { useDispatch } from 'react-redux'
-import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { IoCloseSharp } from 'react-icons/io5'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { login, logout, signup } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { DatePicker } from "antd"
@@ -31,17 +30,17 @@ export function AppHeader() {
     const [searchModalExpended, setSearchModalExpended] = useState(false)
     //expended location modal states
     const [isLocationModalOpen, setIsLocationModalOpen] = useState(false)
-    const [inputValue, setInputValue] = useState('')
+    const [locationInput, setLocationInput] = useState('')
     //expended date modal states
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isCheckedInSelected, setIsCheckedInSelected] = useState(3)
+    const [isCalenderOpen, setIsCalenderOpen] = useState(false)
     const [checkInOutDates, setCheckInOutDates] = useState({ checkIn: "", checkOut: "" })
     const [flexibleDates, setFlexibleDates] = useState(false)
     // expended guests modal states
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
-    const [isCalenderOpen, setIsCalenderOpen] = useState(false)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
-    const [guests, setguests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
+    const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
 
     // final filterBy
     const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader)
@@ -88,7 +87,7 @@ export function AppHeader() {
     }
 
     function handelShadowClick() {
-        setInputValue('')
+        setLocationInput('')
         setIsCalenderOpen(false)
         setIsLocationModalOpen(false)
         setIsDateModalOpen(false)
@@ -115,7 +114,7 @@ export function AppHeader() {
         let addedText = false
         let text = ''
         newGuests[type] += value
-        setguests(newGuests)
+        setGuests(newGuests)
 
         if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
             text = 'Add guests'
@@ -180,8 +179,8 @@ export function AppHeader() {
 
     function handleInputChange({ target }, location) {
 
-        if (location) setInputValue(location)
-        else setInputValue(target.value)
+        if (location) setLocationInput(location)
+        else setLocationInput(target.value)
     }
 
     function handleDateChange(values) {
@@ -201,14 +200,14 @@ export function AppHeader() {
     }
 
     function handleClearValue(ev) {
+        ev.stopImmediatePropagation();
         console.log('clear active')
-        ev.stopPropagation();
         ev.preventDefault();
         const name = ev.target.name;
 
         switch (name) {
             case 'location':
-                setInputValue('');
+                setLocationInput('');
                 break;
             case 'checkIn':
                 setCheckInOutDates({ checkIn: '', checkOut: checkInOutDates.checkOut });
@@ -222,6 +221,7 @@ export function AppHeader() {
             default:
                 break;
         }
+        return false
     }
     return (
         <header className={(stayId || isTripPage || id || isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
@@ -278,19 +278,19 @@ export function AppHeader() {
                 }}>Host an experience </button>
                 <button>About</button>
                 <button>Help </button>
-                {(user) && <button onClick={() => { logout() }}>Log out</button>}
+                {(user) && <button onClick={() => { logout().then(currUser=>{navigate('/explore')}) }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
-
                 <div className='filter-modal-left-btns' >
+                    <span name='location' onClick={() => { setLocationInput(''); }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
                     <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where
-                        <span name='location' onClick={(ev) => handleClearValue(ev)} className={`clear-value-btn input ${isLocationModalOpen ? 'shown' : ''}`}>x</span> </span>
+                    </span>
                         <input
                             ref={inputRef}
                             name='location'
                             type='text'
                             placeholder="Search destinations"
-                            value={inputValue}
+                            value={locationInput}
                             className='lower-text input'
                             onChange={(ev) => handleInputChange(ev)}>
                         </input>
@@ -321,7 +321,8 @@ export function AppHeader() {
                             </div>
                             <div className='calenders-container'>
                                 <div className='left-calender'>
-                                    <RangePicker format="MMM D" open={isCalenderOpen} popupClassName='header-calender-dropdown' className='header-calender'
+                                    <RangePicker format="MMM D" open={isCalenderOpen}
+                                        popupClassName='header-calender-dropdown' className='header-calender'
                                         onChange={(values) => handleDateChange(values)} />
                                 </div>
                             </div>
@@ -331,21 +332,21 @@ export function AppHeader() {
                 <div className='filter-modal-middle-btns '  >
                     <div className={`inner-btns-container middle `}>
                         <div className='inner-btn-wrapper middle'>
+                            <span name={'checkIn'} className={`clear-value-btn checkIn ${checkInOutDates.checkIn && isCheckedInSelected === 1 ? 'shown' : ''}`}
+                                onClick={() => setCheckInOutDates({ checkIn: "", checkOut: "" })} ><IoCloseSharp /></span>
                             <button className={`date-btn right ${isCheckedInSelected === 1 ? 'selected' : ''}`} name='checkIn' onClick={(ev) => handleExpendedModalClick(ev)} >
                                 <span name='date' className='upper-text'>
                                     Check in
-                                    <span name={'checkIn'} className={`clear-value-btn date ${isCheckedInSelected === 1 ? 'shown' : ''}`}
-                                        onClick={(ev) => handleClearValue(ev)} >x</span>
                                 </span>
                                 <span name='date' className='lower-text'>{`${checkInOutDates.checkIn ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
+                            <span name={'checkOut'} className={`clear-value-btn checkOut ${checkInOutDates.checkOut && isCheckedInSelected === 2 ? 'shown' : ''}`}
+                                onClick={() => setCheckInOutDates({ checkIn: "", checkOut: "" })} ><IoCloseSharp /></span>
                             <button className={`date-btn left ${isCheckedInSelected === 2 ? 'selected' : ''}`} name='checkOut' onClick={(ev) => handleExpendedModalClick(ev)}>
                                 <span className='upper-text'>
                                     Check out
-                                    <span name={'checkOut'} className={`clear-value-btn date ${isCheckedInSelected === 2 ? 'shown' : ''}`}
-                                        onClick={(ev) => handleClearValue(ev)} >x</span>
                                 </span>
                                 <span className='lower-text'>{`${checkInOutDates.checkOut ? checkInOutDates.checkOut : 'Add dates'}`}</span> </button>
                             <span className='border-between-right'></span>
@@ -353,13 +354,14 @@ export function AppHeader() {
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
+                    <span name='guests' onClick={(ev) => setLowerGuestsText('Add guests')} className={`clear-value-btn guests ${lowerGuestsText === 'Add guests' ? '' : 'shown'}`}>
+                        <IoCloseSharp />
+                    </span>
                     <div className={`inner-btn-wrapper ${isGuestsModalOpen ? 'selected' : ''}`}>
                         <button className={`inner-btns-container right`} name='guests' onClick={(ev) => handleExpendedModalClick(ev)}>
                             <span className='upper-text'>
                                 Who
-                                <span name='guests' onClick={(ev) => handleClearValue(ev)} className={`clear-value-btn ' ${isGuestsModalOpen ? 'shown' : ''}`}>
-                                    x
-                                </span></span>
+                            </span>
                             <span className='lower-text'>{lowerGuestsText}</span></button>
                         <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
