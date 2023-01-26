@@ -1,0 +1,25 @@
+
+.order-preview{
+    border-bottom: $bs1;
+    padding: 1.5rem;
+    justify-content: space-between;
+    color: $clr7;
+    font-weight: lighter;
+    font-family: Circular;
+
+    h4{
+        font-size: 1.5rem;
+    }
+
+
+    button{
+        font-size: 1.5rem;
+    }
+
+    .reserved-at{
+        color: $clr7;
+    }
+    p{
+        color: $clr8;
+    }
+}

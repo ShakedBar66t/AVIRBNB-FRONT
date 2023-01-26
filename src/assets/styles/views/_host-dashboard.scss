@@ -1,5 +1,4 @@
 .host-dashboard {
-
     margin-top: 80px;
     padding: 0 24px;
     color: $clr7;
@@ -21,7 +20,7 @@
     .dashboard-main {
         width: 100%;
         display: flex;
-        margin-top: 1rem;
+        margin-top: 2rem;
         gap: 2rem;
     }
 
@@ -29,25 +28,38 @@
 
 .statistics-container {
     width: 40%;
-    height: 500px;
+    height: 700px;
     position: sticky;
+    top: 204px;
     box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
     border-radius: 8px;
-}
+    font-family: Circular !important;
 
-.orders-container {
-    width: 60%;
-    height: 500px;
-    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
-    border-radius: 8px;
+    header {
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: $bs1;
 
-    div{
-        div{
-            display: flex;
-            justify-content: space-between;
+        h3 {
+
+            font-family: Circular;
+            margin: 0;
         }
+
     }
 
+    .statistics-info {
+        padding: 1rem;
+        gap: 1rem;
+        border-bottom: $bs1;
+    }
+}
+
+.orders-list {
+    width: 60%;
+    height: 2000px;
+    box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+    border-radius: 8px;
     
-  
+    gap: 1rem;
 }

@@ -266,7 +266,7 @@ export function AppHeader() {
                 }}>Host an experience </button>
                 <button>About</button>
                 <button>Help </button>
-                {(user) && <button onClick={() => { logout() }}>Log out</button>}
+                {(user) && <button onClick={() => { logout().then(currUser=>{navigate('/explore')}) }}>Log out</button>}
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 

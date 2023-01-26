@@ -7,6 +7,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getMonthName,
+    getDayName,
+    getFullMonthName
 }
 
 function makeId(length = 6) {
@@ -60,6 +62,21 @@ function getMonthName(date) {
     ]
     return monthNames[date.getMonth()]
 }
+function getFullMonthName(date) {
+
+    const monthNames = ["January", "February", "March", "April", "May",
+     "June", "July", "August", "September", "October", "November", "December"]
+    
+    return monthNames[date.getMonth()]
+}
+
+function getDayName(date, locale) {
+    const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    date = new Date(date)
+    // return date.toLocaleDateString(locale, { weekday: 'long' })
+    return dayNames[date.getDay()]
+}
+
 
 function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
