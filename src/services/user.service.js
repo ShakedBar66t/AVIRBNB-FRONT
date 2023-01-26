@@ -15,7 +15,8 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
+    changeScore,
+    save
 }
 
 window.userService = userService
@@ -28,6 +29,22 @@ function getUsers() {
 }
 
 
+async function save(user) {
+    console.log(user)
+    var savedUser
+    if (user._id) {
+        savedUser = await storageService.put(USER_STORAGE_KEY, user)
+        // savedUser = await httpService.put(`user/${user._id}`, user)
+
+    } else {
+        // Later, owner is set by the backend
+        user = userService.getLoggedinUser()
+        savedUser = await storageService.post(USER_STORAGE_KEY, user)
+
+        // savedUser = await httpService.post('stay', stay)
+    }
+    return savedUser
+}
 
 async function getById(userId) {
     const user = await storageService.get(USER_STORAGE_KEY, userId)
@@ -90,7 +107,8 @@ async function changeScore(by) {
 }
 
 
-function saveLocalUser(user) {
+ export function saveLocalUser(user) {
+    console.log(user)
     user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, email: user.email }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user

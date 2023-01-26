@@ -3,7 +3,15 @@ import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL } from "./reducers/user.reducer.js";
+import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, UPDATE_USER } from "./reducers/user.reducer.js";
+
+export function getActionUpdateUser(user) {
+    console.log('user from get action update', user)
+    return {
+        type: UPDATE_USER,
+        user
+    }
+}
 
 export async function loadUsers() {
     try {
@@ -80,7 +88,6 @@ export async function loadUser(userId) {
 }
 
 export function toggleLoginModal(signup) {
-
     if (signup === 'signup') {
         store.dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
     }
@@ -88,6 +95,20 @@ export function toggleLoginModal(signup) {
     // setLoginModal(!loginModal)
     store.dispatch({ type: TOGGLE_LOGIN_MODAL })
     store.dispatch({ type: TOGGLE_IS_SHADOW })
+}
+
+export async function updateUser(user) {
+    console.log('user from actions', user)
+    try {
+        const savedUser = await userService.save(user)
+        console.log('Updated user:', savedUser)
+        store.dispatch(getActionUpdateUser(savedUser))
+        return savedUser
+    }
+    catch (err) {
+        console.log('Cannot save stay', err)
+        throw err
+    }
 }
 
 // export function toggleUserModal() {
