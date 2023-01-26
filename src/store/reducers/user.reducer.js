@@ -70,15 +70,11 @@ export function userReducer(state = initialState, action) {
         case SET_SCORE:
             newState = { ...state, user: { ...state.user, score: action.score } }
             break
-        case UPDATE_USER:
-            console.log('action from reducer', state.users)
-            users = state.users.map(user => {
-                console.log(user._id, action.user._id)
-                return (user._id === action.user._id) ? action.user : user
-            })
-            console.log(users)
-            newState = { ...state, user: {...state.user, user: action.user  }}
-            break
+            case UPDATE_USER:
+                
+                newState = { ...state, user:action.savedUser }
+                break
+
         default:
     }
     // For debug:

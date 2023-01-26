@@ -49,6 +49,7 @@ async function handleSubmit(event) {
     return
   }
 
+ 
   login(currUser).then(onCloseLoginModal)
   .catch(setIsValid)
   
@@ -119,7 +120,7 @@ async function handleSubmit(event) {
               setIsValid('')
               dispatch({type:TOGGLE_IS_SIGNUP_MODAL})}
               }>{(isSignUpModal)? 'Sign In':'Sign Up'} </span> </p>
-            <button className='login-btn'>Continue</button>
+            <button className='login-btn' type='submit'>Continue</button>
             <p style={{padding:'10px 0' }}>{isValid}</p>
            
           </Box>
