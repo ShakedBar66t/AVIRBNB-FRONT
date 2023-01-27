@@ -77,7 +77,7 @@ export function LabelsFilter() {
     return (<div className={`carousel-container-wrapper full `}>
 
 
-        <div className={`carousel-container main-layout ${isLabelsFilterSticky ? 'sticky' : 'fixed'} `} ref={ElCarousel}>
+        <div className={`carousel-container main-layout  `} ref={ElCarousel}>
             <div className="carousel ">
                 <div className="carousel-inner" ref={ElCarousel1} >
                     {

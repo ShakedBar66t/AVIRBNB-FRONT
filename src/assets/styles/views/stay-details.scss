@@ -258,7 +258,12 @@
                 flex-direction: row;
                 margin-top: 3px;
 
-                h1 {
+                .amenity-name {
+                    color: $clr7 ;
+                    font-family: $ff1 ;
+                    font-weight: 400 !important;
+                    font-size: rem(16px);
+                    line-height: rem(20px);
                     font-weight: 100;
                 }
             }
@@ -292,7 +297,7 @@
             align-items: center;
 
             & span {
-                font-weight: 300;
+                font-weight: 600;
             }
         }
 
@@ -301,7 +306,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-self: flex-start;
-            gap: 42px;
+            gap: 24px;
             border: 1px solid rgb(221, 221, 221);
             border-radius: 12px;
             padding: 24px;
@@ -403,6 +408,7 @@
         }
 
         .total {
+            margin-top: 12px;
             font-weight: 700;
             display: flex;
             justify-content: space-between;
@@ -1079,14 +1085,13 @@ p {
 .guests-modal {
     position: absolute;
     background-color: #fff;
-    top: 50.5%;
+    top: 34.75%;
     width: 87%;
     z-index: 5;
     box-shadow: 0px 4px 14px 0px rgb(72 72 72 / 40%);
     border: $bs1;
     border-radius: 10px;
     height: 410px;
-    // width: 280px;
     display: flex;
     padding: 16px;
     flex-direction: column;
