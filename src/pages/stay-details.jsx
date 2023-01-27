@@ -12,7 +12,7 @@ import GoogleMap from "../cmps/google-map"
 import { AppFooter } from "../cmps/app-footer"
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { orderService } from "../services/order.service"
-import { DatePicker } from "antd";
+import { DatePicker } from "antd"
 import { toggleLoginModal } from '../store/user.actions.js'
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
@@ -25,27 +25,7 @@ const { RangePicker } = DatePicker
 
 export function StayDetails() {
 
-    const guestsTypes = [
-        { type: 'Adults', txt: 'Ages 13 or above' }, { type: 'Children', txt: 'Ages 2-12' }
-        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
 
-    const achievements = [
-        {
-            icon: <BsTrophy />,
-            title: "Superhost",
-            subtext: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!"
-        },
-        {
-            icon: <SlLocationPin />,
-            title: "Great location",
-            subtext: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!"
-        },
-        {
-            icon: <HiOutlineKey />,
-            title: "Great check-in experience",
-            subtext: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!"
-        }
-    ]
     const params = useParams()
     const { stayId } = params
     const [stay, setStay] = useState(null)
@@ -66,7 +46,29 @@ export function StayDetails() {
         setStay(stay)
     }
 
-    const stayAmenities = [
+    const guestsTypes = [
+        { type: 'Adults', txt: 'Ages 13 or above' }, { type: 'Children', txt: 'Ages 2-12' }
+        , { type: 'Infants', txt: 'Under 2' }, { type: 'Pets', txt: 'Bringing a service animal?' }]
+
+    const achievements = [
+        {
+            icon: <BsTrophy />,
+            title: "Superhost",
+            description: "Our property has been designated as a Superhost, which is a recognition given to hosts who provide exceptional service and experience to their guests."
+        },
+        {
+            icon: <SlLocationPin />,
+            title: "Great location",
+            description: "Our guests can expect a great location, with easy access to local amenities and attractions."
+        },
+        {
+            icon: <HiOutlineKey />,
+            title: "Great check-in experience",
+            description: "We pride ourselves on providing a seamless check-in experience, ensuring that our guests have everything they need to feel at home during their stay."
+        }
+    ]
+
+    const stayAmenitiesImages = [
         { name: 'TV', image: require('../assets/amenities-logos/TV.png') },
         { name: 'Internet', image: require('../assets/amenities-logos/Internet.png') },
         { name: 'Wifi', image: require('../assets/amenities-logos/Wifi.png') },
@@ -116,6 +118,18 @@ export function StayDetails() {
         { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
     ]
 
+
+    function getStayAmenitiesWithImages(stayAmenitiesList, stayAmenitiesWithImages) {
+        const amenitiesWithImages = []
+        stayAmenitiesList.forEach(amenity => {
+            const amenityWithImage = stayAmenitiesWithImages.find(a => a.name === amenity)
+            if (amenityWithImage) {
+                amenitiesWithImages.push(amenityWithImage)
+            }
+        })
+        return amenitiesWithImages
+    }
+
     function handleGuestsInput(type, value) {
         let newGuests = { ...guests }
         let addedText = false
@@ -147,6 +161,11 @@ export function StayDetails() {
         setLowerGuestsText(text)
     }
 
+    if (stay) {
+        var avgRate = stayService.getAvrStayRating(stay.reviews)
+        var amenitiesWithImages = getStayAmenitiesWithImages(stay.amenities, stayAmenitiesImages)
+    }
+
     function reserveOrder() {
         if (!user) {
             toggleLoginModal()
@@ -173,10 +192,10 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar />  {stay.avrRate} ·<span>{stay.reviews.length} reviews</span></h2>
+                            <h2><FaStar />  {avgRate}  <span>{stay.reviews.length} reviews  </span></h2>
                         </div>
-                        <span>·</span>
-                        <h2><span className="loc">{stay.loc.city}, {stay.loc.country}</span></h2>
+                        <span>    </span>
+                        <h2><span className="loc"> ·  {stay.loc.city}, {stay.loc.country}</span></h2>
                     </div>
                     <div className="share-save-action">
                         <span className="share-stay">
@@ -209,34 +228,19 @@ export function StayDetails() {
                         <img className="host-image" src={stay.host.pictureUrl} />
                     </div>
                     <div className="user-stay-info">
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <BsTrophy />
+                        {achievements.map((achievement) => (
+                            <div className="user-achievement">
+                                <div className="achievement-icon">
+                                    {achievement.icon}
+                                </div>
+                                <div>
+                                    <h1>{achievement.title}</h1>
+                                    <p className="subtext">{achievement.description}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h1>{stay.host.fullname} is a Superhost</h1>
-                                <p className="subtext">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, blanditiis!</p>
-                            </div>
-                        </div>
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <SlLocationPin />
-                            </div>
-                            <div>
-                                <h1>Great location</h1>
-                                <p className="subtext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, asperiores!</p>
-                            </div>
-                        </div>
-                        <div className="user-achievement">
-                            <div className="achievement-icon">
-                                <HiOutlineKey />
-                            </div>
-                            <div>
-                                <h1>Great check-in experience</h1>
-                                <p className="subtext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, cum!</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+
                     <div className="air-cover">
                         <h3>
                             <span style={{ color: '#ff385c' }}>avir</span>cover
@@ -244,23 +248,23 @@ export function StayDetails() {
                         <p style={{ marginBottom: '8px', lineHeight: '20px' }}>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                         </p>
-                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder', marginTop: '16px' }}>
-                            Learn More
-                        </p>
                     </div>
                     <div className="summary">
                         <p>
                             {stay.summary}
                         </p>
-                        <LongTxt txt={stay.summary} length={20} />
+                        <span className={'long-text-details'}>
+
+                            <LongTxt txt={stay.summary} length={20} />
+                        </span>
                     </div>
                     <div className="amenities-container">
                         <h2>What this place offers </h2>
                         <div className="stay-amenities">
-                            {stay.amenities.map((amenity, index) => {
+                            {amenitiesWithImages.map((amenity, index) => {
                                 return <div className="amenities-list" key={index}>
-                                    {/* <img src={amenityObject.image}/> */}
-                                    <h1>{amenity}</h1>
+                                    <img src={amenity.image} />
+                                    <h1 className="amenity-name">{amenity.name}</h1>
                                 </div>
                             })}
                         </div>
@@ -270,11 +274,11 @@ export function StayDetails() {
                     <div className="sticky-modal">
                         <form >
                             <header className='sticky-modal-header'>
-                                <h4><span>{stay.price + '$ '} </span> night</h4>
+                                <h4><span>{'$ ' + stay.price} </span> night</h4>
                                 <div className="review-totals">
                                     <FaStar />
                                     {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>{stay.avrRate} ·</span>
+                                    <span>{avgRate} ·</span>
                                     {/* <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span> */}
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
@@ -303,11 +307,6 @@ export function StayDetails() {
                                 <div className="guests-input">
                                     <small>GUESTS</small>
                                     <p>
-                                        {/* {(guests.adults) ? <span>{guests.adults + ' Adults'}</span> : ''}
-                                        {(guests.children) ? <span>{" " + guests.children + ' Children'}</span> : ''}
-                                        {(guests.infants) ? <span>{" " + guests.infants + ' Infants'}</span> : ''}
-                                        {(guests.pets) ? <span>{" " + guests.pets + ' Pets'}</span> : ''} */}
-
                                         {lowerGuestsText}
 
                                     </p>
@@ -337,21 +336,19 @@ export function StayDetails() {
                             <ColorForButton txt={'Reserve'}
                                 reserveOrder={reserveOrder} />
 
-                            {/* <div style={{ display: 'flex', gap: '25px', flexDirection: 'column' }}>
-                            <p style={{ textAlign: 'center' }}>You won't be charged yet</p>
-                            <div className="prices">
-                                <p>${stay.price} x {order.totalNights} nights</p>
-                                <p>0$</p>
-                                <p>Cleaning fee</p>
-                                <p>0$</p>
-                                <p>Service fee</p>
-                                <p>0$</p>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <p style={{ textAlign: 'center', fontWeight: 300, marginBottom: 12 }}>You won't be charged yet</p>
+                                <div className="prices">
+                                    <p>${stay.price} x {order.totalNights} nights</p>
+                                    <p>${stay.price * order.totalNights}</p>
+                                    <p>Taxes</p>
+                                    <p>${4 * order.totalNights}</p>
+                                </div>
+                                <div className="total">
+                                    <p>Total</p>
+                                    <p>{order.totalPrice}$</p>
+                                </div>
                             </div>
-                            <div className="total">
-                                <p>Total</p>
-                                <p>{order.totalPrice}$</p>
-                            </div>
-                        </div> */}
                         </form >
                         <div className="stay-report">
                             <h2>
@@ -368,7 +365,7 @@ export function StayDetails() {
                 <header>
                     <div className="review-totals">
                         <FaStar />
-                        <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span>
+                        <span>{avgRate === NaN ? avgRate : 'No reviews yet'} ·</span>
                         <a href="">{stay.reviews.length} reviews </a>
                     </div >
                 </header >
@@ -459,7 +456,7 @@ export function StayDetails() {
                     <h3>{stay.host.about}</h3>
                 </div>
             </div >
-            {/* <AppFooter /> */}
+            <AppFooter />
         </section >
 
     </div >
