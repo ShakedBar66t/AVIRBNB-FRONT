@@ -16,7 +16,7 @@
     top: 90px;
 
     @include for-narrow-layout {
-        padding: 0 40px;
+        padding: 0 40px 0 35px;
     }
 
     @include for-wide-layout {
@@ -27,14 +27,14 @@
         transition: top 1s ease;
     }
 
-    // &.fixed {
-    //     z-index: 1;
-    //     // top: 80px;
-    //     position: fixed;
-    //     box-shadow: 0px 0px 1px 0px rgb(72 72 72 / 0.6);
-    //     border-bottom: 1px solid #ccc;
-    //     transition: top 1s ease;
-    // }
+    &.fixed {
+        z-index: 1;
+        // top: 80px;
+        position: fixed;
+        box-shadow: 0px 0px 1px 0px rgb(72 72 72 / 0.6);
+        border-bottom: 1px solid #ccc;
+        transition: top 1s ease;
+    }
 
     .setting-btn {
         justify-self: start;

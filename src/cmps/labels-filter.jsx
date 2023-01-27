@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import { CgOptions } from "react-icons/cg"
 
@@ -10,16 +10,11 @@ export function LabelsFilter() {
     const dispatch = useDispatch()
     const [currentIndex, setCurrentIndex] = useState(0)
     const [displayCount, setDisplayCount] = useState(4)
-    const [displayNext, setDisplayNext] = useState(true)
     const ElCarousel = useRef(null)
     const ElCarousel1 = useRef(null)
     const totalWidth = ElCarousel1?.current?.offsetWidth
     const displayedWidth = (ElCarousel?.current?.offsetWidth - 114)
     const [isLabelsFilterSticky, setIsLabelsFilterSticky] = useState(false)
-
-
-    // className={`labers-filter-wrapper ${isLabelsFilterSticky ? 'sticky' : ''}`}
-    // style={{ top: isLabelsFilterSticky ? '100px' : '0' }}
     const stayLabels = [
         { name: 'Play', src: 'play' }, { name: 'Iconic cities', src: 'iconic' }, { name: 'Caves', src: 'cave' },
         { name: 'By the lake', src: 'lake' }, { name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
