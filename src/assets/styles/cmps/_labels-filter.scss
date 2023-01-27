@@ -10,10 +10,10 @@
     grid-template-columns: 1fr 90px;
     gap: 24px;
     background-color: white;
-    padding: 0 24px;
+    padding: 0 24px 0 19px;
 
     @include for-narrow-layout {
-        padding: 0 40px;
+        padding: 0 40px 0 35px;
     }
 
     @include for-wide-layout {
