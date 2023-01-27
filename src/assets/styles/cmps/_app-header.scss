@@ -100,12 +100,12 @@
 
     .filter-container {
         border-radius: 25px;
-        box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.15);
+        box-shadow: 0px 4px 14px 0px rgba(120, 120, 120, 0.15);
         transition: 0.1s ease;
         height: 48px;
         align-items: center;
         display: flex;
-        border: 1px solid rgba(211, 211, 211, 1);
+        border: 1px solid rgb(198, 196, 196);
         opacity: 1;
 
         &.closed {
@@ -113,7 +113,7 @@
         }
 
         &:hover {
-            box-shadow: 0px 4px 14px 0px rgba(72, 72, 72, 0.4);
+            box-shadow: 0px 4px 5px 0px rgba(120, 120, 120, 0.2);
             cursor: pointer;
         }
     }
@@ -245,16 +245,18 @@
 //// details appheader /////
 .filter-btns-details {
     width: 300px;
-    padding: 0 0 0 8px;
+    padding: 0 0 0 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     & .search-btn {
+        margin-right: 5px;
         background-color: $clr1;
         border-radius: 50%;
         height: 32px;
         width: 32px;
+        margin-right: 5px;
     }
 
     & span {
@@ -288,10 +290,6 @@
         display: flex;
         justify-content: space-between;
 
-    }
-
-    &.on-details-layout {
-        // right: 45%;
     }
 
     & button {
@@ -479,7 +477,6 @@
                 padding-bottom: 3px;
 
                 & .fa-search {
-
                     margin: 2px 7px 2px 4px;
                 }
             }
@@ -520,7 +517,6 @@
 
         &.checkOut {
             right: 15px;
-
         }
 
         &.checkIn {
@@ -534,7 +530,6 @@
         &:hover {
             box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
         }
-
     }
 
     & .inner-btn-wrapper {

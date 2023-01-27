@@ -258,7 +258,12 @@
                 flex-direction: row;
                 margin-top: 3px;
 
-                h1 {
+                .amenity-name {
+                    color: $clr7 ;
+                    font-family: $ff1 ;
+                    font-weight: 400 !important;
+                    font-size: rem(16px);
+                    line-height: rem(20px);
                     font-weight: 100;
                 }
             }
@@ -292,7 +297,7 @@
             align-items: center;
 
             & span {
-                font-weight: 300;
+                font-weight: 600;
             }
         }
 
@@ -301,7 +306,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-self: flex-start;
-            gap: 42px;
+            gap: 24px;
             border: 1px solid rgb(221, 221, 221);
             border-radius: 12px;
             padding: 24px;
@@ -403,6 +408,7 @@
         }
 
         .total {
+            margin-top: 12px;
             font-weight: 700;
             display: flex;
             justify-content: space-between;
@@ -523,7 +529,7 @@ h2 {
     margin: 0;
     font-weight: 400;
     font-size: 1.625em;
-    padding: 0 0 24px;
+    padding: 0 0 12px;
 }
 
 h3 {
@@ -532,12 +538,13 @@ h3 {
     font-family: cereal;
 }
 
-.subtitle h2 {
+.subtitle-title {
+    font-family: $ff1;
     padding: 0;
     margin-bottom: 7px;
-    font-family: Cereal;
+    font-size: rem(22px);
     text-transform: capitalize;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .review-totals {
@@ -588,6 +595,7 @@ h3 {
 
         .achievement-icon {
             margin-right: 26px;
+            font-size: rem(25px);
         }
 
         h1 {
@@ -1070,7 +1078,7 @@ p {
 
         small {
             position: absolute;
-            margin-top: 5px 0;
+            margin-top: 5px;
             top: 0;
         }
     }
@@ -1084,14 +1092,13 @@ p {
 .guests-modal {
     position: absolute;
     background-color: #fff;
-    top: 50.5%;
+    top: 34.75%;
     width: 87%;
     z-index: 5;
     box-shadow: 0px 4px 14px 0px rgb(72 72 72 / 40%);
     border: $bs1;
     border-radius: 10px;
     height: 410px;
-    // width: 280px;
     display: flex;
     padding: 16px;
     flex-direction: column;
