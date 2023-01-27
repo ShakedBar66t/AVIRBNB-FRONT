@@ -620,6 +620,13 @@ p {
     padding-bottom: 48px;
     border-bottom: 1px solid #dddddd;
 
+    button {
+        border: 0;
+        background-color: inherit;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
 }
 
 .secondary-container {

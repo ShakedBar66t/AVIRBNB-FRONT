@@ -250,9 +250,6 @@ export function StayDetails() {
                         <p style={{ marginBottom: '8px', lineHeight: '20px' }}>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                         </p>
-                        <p style={{ textDecoration: 'underline', fontWeight: 'bolder', marginTop: '16px' }}>
-                            Learn More
-                        </p>
                     </div>
                     <div className="summary">
                         <p>
@@ -465,7 +462,7 @@ export function StayDetails() {
                     <h3>{stay.host.about}</h3>
                 </div>
             </div >
-            {/* <AppFooter /> */}
+            <AppFooter />
         </section >
 
     </div >
