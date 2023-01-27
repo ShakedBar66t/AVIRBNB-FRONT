@@ -2,6 +2,7 @@
     margin-top:0px;
     padding: 0 24px;
     color: $clr7;
+   
 
     @include for-mobile-layout {
         margin-top: 80px;
@@ -31,6 +32,7 @@
 
         @include for-midium-layout {
             flex-direction: row;
+            
             // padding: 0 40px;
         }
     

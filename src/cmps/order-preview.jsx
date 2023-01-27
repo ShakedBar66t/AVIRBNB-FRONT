@@ -21,7 +21,7 @@ export function OrderPreview({ order, onUpdateOrderStatus }) {
                     new Date(order.reservedAt).getDate() + ', ' + new Date(order.reservedAt).getFullYear()}</p>
                 <p>{order.guests.total + ' guests | ' +
                     utilService.getFullMonthName(new Date(order.startDate)) + ' ' +
-                    new Date(order.startDate).getDate() + ' - ' + new Date(order.endDate).getDate() + ' | ' + 'total price: ' + order.totalPrice + '$'}</p>
+                    new Date(order.startDate).getDate() + ' - ' + new Date(order.endDate).getDate() + ' | ' + 'total price: ' + '$' + order.totalPrice  }</p>
                 <p>{order.stay.loc.address}</p>
             </div>
         </div>

@@ -17,7 +17,7 @@ export function TripPreview({trip}){
             <header>
 
         <h4>{trip.stay.name}</h4>
-        <p>{'Total price: '  + trip.stay.price + "$ /night x" + trip.totalNights + " = " + trip.totalPrice + '$' }</p>
+        <p>{'Total price: $'   + trip.stay.price + " /night x" + trip.totalNights + " = " +' $' + trip.totalPrice }</p>
         <p>{'Hosted by: ' + trip.host.fullname }</p>
         <p>{'Total guests: ' + trip.guests.total}  </p>
         <p className='trip-status'>{'Trip status: '} <GetOrderStatusStyle status={trip.status}/> </p>
