@@ -324,10 +324,10 @@ export function AppHeader() {
                         <div className='exit-btn'>
 
                         </div>
-                        <div className='header-btns'>
+                        {/* <div className='header-btns'>
                             <span> Stays</span>
                             <span> Experiences</span>
-                        </div>
+                        </div> */}
                     </header>
                     <div className='mobile-filters-container'>
                         <div className='mobile-locataion-filter'>
