@@ -3,7 +3,7 @@ import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, UPDATE_USER } from "./reducers/user.reducer.js";
+import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER,TOGGLE_CHECKOUT_MODAL, TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, TOGGLE_IS_SIGNUP_MODAL, UPDATE_USER } from "./reducers/user.reducer.js";
 
 export function getActionUpdateUser(user) {
     console.log('user from get action update', user)
@@ -96,6 +96,16 @@ export function toggleLoginModal(signup) {
     // toggleUserModal()
     // setLoginModal(!loginModal)
     store.dispatch({ type: TOGGLE_LOGIN_MODAL })
+    store.dispatch({ type: TOGGLE_IS_SHADOW })
+}
+
+export function toggleCheckoutModal(order) {
+    // if (signup === 'signup') {
+    //     store.dispatch({ type: TOGGLE_IS_SIGNUP_MODAL })
+    // }
+    // toggleUserModal()
+    // setLoginModal(!loginModal)
+    store.dispatch({ type: TOGGLE_CHECKOUT_MODAL })
     store.dispatch({ type: TOGGLE_IS_SHADOW })
 }
 

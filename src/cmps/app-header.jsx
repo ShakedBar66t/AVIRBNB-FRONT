@@ -5,12 +5,13 @@ import { GoDash, GoPlus } from "react-icons/go"
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
 import { IoCloseSharp } from 'react-icons/io5'
-import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
+import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL, TOGGLE_CHECKOUT_MODAL } from '../store/reducers/user.reducer'
 import { login, logout, signup } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { DatePicker } from "antd"
 import { stayService } from '../services/stay.service.js'
+import { SiAirbnb } from 'react-icons/si'
 const { RangePicker } = DatePicker
 
 
@@ -23,6 +24,8 @@ export function AppHeader() {
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
+    const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
+    const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
     const user = useSelector(storeState => storeState.userModule.user)
     const inputRef = useRef()
     const [userModal, setUserModal] = useState(false)
@@ -92,6 +95,7 @@ export function AppHeader() {
         setIsLocationModalOpen(false)
         setIsDateModalOpen(false)
         setIsGuestsModalOpen(false)
+       
         if (searchModal) {
             setSearchModal(!searchModal)
             return
@@ -101,12 +105,19 @@ export function AppHeader() {
             dispatch({ type: TOGGLE_IS_SHADOW })
             return
         }
-        dispatch({ type: TOGGLE_LOGIN_MODAL })
-        dispatch({ type: TOGGLE_IS_SHADOW })
-        dispatch({ type: REFRESH_LOGIN_MODAL })
-        setTimeout(() => {
+        if(isLoginModalOpen){
+            
+            dispatch({ type: TOGGLE_LOGIN_MODAL })
             dispatch({ type: REFRESH_LOGIN_MODAL })
-        }, 500)
+            setTimeout(() => {
+                dispatch({ type: REFRESH_LOGIN_MODAL })
+            }, 500)
+        }
+        if(isCheckoutModal){
+            
+            dispatch({ type: TOGGLE_CHECKOUT_MODAL })   
+        }
+        dispatch({ type: TOGGLE_IS_SHADOW })
     }
 
     function handleGuestsInput(type, value) {
@@ -227,7 +238,9 @@ export function AppHeader() {
         <header className={(stayId || isTripPage || id || isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
                 <div className='logo-container' onClick={() => { navigate('/explore') }}>
-                    <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} />
+                    <div className='header-logo'><SiAirbnb/></div>
+                    {/* <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} /> */}
+                    {/* <img className='header-logo' src={require(`../assets/img/air-bnb-logo.png`)} alt='' onClick={() => navigate('/stay')} /> */}
                     <span className='header-logo-text'>avirbnb</span>
                 </div>
 

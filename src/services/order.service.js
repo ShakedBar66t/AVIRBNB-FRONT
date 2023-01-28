@@ -72,6 +72,27 @@ function getStatusPrec(status,orders){
 }
 
 
+// function _createOrders() {
+//     let orders = utilService.loadFromStorage(ORDER_STORAGE_KEY) || []
+
+//     if (!orders || !orders.length) {
+//         orders = [
+//             {
+//                 buyer:{
+//                     "fullname": "Margaux",
+//                     "imgUrl": "https://robohash.org/3805403?set=set1",
+//                     "_id":{Adults:2,Children:1,Infants}
+//             },
+//         }
+//         ]
+            
+
+//         utilService.saveToStorage(ORDER_STORAGE_KEY, orders)
+//     }
+//     return orders
+// }
+
+
 // async function query(filterBy = { txt: '', price: 0 }) {
 //     var orders = await storageService.query(ORDER_STORAGE_KEY)
 //     if (filterBy.txt) {
@@ -124,21 +145,22 @@ async function save(order) {
 function getEmptyOrder() {
     return {
 
-        "hostId": '',
+        "hostId": '1',
         "totalNights": 0,
         "buyer": {
-            "_id": '',
-            "fullname": ''
+            "_id": '1',
+            "fullname": '1'
         },
         "totalPrice": 0,
-        "startDate": '',
-        "endDate": '',
+        "startDate": '1',
+        "endDate": '1',
         "guests": {},
         "stay": {
             "_id": "h102",
             "name": "House Of Uncle My",
             "price": 0,
         },
+        "host":{},
         "msgs": [],
         "status": "pending" // pending, approved
 

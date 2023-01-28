@@ -13,13 +13,16 @@ import { AppFooter } from "../cmps/app-footer"
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { orderService } from "../services/order.service"
 import { DatePicker } from "antd"
-import { toggleLoginModal } from '../store/user.actions.js'
+import { toggleCheckoutModal, toggleLoginModal } from '../store/user.actions.js'
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
 import { AiFillFlag } from "react-icons/ai"
 import { ColorForButton } from "../cmps/btn-color"
 import { LongTxt } from "../cmps/long-txt"
+import { useStepContext } from "@mui/material"
+import { SizeContextProvider } from "antd/es/config-provider/SizeContext"
+import { ReserveModal } from "../cmps/checkout-modal"
 const { RangePicker } = DatePicker
 
 
@@ -35,6 +38,7 @@ export function StayDetails() {
     const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
+    const [isReserveModal, setReserveModal] = useState(false)
 
     useEffect(() => {
         loadStay()
@@ -171,15 +175,21 @@ export function StayDetails() {
             toggleLoginModal()
             return
         }
+        // else{
+        //     setReserveModal
+        // }
         else {
             const newOrder = {
                 ...order, guests: guests, reservedAt: Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc, avrRate: stay.avrRate },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0],type:stay.type, loc: stay.loc, avrRate: stay.avrRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)
-            addOrder(newOrder).then(res => prompt('great'))
+            setOrder(newOrder)
+            toggleCheckoutModal()
+            // setReserveModal(prev => !prev)
+            // addOrder(newOrder).then(res => prompt('great'))
         }
     }
 
@@ -458,6 +468,8 @@ export function StayDetails() {
             </div >
             <AppFooter />
         </section >
+
+        <ReserveModal order={order} /> 
 
     </div >
 }
