@@ -1,11 +1,9 @@
-header {
-    display: none;
-}
-
 .user-edit {
     margin-top: 10px;
     font-family: cereal;
     box-shadow: rgb(0 0 0 / 20%) 0 6px 16px;
+
+
 
     .app-footer {
         background-color: #f3f3f3;
@@ -64,6 +62,12 @@ header {
         }
     }
 
+}
+
+.user-deatils-cont{
+    header{
+        display: none;
+    }
 }
 
 
