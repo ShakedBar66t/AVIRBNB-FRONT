@@ -324,10 +324,10 @@ export function AppHeader() {
                         <div className='exit-btn'>
 
                         </div>
-                        <div className='header-btns'>
+                        {/* <div className='header-btns'>
                             <span> Stays</span>
                             <span> Experiences</span>
-                        </div>
+                        </div> */}
                     </header>
                     <div className='mobile-filters-container'>
                         <div className='mobile-locataion-filter'>
@@ -371,7 +371,6 @@ export function AppHeader() {
                                 })}
                             </div>
                         </div>
-
                     </div>
                     <div className={`date-modal-extended ${isDateModalOpen ? 'open' : ''}`}>
                         <div className='date-modal-inner'>
@@ -389,7 +388,7 @@ export function AppHeader() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><span className='border-between-right'></span>
                 </div>
                 <div className='filter-modal-middle-btns '  >
                     <div className={`inner-btns-container middle `}>
@@ -401,6 +400,7 @@ export function AppHeader() {
                                     Check in
                                 </span>
                                 <span name='date' className='lower-text'>{`${checkInOutDates.checkIn !== 'flexible' ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
+                                <span className='border-between-right'></span>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
