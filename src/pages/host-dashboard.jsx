@@ -84,7 +84,7 @@ export function HostDashBoard(){
             <BarChart/>
                 </div>
 
-                <section className="order-list">
+                {(orders?.length) ? <section className="order-list">
                     <h4>Booking reports</h4>
                     {/* <table>
                         <thead><tr><td>Date</td>
@@ -107,7 +107,7 @@ export function HostDashBoard(){
                             return <OrderPreview order={order} onUpdateOrderStatus={onUpdateOrderStatus}/>
                         })}
                         </main>
-                </section>
+                </section>: <section>hi</section>}
      
         </main>
        <AppFooter/>

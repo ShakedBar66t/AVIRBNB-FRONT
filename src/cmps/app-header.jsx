@@ -260,7 +260,7 @@ export function AppHeader() {
                 }
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
-                        <button className='host-btn' onClick={() => navigate('/host/dashboard')}>{`${user ? 'Switch to hosting' : 'Avirbnb your home'}`}</button>
+                        <button className='host-btn' onClick={() => navigate('/host/home')}>{`${user ? 'Switch to hosting' : 'Avirbnb your home'}`}</button>
                         <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
                     </div>
 
@@ -286,8 +286,8 @@ export function AppHeader() {
                                     toggleUserModal()
                                     return
                                 }
-                                navigate('/host/home')
-                            }}>Host an experience </button>
+                                navigate('/host/dashboard')
+                            }}>Hosting tools </button>
                             <button>About</button>
                             <button>Help </button>
                             {(user) && <button onClick={() => { logout().then(currUser => { navigate('/explore') }) }}>Log out</button>}

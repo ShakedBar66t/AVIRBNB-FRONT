@@ -29,7 +29,7 @@ export function MoblieFooter(){
                     <div><BiMessageAlt/></div>
                     <div>Inbox</div>
                 </NavLink>
-                <NavLink to={(user) ? '/host' : '#'}>
+                <NavLink to={(user) ? `/user/${user._id}` : '#'}>
                     <div><CgProfile/></div>
                     <div>{(user) ? 'Profile' : 'Login'} </div>
                     {/* <div onClick={(user) ? navigate('/host') : ()=>toggleLoginModal()}>{(user) ? 'Profile' : 'Login'} </div> */}
