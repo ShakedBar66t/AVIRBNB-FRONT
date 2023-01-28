@@ -152,7 +152,7 @@ export async function login(credentials) {
         // console.log(credentials, 'user action')
         const user = await userService.login(credentials)
         store.dispatch({ type: SET_USER, user })
-        store.dispatch({ type: TOGGLE_IS_SHADOW })
+        // store.dispatch({ type: TOGGLE_IS_SHADOW })
         return user
     } catch (err) {
         // console.error('Cannot login:', err)

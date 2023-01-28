@@ -1,13 +1,6 @@
-.fixed-main-wrapper {
-    z-index: 1;
-    position: sticky;
-    top: 80px;
-    height: 180px;
-}
-
 .carousel-container-wrapper {
     position: sticky;
-    height: 95px;
+    height: 190px;
     width: 100%;
     z-index: 1;
 }
@@ -15,23 +8,23 @@
 .carousel-container {
     z-index: 2;
     bottom: 0;
-    // top: 90px;
+    top: 90px;
     z-index: 0;
     display: grid;
     grid-template-columns: 1fr 90px;
     gap: 24px;
     background-color: white;
-    padding: 0 24px;
+    padding: 0 ;
     position: sticky;
     top: 180px;
 
-    @include for-narrow-layout {
-        padding: 0 40px 0 35px;
-    }
+    // @include for-narrow-layout {
+    //     padding: 0 40px 0 35px;
+    // }
 
-    @include for-wide-layout {
-        padding: 0 80px 0 65px;
-    }
+    // @include for-wide-layout {
+    //     padding: 0 80px 0 65px;
+    // }
 
 
     .setting-btn {

@@ -14,7 +14,7 @@ export function UserDetails() {
 
   const params = useParams()
   const user = useSelector(storeState => storeState.userModule.user)
-  const [page,setPage] = useState('setting')
+  const [page, setPage] = useState('setting')
 
   // useEffect(() => {
   //   loadUser(params.id)
@@ -35,20 +35,20 @@ export function UserDetails() {
 
   return (
     <section className="user-details">
-      <AppHeader/>
+      <AppHeader />
 
-    <main className='user-deatils-cont'>
-      <header>
+      <main className='user-deatils-cont'>
+        <header>
 
-      <h2>Account</h2>
-      <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>·Go to profile</span></p>
-      </header>
-    {(page==='setting') ?  <UserSetting setPage={setPage}/> : ''}
-    {(page==='edit') ?  <UserEdit setPage={setPage}/> : ''}
-      
-      
+          <h2>Account</h2>
+          <p><span>{user.fullname + ','}</span><span>{user.email}</span><span>·Go to profile</span></p>
+        </header>
+        {(page === 'setting') ? <UserSetting setPage={setPage} /> : ''}
+        {(page === 'edit') ? <UserEdit setPage={setPage} /> : ''}
 
-    </main>
+
+
+      </main>
       {/* <h1>User Details</h1>
       {user && <div>
         <h3>

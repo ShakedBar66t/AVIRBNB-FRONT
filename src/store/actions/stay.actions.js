@@ -154,7 +154,6 @@ export async function updateStay(stay) {
         console.log('Updated Stay:', savedStay)
         store.dispatch(getActionUpdateStay(savedStay))
         return savedStay
-
     }
     catch (err) {
         console.log('Cannot save stay', err)
