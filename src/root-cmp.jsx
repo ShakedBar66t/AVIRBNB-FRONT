@@ -13,6 +13,7 @@ import { HostIndex } from './pages/host-index'
 import { UserTrips } from './pages/user-trips'
 import { MoblieFooter } from './cmps/mobile-footer.jsx'
 import { HostDashBoard } from './pages/host-dashboard.jsx'
+import { UserWishlist } from './pages/user-wishlist.jsx'
 
 
 
@@ -29,6 +30,7 @@ export function RootCmp() {
 
                     <Route path="/user/trip" element={<UserTrips />} />
                     <Route path="/user/:id" element={<UserDetails />} />
+                    <Route path="/user/:id/wishlist" element={<UserWishlist />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />

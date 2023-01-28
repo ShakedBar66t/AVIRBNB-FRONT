@@ -27,7 +27,7 @@
     & .background-shadow {
         top: 80px;
         left: 0;
-        height: 100vh;
+        height: 500vh;
         width: 100vw;
         background-color: #22222256;
         opacity: 0;
@@ -85,7 +85,10 @@
         & .header-logo {
             cursor: pointer;
             height: 100%;
+            font-size: 32px;
+            color: $clr9;
             width: 36px;
+            padding-left: 2px;
         }
 
         & .header-logo-text {

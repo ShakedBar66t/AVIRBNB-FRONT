@@ -116,7 +116,7 @@
         border-bottom: 1px solid #dddddd;
         scroll-margin-top: 88px;
 
-        header {
+        .review-totals {
             font-size: 1.375em;
             margin-bottom: 32px;
 
@@ -288,7 +288,6 @@
         .sticky-modal {
             position: sticky;
             top: 50px;
-            width: 90%;
         }
 
         .sticky-modal-header {
@@ -305,14 +304,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-self: flex-start;
             gap: 24px;
             border: 1px solid rgb(221, 221, 221);
             border-radius: 12px;
             padding: 24px;
             box-shadow: #0000001f 0 6px 16px;
-            width: 100%;
             max-width: 400px;
+            margin-left: 8.3333333333%;
 
             .btn-container {
                 position: relative;
@@ -627,6 +625,15 @@ p {
     padding-top: 32px;
     padding-bottom: 48px;
     border-bottom: 1px solid #dddddd;
+
+    button {
+        border: 0;
+        background-color: inherit;
+        text-decoration: underline;
+        font-weight: 600;
+        position: absolute;
+        padding: 0;
+    }
 
 }
 

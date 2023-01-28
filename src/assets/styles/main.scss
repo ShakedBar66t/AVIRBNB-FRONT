@@ -23,6 +23,7 @@
 @import "views/host-home-page";
 @import "views/host-index";
 @import "views/user-trip";
+@import "views/user-wishlist";
 @import "views/_host-dashboard";
 
 // Components
@@ -41,4 +42,5 @@
 @import "cmps/_mobile-footer";
 @import "cmps/_order-preview";
 @import "cmps/_user-edit";
+@import "cmps/_checkout-modal";
 

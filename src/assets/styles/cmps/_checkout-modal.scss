@@ -1,0 +1,108 @@
+
+.checkout-modal{
+    position: fixed;
+  
+    background-color: $clr6;
+    width: 100vw;
+    height: 650px;
+    transition: width 0s, top 0.7s;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;  
+    opacity: 0;
+    color: $clr7;
+    font-family: Circular;
+    z-index: 6;
+
+    &>*:not(.full) {
+        padding: 0 24px;
+    }
+
+    &.open {
+        opacity: 1;
+        bottom: 0;
+        top: 0;
+        opacity: 1;
+    }
+
+    &.closed {
+        top: 100vh;
+    }
+
+    @include for-narrow-layout {
+        width: 568px;
+    }
+    
+    header {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+
+        h2 {
+            margin: auto;
+            font-size: 1rem;
+            padding: 12px;
+        }
+
+        button {
+            top: 24px;
+            position: absolute;
+        }
+    }
+
+    hr {
+        color: $clr8;
+    }
+    
+   .checkout-cont{
+
+    .modal-price-info,
+    .modal-stay-info,
+    .modal-trip-info{
+        padding: 1rem 0;
+        gap: 0.25rem;
+        border-bottom: $bs1;
+
+    }
+
+    // .modal-price-info{
+    //     padding: 1rem 0;
+    //     gap: 0.25rem;
+    // }
+    
+    // .modal-stay-info-cont{
+        
+    // }
+    // .modal-stay-info{
+    //     padding: 1rem 0;
+    //     border-bottom: $bs1;
+    // }
+
+   }
+   h4{
+    color: $clr9;
+    font-size: rem(18px);
+    margin-bottom: 0.5rem;
+   }
+
+   img{
+    width: 40%;
+    aspect-ratio: 16 / 9;
+   }
+
+   .reserve-btn{
+    margin:2rem 0 ;
+    border-radius: 8px;
+    width: 100%;
+    padding: auto;
+    padding: 1rem;
+    color: $clr6;
+    background: $bgclr1;
+    font-weight: bold;
+    font-size: rem(18px);
+    border: none;
+   }
+
+
+}

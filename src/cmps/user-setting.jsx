@@ -1,7 +1,8 @@
 import { FaRegAddressCard } from 'react-icons/fa'
 import { AiOutlineHome } from 'react-icons/ai'
 import { SiAirbnb } from 'react-icons/si'
-import { BsHeart } from 'react-icons/bs'
+import { BiBarChartAlt2 } from 'react-icons/bi'
+import { BsHeart, BsMegaphone } from 'react-icons/bs'
 export function UserSetting({setPage}){
   return  <div className='setting-cards-cont'>
         <article className="setting-prev" onClick={() => {
@@ -36,6 +37,22 @@ export function UserSetting({setPage}){
             <div>
                 <h4>Wishlist</h4>
                 <p>The places you want to go most and have new experiences</p>
+            </div>
+        </article>
+        <article className="setting-prev">
+
+            <div> <BsMegaphone/></div>
+            <div>
+                <h4>Notifications</h4>
+                <p>Choose notification preferences and how you want to be contracted</p>
+            </div>
+        </article>
+        <article className="setting-prev">
+
+            <div> <BiBarChartAlt2/></div>
+            <div>
+                <h4>Professional hosting tools</h4>
+                <p>Get professional tools if you manage several properties on Airbnb</p>
             </div>
         </article>
 

@@ -13,13 +13,16 @@ import { AppFooter } from "../cmps/app-footer"
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
 import { orderService } from "../services/order.service"
 import { DatePicker } from "antd"
-import { toggleLoginModal } from '../store/user.actions.js'
+import { toggleCheckoutModal, toggleLoginModal } from '../store/user.actions.js'
 import { addOrder } from "../store/actions/order.actions"
 import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
 import { AiFillFlag } from "react-icons/ai"
 import { ColorForButton } from "../cmps/btn-color"
 import { LongTxt } from "../cmps/long-txt"
+import { useStepContext } from "@mui/material"
+import { SizeContextProvider } from "antd/es/config-provider/SizeContext"
+import { ReserveModal } from "../cmps/checkout-modal"
 const { RangePicker } = DatePicker
 
 
@@ -35,6 +38,7 @@ export function StayDetails() {
     const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
+    const [isReserveModal, setReserveModal] = useState(false)
 
     useEffect(() => {
         loadStay()
@@ -171,15 +175,21 @@ export function StayDetails() {
             toggleLoginModal()
             return
         }
+        // else{
+        //     setReserveModal
+        // }
         else {
             const newOrder = {
                 ...order, guests: guests, reservedAt: Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc, avrRate: stay.avrRate },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avrRate: stay.avrRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
-            // console.log('new order!!!!!!!!', newOrder)
-            addOrder(newOrder).then(res => prompt('great'))
+            console.log('new order!!!!!!!!', newOrder)
+            setOrder(newOrder)
+            toggleCheckoutModal()
+            // setReserveModal(prev => !prev)
+            // addOrder(newOrder).then(res => prompt('great'))
         }
     }
 
@@ -192,10 +202,10 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar />  {avgRate}  <span>{stay.reviews.length} reviews  </span></h2>
+                            <h2><FaStar />  {avgRate} ·  <span>{stay.reviews.length} reviews  </span></h2>
                         </div>
                         <span>    </span>
-                        <h2><span className="loc"> ·  {stay.loc.city}, {stay.loc.country}</span></h2>
+                        <h2><span className="loc">  ·  {stay.loc.city}, {stay.loc.country}</span></h2>
                     </div>
                     <div className="share-save-action">
                         <span className="share-stay">
@@ -248,17 +258,11 @@ export function StayDetails() {
                         <p style={{ marginBottom: '8px', lineHeight: '20px' }}>
                             Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                         </p>
-                        <p style={{ textDecoration: 'underline', fontWeight: 'bold', marginTop: '16px' }}>
-                            Learn More
-                        </p>
                     </div>
                     <div className="summary">
-                        <p>
-                            {stay.summary}
-                        </p>
                         <span className={'long-text-details'}>
 
-                            <LongTxt txt={stay.summary} length={20} />
+                            <LongTxt txt={stay.summary} length={200} />
                         </span>
                     </div>
                     <div className="amenities-container">
@@ -368,11 +372,13 @@ export function StayDetails() {
                 <header>
                     <div className="review-totals">
                         <FaStar />
-                        <span>{avgRate === NaN ? avgRate : 'No reviews yet'} ·</span>
+                        <span>{avgRate === 0 ? 'No reviews yet' : avgRate} ·</span>
                         <a href="">{stay.reviews.length} reviews </a>
                     </div >
                 </header >
                 <div className="rating">
+
+
                     <p>Cleanliness</p>
                     <span className="progress-container">
                         <progress max="5" value="4.966666666666667">
@@ -459,8 +465,10 @@ export function StayDetails() {
                     <h3>{stay.host.about}</h3>
                 </div>
             </div >
-            {/* <AppFooter /> */}
+            <AppFooter />
         </section >
+
+        <ReserveModal order={order} />
 
     </div >
 }
