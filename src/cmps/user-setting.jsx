@@ -8,7 +8,7 @@ export function UserSetting({setPage}){
         <article className="setting-prev" onClick={() => {
             setPage('edit')
         }}>
-
+            
             <div> <FaRegAddressCard/></div>
             <div>
                 <h4>Personal info</h4>
