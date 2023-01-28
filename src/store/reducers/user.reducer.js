@@ -23,7 +23,7 @@ const initialState = {
     isShadow: false,
     watchedUser: null,
     isSignUpModal: false,
-    isCheckoutModal: true,
+    isCheckoutModal: false,
     isRefreshedLoginModal: true,
     
 }
