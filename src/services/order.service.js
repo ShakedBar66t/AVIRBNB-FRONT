@@ -2,40 +2,43 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 
 const ORDER_STORAGE_KEY = 'orderDB'
 
+const BASE_URL = 'order/'
+
 export const orderService = {
-    query,
+    query, /// back
     // getById,
-    save,
+    save,  /// back
     // remove,
     // addOrderMsg,
-    getEmptyOrder,
-    getMonthlyIncome,
-    getTotalIncome,
-    getStatusPrec,
+    getEmptyOrder, /// front
+    getMonthlyIncome, /// front
+    getTotalIncome, /// front
+    getStatusPrec, /// front
 }
 window.cs = orderService
 
 
-async function query(user = userService.getLoggedinUser()) {
-    var orders = await storageService.query(ORDER_STORAGE_KEY)
-    // console.log('order!!@231312',orders)
-    // console.log('userid',user._id,'buterid',orders[0].buyer._id)
-    console.log('user!!!!!!!', user)
-    if (user) {
+// async function query(user = userService.getLoggedinUser()) {
+//     var orders = await storageService.query(ORDER_STORAGE_KEY)
+//     // console.log('order!!@231312',orders)
+//     // console.log('userid',user._id,'buterid',orders[0].buyer._id)
+//     console.log('user!!!!!!!', user)
+//     if (user) {
 
-        if (user.forHost) {
-            orders = orders.filter(order => order.host._id === user.user._id)
-        }
-        else {
-            orders = orders.filter(order => order.buyer._id === user.user._id)
-        }
-        console.log('filtersd orders', orders)
-    }
-    return orders
-}
+//         if (user.forHost) {
+//             orders = orders.filter(order => order.host._id === user.user._id)
+//         }
+//         else {
+//             orders = orders.filter(order => order.buyer._id === user.user._id)
+//         }
+//         console.log('filtersd orders', orders)
+//     }
+//     return orders
+// }
 
 
 function getMonthlyIncome(orders) {
@@ -58,16 +61,16 @@ function getTotalIncome(orders) {
     return totalIncome
 }
 
-function getStatusPrec(status,orders){
+function getStatusPrec(status, orders) {
     // var pPos = $('#pointspossible').val();
     // var pEarned = $('#pointsgiven').val();
-    
+
     // var perc = ((pEarned/pPos) * 100).toFixed(3);
     // $('#pointsperc').val(perc)
 
-   const  OrdersCount = orders.filter(order=>order.status===status)
-    const prec = ((OrdersCount.length / orders.length ) *100).toFixed(2)
-    console.log(prec)  
+    const OrdersCount = orders.filter(order => order.status === status)
+    const prec = ((OrdersCount.length / orders.length) * 100).toFixed(2)
+    console.log(prec)
     return prec
 }
 
@@ -93,17 +96,17 @@ function getStatusPrec(status,orders){
 //     await storageService.remove(ORDER_STORAGE_KEY, orderId)
 // }
 
-async function save(order) {
-    var savedOrder
-    if (order._id) {
-        savedOrder = await storageService.put(ORDER_STORAGE_KEY, order)
-    } else {
-        // Later, owner is set by the backend
-        // order.owner = userService.getLoggedinUser()
-        savedOrder = await storageService.post(ORDER_STORAGE_KEY, order)
-    }
-    return savedOrder
-}
+// async function save(order) {
+//     var savedOrder
+//     if (order._id) {
+//         savedOrder = await storageService.put(ORDER_STORAGE_KEY, order)
+//     } else {
+//         // Later, owner is set by the backend
+//         // order.owner = userService.getLoggedinUser()
+//         savedOrder = await storageService.post(ORDER_STORAGE_KEY, order)
+//     }
+//     return savedOrder
+// }
 
 // async function addOrderMsg(orderId, txt) {
 //     // Later, this is all done by the backend
@@ -145,7 +148,7 @@ function getEmptyOrder() {
     }
 }
 
-    //   const orders = [
+//   const orders = [
 //     {
 //       "_id": "o1225",
 //       "hostId": "u102",
@@ -170,10 +173,35 @@ function getEmptyOrder() {
 //     }
 //   ]
 
+/////////////////////////////////////// BACK 
 
-// TEST DATA
-// storageService.post(ORDER_STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
+async function query(user = userService.getLoggedinUser()) { ////////filter at the front 
+    var orders = await httpService.get(BASE_URL)
+    if (user) {
+        if (user.forHost) {
+            orders = orders.filter(order => order.host._id === user.user._id)
+        }
+        else {
+            orders = orders.filter(order => order.buyer._id === user.user._id)
+        }
+        console.log('filtersd orders', orders)
+    }
+    return orders
+}
 
+function remove(orderId) {
+    console.log(BASE_URL + orderId)
+    return httpService.delete(BASE_URL + orderId)
+}
 
-
-
+async function save(order) {
+    var savedOrder
+    if (order._id) {
+        savedOrder = await httpService.put(BASE_URL + '/' + `${order._id}`, order)
+    } else {
+        // Later, owner is set by the backend
+        // order.owner = userService.getLoggedinUser()
+        savedOrder = await httpService.post(BASE_URL, order)
+    }
+    return savedOrder
+}

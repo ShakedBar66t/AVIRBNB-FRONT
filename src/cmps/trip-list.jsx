@@ -2,7 +2,7 @@ import { TripPreview } from "./trip-preview"
 
 export function TripList({ trips, }) {
 
-    console.log('trips!!!!!!!!!!!!', trips)
+    // console.log('trips!!!!!!!!!!!!', trips)
 
     return <section className="trip-list-container">
 

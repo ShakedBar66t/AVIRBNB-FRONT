@@ -1,15 +1,16 @@
 import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
+import { DatePicker } from "antd"
 import { GoDash, GoPlus } from "react-icons/go"
 import { FaUserCircle, FaBars, FaSearch } from 'react-icons/fa'
 import { BiGlobe } from 'react-icons/bi'
+import { CgOptions } from "react-icons/cg"
 import { IoCloseSharp } from 'react-icons/io5'
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL } from '../store/reducers/user.reducer'
-import { login, logout, signup } from '../store/user.actions.js'
+import { logout } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
-import { DatePicker } from "antd"
 import { stayService } from '../services/stay.service.js'
 const { RangePicker } = DatePicker
 
@@ -17,8 +18,8 @@ const { RangePicker } = DatePicker
 export function AppHeader() {
 
     const params = useParams()
-    const dispatch = useDispatch()
     const location = useLocation()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
@@ -35,7 +36,7 @@ export function AppHeader() {
     const [isDateModalOpen, setIsDateModalOpen] = useState(false)
     const [isCheckedInSelected, setIsCheckedInSelected] = useState(3)
     const [isCalenderOpen, setIsCalenderOpen] = useState(false)
-    const [checkInOutDates, setCheckInOutDates] = useState({ checkIn: "", checkOut: "" })
+    const [checkInOutDates, setCheckInOutDates] = useState({ checkIn: 'flexible', checkOut: 'flexible' })
     const [flexibleDates, setFlexibleDates] = useState(false)
     // expended guests modal states
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
@@ -44,12 +45,12 @@ export function AppHeader() {
 
     // final filterBy
     const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader)
+    // pages locations for classNames
     const { stayId } = params
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
     const isHostDashboardPage = (location.pathname === '/host/dashboard') ? true : false
 
-    console.log(isHostDashboardPage)
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
         { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
@@ -114,6 +115,7 @@ export function AppHeader() {
         let addedText = false
         let text = ''
         newGuests[type] += value
+        newGuests.Total += value
         setGuests(newGuests)
 
         if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
@@ -137,6 +139,7 @@ export function AppHeader() {
                 text += ` ${newGuests.Infants} infants`
             }
         }
+        setFilterBy({ ...filterBy, guests })
         setLowerGuestsText(text)
     }
 
@@ -144,6 +147,14 @@ export function AppHeader() {
         const name = target.name
         if (!searchModalExpended) setSearchModalExpended(!searchModalExpended)
         switch (name) {
+            case 'search':
+                setIsCalenderOpen(false)
+                setIsCheckedInSelected(3)
+                setIsLocationModalOpen(false)
+                setIsDateModalOpen(false)
+                setIsGuestsModalOpen(false)
+                setSearchModal(!searchModal)
+                break
             case 'guests':
                 setIsCheckedInSelected(3)
                 setIsCalenderOpen(false)
@@ -178,9 +189,14 @@ export function AppHeader() {
     }
 
     function handleInputChange({ target }, location) {
-
-        if (location) setLocationInput(location)
-        else setLocationInput(target.value)
+        if (location) {
+            setLocationInput(location)
+            setFilterBy({ ...filterBy, location })
+        }
+        else {
+            setLocationInput(target.value)
+            setFilterBy({ ...filterBy, location: target.value })
+        }
     }
 
     function handleDateChange(values) {
@@ -188,10 +204,12 @@ export function AppHeader() {
         const checkOut = new Date(values[1].$d)
         const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })
         const checkInDay = checkIn.getDate()
+        console.log(checkInDay)
         const checkOutMonth = checkOut.toLocaleString('en-US', { month: 'short' })
         const checkOutDay = checkOut.getDate()
         const formattedCheckIn = `${checkInMonth} ${checkInDay}`
         const formattedCheckOut = `${checkOutMonth} ${checkOutDay}`
+        setFilterBy({ ...filterBy, checkIn: checkIn, checkOut: checkOut })
         setCheckInOutDates({ checkIn: formattedCheckIn, checkOut: formattedCheckOut })
         const dayInMilliseconds = 1000 * 60 * 60 * 24
         const dateStart = values[0].$d.getTime()
@@ -199,30 +217,16 @@ export function AppHeader() {
         const daysCount = Math.round((dateEnd - dateStart) / (dayInMilliseconds))
     }
 
-    function handleClearValue(ev) {
-        ev.stopImmediatePropagation();
-        console.log('clear active')
-        ev.preventDefault();
-        const name = ev.target.name;
-
-        switch (name) {
-            case 'location':
-                setLocationInput('');
-                break;
-            case 'checkIn':
-                setCheckInOutDates({ checkIn: '', checkOut: checkInOutDates.checkOut });
-                break;
-            case 'checkOut':
-                setCheckInOutDates({ checkIn: checkInOutDates.checkIn, checkOut: '' });
-                break;
-            case 'guests':
-                setLowerGuestsText('');
-                break;
-            default:
-                break;
-        }
-        return false
+    function onSearch(ev) {
+        ev.preventDefault()
+        const { location, checkIn, checkOut, guests } = filterBy
+        const queryParams = `isParams=true&location=${location}&checkIn=${checkIn}&checkOut=${checkOut}
+        &adults=${guests.Adults}&infants=${guests.Infants}&children=${guests.Children}&pets=${guests.Pets}
+        &total=${guests.Total}&minPrice='&maxPrice='&bedrooms='&beds='&type='&amenities=''`
+        navigate(`/explore?${queryParams}`)
+        handleExpendedModalClick(ev)
     }
+
     return (
         <header className={(stayId || isTripPage || id || isHostDashboardPage) ? 'app-header full secondary-container' : 'app-header full main-layout'}>
             <nav className='app-header-nav '>
@@ -250,67 +254,86 @@ export function AppHeader() {
                     </div>
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span>
-                    <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
-                {(!user) && <button onClick={() => {
+                        <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
+                            {(!user) && <button onClick={() => {
 
-                    toggleUserModal()
-                    toggleLoginModal()
-                }}>Log in </button>}
-                {(!user) && <button onClick={() => {
-                    toggleUserModal()
-                    toggleLoginModal('signup')
-                }}>Sign up </button>}
-                {(user) && <button >Notifications </button>}
-                {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
-                {(user) && <button >Wishlists </button>}
-                <hr />
-                {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
-                <button onClick={() => {
-                    if (!user) {
-                        toggleLoginModal()
-                        toggleUserModal()
-                        return
-                    }
-                    navigate('/host/home')
-                }}>Host an experience </button>
-                <button>About</button>
-                <button>Help </button>
-                {(user) && <button onClick={() => { logout().then(currUser=>{navigate('/explore')}) }}>Log out</button>}
-            </div>
+                                toggleUserModal()
+                                toggleLoginModal()
+                            }}>Log in </button>}
+                            {(!user) && <button onClick={() => {
+                                toggleUserModal()
+                                toggleLoginModal('signup')
+                            }}>Sign up </button>}
+                            {(user) && <button >Notifications </button>}
+                            {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
+                            {(user) && <button >Wishlists </button>}
+                            <hr />
+                            {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
+                            <button onClick={() => {
+                                if (!user) {
+                                    toggleLoginModal()
+                                    toggleUserModal()
+                                    return
+                                }
+                                navigate('/host/home')
+                            }}>Host an experience </button>
+                            <button>About</button>
+                            <button>Help </button>
+                            {(user) && <button onClick={() => { logout().then(currUser => { navigate('/explore') }) }}>Log out</button>}
+                        </div>
                     </button>
                 </div>
             </nav>
-            <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            {/* <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
-                {(!user) && <button onClick={() => {
+            <nav className='mobile-nav'>
+                <div className='search-btn-container-mobile'>
+                    <FaSearch />
+                </div>
+                <div className={`filter-container-mobile `}>
+                    <div className='location-text'>Anywhere</div>
+                    <div className='lower-text-container'>
+                        <span className='check-in-out-date'>
+                            Anytime    *
+                        </span>
+                        <span className='guest-text'>
+                            Add a guest
+                        </span>
+                    </div>
+                </div>
 
-                    toggleUserModal()
-                    toggleLoginModal()
-                }}>Log in </button>}
-                {(!user) && <button onClick={() => {
-                    toggleUserModal()
-                    toggleLoginModal('signup')
-                }}>Sign up </button>}
-                {(user) && <button >Notifications </button>}
-                {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
-                {(user) && <button >Wishlists </button>}
-                <hr />
-                {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
-                <button onClick={() => {
-                    if (!user) {
-                        toggleLoginModal()
-                        toggleUserModal()
-                        return
-                    }
-                    navigate('/host/home')
-                }}>Host an experience </button>
-                <button>About</button>
-                <button>Help </button>
-                {(user) && <button onClick={() => { logout().then(currUser=>{navigate('/explore')}) }}>Log out</button>}
-            </div> */}
+                <div className='setting-mobile-container'>
+                    <div className='setting-btn-container'>
+                        <CgOptions />
+                    </div>
+                </div>
+            </nav>
+            <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
+            <div className='mobile-filter-modal-wrapper'>
+                <div className='mobile-filter-modal'>
+                    <header className='mobile-filter-modal-header'>
+                        <div className='exit-btn'>
+
+                        </div>
+                        <div className='header-btns'>
+                            <span> Stays</span>
+                            <span> Experiences</span>
+                        </div>
+                    </header>
+                    <div className='mobile-filters-container'>
+                        <div className='mobile-locataion-filter'>
+
+                        </div>
+                        <div className='mobile-dates-filter'>
+
+                        </div>
+                        <div className='mobile-guests-filter'>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' >
-                    <span name='location' onClick={() => { setLocationInput(''); }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
+                    <span name='location' onClick={() => { setLocationInput('') }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
                     <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where
                     </span>
                         <input
@@ -361,28 +384,28 @@ export function AppHeader() {
                     <div className={`inner-btns-container middle `}>
                         <div className='inner-btn-wrapper middle'>
                             <span name={'checkIn'} className={`clear-value-btn checkIn ${checkInOutDates.checkIn && isCheckedInSelected === 1 ? 'shown' : ''}`}
-                                onClick={() => setCheckInOutDates({ checkIn: "", checkOut: "" })} ><IoCloseSharp /></span>
+                                onClick={() => setCheckInOutDates({ checkIn: 'flexible', checkOut: 'flexible' })} ><IoCloseSharp /></span>
                             <button className={`date-btn right ${isCheckedInSelected === 1 ? 'selected' : ''}`} name='checkIn' onClick={(ev) => handleExpendedModalClick(ev)} >
                                 <span name='date' className='upper-text'>
                                     Check in
                                 </span>
-                                <span name='date' className='lower-text'>{`${checkInOutDates.checkIn ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
+                                <span name='date' className='lower-text'>{`${checkInOutDates.checkIn !== 'flexible' ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
                             <span name={'checkOut'} className={`clear-value-btn checkOut ${checkInOutDates.checkOut && isCheckedInSelected === 2 ? 'shown' : ''}`}
-                                onClick={() => setCheckInOutDates({ checkIn: "", checkOut: "" })} ><IoCloseSharp /></span>
+                                onClick={() => setCheckInOutDates({ checkIn: 'flexible', checkOut: 'flexible' })} ><IoCloseSharp /></span>
                             <button className={`date-btn left ${isCheckedInSelected === 2 ? 'selected' : ''}`} name='checkOut' onClick={(ev) => handleExpendedModalClick(ev)}>
                                 <span className='upper-text'>
                                     Check out
                                 </span>
-                                <span className='lower-text'>{`${checkInOutDates.checkOut ? checkInOutDates.checkOut : 'Add dates'}`}</span> </button>
+                                <span className='lower-text'>{`${checkInOutDates.checkOut !== 'flexible' ? checkInOutDates.checkOut : 'Add dates'}`}</span> </button>
                             <span className='border-between-right'></span>
                         </div>
                     </div>
                 </div>
                 <div className='filter-modal-right-btns'>
-                    <span name='guests' onClick={(ev) => setLowerGuestsText('Add guests')} className={`clear-value-btn guests ${lowerGuestsText === 'Add guests' ? '' : 'shown'}`}>
+                    <span name='guests' onClick={() => setLowerGuestsText('Add guests')} className={`clear-value-btn guests ${lowerGuestsText === 'Add guests' ? '' : 'shown'}`}>
                         <IoCloseSharp />
                     </span>
                     <div className={`inner-btn-wrapper ${isGuestsModalOpen ? 'selected' : ''}`}>
@@ -391,7 +414,8 @@ export function AppHeader() {
                                 Who
                             </span>
                             <span className='lower-text'>{lowerGuestsText}</span></button>
-                        <button className={`search-btn ${searchModalExpended ? 'expended' : ''}`}><FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
+                        <button name='search' className={`search-btn ${searchModalExpended ? 'expended' : ''}`} onClick={(ev) => onSearch(ev)} >
+                            <FaSearch className='fa-search' color='white' /> {searchModalExpended ? <span>Search </span> : ''}</button>
                     </div>
                     <div className={`guests-modal-extended ${isGuestsModalOpen ? 'open' : ''}`}>
                         {guestsTypes.map((type, index) => {
@@ -410,10 +434,10 @@ export function AppHeader() {
                         })}
                     </div>
                 </div>
+
             </div>
             <div onClick={handelShadowClick} className={`background-shadow full ${searchModal ? 'open' : ''} ${isShadow ? 'login' : ''}`} ></div>
-            {((!isTripPage && !id)) && <div className={`labels-container ${(isHostDashboardPage) ? 'hidden' : ''}`}>
-                {/* {(!stayId) && <LabelsFilter />} */}
+            {(!isTripPage && !id) && <div className={`labels-container ${(isHostDashboardPage) ? 'hidden' : ''}`}>
             </div>}
         </header >
     )
@@ -622,26 +646,26 @@ export function AppHeader() {
 //     }
 
 //     function handleClearValue(ev) {
-//         ev.stopImmediatePropagation();
+//         ev.stopImmediatePropagation()
 //         console.log('clear active')
-//         ev.preventDefault();
-//         const name = ev.target.name;
+//         ev.preventDefault()
+//         const name = ev.target.name
 
 //         switch (name) {
 //             case 'location':
-//                 setLocationInput('');
-//                 break;
+//                 setLocationInput('')
+//                 break
 //             case 'checkIn':
-//                 setCheckInOutDates({ checkIn: '', checkOut: checkInOutDates.checkOut });
-//                 break;
+//                 setCheckInOutDates({ checkIn: '', checkOut: checkInOutDates.checkOut })
+//                 break
 //             case 'checkOut':
-//                 setCheckInOutDates({ checkIn: checkInOutDates.checkIn, checkOut: '' });
-//                 break;
+//                 setCheckInOutDates({ checkIn: checkInOutDates.checkIn, checkOut: '' })
+//                 break
 //             case 'guests':
-//                 setLowerGuestsText('');
-//                 break;
+//                 setLowerGuestsText('')
+//                 break
 //             default:
-//                 break;
+//                 break
 //         }
 //         return false
 //     }
@@ -704,7 +728,7 @@ export function AppHeader() {
 //             </div>
 //             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
 //                 <div className='filter-modal-left-btns' >
-//                     <span name='location' onClick={() => { setLocationInput(''); }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
+//                     <span name='location' onClick={() => { setLocationInput('') }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
 //                     <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where
 //                     </span>
 //                         <input

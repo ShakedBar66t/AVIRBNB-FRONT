@@ -25,17 +25,18 @@ export function getActionUpdateStay(stay) {
     }
 }
 
-export async function loadStays(filterByParams) {
-    const check = (filterByParams) => {
-        for (const key in filterByParams) {
-            if (filterByParams[key]) return true;
-        }
-        return false;
-    }
-    console.log(check)
-    // if(check )
+////////////////////////////////////////////////////////// BACK LOADSTAYS
+export async function loadStays(filterBy) {
+    // const check = (filterByParams) => {
+    //     for (const key in filterByParams) {
+    //         if (filterByParams[key]) return true;
+    //     }
+    //     return false;
+    // }
+    // console.log(check)
     try {
-        const stays = await stayService.query(filterByParams)
+        // const stays = await stayService.query(filterByParams)
+        const stays = await stayService.query(filterBy)
 
         store.dispatch({
             type: SET_STAYS,
@@ -47,6 +48,31 @@ export async function loadStays(filterByParams) {
         throw err
     }
 }
+
+
+//////////////////////////////////////////////////////////// FRONT ONLY LOADSTAYS
+// export async function loadStays(filterByParams) {
+//     const check = (filterByParams) => {
+//         for (const key in filterByParams) {
+//             if (filterByParams[key]) return true;
+//         }
+//         return false;
+//     }
+//     console.log(check)
+//     try {
+//         // const stays = await stayService.query(filterByParams)
+//         const stays = await stayService.query()
+
+//         store.dispatch({
+//             type: SET_STAYS,
+//             stays
+//         })
+
+//     } catch (err) {
+//         console.log('Cannot load stays', err)
+//         throw err
+//     }
+// }
 // else {
 //     let filterBy = filterByParams.split('&').reduce((acc, param) => {
 //         const [key, value] = param.split('=')

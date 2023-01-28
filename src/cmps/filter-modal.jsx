@@ -55,7 +55,7 @@ export function FilterModal() {
         const { name } = ev.target
         setFilterBy({ ...filterBy, [name]: num, minPrice: rangeRef.current.min, maxPrice: rangeRef.current.max })
     }
-    console.log(filterBy)
+    // console.log(filterBy)
 
     function handleRangeChange({ minPrice, maxPrice }) {
         if (rangeRef.current) rangeRef.current = { minPrice, maxPrice }
@@ -93,7 +93,9 @@ export function FilterModal() {
     function onSubmit(ev) {
         ev.preventDefault()
         const { minPrice, maxPrice, bedrooms, type, beds, bathrooms, amenities } = filterBy
-        const queryParams = `isParams=true&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&type=${type}&beds=${beds}&bathrooms=${bathrooms}&amenities=${amenities.join(',')}`
+        const queryParams = `isParams=true&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}
+        &beds=${beds}&bathrooms=${bathrooms}&amenities=${amenities.join(',')} &location=flexible&checkIn=flexible
+        &checkOut=flexible&adults=''&infants=''&children=''&type=''`
         onCloseFilterModal()
         navigate(`/explore?${queryParams}`)
     }
@@ -191,7 +193,7 @@ export function FilterModal() {
                     <div className='rooms-beds-btns-filter'>
                         <div className='inner-numbers-container-wrapper'>
                             {filterOptions.map(({ name, label, value }) => (
-                                <div className='inner-numbers-container' key={label+value}>
+                                <div className='inner-numbers-container' key={label + value}>
                                     <span>{label}</span>
                                     <div className='btns-container'>
                                         <button

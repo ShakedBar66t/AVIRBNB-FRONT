@@ -48,6 +48,10 @@
         }
     }
 
+    .mobile-nav {
+        display: none;
+    }
+
     nav {
         align-items: center;
         display: flex;
@@ -101,7 +105,7 @@
     .filter-container {
         border-radius: 25px;
         box-shadow: 0px 4px 14px 0px rgba(120, 120, 120, 0.15);
-        transition: 0.1s ease;
+        transition: 0.3s ease;
         height: 48px;
         align-items: center;
         display: flex;
@@ -225,6 +229,98 @@
     }
 
 }
+
+@media (max-width: $narrow-breakpoint) {
+
+    .app-header {
+        height: 70px;
+        border: none;
+        cursor: pointer;
+
+        &.open {
+            z-index: 5;
+            height: 100vh;
+        }
+
+        & nav {
+            display: none;
+        }
+
+        & .mobile-nav {
+            margin-top: 14px;
+            display: flex;
+            height: 56px;
+            border-radius: 35px;
+            box-shadow: 0px 1px 14px 0px rgba(120, 120, 120, 0.35);
+            transition: 0.3s ease;
+            align-items: center;
+
+            &.search-btn-container-mobile {
+                justify-self: flex-start
+            }
+
+        }
+
+        .search-btn-container-mobile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 54px;
+            color: $clr8;
+        }
+
+        .filter-container-mobile {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            font-family: $ff1;
+
+            & .location-text {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            & .lower-text-container {
+                color: $clr8;
+                font-size: 12px;
+                font-weight: 400;
+
+            }
+
+            & .guest-text {
+                margin-left: 5px
+            }
+        }
+
+        .setting-mobile-container {
+            justify-self: flex-end;
+            height: 56px;
+            width: 56px;
+
+            & .setting-btn-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: $bs1;
+                height: 36px;
+                width: 36px;
+                margin: 10px;
+                font-size: 18px;
+            }
+        }
+
+        & .background-shadow {
+
+            &.open {
+                visibility: hidden;
+                display: none;
+            }
+        }
+    }
+}
+
 
 .header-opened {
     position: absolute;
@@ -593,6 +689,21 @@
             }
         }
     }
+}
+
+@media (max-width: $narrow-breakpoint) {
+    .filter-modal {
+        flex-direction: column;
+        display: block; ////////////////////////////////////// dont forget to remove
+
+        &.open {
+            width: 100vw;
+            height: 100vh;
+        }
+    }
+
+
+    .filter-modal-left-btns {}
 }
 
 ////////// extended modals 

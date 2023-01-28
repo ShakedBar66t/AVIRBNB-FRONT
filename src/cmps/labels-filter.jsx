@@ -5,8 +5,10 @@ import { CgOptions } from "react-icons/cg"
 
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
+import { useNavigate } from 'react-router-dom'
 
 export function LabelsFilter() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [currentIndex, setCurrentIndex] = useState(0)
     const [displayCount, setDisplayCount] = useState(4)
@@ -50,7 +52,7 @@ export function LabelsFilter() {
         }
         window.addEventListener('scroll', handleScroll)
         return () => {
-            console.log(isLabelsFilterSticky)
+            // console.log(isLabelsFilterSticky)
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
@@ -58,6 +60,13 @@ export function LabelsFilter() {
     function handleSettingClick() {
         dispatch({ type: TOGGLE_FILTER_MODAL })
         dispatch({ type: TOGGLE_IS_SHADOW })
+    }
+    function handleLabelClick(ev) {
+        console.log(ev.target.name)
+        ev.preventDefault()
+        const queryParams = `isParams=true&minPrice=''&maxPrice=''&type=${ev.target.name}&bedrooms=''&beds=''&bathrooms=''
+        &amenities=''&location=flexible&checkIn=flexible&checkOut=flexible&adults=''&infants=''&children=''&pets=''`
+        navigate(`/explore?${queryParams}`)
     }
 
     function IsLastNextClick() {
@@ -69,38 +78,40 @@ export function LabelsFilter() {
         }
     }
 
-    return (<div className={`carousel-container-wrapper full `}>
+    return (
+        <div className='fixed-main-wrapper'>
+            <div className={`carousel-container-wrapper full `}>
+                <div className={`carousel-container main-layout  `} ref={ElCarousel}>
+                    <div className="carousel ">
+                        <div className="carousel-inner" ref={ElCarousel1} >
+                            {
+                                stayLabels.map((label, index) => {
+                                    return (
+                                        <div name={label.name} key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
 
+                                            <div name={label.name} className="label-filter-btn"
+                                                onClick={(ev) => handleLabelClick(ev)} >
+                                                <img name={label.name} src={require(`../assets/labels-logos/${label.src}.jpg`)} />
+                                                <span name={label.name}>{label.name}</span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-        <div className={`carousel-container main-layout  `} ref={ElCarousel}>
-            <div className="carousel ">
-                <div className="carousel-inner" ref={ElCarousel1} >
-                    {
-                        stayLabels.map((label, index) => {
-                            return (
-                                <div key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
+                        {(currentIndex) ? <div className={'btn-container prev '}>
+                            <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+                        </div> : ''}
 
-                                    <div className="label-filter-btn" >
-                                        <img src={require(`../assets/labels-logos/${label.src}.jpg`)} />
-                                        <span>{label.name}</span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
+                            <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
+
+                        </div>}
+                    </div>
+                    <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
                 </div>
-
-                {(currentIndex) ? <div className={'btn-container prev '}>
-                    <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
-                </div> : ''}
-
-                {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
-                    <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
-
-                </div>}
             </div>
-            <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
         </div>
-    </div>
     )
 }

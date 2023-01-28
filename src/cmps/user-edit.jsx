@@ -1,11 +1,8 @@
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { BsFillCameraFill } from 'react-icons/bs'
-import { ColorForButton } from "./btn-color"
-import { saveLocalUser, userService } from "../services/user.service"
+import { useNavigate, useParams } from "react-router-dom"
+import { userService } from "../services/user.service"
 import { uploadImg } from "../services/cloudinary-service"
 import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
 import { loadUser, updateUser } from "../store/user.actions"
 import { showErrorMsg } from "../services/event-bus.service"
 import { AppFooter } from "./app-footer"
@@ -13,11 +10,9 @@ import { AppFooter } from "./app-footer"
 
 export function UserEdit() {
 
-
     const { userId } = useParams()
     const navigate = useNavigate()
     const [userToEdit, setUserToEdit] = useState(userService.getLoggedinUser())
-    console.log(userToEdit)
 
     useEffect(() => {
         if (!userId) return
@@ -41,8 +36,8 @@ export function UserEdit() {
     async function onSaveUser(ev) {
         ev.preventDefault()
         try {
-            const savedUser = await updateUser(userToEdit)
-            console.log(savedUser)
+            await updateUser(userToEdit)
+            // console.log(savedUser)
             navigate(`/explore`)
         } catch (err) {
             showErrorMsg('Cannot edit user', err)
@@ -67,7 +62,7 @@ export function UserEdit() {
                 </section>
                 <div className="main-user-info">
                     <section className="user-details">
-                        <div style={{width: '50%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                        <div style={{ width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                             <section className="user-fullname">
                                 <label htmlFor="fullname">Full name:
                                     <input type="text"

@@ -178,7 +178,7 @@ export function StayDetails() {
                 stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], loc: stay.loc, avrRate: stay.avrRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
-            console.log('new order!!!!!!!!', newOrder)
+            // console.log('new order!!!!!!!!', newOrder)
             addOrder(newOrder).then(res => prompt('great'))
         }
     }
@@ -303,7 +303,7 @@ export function StayDetails() {
                                             const dateEnd = values[1].$d.getTime()
                                             const daysCount = Math.round((dateEnd - dateStart) / (day))
                                             const totalPrice = daysCount * stay.price
-                                            console.log('valuesss!!!!', totalPrice)
+                                            // console.log('valuesss!!!!', totalPrice)
                                             setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
                                         }} />
                                 </div>

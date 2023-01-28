@@ -26,17 +26,14 @@ export function getActionUpdateOrder(order) {
 }
 
 export async function loadOrders(user) {
-   
+
     try {
         const orders = await orderService.query(user)
         // console.log('orders!!!!!!!!!!!!!!!!!!!!!!!!',orders)
-
         store.dispatch({
             type: SET_ORDERS,
             orders
         })
-        
-
     } catch (err) {
         // console.log('Cannot load orders', err)
         throw err
@@ -191,4 +188,7 @@ export function onRemoveOrderOptimistic(orderId) {
             })
         })
 }
+
+
+
 

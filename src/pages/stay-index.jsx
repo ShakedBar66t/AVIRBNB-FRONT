@@ -15,12 +15,13 @@ export function StayIndex() {
     const stays = useSelector(storeState => storeState.stayModule.stays)
     const user = useSelector(storeState => storeState.userModule.user)
     const [searchParams, setSearchParams] = useSearchParams()
-    const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
+    // const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
 
 
     useEffect(() => {
-        if (location.pathname === '/explore') loadStays()
-        else loadStays(queryFilterBy)
+        // if (location.pathname === '/explore') loadStays()
+        // else loadStays(queryFilterBy)
+        loadStays(searchParams)
     }, [searchParams])
 
     async function onRemoveStay(stayId) {
@@ -55,13 +56,13 @@ export function StayIndex() {
     }
 
     function onAddToStayt(stay) {
-        console.log(`Adding ${stay.vendor} to Stayt`)
+        // console.log(`Adding ${stay.vendor} to Stayt`)
         addToStayt(stay)
         showSuccessMsg('Added to Stayt')
     }
 
     function onAddStayMsg(stay) {
-        console.log(`TODO Adding msg to stay`)
+        // console.log(`TODO Adding msg to stay`)
     }
 
     async function onToggleLike(ev, stay) {

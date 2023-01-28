@@ -14,7 +14,7 @@ export function HostIndex() {
 
     const [stay, setStay] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
-    console.log(stay)
+    // console.log(stay)
 
 
     const stayAmenities = ['TV', 'Internet', 'Wifi', 'Air conditioning', 'Pool', 'Kitchen', 'Doorman', 'Gym', 'Elevator', 'Heating', 'Washer', 'Dryer', 'Smoke detector', 'First aid kit', 'Fire extinguisher', 'Essentials', 'Shampoo', '24-hour check-in', 'Hangers', 'Hair dryer', 'Iron', 'Laptop friendly workspace', 'Self check-in', 'Hot water', 'Bed linens', 'Beachfront', 'Microwave', 'Coffee maker', 'Refrigerator', 'Dishes and silverware', 'Cooking basics', 'Stove', 'Babysitter recommendations', 'Step-free access', 'Luggage dropoff allowed', 'Indoor fireplace', 'Extra pillows and blankets', 'Wide entryway', 'Keypad', 'Pocket wifi', 'Ethernet connection', 'Private bathroom', 'How water kettle', 'Fireplace guards', 'Building staff', 'Accessible-height toilet', 'Room-darkening shades']
@@ -22,7 +22,7 @@ export function HostIndex() {
 
 
     function handleChange({ target }) {
-        console.log(target)
+        // console.log(target)
         const { name: field, files } = target;
         if (field === 'name' || field === 'capacity' || field === 'price' || field === 'description' || field === 'stay-type' || field === 'summary' || field === 'bathrooms' || field === 'bedrooms') {
             setStay(({ ...stay, [field]: target.value }))
@@ -50,7 +50,7 @@ export function HostIndex() {
     async function onAddStay(ev) {
         ev.preventDefault()
         const savedStay = await addStay(stay)
-        console.log(savedStay)
+        // console.log(savedStay)
         try {
             navigate(`/explore/${savedStay._id}`)
         } catch (err) {
@@ -59,7 +59,7 @@ export function HostIndex() {
     }
 
     return <section className="host-index secondary-container">
-        <AppHeader/>
+        <AppHeader />
         <section className="stay-edit">
             <section className="edit-section">
                 <form className="stay-info" onSubmit={onAddStay}>
@@ -180,17 +180,17 @@ export function HostIndex() {
                             </label>
                             <label htmlFor="bathrooms">Bathrooms
                                 <input type="text"
-                                name="bathrooms"
-                                value={stay.bathrooms}
-                                onChange={handleChange}
-                                 />
+                                    name="bathrooms"
+                                    value={stay.bathrooms}
+                                    onChange={handleChange}
+                                />
                             </label>
                             <label htmlFor="bedrooms">Bedrooms
-                            <input type="text"
-                            name="bedrooms"
-                            value={stay.bedrooms}
-                            onChange={handleChange}
-                             />
+                                <input type="text"
+                                    name="bedrooms"
+                                    value={stay.bedrooms}
+                                    onChange={handleChange}
+                                />
 
                             </label>
                             <label htmlFor="stay-type">Stay-type:

@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     column-gap: 24px;
     row-gap: 36px;
-    margin-top: 25px;
+    // margin-top: 180px;
 
     @include for-ultrawide-layout {
         // grid-template-columns: repeat(6, minmax(260px, 500px));

@@ -26,7 +26,7 @@ export function HostDashBoard() {
     async function OnloadUserOrders() {
         try {
             const currUserOrders = await loadOrders({ user: userService.getLoggedinUser(), forHost: true })
-            console.log(currUserOrders, 'orders!!!!!!!!!')
+            // console.log(currUserOrders, 'orders!!!!!!!!!')
             setUserTrips(currUserOrders)
 
         }
@@ -35,19 +35,19 @@ export function HostDashBoard() {
         }
     }
 
-    async function onUpdateOrderStatus(order,status) {
-        try{
+    async function onUpdateOrderStatus(order, status) {
+        try {
 
             await updateOrder({ ...order, status: status })
             alert('updated')
-            
+
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
-    
+
 
 
 
@@ -77,11 +77,11 @@ export function HostDashBoard() {
                         </header>
 
                         <div className="statistics-info flex column">
-                        <div className="flex space-between"><p>Average rating</p><p className="pending"
-                         style={{position:'relative',right:'16px'}}>{orders[0].stay.avrRate} 
-                         <AiFillStar style={{position:'absolute',bottom:'5px'}}/></p></div>
-                            <div className="flex space-between"><p>Monthly earnings</p><p className="approved">{ '$'+orderService.getMonthlyIncome(orders)}</p></div>
-                            <div className="flex space-between"> <p>Total earnings</p><p className="approved">{ '$'+orderService.getTotalIncome(orders)}</p></div>
+                            <div className="flex space-between"><p>Average rating</p><p className="pending"
+                                style={{ position: 'relative', right: '16px' }}>{orders[0].stay.avrRate}
+                                <AiFillStar style={{ position: 'absolute', bottom: '5px' }} /></p></div>
+                            <div className="flex space-between"><p>Monthly earnings</p><p className="approved">{'$' + orderService.getMonthlyIncome(orders)}</p></div>
+                            <div className="flex space-between"> <p>Total earnings</p><p className="approved">{'$' + orderService.getTotalIncome(orders)}</p></div>
                         </div>
 
                         <DashboardTable orders={orders} />

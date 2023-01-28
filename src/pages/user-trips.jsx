@@ -23,8 +23,8 @@ export function UserTrips() {
 
     async function OnloadUserOrders() {
         try {
-          const  currUserOrders = await loadOrders({user:userService.getLoggedinUser(),forHost:false})
-          console.log(currUserOrders,'prder!!!!!!!!!')
+            const currUserOrders = await loadOrders({ user: userService.getLoggedinUser(), forHost: false })
+            //   console.log(currUserOrders,'prder!!!!!!!!!')
             setUserTrips(currUserOrders)
 
         }
@@ -33,7 +33,7 @@ export function UserTrips() {
         }
     }
 
-    console.log('trips', userTrips)
+    // console.log('trips', userTrips)
 
     return <section className="order-layout">
         <AppHeader />
@@ -43,16 +43,16 @@ export function UserTrips() {
 
                 <div className="no-trips-cont">
 
-                <h3 className="trip-list-title">No trips booked...yet!</h3>
-                <p>Time to dust off your bags and start planning your next adventure</p>
-                <button onClick={()=>{navigate('/explore')}} className="clear-btn">Start searching</button>
+                    <h3 className="trip-list-title">No trips booked...yet!</h3>
+                    <p>Time to dust off your bags and start planning your next adventure</p>
+                    <button onClick={() => { navigate('/explore') }} className="clear-btn">Start searching</button>
                 </div>
                 <p className="bug-report">Can’t find your reservation here? <span>Visit the Help Center</span></p>
-                </section> }
+            </section>}
 
-            {( orders.length) ? <TripList trips={orders}/> : ''}
-                                
+            {(orders.length) ? <TripList trips={orders} /> : ''}
+
         </main>
-        <AppFooter/>
+        <AppFooter />
     </section>
 }
