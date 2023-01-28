@@ -262,7 +262,7 @@ export function AppHeader() {
                 }}>Sign up </button>}
                 {(user) && <button >Notifications </button>}
                 {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
-                {(user) && <button >Wishlists </button>}
+                {(user) && <button onClick={() => navigate(`/user/${user._id}/wishlist`)} >Wishlists </button>}
                 <hr />
                 {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
                 <button onClick={() => {

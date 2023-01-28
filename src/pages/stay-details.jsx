@@ -192,10 +192,10 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar />  {avgRate}  <span>{stay.reviews.length} reviews  </span></h2>
+                            <h2><FaStar />  {avgRate} ·  <span>{stay.reviews.length} reviews  </span></h2>
                         </div>
                         <span>    </span>
-                        <h2><span className="loc"> ·  {stay.loc.city}, {stay.loc.country}</span></h2>
+                        <h2><span className="loc">  ·  {stay.loc.city}, {stay.loc.country}</span></h2>
                     </div>
                     <div className="share-save-action">
                         <span className="share-stay">
@@ -250,12 +250,9 @@ export function StayDetails() {
                         </p>
                     </div>
                     <div className="summary">
-                        <p>
-                            {stay.summary}
-                        </p>
                         <span className={'long-text-details'}>
 
-                            <LongTxt txt={stay.summary} length={20} />
+                            <LongTxt txt={stay.summary} length={200} />
                         </span>
                     </div>
                     <div className="amenities-container">
@@ -365,11 +362,13 @@ export function StayDetails() {
                 <header>
                     <div className="review-totals">
                         <FaStar />
-                        <span>{avgRate === NaN ? avgRate : 'No reviews yet'} ·</span>
+                        <span>{avgRate === 0 ? 'No reviews yet' : avgRate } ·</span>
                         <a href="">{stay.reviews.length} reviews </a>
                     </div >
                 </header >
                 <div className="rating">
+
+
                     <p>Cleanliness</p>
                     <span className="progress-container">
                         <progress max="5" value="4.966666666666667">
