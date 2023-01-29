@@ -159,8 +159,10 @@
 }
 
 @media (max-width: 460px) {
-    .app-header {
-        display: none;
+    .host-index {
+        .app-header {
+            display: none;
+        }
     }
 
     .stay-edit {

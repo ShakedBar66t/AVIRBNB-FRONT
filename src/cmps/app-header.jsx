@@ -58,7 +58,7 @@ export function AppHeader() {
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
         { country: 'Middle East', label: 'Middle East', image: require('../assets/img/middleEast.jpg') },
         { country: 'Italy', label: 'Italy', image: require('../assets/img/italy.jpg') },
-        { country: 'United Stated', label: 'United Stated', image: require('../assets/img/usa.jpg') },
+        { country: 'United States', label: 'United States', image: require('../assets/img/usa.jpg') },
         { country: 'France', label: 'France', image: require('../assets/img/france.jpg') },
         { country: 'South America', label: 'South America', image: require('../assets/img/southAmerica.jpg') },
     ]
@@ -266,7 +266,7 @@ export function AppHeader() {
                 <div className='user-nav-container'>
                     <div className='host-lng-container'>
                         <button className='host-btn' onClick={() => navigate('/host/home')}>{`${user ? 'Switch to hosting' : 'Avirbnb your home'}`}</button>
-                        <button className='lang-btn '><BiGlobe className='bi-globe' /></button>
+                        {/* <button className='lang-btn '><BiGlobe className='bi-globe' /></button> */}
                     </div>
 
                     <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span>
