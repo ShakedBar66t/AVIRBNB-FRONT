@@ -11,7 +11,7 @@ export function UserSetting({ setPage }) {
     const [user, setUser] = useState(userService.getLoggedinUser())
 
     const navigate = useNavigate()
-    return <div className='account-setting'>
+    return <div className='account-setting secondary-container'>
         <h1>Account</h1>
         <h2> <span className='user-fullname'>{user.fullname}</span>, {user.email} · <span style={{textDecoration: 'underline', fontWeight: '600', cursor: 'pointer'}} onClick={() => {
             setPage('edit')

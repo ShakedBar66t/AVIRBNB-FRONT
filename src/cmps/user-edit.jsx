@@ -13,6 +13,7 @@ export function UserEdit() {
     const { userId } = useParams()
     const navigate = useNavigate()
     const [userToEdit, setUserToEdit] = useState(userService.getLoggedinUser())
+    console.log(userToEdit)
 
     useEffect(() => {
         if (!userId) return
