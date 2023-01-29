@@ -48,7 +48,7 @@ export function HostDashBoard(){
 
     return <section className="host-dashboard ">
         <AppHeader/>
-        <main className="host-dashboard-main">
+        {(orders?.length) ? <main className="host-dashboard-main">
             <header>
                     <div className="stat-prev">
                         <h3><BsFillCloudMoonFill/> 219</h3>
@@ -84,7 +84,7 @@ export function HostDashBoard(){
             <BarChart/>
                 </div>
 
-                {(orders?.length) ? <section className="order-list">
+                 <section className="order-list">
                     <h4>Booking reports</h4>
                     {/* <table>
                         <thead><tr><td>Date</td>
@@ -107,9 +107,12 @@ export function HostDashBoard(){
                             return <OrderPreview order={order} onUpdateOrderStatus={onUpdateOrderStatus}/>
                         })}
                         </main>
-                </section>: <section>hi</section>}
+                </section>
      
-        </main>
+        </main> : <section className="no-orders">
+
+            <h2>You have no registered properties</h2>
+            </section>}
        <AppFooter/>
 
     </section>
