@@ -9,6 +9,7 @@ import { toggleLoginModal } from "../store/user.actions"
 
 export function MoblieFooter(){
     const user = useSelector(storeState => storeState.userModule.user)
+    console.log(user)
     const navigate = useNavigate()
 
     return <section className="mobile-footer">
@@ -17,7 +18,7 @@ export function MoblieFooter(){
                     <div><GoSearch/></div>
                     <div>Explore</div>
                 </NavLink>
-                <NavLink to={'/wishlist'}>
+                <NavLink to={`user/${user._id}/wishlist`}>
                     <div><BsHeart/></div>
                     <div>Wishlist</div>
                 </NavLink>

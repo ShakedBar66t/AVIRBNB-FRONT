@@ -254,7 +254,7 @@ function getUsers() {
 }
 
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
+    const userToSave = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, email: user.email }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userToSave))
     return userToSave
 }
