@@ -10,7 +10,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL, TOGGLE_CHECKOUT_MODAL } from '../store/reducers/user.reducer'
 import { logout } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
-import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
+import { TOGGLE_FILTER_MODAL, SET_SEARCH_DETAILS } from '../store/reducers/stay.reducer'
 import { stayService } from '../services/stay.service.js'
 import { SiAirbnb } from 'react-icons/si'
 const { RangePicker } = DatePicker
@@ -25,6 +25,7 @@ export function AppHeader() {
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
+    const searchDetails = useSelector(storeState => storeState.stayModule.searchDetails)
     const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
     const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
     const user = useSelector(storeState => storeState.userModule.user)
@@ -156,6 +157,8 @@ export function AppHeader() {
 
     function handleExpendedModalClick({ target }) {
         const name = target.name
+        console.log(name)
+        if (!searchModal) setSearchModal(!searchModal)
         if (!searchModalExpended) setSearchModalExpended(!searchModalExpended)
         switch (name) {
             case 'search':
@@ -250,10 +253,10 @@ export function AppHeader() {
                     {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
-                    {!stayId && <div className='filter-btns' onClick={toggleFilterModal}>
-                        <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
-                        <button className='time-filter'>Any week <span className='seperator-span'></span></button>
-                        <button className='guest-filter '>Add guests </button>
+                    {!stayId && <div className='filter-btns' >
+                        <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className='location-filter '>Anywhere <span className='seperator-span'></span></button>
+                        <button name='checkIn' onClick={(ev) => handleExpendedModalClick(ev)} className='time-filter'>Any week <span className='seperator-span'></span></button>
+                        <button name='guests' onClick={(ev) => handleExpendedModalClick(ev)} className='guest-filter '>Add guests </button>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
                 </div>
@@ -400,7 +403,7 @@ export function AppHeader() {
                                     Check in
                                 </span>
                                 <span name='date' className='lower-text'>{`${checkInOutDates.checkIn !== 'flexible' ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
-                                <span className='border-between-right'></span>
+                            <span className='border-between-right'></span>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
