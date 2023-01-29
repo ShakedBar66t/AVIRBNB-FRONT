@@ -1,3 +1,24 @@
+.account-setting {
+    h1 {
+        font-size: 32px;
+        line-height: 36px;
+        font-weight: 600;
+        color: rgb(34, 34, 34);
+    }
+
+    h2 {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 400;
+        color: rgb(34, 34, 34);
+        margin-bottom: 16px;
+
+        .user-fullname {
+            font-weight: 600;
+        }
+    }
+}
+
 .user-details {
     color: $clr7;
     font-weight: lighter;
@@ -15,6 +36,7 @@
             grid-template-columns: 1fr 1280px 1fr;
         }
     }
+
 
     .user-deatils-cont {
         display: grid;

@@ -236,9 +236,10 @@ async function logout() {
     }
 }
 
-async function signup({ email, username, password, fullname }) {
-    const user = { email, username, password, fullname }
+async function signup({ email, password, fullname }) {
+    const user = { email, password, fullname }
     console.log('sign up cred at user service ', user)
+    saveLocalUser(user)
     return await httpService.post(BASE_URL + 'signup', user)
 }
 

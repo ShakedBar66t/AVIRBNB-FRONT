@@ -39,6 +39,7 @@ export function StayDetails() {
     const user = useSelector(storeState => storeState.userModule.user)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [isReserveModal, setReserveModal] = useState(false)
+    console.log(stay)
 
     useEffect(() => {
         loadStay()
