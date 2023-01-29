@@ -26,7 +26,8 @@ export function stayReducer(state = initialState, action) {
             newState = { ...state, stays: action.stays }
             break
         case SET_SEARCH_DETAILS:
-            newState = { ...state, searchModalDetails: action.searchModalDetails }
+            console.log(action.filterBy)
+            newState = { ...state, searchDetails: { ...action.filterBy } }
             break
         case REMOVE_STAY:
             const lastRemovedStay = state.stays.find(stay => stay._id === action.stayId)

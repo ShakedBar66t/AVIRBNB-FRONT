@@ -25,7 +25,6 @@ export function AppHeader() {
 
     const isShadow = useSelector(storeState => storeState.userModule.isShadow)
     const isFilterModalOpen = useSelector(storeState => storeState.stayModule.isFilterModalOpen)
-    const searchDetails = useSelector(storeState => storeState.stayModule.searchDetails)
     const isLoginModalOpen = useSelector(storeState => storeState.userModule.isLoginModalOpen)
     const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
     const user = useSelector(storeState => storeState.userModule.user)
@@ -152,6 +151,7 @@ export function AppHeader() {
             }
         }
         setFilterBy({ ...filterBy, guests })
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         setLowerGuestsText(text)
     }
 
@@ -211,6 +211,7 @@ export function AppHeader() {
             setLocationInput(target.value)
             setFilterBy({ ...filterBy, location: target.value })
         }
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
     }
 
     function handleDateChange(values) {
@@ -225,6 +226,7 @@ export function AppHeader() {
         const formattedCheckOut = `${checkOutMonth} ${checkOutDay}`
         setFilterBy({ ...filterBy, checkIn: checkIn, checkOut: checkOut })
         setCheckInOutDates({ checkIn: formattedCheckIn, checkOut: formattedCheckOut })
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         const dayInMilliseconds = 1000 * 60 * 60 * 24
         const dateStart = values[0].$d.getTime()
         const dateEnd = values[1].$d.getTime()
