@@ -9,6 +9,8 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 import { StayList } from '../cmps/stay-list.jsx'
 import { toggleLoginModal } from '../store/user.actions.js'
 import { LabelsFilter } from '../cmps/labels-filter.jsx'
+import { socketService } from '../services/socket.service.js'
+import { SOCKET_EVENT_REGISTER_HOST_TO_ROOM, SOCKET_EMIT_SEND_HOST_NOTIFICATION } from '../services/socket.service'
 
 export function StayIndex() {
     const location = useLocation()
@@ -23,6 +25,23 @@ export function StayIndex() {
         // else loadStays(queryFilterBy)
         loadStays(searchParams)
     }, [searchParams])
+    useEffect(() => {
+        if (user.isHost) {
+            console.log(user.isHost);
+            socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, user._id)
+        }
+
+    }, [])
+    useEffect(() => {
+        socketService.on(SOCKET_EMIT_SEND_HOST_NOTIFICATION, (order) => {
+            console.log(order);
+        })
+        return () => {
+            socketService.off(SOCKET_EMIT_SEND_HOST_NOTIFICATION, (order) => {
+                console.log(order, 'is offfffff');
+            })
+        }
+    }, [])
 
     async function onRemoveStay(stayId) {
         try {

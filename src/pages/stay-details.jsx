@@ -23,6 +23,8 @@ import { LongTxt } from "../cmps/long-txt"
 import { useStepContext } from "@mui/material"
 import { SizeContextProvider } from "antd/es/config-provider/SizeContext"
 import { ReserveModal } from "../cmps/checkout-modal"
+import { socketService } from "../services/socket.service"
+import { SOCKET_EVENT_REGISTER_HOST_TO_ROOM } from '../services/socket.service'
 const { RangePicker } = DatePicker
 
 
@@ -49,6 +51,7 @@ export function StayDetails() {
 
     async function loadStay() {
         const stay = await stayService.getById(stayId)
+        socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, stay?.host._id)
         setStay(stay)
     }
 
