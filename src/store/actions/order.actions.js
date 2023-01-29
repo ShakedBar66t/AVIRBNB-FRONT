@@ -4,6 +4,7 @@ import { store } from '../store.js'
 import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
 import { ADD_ORDER, ADD_TO_ORDERT, CLEAR_ORDERT, REMOVE_ORDER, REMOVE_FROM_ORDERT, SET_ORDERS, UNDO_REMOVE_ORDER, UPDATE_ORDER } from "../reducers/order.reducer.js"
 import { SET_SCORE } from '../reducers/user.reducer.js'
+import { socketService, SOCKET_EMIT_SEND_HOST_NOTIFICATION } from '../../services/socket.service'
 
 // Action Creators:
 export function getActionRemoveOrder(orderId) {
@@ -91,7 +92,9 @@ export async function removeOrder(orderId) {
 
 export async function addOrder(order) {
     try {
+        console.log(order, 'the orderrrrrrrrr')
         const savedOrder = await orderService.save(order)
+        socketService.emit(SOCKET_EMIT_SEND_HOST_NOTIFICATION, order)
         console.log('Added Order', savedOrder)
         store.dispatch(getActionAddOrder(savedOrder))
         return savedOrder
