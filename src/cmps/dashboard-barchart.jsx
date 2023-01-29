@@ -11,6 +11,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { orderService } from '../services/order.service';
 import { useSelector } from 'react-redux';
+import { MonthlyIcome } from '../customHooks/getMonthlyIncome';
 
 // import {faker} from 'faker';
 
@@ -47,14 +48,15 @@ export const options = {
 };
 
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ["January", "February", "March", "April", "May",
+"June", "July", "August", "September", "October", "November", "December"];
 // const orders = useSelector(storeState => storeState.orderModule.orders)
 export const data = {
   labels,
   datasets: [
     {
         label: 'Dataset 1',
-        // data:orderService.getMonthlyIncome(orders),
+        // data:MonthlyIcome(),
         data:[200,300,400,500,600,300,300],
         backgroundColor: '#00A699',
 
@@ -75,5 +77,5 @@ export const data = {
 };
 
 export function BarChart() {
-  return <Bar options={options} data={data}  height="120vw"  />;
+  return <Bar options={options} data={data}  height="110vw"  />;
 }

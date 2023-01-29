@@ -33,7 +33,7 @@ export function ReserveModal({ order }) {
                         <p>{order.stay.name}</p>
                         <small>{order.stay.type}</small>
                         <div className="flex space-between"><p><FaStar style={{ fontSize: '13px' }} />
-                            {order.stay.avrRate}</p><p>{'$' + order.stay.price + ' night'}</p></div>
+                            {order.stay.avRate}</p><p>{'$' + order.stay.price + ' night'}</p></div>
                     </div>
                 </div>
             </div>
