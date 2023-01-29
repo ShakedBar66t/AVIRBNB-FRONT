@@ -925,10 +925,14 @@ p {
             margin-left: 0;
 
             form {
-                width: 100%;
+                margin: 0;
             }
         }
 
+    }
+
+    .review-preview {
+        margin-right: 20px;
     }
 }
 

@@ -239,8 +239,8 @@ export function StayDetails() {
                         <img className="host-image" src={stay.host.pictureUrl} />
                     </div>
                     <div className="user-stay-info">
-                        {achievements.map((achievement) => (
-                            <div className="user-achievement">
+                        {achievements.map((achievement, index) => (
+                            <div className="user-achievement" key={index}>
                                 <div className="achievement-icon">
                                     {achievement.icon}
                                 </div>

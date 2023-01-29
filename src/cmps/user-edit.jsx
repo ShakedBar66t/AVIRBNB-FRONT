@@ -43,7 +43,6 @@ export function UserEdit() {
             showErrorMsg('Cannot edit user', err)
         }
     }
-    console.log(userToEdit.imgUrl)
 
     return <section className="user-edit">
         <section className="edit-section">
