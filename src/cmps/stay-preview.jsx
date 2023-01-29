@@ -72,13 +72,13 @@ export function StayPreview({ stay, onToggleLike }) {
                 <p className="prev-loc">{stay.loc.city + ', ' + stay.loc.country}</p>
                 <p className="stay-prev-rating">
                     <span className="fa-solid star" style={{ fontSize: "12px" }}>
-                    </span>{" " + stay.avrRate}
+                    </span>{" " + stay.avRate}
                     {/* </span>{" " + stayService.getAvrStayRating(stay.reviews)} */}
                 </p>
             </div >
             <p className="prev-host-name">{"Hosted by " + (stay.host.fullname.slice(0, stay.host.fullname.indexOf(' ')))}</p>
             <PrevDateStr />
-            <p className="prev-price"> <span style={{fontWeight:'600'}}>{'$' + stay.price}</span> night</p>
+            <p className="prev-price"> <span style={{ fontWeight: '600' }}>{'$' + stay.price}</span> night</p>
         </div>
     </article>
 }

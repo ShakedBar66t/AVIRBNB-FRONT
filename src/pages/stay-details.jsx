@@ -37,10 +37,11 @@ export function StayDetails() {
     const [dates, setDates] = useState([])
     const [order, setOrder] = useState(orderService.getEmptyOrder())
     const user = useSelector(storeState => storeState.userModule.user)
+    const searchDetails = useSelector(storeState => storeState.stayModule.searchDetails)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [isReserveModal, setReserveModal] = useState(false)
-    console.log(stay)
-
+    const startDate = searchDetails.checkIn
+    const endDate = searchDetails.checkIn
     useEffect(() => {
         loadStay()
 
@@ -123,7 +124,6 @@ export function StayDetails() {
         { name: 'Room-darkening shades', image: require('../assets/amenities-logos/Room-darkening shades.png') },
     ]
 
-
     function getStayAmenitiesWithImages(stayAmenitiesList, stayAmenitiesWithImages) {
         const amenitiesWithImages = []
         stayAmenitiesList.forEach(amenity => {
@@ -136,6 +136,7 @@ export function StayDetails() {
     }
 
     function handleGuestsInput(type, value) {
+
         let newGuests = { ...guests }
         let addedText = false
         let text = ''
@@ -167,7 +168,6 @@ export function StayDetails() {
     }
 
     if (stay) {
-        var avgRate = stayService.getAvrStayRating(stay.reviews)
         var amenitiesWithImages = getStayAmenitiesWithImages(stay.amenities, stayAmenitiesImages)
     }
 
@@ -203,7 +203,7 @@ export function StayDetails() {
                 <div className="stay-header-links">
                     <div className="stay-summary">
                         <div className="review-totals">
-                            <h2><FaStar />  {avgRate} ·  <span>{stay.reviews.length} reviews  </span></h2>
+                            <h2><FaStar />  {stay.avRate} ·  <span>{stay.reviews.length} reviews  </span></h2>
                         </div>
                         <span>    </span>
                         <h2><span className="loc">  ·  {stay.loc.city}, {stay.loc.country}</span></h2>
@@ -286,7 +286,7 @@ export function StayDetails() {
                                 <div className="review-totals">
                                     <FaStar />
                                     {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
-                                    <span>{avgRate} ·</span>
+                                    <span>{stay.avRate} ·</span>
                                     {/* <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span> */}
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
@@ -296,8 +296,8 @@ export function StayDetails() {
                                 <div className="date-input">
                                     {/* <input type="text" /> */}
                                     <RangePicker popupClassName='details-range-picker'
+                                        defaultValue={[startDate, endDate]}
                                         onChange={(values) => {
-
                                             // const value1 = moment(values[0]).format('DD-MM-YYYY')
                                             const time1 = values[0].$d
                                             const date = new Date(time1)
@@ -373,7 +373,7 @@ export function StayDetails() {
                 <header>
                     <div className="review-totals">
                         <FaStar />
-                        <span>{avgRate === 0 ? 'No reviews yet' : avgRate} ·</span>
+                        <span>{stay.avRate === 0 ? 'No reviews yet' : stay.avRate} ·</span>
                         <a href="">{stay.reviews.length} reviews </a>
                     </div >
                 </header >
@@ -423,7 +423,7 @@ export function StayDetails() {
                             <div className="mini-user-details">
                                 <img src={review.by.imgUrl} />
                                 <p>{review.by.fullname}</p>
-                                <span>Rated: {review.rate} <FaStar /></span>
+                                <span>Rated: {review.rating} <FaStar /></span>
                             </div>
                             <section className="review-text">
                                 <LongTxt txt={review.txt} length={100} />

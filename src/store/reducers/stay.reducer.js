@@ -7,12 +7,14 @@ export const CLEAR_STAYT = 'CLEAR_STAYT'
 export const UNDO_REMOVE_STAY = 'UNDO_REMOVE_STAY'
 export const REMOVE_FROM_STAYT = 'REMOVE_FROM_STAYT'
 export const TOGGLE_FILTER_MODAL = 'TOGGLE_FILTER_MODAL'
+export const SET_SEARCH_DETAILS = 'SET_SEARCH_DETAILS'
 
 const initialState = {
     stays: [],
     stayt: [],
     isFilterModalOpen: false,
     lastRemovedStay: null,
+    searchDetails: { location: '', checkIn: '', checkOut: '', guests: { adults: 1, children: 0, infants: 0, pets: 0 } }
 }
 
 export function stayReducer(state = initialState, action) {
@@ -22,6 +24,10 @@ export function stayReducer(state = initialState, action) {
     switch (action.type) {
         case SET_STAYS:
             newState = { ...state, stays: action.stays }
+            break
+        case SET_SEARCH_DETAILS:
+            console.log(action.filterBy)
+            newState = { ...state, searchDetails: { ...action.filterBy } }
             break
         case REMOVE_STAY:
             const lastRemovedStay = state.stays.find(stay => stay._id === action.stayId)

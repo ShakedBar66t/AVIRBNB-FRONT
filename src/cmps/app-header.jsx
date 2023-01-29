@@ -10,7 +10,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { TOGGLE_LOGIN_MODAL, TOGGLE_IS_SHADOW, REFRESH_LOGIN_MODAL, TOGGLE_CHECKOUT_MODAL } from '../store/reducers/user.reducer'
 import { logout } from '../store/user.actions.js'
 import { toggleLoginModal } from '../store/user.actions.js'
-import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
+import { TOGGLE_FILTER_MODAL, SET_SEARCH_DETAILS } from '../store/reducers/stay.reducer'
 import { stayService } from '../services/stay.service.js'
 import { SiAirbnb } from 'react-icons/si'
 const { RangePicker } = DatePicker
@@ -151,11 +151,14 @@ export function AppHeader() {
             }
         }
         setFilterBy({ ...filterBy, guests })
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         setLowerGuestsText(text)
     }
 
     function handleExpendedModalClick({ target }) {
         const name = target.name
+        console.log(name)
+        if (!searchModal) setSearchModal(!searchModal)
         if (!searchModalExpended) setSearchModalExpended(!searchModalExpended)
         switch (name) {
             case 'search':
@@ -208,6 +211,7 @@ export function AppHeader() {
             setLocationInput(target.value)
             setFilterBy({ ...filterBy, location: target.value })
         }
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
     }
 
     function handleDateChange(values) {
@@ -222,6 +226,7 @@ export function AppHeader() {
         const formattedCheckOut = `${checkOutMonth} ${checkOutDay}`
         setFilterBy({ ...filterBy, checkIn: checkIn, checkOut: checkOut })
         setCheckInOutDates({ checkIn: formattedCheckIn, checkOut: formattedCheckOut })
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         const dayInMilliseconds = 1000 * 60 * 60 * 24
         const dateStart = values[0].$d.getTime()
         const dateEnd = values[1].$d.getTime()
@@ -250,10 +255,10 @@ export function AppHeader() {
                     {stayId && <div className='filter-btns-details' onClick={toggleFilterModal}><span> Start your search </span>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
-                    {!stayId && <div className='filter-btns' onClick={toggleFilterModal}>
-                        <button className='location-filter '>Anywhere <span className='seperator-span'></span></button>
-                        <button className='time-filter'>Any week <span className='seperator-span'></span></button>
-                        <button className='guest-filter '>Add guests </button>
+                    {!stayId && <div className='filter-btns' >
+                        <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className='location-filter '>Anywhere <span className='seperator-span'></span></button>
+                        <button name='checkIn' onClick={(ev) => handleExpendedModalClick(ev)} className='time-filter'>Any week <span className='seperator-span'></span></button>
+                        <button name='guests' onClick={(ev) => handleExpendedModalClick(ev)} className='guest-filter '>Add guests </button>
                         <button className='search-btn'><FaSearch className='fa-search' /></button>
                     </div>}
                 </div>
@@ -400,7 +405,7 @@ export function AppHeader() {
                                     Check in
                                 </span>
                                 <span name='date' className='lower-text'>{`${checkInOutDates.checkIn !== 'flexible' ? checkInOutDates.checkIn : 'Add dates'}`}</span> </button>
-                                <span className='border-between-right'></span>
+                            <span className='border-between-right'></span>
                             <span>
                                 <span className='border-between-middle'></span>
                             </span>
