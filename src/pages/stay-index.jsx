@@ -26,7 +26,7 @@ export function StayIndex() {
         loadStays(searchParams)
     }, [searchParams])
     useEffect(() => {
-        if (user.isHost) {
+        if (user?.isHost) {
             console.log(user.isHost);
             socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, user._id)
         }
