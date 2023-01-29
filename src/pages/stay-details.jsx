@@ -183,7 +183,7 @@ export function StayDetails() {
             const newOrder = {
                 ...order, guests: guests, reservedAt: Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avrRate: stay.avrRate },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avrRate: stay.avRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)

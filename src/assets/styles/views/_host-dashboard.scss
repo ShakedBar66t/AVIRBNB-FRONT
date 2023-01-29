@@ -174,7 +174,49 @@
 }
 
 .no-orders{
-    margin: 120px 0 100vh;
+    margin: 140px 0 100vh;
+
+    h2{
+        font-size: 2rem;
+        padding: 1rem 0;
+        border-bottom: $bs1;
+    }
+
+    div{
+        padding: 1rem 0;
+        border-bottom: $bs1;
+        margin-top: 2rem;
+
+        
+    }
+    h4{
+        font-size: rem(24px);
+        padding: 0.75rem 0;
+    }
+
+    button {
+        margin: 16px 0 48px;
+        padding: 13px 23px;
+        border: 1px solid $clr7;
+        border-radius: 8px;
+        font-weight: bolder;
+        width: 161px;
+        height: 47px;
+        background: none;
+
+        &:hover {
+            background-color: darken($color: $clr6, $amount: 5%);
+        }
+    }
+    small{
+
+        margin: 1rem 0;
+    }
+
+    span{
+        border-bottom: 1px solid $clr7;
+        font-weight: bold;
+    }
 }
 
 // .chart-container{

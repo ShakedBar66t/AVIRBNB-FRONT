@@ -3,6 +3,7 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 import { httpService } from './http.service.js'
+import { months } from 'moment/moment.js'
 
 const ORDER_STORAGE_KEY = 'orderDB'
 
@@ -17,7 +18,10 @@ export const orderService = {
     getEmptyOrder, /// front
     getMonthlyIncome, /// front
     getTotalIncome, /// front
+    getTotalNights, /// front
+    getAvrHostRate, /// front
     getStatusPrec, /// front
+    getMonthlyIncome,
 }
 window.cs = orderService
 
@@ -42,36 +46,95 @@ window.cs = orderService
 
 
 function getMonthlyIncome(orders) {
-    const month = 1000 * 60 * 60 * 24 * 30
+    // const month = 1000 * 60 * 60 * 24 * 30
 
-    const filteredOrders = orders.filter(order => {
-        return (order.reservedAt + month > Date.now() && order.status === 'approved')
-    })
-    const monthlyIncome = filteredOrders.reduce((acc, order) => {
+    // const filteredOrders = orders.filter(order => {
+    //     return (order.reservedAt + month > Date.now() && order.status === 'approved')
+    // })
+    // const monthlyIncome = filteredOrders.reduce((acc, order) => {
+    //     return acc += order.totalPrice
+    // }, 0)
+    // return monthlyIncome
+    const months = ["January", "February", "March", "April", "May",
+    "June", "July", "August", "September", "October", "November", "December"]
+
+
+   const avrEarnings = months.map((month,idx)=>{
+      const filteredOrders =  orders.filter(order=>new Date(order.startDate).getMonth() === idx)
+    return filteredOrders.reduce((acc,order)=>{
         return acc += order.totalPrice
-    }, 0)
-    return monthlyIncome
+      },0)
+    })
+
+    console.log('avrearning',avrEarnings)
+    return 1
+
+    
 }
+// function getMonthlyIncome(orders) {
+//     const month = 1000 * 60 * 60 * 24 * 30
+
+//     const filteredOrders = orders.filter(order => {
+//         return (order.reservedAt + month > Date.now() && order.status === 'approved')
+//     })
+//     const monthlyIncome = filteredOrders.reduce((acc, order) => {
+//         return acc += order.totalPrice
+//     }, 0)
+//     return monthlyIncome
+// }
 
 function getTotalIncome(orders) {
     const filteredOrders = orders.filter(order => (order.status === 'approved'))
-    const totalIncome = filteredOrders.reduce((acc, order) => {
+    let totalIncome = filteredOrders.reduce((acc, order) => {
         return acc += order.totalPrice
     }, 0)
+
+    if(totalIncome>1000){
+        totalIncome = (totalIncome/1000).toFixed(2) + 'k'
+    }
     return totalIncome
 }
 
-function getStatusPrec(status, orders) {
-    // var pPos = $('#pointspossible').val();
-    // var pEarned = $('#pointsgiven').val();
+function getTotalNights(orders) {
 
-    // var perc = ((pEarned/pPos) * 100).toFixed(3);
-    // $('#pointsperc').val(perc)
+    const filteredOrders = orders.filter(order => (order.status === 'approved'))
+    let totalNights = filteredOrders.reduce((acc, order) => {
+        return acc += order.totalNights
+    }, 0)
+
+    return totalNights
+}
+
+function getStatusPrec(status, orders) {
 
     const OrdersCount = orders.filter(order => order.status === status)
     const prec = ((OrdersCount.length / orders.length) * 100).toFixed(2)
     console.log(prec)
     return prec
+}
+
+function getAvrHostRate( orders) {
+
+   let mapedOrders = orders.reduce((acc,order)=>{
+            if(acc>=0 && !acc.includes(order.stay)){
+                acc.push(order)
+            }
+            return acc
+   },[])
+
+   console.log('maped',mapedOrders)
+
+   const totalHostRate = mapedOrders.reduce((acc,order)=>{
+
+   return acc += (+order.stay.avRate)
+   },0)
+
+   return (totalHostRate/mapedOrders.length).toFixed(2)
+// return 1
+    // const OrdersCount = orders.filter(order => order.status === status)
+    // const prec = ((OrdersCount.length / orders.length) * 100).toFixed(2)
+    // console.log(prec)
+    // return prec
 }
 
 

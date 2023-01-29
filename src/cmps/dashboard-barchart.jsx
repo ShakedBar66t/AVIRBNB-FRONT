@@ -9,6 +9,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { orderService } from '../services/order.service';
+import { useSelector } from 'react-redux';
+
 // import {faker} from 'faker';
 
 ChartJS.register(
@@ -45,12 +48,13 @@ export const options = {
 
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
+// const orders = useSelector(storeState => storeState.orderModule.orders)
 export const data = {
   labels,
   datasets: [
     {
         label: 'Dataset 1',
+        // data:orderService.getMonthlyIncome(orders),
         data:[200,300,400,500,600,300,300],
         backgroundColor: '#00A699',
 

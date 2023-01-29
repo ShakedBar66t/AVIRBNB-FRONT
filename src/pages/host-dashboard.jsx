@@ -10,11 +10,13 @@ import { AiFillStar, } from 'react-icons/ai'
 import { RiStarSFill, } from 'react-icons/ri'
 import { BsCurrencyDollar,BsFillCloudMoonFill } from 'react-icons/bs'
 import { AppFooter } from '../cmps/app-footer'
+import { orderService } from "../services/order.service";
 
 export function HostDashBoard(){
 
 
         const [userTrips, setUserTrips] = useState([])
+       
     // const user = userService.getLoggedinUser()
     // console.log(user,'user')
     const orders = useSelector(storeState => storeState.orderModule.orders)
@@ -51,27 +53,27 @@ export function HostDashBoard(){
         {(orders?.length) ? <main className="host-dashboard-main">
             <header>
                     <div className="stat-prev">
-                        <h3><BsFillCloudMoonFill/> 219</h3>
+                        <h3><BsFillCloudMoonFill/> {orderService.getTotalNights(orders)}</h3>
                         <div><p>Nights</p>
                         <p>Booked</p>
                         </div>
                     </div>
                     <div className="stat-prev">
-                        <h3><BsCurrencyDollar/> 31.7k</h3>
+                        <h3><BsCurrencyDollar/> {orderService.getTotalIncome(orders)}</h3>
                         <div>
                             <p>Total</p>
                         <p>Earning</p>
                         </div>
                     </div>
                     <div className="stat-prev">
-                        <h3><BsCurrencyDollar/> 219</h3>
+                        <h3><BsCurrencyDollar/>{orderService.getMonthlyIncome(orders)}</h3>
                         <div><p>Average </p>
                         <p className="monthly">Monthly earning</p>
                         <p className="salary">Salary</p>
                         </div>
                     </div>
                     <div className="stat-prev">
-                        <h3><RiStarSFill/>3.59</h3>
+                        <h3><RiStarSFill/>{orderService.getAvrHostRate(orders)}</h3>
                         <div><p>Average </p>
                         <p> Host rating</p>
                         </div>
@@ -81,17 +83,12 @@ export function HostDashBoard(){
             <hr />
 
                 <div  className="chart-cont">
-            <BarChart/>
+            <BarChart orders={orders}/>
                 </div>
 
                  <section className="order-list">
                     <h4>Booking reports</h4>
-                    {/* <table>
-                        <thead><tr><td>Date</td>
-                         <td>Booker</td><td>Start date</td>
-                          <td>End date</td><td>Nights</td> <td>Guests</td><td>Status</td> <td>Total price</td></tr></thead>
-                        
-                    </table> */}
+
                         <main>
                         <article className="order-preview order-list-header">
                             <div>Date</div>
@@ -111,7 +108,13 @@ export function HostDashBoard(){
      
         </main> : <section className="no-orders">
 
-            <h2>You have no registered properties</h2>
+            <h2>Hosting tools</h2>
+            <div>
+                <h4>You have no registered properties</h4>
+            <p>Not a host yet? try registering a property here:</p>
+            <button onClick={()=>navigate('/host/home')}>Become a host</button>
+            </div>
+            <small>Cant find your listings? <span>contact us here</span></small>
             </section>}
        <AppFooter/>
 
