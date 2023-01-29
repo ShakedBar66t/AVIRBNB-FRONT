@@ -27,7 +27,7 @@ export function StayIndex() {
     }, [searchParams])
     // useEffect(() => {
     //     if (user.isHost) {
-    //         console.log(user.isHost);
+    //         console.log(user.isHost);.
     //         socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, user._id)
     //     }
 
