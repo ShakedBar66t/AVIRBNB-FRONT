@@ -353,6 +353,7 @@ export function AppHeader() {
                     <button name='location' onClick={(ev) => handleExpendedModalClick(ev)} className={`inner-btns-container left ${isLocationModalOpen ? 'selected' : ''}`} ><span className='upper-text'>Where
                     </span>
                         <input
+                            autoComplete='off'
                             ref={inputRef}
                             name='location'
                             type='text'

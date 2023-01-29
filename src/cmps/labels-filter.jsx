@@ -101,11 +101,11 @@ export function LabelsFilter() {
                         </div>
 
                         {(currentIndex) ? <div className={'btn-container prev '}>
-                            <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft /></button>
+                            <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft style={{marginTop: '2.5px', paddingRight: '2.4px'}} /></button>
                         </div> : ''}
 
                         {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
-                            <button className='next-btn' onClick={handleNext}> <BiChevronRight /></button>
+                            <button className='next-btn' onClick={handleNext}> <BiChevronRight style={{marginTop: '2.5px', paddingRight: '2.4px'}} /></button>
 
                         </div>}
                     </div>
