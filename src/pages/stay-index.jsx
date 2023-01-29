@@ -25,13 +25,13 @@ export function StayIndex() {
         // else loadStays(queryFilterBy)
         loadStays(searchParams)
     }, [searchParams])
-    useEffect(() => {
-        if (user.isHost) {
-            console.log(user.isHost);
-            socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, user._id)
-        }
+    // useEffect(() => {
+    //     if (user.isHost) {
+    //         console.log(user.isHost);
+    //         socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, user._id)
+    //     }
 
-    }, [])
+    // }, [])
     useEffect(() => {
         socketService.on(SOCKET_EMIT_SEND_HOST_NOTIFICATION, (order) => {
             console.log(order);

@@ -42,8 +42,8 @@ export function StayDetails() {
     const searchDetails = useSelector(storeState => storeState.stayModule.searchDetails)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [isReserveModal, setReserveModal] = useState(false)
-    const startDate = searchDetails.checkIn
-    const endDate = searchDetails.checkIn
+    // const startDate = searchDetails.checkIn
+    // const endDate = searchDetails.checkIn
     useEffect(() => {
         loadStay()
 
@@ -299,7 +299,7 @@ export function StayDetails() {
                                 <div className="date-input">
                                     {/* <input type="text" /> */}
                                     <RangePicker popupClassName='details-range-picker'
-                                        defaultValue={[startDate, endDate]}
+                                        // defaultValue={[startDate, endDate]}
                                         onChange={(values) => {
                                             // const value1 = moment(values[0]).format('DD-MM-YYYY')
                                             const time1 = values[0].$d
