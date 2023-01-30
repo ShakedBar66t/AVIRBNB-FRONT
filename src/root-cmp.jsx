@@ -29,8 +29,8 @@ export function RootCmp() {
                     {/* {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)} */}
 
                     <Route path="/user/trip" element={<UserTrips />} />
+                    <Route path="/user/wishlist/:id" element={<UserWishlist />} />
                     <Route path="/user/:id" element={<UserDetails />} />
-                    <Route path="/user/:id/wishlist" element={<UserWishlist />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />
                     <Route path="/explore/:stayId" element={<StayDetails />} />
