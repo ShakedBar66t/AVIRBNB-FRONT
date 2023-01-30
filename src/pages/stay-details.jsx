@@ -56,8 +56,19 @@ export function StayDetails() {
 
     async function loadStay() {
         const stay = await stayService.getById(stayId)
+        console.log(user);
+        if (!user?.isHost) {
+            console.log("ya host", user, stay);
+            socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
+        }
+        const totalPrice = totalNights * stay.price
+        setOrder({ ...order, startDate, endDate, totalNights, totalPrice, })
+        //    setGuests({})
+        //    console.log('this is guests!!!',guests)
+        //    console.log('this is params!!!',searchDetails.guests)
+        // setStay(stay)
         console.log(user, '....... test')
-        socketService.emit('test', { userId: user._id, hostId: stay.host._id })
+        socketService.emit('test', { userId: user?._id, hostId: stay.host._id })
         setStay(stay)
     }
 
@@ -156,21 +167,34 @@ export function StayDetails() {
             text = 'Add guests'
         } else {
             if (newGuests.Adults + newGuests.Children > 0) {
-                text += `${newGuests.Adults + newGuests.Children} guests`
+                text += `${newGuests.Adults + newGuests.Children} guest`
+                if (newGuests.Adults + newGuests.Children > 1) {
+
+                    text += 's'
+                }
                 addedText = true
             }
             if (newGuests.Pets > 0) {
                 if (addedText) {
                     text += ', '
                 }
-                text += ` ${newGuests.Pets} pets`
+                text += ` ${newGuests.Pets} pet`
+                if (newGuests.Pets > 1) {
+                    text += 's'
+                }
+
                 addedText = true
             }
             if (newGuests.Infants > 0) {
                 if (addedText) {
                     text += ', '
                 }
-                text += ` ${newGuests.Infants} infants`
+
+                text += ` ${newGuests.Infants} infant`
+                if (newGuests.Infants > 1) {
+                    text += 's'
+                }
+
             }
         }
         setLowerGuestsText(text)
