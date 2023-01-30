@@ -34,7 +34,7 @@ export function UserWishlist() {
                                         return <img src={img} />
                                     })}
                                 </div>
-                                    <h1>{stay.stay.name}</h1>
+                                    <h4>{stay.stay.name}</h4>
 
 
                             </section>
