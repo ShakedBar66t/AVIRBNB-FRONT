@@ -14,6 +14,7 @@ import { UserTrips } from './pages/user-trips'
 import { MoblieFooter } from './cmps/mobile-footer.jsx'
 import { HostDashBoard } from './pages/host-dashboard.jsx'
 import { UserWishlist } from './pages/user-wishlist.jsx'
+import { UserNotification } from './cmps/user-notification.jsx'
 
 
 
@@ -30,6 +31,7 @@ export function RootCmp() {
 
                     <Route path="/user/trip" element={<UserTrips />} />
                     <Route path="/user/wishlist/:id" element={<UserWishlist />} />
+                    <Route path="/user/notification/:id" element={<UserNotification />} />
                     <Route path="/user/:id" element={<UserDetails />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explore" element={<StayIndex />} />

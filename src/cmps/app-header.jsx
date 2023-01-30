@@ -287,7 +287,7 @@ export function AppHeader({ isOn, setIsOn }) {
                                 toggleUserModal()
                                 toggleLoginModal('signup')
                             }}>Sign up </button>}
-                            {(user) && <button >Notifications </button>}
+                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications </button>}
                             {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
                             {(user) && <button onClick={() => navigate(`/user/wishlist/${user._id}`)} >Wishlists </button>}
                             <hr />
