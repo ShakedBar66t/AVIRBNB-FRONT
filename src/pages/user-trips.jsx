@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { AppFooter } from "../cmps/app-footer";
 import { AppHeader } from "../cmps/app-header";
 import { TripList } from "../cmps/trip-list";
+import { showSuccessMsg } from "../services/event-bus.service";
 import { orderService } from "../services/order.service"
+import { socketService } from "../services/socket.service";
 import { userService } from "../services/user.service";
 import { loadOrders } from "../store/actions/order.actions";
 
@@ -18,19 +20,32 @@ export function UserTrips() {
     const navigate = useNavigate()
     useEffect(() => {
         OnloadUserOrders()
+
+        socketService.on('update-order-status', onUpdateBySocket)
+        return () => {
+            socketService.off('update-order-status', onUpdateBySocket)
+        }
+
     }, [])
+
+
 
 
     async function OnloadUserOrders() {
         try {
             const currUserOrders = await loadOrders({ user: userService.getLoggedinUser(), forHost: false })
-            //   console.log(currUserOrders,'prder!!!!!!!!!')
             setUserTrips(currUserOrders)
-
         }
         catch (err) {
             console.log(err)
         }
+    }
+
+    function onUpdateBySocket(updatedOrder) {
+        const userOrders = orders.map(order => order._id === order._id ? updatedOrder : order)
+        setUserTrips(userOrders)
+
+        console.log(userOrders, 'socket updatedddd')
     }
 
     // console.log('trips', userTrips)
@@ -49,7 +64,9 @@ export function UserTrips() {
                 </div>
                 <p className="bug-report">Can’t find your reservation here? <span>Visit the Help Center</span></p>
             </section>}
-
+            <button onClick={() => {
+                socketService.emit('testa', 'kaka')
+            }}>testa</button>
             {(orders.length) ? <TripList trips={orders} /> : ''}
 
         </main>
