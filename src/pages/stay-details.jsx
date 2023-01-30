@@ -64,7 +64,7 @@ export function StayDetails() {
         setOrder({ ...order, startDate, endDate, totalNights, totalPrice, })
         setGuests({ ...searchDetails.guests })
         handleGuestsInput('adult', 0)
-        socketService().emit('test', { userId: user?._id, hostId: stay.host._id })
+        socketService.emit('test', { userId: user?._id, hostId: stay.host._id })
         setStay(stay)
     }
 
