@@ -68,7 +68,7 @@ export function UserSetting({ setPage }) {
                 <div> <BiBarChartAlt2 /></div>
                 <div>
                     <h4>Professional hosting tools</h4>
-                    <p>Get professional tools if you manage several properties on Airbnb</p>
+                    <p>Get professional tools if you manage several properties on Avirbnb</p>
                 </div>
             </article>
 

@@ -103,6 +103,9 @@
             gap: 1.5rem;
 
             @include for-narrow-layout {
+                grid-template-columns:  1fr 1fr;
+            }
+            @include for-midium-layout {
                 grid-template-columns: 1fr 1fr 1fr;
             }
 

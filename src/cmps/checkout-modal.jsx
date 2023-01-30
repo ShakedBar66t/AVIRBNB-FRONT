@@ -4,12 +4,14 @@ import { TOGGLE_CHECKOUT_MODAL } from "../store/reducers/user.reducer"
 import { toggleCheckoutModal } from "../store/user.actions"
 import { FaStar } from 'react-icons/fa'
 import { addOrder } from '../store/actions/order.actions'
+import { useNavigate } from "react-router-dom"
 
 
 export function ReserveModal({ order }) {
 
     const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
     console.log('this is order', order)
+    const navigate = useNavigate()
 
 
     return <div className={`checkout-modal ${(isCheckoutModal) ? 'open' : 'closed'}`}>
@@ -43,7 +45,10 @@ export function ReserveModal({ order }) {
                 <div className="flex space-between"><p>Total Nights</p> <p>{order.totalNights}</p></div>
                 <div className="flex space-between"><p>Total Price</p> <p>{'$' + order.totalPrice}</p></div>
             </div>
-            <button onClick={() => addOrder(order).then(res => toggleCheckoutModal())} className="reserve-btn">Reserve now</button>
+            <button onClick={() => addOrder(order).then(res => {
+                toggleCheckoutModal()
+                navigate('/user/trip')
+                })} className="reserve-btn">Reserve now</button>
         </main>
     </div>
     // {return (isCheckoutModal) ? <div className={`checkout-modal ${(isCheckoutModal) ? 'open' : 'closed'}`}>

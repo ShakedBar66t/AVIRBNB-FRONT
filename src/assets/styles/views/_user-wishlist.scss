@@ -6,42 +6,44 @@
         display: grid;
         gap: 20px;
         border-radius: 10px;
-        padding: 10px;
+        // padding: 10px;
         margin-bottom: 10px;
 
         .wishlist-container {
 
             h1 {
-                font-size: 30px;
+                font-size: 32px;
+                color: $clr7;
+                font-weight: 600;
+                font-family: $ff1;
+                padding: 1rem 0;
+
             }
 
             .stay-wishlist {
                 display: grid;
                 margin-top: 20px;
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
                 gap: 30px;
                 justify-content: space-between;
 
                 .liked-stay-preview {
                     cursor: pointer;
 
-                    h1 {
+                    h4 {
                         display: block;
-                        font-size: 1.17em;
-                        margin-block-start: 1em;
-                        margin-block-end: 1em;
-                        margin-inline-start: 0px;
-                        margin-inline-end: 0px;
-                        font-weight: bold;
+                        font-size: 1rem;
+                        font-weight: 600;
                         font-family: $ff1;
+                        color: $clr7;
                     }
 
                     .like-stay-imgs {
                         display: grid;
-                        grid-template: repeat(2, 107px)/2fr 1fr;
+                        grid-template: repeat(2, 150px)/2fr 1fr;
                         border-radius: 20px;
-                        gap: 5px;
-                        margin-bottom: 15px;
+                        gap: 1.5px;
+                        margin-bottom: 10px;
 
                         img {
                             width: 100%;

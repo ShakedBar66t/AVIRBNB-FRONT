@@ -44,12 +44,20 @@ export function StayDetails() {
     const [isReserveModal, setReserveModal] = useState(false)
 
     const dateFormat = "MM-DD-YYYY";
-    // console.log(searchDetails.checkI)
 
-    const startDate = searchDetails.checkIn ? (dayjs(searchDetails.checkIn)) : dayjs("01-02-2023")
-    const endDate = searchDetails.checkOut ? (dayjs(searchDetails.checkOut)) : dayjs("06-02-2023")
+   
+    console.log(searchDetails,'this is total nights')
+    console.log('what????',(searchDetails.checkIn && searchDetails.checkIn !== 'flexible') ? 1 : 2)
+    const startDate = (searchDetails.checkIn && searchDetails.checkIn!=='flexible') ? (dayjs(searchDetails.checkIn)) : dayjs("02-01-2023")
+    const endDate = (searchDetails.checkOut && searchDetails.checkOut!=='flexible') ? (dayjs(searchDetails.checkOut)) : dayjs("02-06-2023")
+    const totalNights = Math.round((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 *24) )
     useEffect(() => {
         loadStay()
+       
+        // order.startDate = startDate
+        // order.endDate = endDate
+        // order.totalNights = totalNights
+        // order.totalPrice = totalNights* stay.price
         if (!user?.isHost) {
             // socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
@@ -64,6 +72,8 @@ export function StayDetails() {
             console.log("ya host", user, stay);
             socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
+        const totalPrice = totalNights * stay.price
+        setOrder({...order,startDate,endDate,totalNights,totalPrice})
         setStay(stay)
     }
 
