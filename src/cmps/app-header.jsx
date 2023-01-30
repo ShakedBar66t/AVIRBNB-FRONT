@@ -13,6 +13,7 @@ import { toggleLoginModal } from '../store/user.actions.js'
 import { TOGGLE_FILTER_MODAL, SET_SEARCH_DETAILS } from '../store/reducers/stay.reducer'
 import { stayService } from '../services/stay.service.js'
 import { SiAirbnb } from 'react-icons/si'
+import { socketService } from '../services/socket.service'
 const { RangePicker } = DatePicker
 
 
@@ -46,7 +47,9 @@ export function AppHeader({ isOn, setIsOn }) {
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 })
     // notifications
-    // const [isNotif, setIsNotif] = useState
+
+    const [isNotif, setIsNotif] = useState(false)
+
     // final filterBy
     const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader)
     // pages locations for classNames
@@ -54,6 +57,21 @@ export function AppHeader({ isOn, setIsOn }) {
     const { id } = params
     const isTripPage = (location.pathname === '/user/trip') ? true : false
     const isHostDashboardPage = (location.pathname === '/host/dashboard') ? true : false
+
+    useEffect(() => {
+        socketService.on('host-add-notification', (notif) => {  ///////host notif
+            setIsNotif(!isNotif)
+        })
+
+        socketService.on('update-order-status', (notif) => { ///// user notif 
+            setIsNotif(!isNotif)
+        })
+
+        return () => {
+            socketService.off('host-add-notification')
+            socketService.off('update-order-status')
+        }
+    }, [])
 
     const countries = [
         { country: 'Flexible', label: `I'm flexible`, image: require('../assets/img/flexible.jpg') },
@@ -274,9 +292,14 @@ export function AppHeader({ isOn, setIsOn }) {
                         {/* <button className='lang-btn '><BiGlobe className='bi-globe' /></button> */}
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span>
+                    <button
+                        onClick={() => {
+                            if (isNotif) setIsNotif(!isNotif)
+                            toggleUserModal()
+                        }}
+                        className='user-info-btn ' ><span><FaBars /></span>
                         <span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}            </span>
-                        <span className='notifcation-dot'></span>
+                        <span className={`notifcation-dot ${isNotif ? 'shown' : ''}`}></span>
                         <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
                             {(!user) && <button onClick={() => {
 
@@ -287,7 +310,7 @@ export function AppHeader({ isOn, setIsOn }) {
                                 toggleUserModal()
                                 toggleLoginModal('signup')
                             }}>Sign up </button>}
-                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications </button>}
+                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications  <span className={`notifcation-dot ${isNotif ? 'shown' : ''}`}></span> </button>}
                             {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
                             {(user) && <button onClick={() => navigate(`/user/wishlist/${user._id}`)} >Wishlists </button>}
                             <hr />

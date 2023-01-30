@@ -17,7 +17,6 @@ export function UserTrips() {
     const navigate = useNavigate()
     useEffect(() => {
         OnloadUserOrders()
-
         socketService.on('update-order-status', onUpdateBySocket)
         return () => {
             socketService.off('update-order-status', onUpdateBySocket)
@@ -39,8 +38,6 @@ export function UserTrips() {
 
         console.log(userOrders, 'socket updatedddd')
     }
-
-    // console.log('trips', userTrips)
 
     return <section className="order-layout">
         <AppHeader />

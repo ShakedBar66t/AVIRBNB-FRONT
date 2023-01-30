@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom"
 export function ReserveModal({ order }) {
 
     const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
-    console.log('this is order', order)
     const navigate = useNavigate()
 
 
@@ -48,7 +47,7 @@ export function ReserveModal({ order }) {
             <button onClick={() => addOrder(order).then(res => {
                 toggleCheckoutModal()
                 navigate('/user/trip')
-                })} className="reserve-btn">Reserve now</button>
+            })} className="reserve-btn">Reserve now</button>
         </main>
     </div>
     // {return (isCheckoutModal) ? <div className={`checkout-modal ${(isCheckoutModal) ? 'open' : 'closed'}`}>
