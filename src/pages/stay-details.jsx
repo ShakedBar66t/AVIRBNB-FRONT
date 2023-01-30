@@ -62,13 +62,15 @@ export function StayDetails() {
             socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
         const totalPrice = totalNights * stay.price
-        setOrder({...order,startDate,endDate,totalNights,totalPrice,})
-       setGuests({...searchDetails.guests})
-    //    console.log('this is guests!!!',guests)
-    //    console.log('this is params!!!',searchDetails.guests)
-        // setStay(stay)
+        setOrder({...order,startDate,endDate,totalNights,totalPrice})
+    //    setGuests({...searchDetails.guests,
+    //     total:searchDetails.guests.Adults+searchDetails.guests.Children+searchDetails.guests.Infants+searchDetails.guests.Pets})
+       console.log('this is guests!!!',guests)
+       console.log('this is params!!!',searchDetails.guests)
+        setStay(stay)
+        // setGuests({...searchDetails.guests})
         console.log(user, '....... test')
-        socketService.emit('test', { userId: user?._id, hostId: stay.host._id })
+        socketService().emit('test', { userId: user?._id, hostId: stay.host._id })
         setStay(stay)
     }
 
@@ -158,6 +160,7 @@ export function StayDetails() {
     function handleGuestsInput(type, value) {
 
         let newGuests = { ...guests }
+        console.log('bitch123',newGuests)
         let addedText = false
         let text = ''
         newGuests[type] += value

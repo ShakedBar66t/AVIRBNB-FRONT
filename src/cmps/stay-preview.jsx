@@ -12,11 +12,11 @@ export function StayPreview({ stay, onToggleLike }) {
     const [isLikedByUser, setIsLikedByUser] = useState(false)
     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
     const user = useSelector(storeState => storeState.userModule.user)
-    const dateStr = useRef('')
+    const dateStr = useRef(prevDateStr())
 
-    useEffect(()=>{
-        prevDateStr()
-    },[])
+    // useEffect(()=>{
+    //     prevDateStr()
+    // },[])
 
     function prevDateStr() {
         const day = 1000 * 60 * 60 * 24
@@ -26,7 +26,8 @@ export function StayPreview({ stay, onToggleLike }) {
         const endDate = startingDate + day * 5
         const endingMonth = utilService.getMonthName(new Date(endDate))
         const endingDay = new Date(endDate).getDate()
-        dateStr.current = `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
+        return `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
+        // dateStr.current = `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
       
     }
 
