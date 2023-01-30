@@ -45,7 +45,7 @@ export function UserSetting({ setPage }) {
                 </div>
             </article>
             <article className="setting-prev" onClick={() => {
-                navigate(`/user/:userId/wishlist`)
+                navigate(`/user/wishlist/${user._id}`)
             }}>
                 <div> <BsHeart /></div>
                 <div>

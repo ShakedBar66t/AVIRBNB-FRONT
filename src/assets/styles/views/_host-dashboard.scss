@@ -30,6 +30,7 @@
     }
 
     .app-header {
+        display: none;
         button:not(.user-modal button) {
             color: $clr6 ;
         }
@@ -54,6 +55,9 @@
                
                 padding: 0 80px;
             }
+        }
+        @include for-midium-layout {
+            display: block;
         }
     }
 
@@ -156,6 +160,37 @@
         margin-bottom: 36px;
     }
 
+    .chart-header{
+        position: relative;
+        .chart-title{
+            font-size: 1.5rem;
+            margin: 1rem 0 1.5rem;
+            text-align: center;
+        }
+
+        div{
+            position: absolute;
+            right: 0;
+        }
+
+        select{
+            width: 20px;
+            border: none;
+            outline: none;
+            background: none;
+            // height: 50px;
+            option{
+                background-color: #484848;
+                color: $clr6;
+
+                &:hover{
+                    background-color:#00A699;
+                }
+            }
+        }
+    }
+
+
     .order-list {
         margin: 30px 0;
         @include for-mobile-layout {
@@ -211,12 +246,17 @@
     small{
 
         margin: 1rem 0;
+        position: absolute;
+        top: 450px;
     }
 
     span{
         border-bottom: 1px solid $clr7;
         font-weight: bold;
+       
     }
+
+  
 }
 
 // .chart-container{

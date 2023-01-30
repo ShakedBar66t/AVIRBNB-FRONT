@@ -244,6 +244,7 @@ export function AppHeader({ isOn, setIsOn }) {
         navigate(`/explore?${queryParams}`)
         dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         handleExpendedModalClick(ev)
+        handelShadowClick()
     }
 
     return (
@@ -285,7 +286,7 @@ export function AppHeader({ isOn, setIsOn }) {
                             }}>Sign up </button>}
                             {(user) && <button >Notifications </button>}
                             {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
-                            {(user) && <button onClick={() => navigate(`/user/${user._id}/wishlist`)} >Wishlists </button>}
+                            {(user) && <button onClick={() => navigate(`/user/wishlist/${user._id}`)} >Wishlists </button>}
                             <hr />
                             {(user) && < button onClick={() => { navigate(`/user/${user._id}`) }}>Account </button>}
                             <button onClick={() => {

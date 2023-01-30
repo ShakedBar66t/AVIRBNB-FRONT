@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -12,8 +12,13 @@ export function StayPreview({ stay, onToggleLike }) {
     const [isLikedByUser, setIsLikedByUser] = useState(false)
     const [currImgUrlIdx, setCurrImgUrlIdx] = useState(0)
     const user = useSelector(storeState => storeState.userModule.user)
+    const dateStr = useRef('')
 
-    function PrevDateStr() {
+    useEffect(()=>{
+        prevDateStr()
+    },[])
+
+    function prevDateStr() {
         const day = 1000 * 60 * 60 * 24
         const startingDate = Date.now() + (utilService.getRandomIntInclusive(0, 14) * day)
         const startingMonth = utilService.getMonthName(new Date(startingDate))
@@ -21,7 +26,8 @@ export function StayPreview({ stay, onToggleLike }) {
         const endDate = startingDate + day * 5
         const endingMonth = utilService.getMonthName(new Date(endDate))
         const endingDay = new Date(endDate).getDate()
-        return <p className="prev-date">{`${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `}</p>
+        dateStr.current = `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
+      
     }
 
     function checkIfLikedByUser() {
@@ -73,11 +79,10 @@ export function StayPreview({ stay, onToggleLike }) {
                 <p className="stay-prev-rating">
                     <span className="fa-solid star" style={{ fontSize: "12px" }}>
                     </span>{" " + stay.avRate}
-                    {/* </span>{" " + stayService.getAvrStayRating(stay.reviews)} */}
                 </p>
             </div >
             <p className="prev-host-name">{"Hosted by " + (stay.host.fullname.slice(0, stay.host.fullname.indexOf(' ')))}</p>
-            <PrevDateStr />
+            <p className="prev-date">{dateStr.current }</p>
             <p className="prev-price"> <span style={{ fontWeight: '600' }}>{'$' + stay.price}</span> night</p>
         </div>
     </article>

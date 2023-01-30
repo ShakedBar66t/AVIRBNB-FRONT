@@ -18,8 +18,7 @@ export function HostDashBoard(){
 
         const [userTrips, setUserTrips] = useState([])
        
-    // const user = userService.getLoggedinUser()
-    // console.log(user,'user')
+    const [year,setYear] = useState(new Date().getFullYear())
     const orders = useSelector(storeState => storeState.orderModule.orders)
     const navigate = useNavigate()
     useEffect(() => {
@@ -49,6 +48,11 @@ export function HostDashBoard(){
         }
     }
 
+    function handleYearInputChange({target}){
+            console.log('this is targer',target.value)
+            setYear(target.value)
+    }
+
     return <section className="host-dashboard ">
         <AppHeader/>
         {(orders?.length) ? <main className="host-dashboard-main">
@@ -67,9 +71,9 @@ export function HostDashBoard(){
                         </div>
                     </div>
                     <div className="stat-prev">
-                        <h3><BsCurrencyDollar/>{orderService.getMonthlyIncome(orders)}</h3>
+                        <h3><BsCurrencyDollar/>{orderService.getAvrIncome(orders)}</h3>
                         <div><p>Average </p>
-                        <p className="monthly">Monthly earning</p>
+                        <p className="monthly">Order earning</p>
                         <p className="salary">Salary</p>
                         </div>
                     </div>
@@ -82,9 +86,20 @@ export function HostDashBoard(){
             </header>
 
             <hr />
-
+                <div className="chart-header">
+                    <div>
+                    <label htmlFor="year-select">{year}</label>
+                <select name="" id="year-select" className="year-select" onChange={handleYearInputChange}>
+                    <option value={2023}>2023</option>
+                    <option value={2022}>2022</option>
+                    <option value={2021}>2021</option>
+                    <option value={2020}>2020</option>
+                </select>
+                    </div>
+                <h4 className="chart-title">{year + ' monthly earnings'}</h4>
+                </div>
                 <div  className="chart-cont">
-            <BarChart orders={orders}/>
+            <BarChart orders={orders} year={year}/>
                 </div>
 
                  <section className="order-list">
@@ -109,7 +124,7 @@ export function HostDashBoard(){
      
         </main> : <section className="no-orders">
 
-            <h2>Hosting tools</h2>
+            <h2 >Hosting tools</h2>
             <div>
                 <h4>You have no registered properties</h4>
             <p>Not a host yet? try registering a property here:</p>

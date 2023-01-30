@@ -20,13 +20,13 @@ export function ReserveModal({ order }) {
         <hr className="full" />
         <main className="checkout-cont">
             <div className="modal-trip-info flex column">
-                <h4>Your trip:</h4>
+                <h4>Your trip</h4>
                 <div className="flex space-between"><p>Check-in</p> <p>{new Date(order.startDate).toLocaleDateString()}</p></div>
                 <div className="flex space-between"><p>Check-out</p> <p>{new Date(order.endDate).toLocaleDateString()}</p></div>
                 <div className="flex space-between"><p>Host name</p> <p>{order.host.fullname}</p></div>
             </div>
             <div className="modal-stay-info">
-                <h4>Stay details:</h4>
+                <h4>Stay details</h4>
                 <div className="modal-stay-info-cont flex" style={{ gap: '8px' }}>
                     <img src={order.stay.imgUrl} alt="" />
                     <div className="flex column space-between" style={{ width: '60%' }}>
@@ -38,7 +38,7 @@ export function ReserveModal({ order }) {
                 </div>
             </div>
             <div className="modal-price-info">
-                <h4>Price details:</h4>
+                <h4>Price details</h4>
                 <div className="flex space-between"><p>Guests</p> <p>{order.guests.total}</p></div>
                 <div className="flex space-between"><p>Total Nights</p> <p>{order.totalNights}</p></div>
                 <div className="flex space-between"><p>Total Price</p> <p>{'$' + order.totalPrice}</p></div>

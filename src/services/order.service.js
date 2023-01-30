@@ -23,6 +23,7 @@ export const orderService = {
     getAvrHostRate, /// front
     getStatusPrec, /// front
     getMonthlyIncome,
+    getAvrIncome,
 }
 window.cs = orderService
 
@@ -46,24 +47,20 @@ window.cs = orderService
 // }
 
 
-function getMonthlyIncome(orders) {
 
-    // const orders = useSelector(storeState => storeState.orderModule.orders)
-    // const month = 1000 * 60 * 60 * 24 * 30
 
-    // const filteredOrders = orders.filter(order => {
-    //     return (order.reservedAt + month > Date.now() && order.status === 'approved')
-    // })
-    // const monthlyIncome = filteredOrders.reduce((acc, order) => {
-    //     return acc += order.totalPrice
-    // }, 0)
-    // return monthlyIncome
+function getMonthlyIncome(orders,year) {
+
     const months = ["January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October", "November", "December"]
 
-
-   const avrEarnings = months.map((month,idx)=>{
-      const filteredOrders =  orders.filter(order=>new Date(order.startDate).getMonth() === idx)
+    const currMonthIdx =  new Date().getMonth()
+     const lastHalfYear = months.splice(currMonthIdx-5,6)
+    console.log(new Date(orders[0].startDate).getFullYear(),'year',year)
+    //  
+   const avrEarnings = lastHalfYear.map((month,idx)=>{
+      const filteredOrders =  orders.filter(order=>new Date(order.startDate).getMonth() === idx && 
+      order.status==='approved'&& new Date(order.startDate).getFullYear() === (+year) )
     return filteredOrders.reduce((acc,order)=>{
         return acc += order.totalPrice
       },0)
@@ -71,9 +68,9 @@ function getMonthlyIncome(orders) {
 
     console.log('avrearning',avrEarnings)
     return avrEarnings
-
     
 }
+
 // function getMonthlyIncome(orders) {
 //     const month = 1000 * 60 * 60 * 24 * 30
 
@@ -96,6 +93,20 @@ function getTotalIncome(orders) {
         totalIncome = (totalIncome/1000).toFixed(2) + 'k'
     }
     return totalIncome
+}
+
+function getAvrIncome(orders) {
+    const filteredOrders = orders.filter(order => (order.status === 'approved'))
+    let totalIncome = filteredOrders.reduce((acc, order) => {
+        return acc += order.totalPrice
+    }, 0)
+
+    let avrIncome = totalIncome / filteredOrders.length
+
+    if(avrIncome>1000){
+        avrIncome = (avrIncome/1000).toFixed(2) + 'k'
+    }
+    return avrIncome
 }
 
 function getTotalNights(orders) {
@@ -274,6 +285,7 @@ async function query(user = userService.getLoggedinUser()) { ////////filter at t
         }
         console.log('filtersd orders', orders)
     }
+    orders = orders.sort((a ,b)=>b.reservedAt - a.reservedAt)
     return orders
 }
 
