@@ -241,6 +241,7 @@ export function AppHeader() {
         &total=${guests.Total}&minPrice='&maxPrice='&bedrooms='&beds='&type='&amenities=''`
         navigate(`/explore?${queryParams}`)
         handleExpendedModalClick(ev)
+        handelShadowClick()
     }
 
     return (

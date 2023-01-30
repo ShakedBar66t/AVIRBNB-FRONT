@@ -8,17 +8,24 @@
     padding-top: 48px !important;
     padding-bottom: 48px !important;
     border-top: 1px solid #dddddd;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     background-color: $clr6;
     font-family: cereal;
     padding-block: 10px;
-    font-size: 1.125em;
+    font-size: 0.875rem;
+
+    @include for-narrow-layout {
+        font-size: 1;
+    }
+    @include for-midium-layout {
+        font-size: 1.125em;
+    }
 
     .footer-options {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
 
         h6 {
             font-weight: 100;

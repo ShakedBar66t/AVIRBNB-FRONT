@@ -11,6 +11,7 @@
     top: 90px;
     z-index: 0;
     display: grid;
+    // margin-right: 10px;
     grid-template-columns: 1fr 90px;
     gap: 24px;
     background-color: white;
@@ -169,6 +170,7 @@
         align-items: center;
         margin-top: 10px;
         padding-top: 5px;
+        padding-right: 12px;
         transition: color 0.5s ease;
         color: $clr7;
 
@@ -206,7 +208,8 @@
         grid-template-columns: 1fr 90px;
         gap: 24px;
         background-color: white;
-        padding: 0 24px;
+        padding: 0 24px 0 12px;
+       
 
         @include for-narrow-layout {
             padding: 0 40px;
@@ -274,6 +277,7 @@
         font-weight: 600;
         grid-column: 1;
         grid-row: 1;
+        
 
         .carousel-inner {
             position: relative;
@@ -284,6 +288,7 @@
             padding: 0;
             justify-items: start;
             gap: 36px;
+           
         }
 
         .btn-container {

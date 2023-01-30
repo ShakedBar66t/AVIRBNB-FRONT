@@ -11,7 +11,7 @@ export function MoblieFooter(){
     const user = useSelector(storeState => storeState.userModule.user)
     console.log(user)
     const navigate = useNavigate()
-
+    if(!user) return
     return <section className="mobile-footer">
         <nav className="flex">
                 <NavLink to={'/explore'}>

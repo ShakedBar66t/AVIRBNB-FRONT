@@ -71,7 +71,7 @@ export function LabelsFilter() {
 
     function IsLastNextClick() {
         if ((currentIndex * 100) === ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400) + 400)) {
-            return ((totalWidth - displayedWidth) + 70)
+            return ((totalWidth - displayedWidth) + 30)
         }
         else {
             return (currentIndex * 100)
@@ -104,7 +104,7 @@ export function LabelsFilter() {
                             <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft style={{marginTop: '2.5px', paddingRight: '2.4px'}} /></button>
                         </div> : ''}
 
-                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
+                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 30))) && <div className='btn-container next'>
                             <button className='next-btn' onClick={handleNext}> <BiChevronRight style={{marginTop: '2.5px', paddingRight: '2.4px'}} /></button>
 
                         </div>}
