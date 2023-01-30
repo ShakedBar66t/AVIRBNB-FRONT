@@ -13,7 +13,7 @@ export function UserSetting({ setPage }) {
     const navigate = useNavigate()
     return <div className='account-setting secondary-container'>
         <h1>Account</h1>
-        <h2> <span className='user-fullname'>{user.fullname}</span>, {user.email} · <span style={{textDecoration: 'underline', fontWeight: '600', cursor: 'pointer'}} onClick={() => {
+        <h2> <span className='user-fullname'>{user.fullname}</span>, {user.email} · <span style={{ textDecoration: 'underline', fontWeight: '600', cursor: 'pointer' }} onClick={() => {
             setPage('edit')
         }} >Go to profile</span></h2>
         <div className='setting-cards-cont'>
@@ -53,7 +53,9 @@ export function UserSetting({ setPage }) {
                     <p>The places you want to go most and have new experiences</p>
                 </div>
             </article>
-            <article className="setting-prev">
+            <article className="setting-prev" onClick={() => {
+                navigate(`/user/notification/${user._id}`)
+            }}>
 
                 <div> <BsMegaphone /></div>
                 <div>

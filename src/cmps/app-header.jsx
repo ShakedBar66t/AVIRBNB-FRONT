@@ -45,7 +45,8 @@ export function AppHeader({ isOn, setIsOn }) {
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
-
+    // notifications
+    // const [isNotif, setIsNotif] = useState
     // final filterBy
     const [filterBy, setFilterBy] = useState(stayService.getDefaultFilterForHeader)
     // pages locations for classNames
@@ -273,7 +274,9 @@ export function AppHeader({ isOn, setIsOn }) {
                         {/* <button className='lang-btn '><BiGlobe className='bi-globe' /></button> */}
                     </div>
 
-                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span><span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}</span>
+                    <button onClick={toggleUserModal} className='user-info-btn ' ><span><FaBars /></span>
+                        <span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}            </span>
+                        <span className='notifcation-dot'></span>
                         <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
                             {(!user) && <button onClick={() => {
 
@@ -284,7 +287,7 @@ export function AppHeader({ isOn, setIsOn }) {
                                 toggleUserModal()
                                 toggleLoginModal('signup')
                             }}>Sign up </button>}
-                            {(user) && <button >Notifications </button>}
+                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications </button>}
                             {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
                             {(user) && <button onClick={() => navigate(`/user/wishlist/${user._id}`)} >Wishlists </button>}
                             <hr />
@@ -327,7 +330,7 @@ export function AppHeader({ isOn, setIsOn }) {
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className='mobile-filter-modal full'>
+            {/* <div className='mobile-filter-modal full'>
                 <header className='mobile-filter-modal-header'>
                     <div className='exit-btn'>
                         X
@@ -341,7 +344,7 @@ export function AppHeader({ isOn, setIsOn }) {
 
                             <input className='mobile-location-input'></input>
                         </label>
-                        {/* <div className='mobile-location-images'>
+                        <div className='mobile-location-images'>
                             {countries.map((place, index) => {
                                 if (index > 3) return
                                 return <div key={index} className='mobile-card' onClick={(ev) => handleInputChange(ev, place.label)}>
@@ -351,7 +354,7 @@ export function AppHeader({ isOn, setIsOn }) {
                                     </div>
                                 </div>
                             })}
-                        </div> */}
+                        </div>
                     </div>
                     <div className='mobile-filter-modal dates'>
 
@@ -369,7 +372,7 @@ export function AppHeader({ isOn, setIsOn }) {
                     </div>
 
                 </footer>
-            </div>
+            </div> */}
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' >
                     <span name='location' onClick={() => { setLocationInput('') }} className={`clear-value-btn input ${locationInput ? 'shown' : ''}`}><IoCloseSharp /></span>
