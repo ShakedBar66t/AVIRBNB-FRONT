@@ -47,7 +47,7 @@ export function StayDetails() {
 
    
     console.log(searchDetails,'this is total nights')
-    console.log('what????',(searchDetails.checkIn && searchDetails.checkIn !== 'flexible') ? 1 : 2)
+ 
     const startDate = (searchDetails.checkIn && searchDetails.checkIn!=='flexible') ? (dayjs(searchDetails.checkIn)) : dayjs("02-01-2023")
     const endDate = (searchDetails.checkOut && searchDetails.checkOut!=='flexible') ? (dayjs(searchDetails.checkOut)) : dayjs("02-06-2023")
     const totalNights = Math.round((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 *24) )
@@ -73,8 +73,11 @@ export function StayDetails() {
             socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
         const totalPrice = totalNights * stay.price
-        setOrder({...order,startDate,endDate,totalNights,totalPrice})
-        setStay(stay)
+        setOrder({...order,startDate,endDate,totalNights,totalPrice,})
+    //    setGuests({})
+    //    console.log('this is guests!!!',guests)
+    //    console.log('this is params!!!',searchDetails.guests)
+        // setStay(stay)
     }
 
     const guestsTypes = [
@@ -172,21 +175,34 @@ export function StayDetails() {
             text = 'Add guests'
         } else {
             if (newGuests.Adults + newGuests.Children > 0) {
-                text += `${newGuests.Adults + newGuests.Children} guests`
+                text += `${newGuests.Adults + newGuests.Children} guest`
+                if(newGuests.Adults + newGuests.Children > 1){
+
+                    text += 's'
+                }
                 addedText = true
             }
             if (newGuests.Pets > 0) {
                 if (addedText) {
                     text += ', '
                 }
-                text += ` ${newGuests.Pets} pets`
+                text += ` ${newGuests.Pets} pet`
+                if(newGuests.Pets > 1){
+                    text += 's'
+                }
+               
                 addedText = true
             }
             if (newGuests.Infants > 0) {
                 if (addedText) {
                     text += ', '
                 }
-                text += ` ${newGuests.Infants} infants`
+
+                text += ` ${newGuests.Infants} infant`
+                if(newGuests.Infants > 1){
+                    text += 's'
+                }
+
             }
         }
         setLowerGuestsText(text)

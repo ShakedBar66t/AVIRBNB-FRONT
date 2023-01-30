@@ -73,5 +73,5 @@ export function BarChart({orders,year}) {
     ],
   
   };
-  return <Bar options={options} data={data} height="110vw" />;
+  return <Bar options={options} data={data} height="120vw" />;
 }
