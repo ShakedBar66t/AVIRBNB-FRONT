@@ -28,25 +28,19 @@ export function StayIndex() {
     }, [searchParams])
 
     useEffect(() => {
-        if (user?.isHost) {
-            console.log("the user is host");
-            socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, user._id)
-        }
-        else {
-            return
-        }
+        if (user) socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, user._id)
     }, [user])
 
-    useEffect(() => {
-        socketService.on('chat-add-notif', (order) => {
-            console.log(order)
-        })
-        return () => {
-            socketService.off('chat-add-notif', (order) => {
-                console.log(order)
-            })
-        }
-    }, [user])
+    // useEffect(() => {
+    //     socketService.on('chat-add-notif', (order) => {
+    //         console.log(order)
+    //     })
+    //     return () => {
+    //         socketService.off('chat-add-notif', (order) => {
+    //             console.log(order)
+    //         })
+    //     }
+    // }, [user])
 
     async function onRemoveStay(stayId) {
         try {

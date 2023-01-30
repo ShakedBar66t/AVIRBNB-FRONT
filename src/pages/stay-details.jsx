@@ -59,11 +59,8 @@ export function StayDetails() {
 
     async function loadStay() {
         const stay = await stayService.getById(stayId)
-        console.log(user);
-        if (!user?.isHost) {
-            console.log("ya host", user, stay);
-            socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
-        }
+        console.log(user, '....... test')
+        socketService.emit('test', { userId: user._id, hostId: stay.host._id })
         setStay(stay)
     }
 
