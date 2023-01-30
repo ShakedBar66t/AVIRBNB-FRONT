@@ -16,7 +16,7 @@ import { SiAirbnb } from 'react-icons/si'
 const { RangePicker } = DatePicker
 
 
-export function AppHeader() {
+export function AppHeader({ isOn, setIsOn }) {
 
     const params = useParams()
     const location = useLocation()
@@ -151,13 +151,12 @@ export function AppHeader() {
             }
         }
         setFilterBy({ ...filterBy, guests })
-        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
+        // dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         setLowerGuestsText(text)
     }
 
     function handleExpendedModalClick({ target }) {
         const name = target.name
-        console.log(name)
         if (!searchModal) setSearchModal(!searchModal)
         if (!searchModalExpended) setSearchModalExpended(!searchModalExpended)
         switch (name) {
@@ -211,22 +210,25 @@ export function AppHeader() {
             setLocationInput(target.value)
             setFilterBy({ ...filterBy, location: target.value })
         }
-        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
+        // dispatch({ type: SET_SEARCH_DETAILS, filterBy })
     }
 
     function handleDateChange(values) {
         const checkIn = new Date(values[0].$d)
         const checkOut = new Date(values[1].$d)
-        const checkInMonth = checkIn.toLocaleString('en-US', { month: 'short' })
-        const checkInDay = checkIn.getDate()
-        console.log(checkInDay)
-        const checkOutMonth = checkOut.toLocaleString('en-US', { month: 'short' })
-        const checkOutDay = checkOut.getDate()
-        const formattedCheckIn = `${checkInMonth} ${checkInDay}`
-        const formattedCheckOut = `${checkOutMonth} ${checkOutDay}`
-        setFilterBy({ ...filterBy, checkIn: checkIn, checkOut: checkOut })
+        const formattedCheckIn = checkIn.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        const formattedCheckOut = checkOut.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        setFilterBy({ ...filterBy, checkIn: formattedCheckIn, checkOut: formattedCheckOut })
         setCheckInOutDates({ checkIn: formattedCheckIn, checkOut: formattedCheckOut })
-        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
+        // dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         const dayInMilliseconds = 1000 * 60 * 60 * 24
         const dateStart = values[0].$d.getTime()
         const dateEnd = values[1].$d.getTime()
@@ -240,6 +242,7 @@ export function AppHeader() {
         &adults=${guests.Adults}&infants=${guests.Infants}&children=${guests.Children}&pets=${guests.Pets}
         &total=${guests.Total}&minPrice='&maxPrice='&bedrooms='&beds='&type='&amenities=''`
         navigate(`/explore?${queryParams}`)
+        dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         handleExpendedModalClick(ev)
     }
 
@@ -323,29 +326,48 @@ export function AppHeader() {
                 </div>
             </nav>
             <div className={`header-opened full  ${searchModal ? 'open' : ''}`}></div>
-            <div className='mobile-filter-modal-wrapper'>
-                <div className='mobile-filter-modal'>
-                    <header className='mobile-filter-modal-header'>
-                        <div className='exit-btn'>
+            <div className='mobile-filter-modal full'>
+                <header className='mobile-filter-modal-header'>
+                    <div className='exit-btn'>
+                        X
+                    </div>
 
-                        </div>
-                        {/* <div className='header-btns'>
-                            <span> Stays</span>
-                            <span> Experiences</span>
+                </header>
+                <div className='mobile-filters-container'>
+                    <div className='mobile-filter-modal locataion' >
+                        <h1 className='mobile-location-title'> Where to ?</h1>
+                        <label className='mobile-input-label'>
+
+                            <input className='mobile-location-input'></input>
+                        </label>
+                        {/* <div className='mobile-location-images'>
+                            {countries.map((place, index) => {
+                                if (index > 3) return
+                                return <div key={index} className='mobile-card' onClick={(ev) => handleInputChange(ev, place.label)}>
+                                    <div className='mobile-card-inner'>
+                                        <img src={place.image} />
+                                        <span>{place.label}</span>
+                                    </div>
+                                </div>
+                            })}
                         </div> */}
-                    </header>
-                    <div className='mobile-filters-container'>
-                        <div className='mobile-locataion-filter'>
+                    </div>
+                    <div className='mobile-filter-modal dates'>
 
-                        </div>
-                        <div className='mobile-dates-filter'>
+                    </div>
+                    <div className='mobile-filter-modal guests'>
 
-                        </div>
-                        <div className='mobile-guests-filter'>
-
-                        </div>
                     </div>
                 </div>
+                <footer className='mobile-filter-modal-footer'>
+                    <div className='clear-all-btn'>
+                        Clear all
+                    </div>
+                    <div className='search-btn'>
+                        Search
+                    </div>
+
+                </footer>
             </div>
             <div className={`filter-modal ${searchModal ? 'open' : ''} ${searchModalExpended ? 'expended' : ''}`}>
                 <div className='filter-modal-left-btns' >

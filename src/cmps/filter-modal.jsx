@@ -164,6 +164,7 @@ export function FilterModal() {
                     </div>
 
                     <div className='type-filter-main-container'>
+                        <div className='titles-gap'></div>
                         <span className='filter-type-title'>Type of place</span>
                         <div className='type-filter-sub-container'>
                             {placeTypes.map(({ name, label, desc }) => (

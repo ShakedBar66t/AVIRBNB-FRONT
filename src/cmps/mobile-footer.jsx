@@ -7,38 +7,38 @@ import { BiMessageAlt } from 'react-icons/bi'
 import { useSelector } from "react-redux"
 import { toggleLoginModal } from "../store/user.actions"
 
-export function MoblieFooter(){
+export function MoblieFooter() {
     const user = useSelector(storeState => storeState.userModule.user)
     console.log(user)
     const navigate = useNavigate()
-
+    if (!user) return
     return <section className="mobile-footer">
         <nav className="flex">
-                <NavLink to={'/explore'}>
-                    <div><GoSearch/></div>
-                    <div>Explore</div>
-                </NavLink>
-                <NavLink to={`user/${user._id}/wishlist`}>
-                    <div><BsHeart/></div>
-                    <div>Wishlist</div>
-                </NavLink>
-                <NavLink to={'/user/trip'}>
-                    <div><SiAirbnb/></div>
-                    <div>Trips</div>
-                </NavLink>
-                <NavLink to={'/notifications'}>
-                    <div><BiMessageAlt/></div>
-                    <div>Inbox</div>
-                </NavLink>
-                <NavLink to={(user) ? `/user/${user._id}` : '#'}>
-                    <div><CgProfile/></div>
-                    <div>{(user) ? 'Profile' : 'Login'} </div>
-                    {/* <div onClick={(user) ? navigate('/host') : ()=>toggleLoginModal()}>{(user) ? 'Profile' : 'Login'} </div> */}
-                </NavLink>
+            <NavLink to={'/explore'}>
+                <div><GoSearch /></div>
+                <div>Explore</div>
+            </NavLink>
+            <NavLink to={`user/${user._id}/wishlist`}>
+                <div><BsHeart /></div>
+                <div>Wishlist</div>
+            </NavLink>
+            <NavLink to={'/user/trip'}>
+                <div><SiAirbnb /></div>
+                <div>Trips</div>
+            </NavLink>
+            <NavLink to={'/notifications'}>
+                <div><BiMessageAlt /></div>
+                <div>Inbox</div>
+            </NavLink>
+            <NavLink to={(user) ? `/user/${user._id}` : '#'}>
+                <div><CgProfile /></div>
+                <div>{(user) ? 'Profile' : 'Login'} </div>
+                {/* <div onClick={(user) ? navigate('/host') : ()=>toggleLoginModal()}>{(user) ? 'Profile' : 'Login'} </div> */}
+            </NavLink>
 
-                {/* <NavLink to={'/explore'}>explore 🔍</NavLink>
+            {/* <NavLink to={'/explore'}>explore 🔍</NavLink>
                 <NavLink to={'/explore'}>explore 🔍</NavLink> */}
-                
+
         </nav>
     </section>
 }

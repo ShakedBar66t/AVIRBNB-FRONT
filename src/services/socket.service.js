@@ -1,7 +1,7 @@
 import io from 'socket.io-client'
 import { userService } from './user.service'
 
-export const SOCKET_EVENT_REGISTER_USER_TO_ROOM = 'chat-register-user-to-room'
+export const SOCKET_EVENT_REGISTER_USER_TO_ROOM = 'chat-register-users-to-channel'
 export const SOCKET_EVENT_REGISTER_HOST_TO_ROOM = 'chat-register-host-to-room'
 export const SOCKET_EMIT_SEND_RESERVATION_DETAILS = 'chat-send-reservation-details'
 export const SOCKET_EMIT_SEND_HOST_NOTIFICATION = 'chat-sent-host-notification'

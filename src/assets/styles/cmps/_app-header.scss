@@ -176,7 +176,7 @@
         display: flex;
         flex: 1 0 140px;
         justify-content: flex-end;
-        padding: 5px 5px 5px 12px;
+        padding: 5px 0px 5px 12px;
         height: 100%;
     }
 
@@ -231,6 +231,10 @@
         color: $clr6;
     }
 
+}
+
+.mobile-filter-modal {
+    display: none;
 }
 
 @media (max-width: $narrow-breakpoint) {
@@ -322,7 +326,101 @@
             }
         }
     }
+
+
+    .mobile-filter-modal {
+        display: block;
+        z-index: 10;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(211, 211, 211, 0.76);
+        display: flex;
+        // align-items: center;
+        padding: 0 10px;
+        flex-direction: column;
+
+        .mobile-filter-modal-header {
+            height: 60px;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .exit-btn {
+                border: $bs1;
+                background-color: $clr6;
+                font-size: 14px;
+                height: 32px;
+                width: 32px;
+                border-radius: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .mobile-filters-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+
+        }
+
+        .mobile-filter-modal {
+            border-radius: 25px;
+            box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
+            padding: 24px;
+
+            &.location {
+                width: 100%;
+                height: 320px;
+                // display: flex;
+                justify-content: space-evenly;
+                padding: 20px;
+                border: $bs1;
+
+
+                .mobile-location-input {
+                    border: $bs1;
+                    margin-top: 20px;
+                    height: 58px;
+                    width: 100%;
+                }
+            }
+
+            .mobile-location-images {
+                margin-top: 20px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 15px;
+                height: 162px;
+                width: 100%;
+
+                & .mobile-card {}
+
+                & .mobile-card-inner {
+                    font-family: $ff1;
+                    font-weight: 200;
+
+                    & img {
+                        border-radius: 10px;
+
+                        &:hover {
+                            border: $bs2;
+                        }
+                    }
+                }
+            }
+
+            &.dates {
+                width: 100%;
+                // height: ;
+            }
+        }
+    }
+
 }
+
 
 
 .header-opened {

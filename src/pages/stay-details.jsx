@@ -25,7 +25,7 @@ import { LongTxt } from "../cmps/long-txt"
 import { SizeContextProvider } from "antd/es/config-provider/SizeContext"
 import { ReserveModal } from "../cmps/checkout-modal"
 import { socketService } from "../services/socket.service"
-import { SOCKET_EVENT_REGISTER_HOST_TO_ROOM } from '../services/socket.service'
+import { SOCKET_EVENT_REGISTER_HOST_TO_ROOM, SOCKET_EVENT_REGISTER_USER_TO_ROOM } from '../services/socket.service'
 const { RangePicker } = DatePicker
 const dayjs = require("dayjs");
 
@@ -44,17 +44,26 @@ export function StayDetails() {
     const [isReserveModal, setReserveModal] = useState(false)
 
     const dateFormat = "MM-DD-YYYY";
+    // console.log(searchDetails.checkI)
 
     const startDate = searchDetails.checkIn ? (dayjs(searchDetails.checkIn)) : dayjs("01-02-2023")
     const endDate = searchDetails.checkOut ? (dayjs(searchDetails.checkOut)) : dayjs("06-02-2023")
     useEffect(() => {
         loadStay()
-
+        if (!user?.isHost) {
+            // socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
+        }
+        else {
+        }
     }, [])
 
     async function loadStay() {
         const stay = await stayService.getById(stayId)
-        socketService.emit(SOCKET_EVENT_REGISTER_HOST_TO_ROOM, stay?.host._id)
+        console.log(user);
+        if (!user?.isHost) {
+            console.log("ya host", user, stay);
+            socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
+        }
         setStay(stay)
     }
 
@@ -192,7 +201,7 @@ export function StayDetails() {
                 stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avRate: stay.avRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
-            console.log('new order!!!!!!!!', newOrder)
+            // console.log('new order!!!!!!!!', newOrder)
             setOrder(newOrder)
             toggleCheckoutModal()
             // setReserveModal(prev => !prev)
@@ -291,16 +300,13 @@ export function StayDetails() {
                                 <h4><span>{'$ ' + stay.price} </span> night</h4>
                                 <div className="review-totals">
                                     <FaStar />
-                                    {/* <h2><FaStar />4.9·<span>20 reviews</span></h2> */}
                                     <span>{stay.avRate} ·</span>
-                                    {/* <span>{stayService.getAvrStayRating(stay.reviews) === NaN ? stayService.getAvrStayRating(stay.reviews) : 'No reviews yet'} ·</span> */}
                                     <a href="">{stay.reviews.length} reviews</a>
                                 </div>
                             </header>
                             <div className="order-input">
                                 <div className="date-input-header"><span>CHECK-IN</span><span>CHECKOUT</span></div>
                                 <div className="date-input">
-                                    {/* <input type="text" /> */}
                                     <RangePicker popupClassName='details-range-picker'
                                         format={dateFormat}
                                         defaultValue={[startDate, endDate]}
@@ -315,7 +321,7 @@ export function StayDetails() {
                                             const dateEnd = values[1].$d.getTime()
                                             const daysCount = Math.round((dateEnd - dateStart) / (day))
                                             const totalPrice = daysCount * stay.price
-                                            // console.log('valuesss!!!!', totalPrice)
+                                            console.log('valuesss!!!!', totalPrice)
                                             // setSelectedRange(dates.map((date) => dayjs(date).format(dateFormat)))
                                             setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
                                         }} />
@@ -405,7 +411,7 @@ export function StayDetails() {
                     </span>
                     <p>Communication</p>
                     <span className="progress-container">
-                        <progress max="5" value="3.6666666666666665">
+                        <progress max="5" value="4.6666666666666665">
                         </progress>
                         3.7
                     </span>
