@@ -74,7 +74,7 @@ export function StayDetails() {
         }
         const totalPrice = totalNights * stay.price
         setOrder({...order,startDate,endDate,totalNights,totalPrice,})
-    //    setGuests({})
+       setGuests({...searchDetails.guests})
     //    console.log('this is guests!!!',guests)
     //    console.log('this is params!!!',searchDetails.guests)
         // setStay(stay)
