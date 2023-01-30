@@ -19,17 +19,17 @@ import { useSelector } from "react-redux"
 import { AppHeader } from "../cmps/app-header"
 import { AiFillFlag } from "react-icons/ai"
 import { ColorForButton } from "../cmps/btn-color"
-import { LongTxt } from "../cmps/long-txt"
+import moment from "moment";
 import { useStepContext } from "@mui/material"
+import { LongTxt } from "../cmps/long-txt"
 import { SizeContextProvider } from "antd/es/config-provider/SizeContext"
 import { ReserveModal } from "../cmps/checkout-modal"
 import { socketService } from "../services/socket.service"
 import { SOCKET_EVENT_REGISTER_HOST_TO_ROOM } from '../services/socket.service'
 const { RangePicker } = DatePicker
-
+const dayjs = require("dayjs");
 
 export function StayDetails() {
-
 
     const params = useParams()
     const { stayId } = params
@@ -42,8 +42,11 @@ export function StayDetails() {
     const searchDetails = useSelector(storeState => storeState.stayModule.searchDetails)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [isReserveModal, setReserveModal] = useState(false)
-    // const startDate = searchDetails.checkIn
-    // const endDate = searchDetails.checkIn
+
+    const dateFormat = "MM-DD-YYYY";
+
+    const startDate = searchDetails.checkIn ? (dayjs(searchDetails.checkIn)) : dayjs("01-02-2023")
+    const endDate = searchDetails.checkOut ? (dayjs(searchDetails.checkOut)) : dayjs("06-02-2023")
     useEffect(() => {
         loadStay()
 
@@ -186,7 +189,7 @@ export function StayDetails() {
             const newOrder = {
                 ...order, guests: guests, reservedAt: Date.now(),
                 host: { _id: stay.host._id, fullname: stay.host.fullname },
-                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avrRate: stay.avRate },
+                stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avRate: stay.avRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
             console.log('new order!!!!!!!!', newOrder)
@@ -299,7 +302,8 @@ export function StayDetails() {
                                 <div className="date-input">
                                     {/* <input type="text" /> */}
                                     <RangePicker popupClassName='details-range-picker'
-                                        // defaultValue={[startDate, endDate]}
+                                        format={dateFormat}
+                                        defaultValue={[startDate, endDate]}
                                         onChange={(values) => {
                                             // const value1 = moment(values[0]).format('DD-MM-YYYY')
                                             const time1 = values[0].$d
@@ -312,6 +316,7 @@ export function StayDetails() {
                                             const daysCount = Math.round((dateEnd - dateStart) / (day))
                                             const totalPrice = daysCount * stay.price
                                             // console.log('valuesss!!!!', totalPrice)
+                                            // setSelectedRange(dates.map((date) => dayjs(date).format(dateFormat)))
                                             setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
                                         }} />
                                 </div>
@@ -319,7 +324,6 @@ export function StayDetails() {
                                     <small>GUESTS</small>
                                     <p>
                                         {lowerGuestsText}
-
                                     </p>
                                     <button className="guests-btn " type="button" onClick={() => ToggleGuestModal(prev => !prev)}>
                                         {(isGuestModal) ? <GrUp /> : <GrDown />}</button>
@@ -357,7 +361,7 @@ export function StayDetails() {
                                 </div>
                                 <div className="total">
                                     <p>Total</p>
-                                    <p>{order.totalPrice}$</p>
+                                    <p>${order.totalPrice}</p>
                                 </div>
                             </div>
                         </form >
@@ -381,8 +385,6 @@ export function StayDetails() {
                     </div >
                 </header >
                 <div className="rating">
-
-
                     <p>Cleanliness</p>
                     <span className="progress-container">
                         <progress max="5" value="4.966666666666667">

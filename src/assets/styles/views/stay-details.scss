@@ -1096,7 +1096,7 @@ p {
 .guests-modal {
     position: absolute;
     background-color: #fff;
-    top: 34.75%;
+    top: 39.5%;
     width: 87%;
     z-index: 5;
     box-shadow: 0px 4px 14px 0px rgb(72 72 72 / 40%);
@@ -1105,6 +1105,7 @@ p {
     height: 410px;
     display: flex;
     padding: 16px;
+    left: 43px;
     flex-direction: column;
 
     .guests-type-input {
@@ -1191,8 +1192,6 @@ p {
         }
 
     }
-
-
 }
 
 .ant-picker-header-super-next-btn,
@@ -1222,7 +1221,7 @@ p {
 }
 
 .ant-picker.ant-picker-range.css-dev-only-do-not-override-1n7nwfa {
-    border-radius: 15px;
+    width: 100%;
 
     &.ant-picker-focused {
         outline: none !important;
@@ -1238,8 +1237,6 @@ p {
         padding-left: 10px;
         border-right: 1px solid black;
     }
-
-    width: 100%;
 }
 
 .ant-picker .ant-picker-range .css-dev-only-do-not-override-1n7nwfa {}
@@ -1302,6 +1299,10 @@ p {
     border: none !important;
 }
 
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+    width: 40px;
+}
+
 .ant-picker .ant-picker-range> :first-child {
     // border: 1px solid black;
 }
@@ -1312,14 +1313,19 @@ p {
 
 .details-range-picker {
     position: relative !important;
-    right: 0;
     display: flex;
     justify-content: flex-end;
-    left: 0 !important;
     z-index: 10;
-    transition: 0 !important;
-    width: 800px;
+    transition: none !important;
+    padding: 0 20px;
+    // width: 800px;
     margin: auto !important;
+
+    :where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+        height: 40px !important;
+        width: 42px !important;
+        background-color: rgba(211, 211, 211, 0.432);
+    }
 
     .ant-picker-panel-container {
         width: 700px;

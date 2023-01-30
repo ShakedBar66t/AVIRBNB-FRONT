@@ -4,6 +4,7 @@ import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 import { httpService } from './http.service.js'
 import { months } from 'moment/moment.js'
+import { useSelector } from 'react-redux'
 
 const ORDER_STORAGE_KEY = 'orderDB'
 
@@ -46,6 +47,8 @@ window.cs = orderService
 
 
 function getMonthlyIncome(orders) {
+
+    // const orders = useSelector(storeState => storeState.orderModule.orders)
     // const month = 1000 * 60 * 60 * 24 * 30
 
     // const filteredOrders = orders.filter(order => {
@@ -67,7 +70,7 @@ function getMonthlyIncome(orders) {
     })
 
     console.log('avrearning',avrEarnings)
-    return 1
+    return avrEarnings
 
     
 }

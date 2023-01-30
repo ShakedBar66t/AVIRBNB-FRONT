@@ -999,17 +999,17 @@
 
 .header-calender-dropdown {
     position: relative !important;
-    right: 0;
+    // right: 0;
     display: flex;
     justify-content: center;
-    left: 0 !important;
+    // left: 190px !important;
     z-index: 10;
-    transition: 0 !important;
-    width: 800px;
-    margin: auto !important;
+    transition: none !important;
+    // width: 835px;
+    margin: 25px;
 
     .ant-picker-panel-container {
-        width: 780px;
+        width: 800px;
         box-shadow: none;
 
         .ant-picker-content {
@@ -1030,7 +1030,7 @@
 
     .ant-picker-panels {
         justify-content: space-between;
-        width: 700px;
+        width: 780px;
 
     }
 
@@ -1056,11 +1056,12 @@
 
     .ant-picker-panels {
         width: 780px;
-        padding: 0 27px;
+        // padding: 0 27px;
     }
 
     .ant-picker-header {
         border: none;
+        width: 345px;
     }
 
     .ant-picker-header-super-prev-btn,
@@ -1075,6 +1076,15 @@
         font-family: $ff1;
     }
 
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-panel-container .ant-picker-panels {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-picker-dropdown .ant-picker-panel-container .ant-picker-panels {
+    // background-color: red;
 }
 
 ////////// global classes
