@@ -13,9 +13,6 @@ import { loadOrders } from "../store/actions/order.actions";
 
 export function UserTrips() {
 
-    const [userTrips, setUserTrips] = useState([])
-    // const user = userService.getLoggedinUser()
-    // console.log(user,'user')
     const orders = useSelector(storeState => storeState.orderModule.orders)
     const navigate = useNavigate()
     useEffect(() => {
@@ -25,16 +22,11 @@ export function UserTrips() {
         return () => {
             socketService.off('update-order-status', onUpdateBySocket)
         }
-
     }, [])
-
-
-
 
     async function OnloadUserOrders() {
         try {
             const currUserOrders = await loadOrders({ user: userService.getLoggedinUser(), forHost: false })
-            setUserTrips(currUserOrders)
         }
         catch (err) {
             console.log(err)
@@ -43,7 +35,7 @@ export function UserTrips() {
 
     function onUpdateBySocket(updatedOrder) {
         const userOrders = orders.map(order => order._id === order._id ? updatedOrder : order)
-        setUserTrips(userOrders)
+        OnloadUserOrders()
 
         console.log(userOrders, 'socket updatedddd')
     }
