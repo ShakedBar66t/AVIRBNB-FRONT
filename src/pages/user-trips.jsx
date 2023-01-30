@@ -56,9 +56,9 @@ export function UserTrips() {
                 </div>
                 <p className="bug-report">Can’t find your reservation here? <span>Visit the Help Center</span></p>
             </section>}
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 socketService.emit('testa', 'kaka')
-            }}>testa</button>
+            }}>testa</button> */}
             {(orders.length) ? <TripList trips={orders} /> : ''}
 
         </main>

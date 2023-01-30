@@ -64,11 +64,7 @@ export function StayDetails() {
         setOrder({ ...order, startDate, endDate, totalNights, totalPrice, })
         setGuests({ ...searchDetails.guests })
         handleGuestsInput('adult', 0)
-        //    console.log('this is guests!!!',guests)
-        //    console.log('this is params!!!',searchDetails.guests)
-        // setStay(stay)
-        console.log(user, '....... test')
-        socketService.emit('test', { userId: user?._id, hostId: stay.host._id })
+        socketService().emit('test', { userId: user?._id, hostId: stay.host._id })
         setStay(stay)
     }
 
