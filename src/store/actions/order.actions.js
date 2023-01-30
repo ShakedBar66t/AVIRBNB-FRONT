@@ -92,7 +92,7 @@ export async function removeOrder(orderId) {
 
 export async function addOrder(order) {
     try {
-        console.log(order, 'the orderrrrrrrrr')
+        // console.log(order, 'the orderrrrrrrrr')
         const savedOrder = await orderService.save(order)
         socketService.emit(SOCKET_EMIT_SEND_HOST_NOTIFICATION, order)
         console.log('Added Order', savedOrder)

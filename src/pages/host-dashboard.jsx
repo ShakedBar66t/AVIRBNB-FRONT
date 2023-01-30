@@ -11,7 +11,7 @@ import { RiStarSFill, } from 'react-icons/ri'
 import { BsCurrencyDollar,BsFillCloudMoonFill } from 'react-icons/bs'
 import { AppFooter } from '../cmps/app-footer'
 import { orderService } from "../services/order.service";
-import { socketService, SOCKET_EMIT_SEND_HOST_NOTIFICATION } from "../services/socket.service";
+import { socketService, SOCKET_EMIT_SET_STATUS } from "../services/socket.service";
 
 export function HostDashBoard(){
 
@@ -37,11 +37,12 @@ export function HostDashBoard(){
         }
     }
         async function onUpdateOrderStatus(order,status) {
+            console.log(order.buyer._id,'id inside order before emit')
         try{
 
             await updateOrder({ ...order, status: status })
             // alert('updated')
-            socketService.emit(SOCKET_EMIT_SEND_HOST_NOTIFICATION, status) /////////// update user from host
+            socketService.emit(SOCKET_EMIT_SET_STATUS, order.buyer._id) /////////// update user from host
         }
         catch (err) {
             console.log(err)

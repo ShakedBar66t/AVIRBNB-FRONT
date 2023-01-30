@@ -227,6 +227,18 @@
         }
     }
 
+    .notifcation-dot {
+        display: none;
+        position: absolute;
+        border-radius: 100%;
+        height: 15px;
+        width: 15px;
+        background-color: rgba(229, 20, 236, 0.918);
+        z-index: 33;
+        right: 0;
+        top: 0px;
+    }
+
     & .fa-search {
         color: $clr6;
     }
@@ -366,57 +378,57 @@
 
         }
 
-        .mobile-filter-modal {
-            border-radius: 25px;
-            box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
-            padding: 24px;
+        // .mobile-filter-modal {
+        //     border-radius: 25px;
+        //     box-shadow: 0px 1px 3px 1px rgb(72 72 72 / 0.4);
+        //     padding: 24px;
 
-            &.location {
-                width: 100%;
-                height: 320px;
-                // display: flex;
-                justify-content: space-evenly;
-                padding: 20px;
-                border: $bs1;
+        //     &.location {
+        //         width: 100%;
+        //         height: 320px;
+        //         // display: flex;
+        //         justify-content: space-evenly;
+        //         padding: 20px;
+        //         border: $bs1;
 
 
-                .mobile-location-input {
-                    border: $bs1;
-                    margin-top: 20px;
-                    height: 58px;
-                    width: 100%;
-                }
-            }
+        //         .mobile-location-input {
+        //             border: $bs1;
+        //             margin-top: 20px;
+        //             height: 58px;
+        //             width: 100%;
+        //         }
+        //     }
 
-            .mobile-location-images {
-                margin-top: 20px;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 15px;
-                height: 162px;
-                width: 100%;
+        //     .mobile-location-images {
+        //         margin-top: 20px;
+        //         display: grid;
+        //         grid-template-columns: 1fr 1fr 1fr 1fr;
+        //         gap: 15px;
+        //         height: 162px;
+        //         width: 100%;
 
-                & .mobile-card {}
+        //         & .mobile-card {}
 
-                & .mobile-card-inner {
-                    font-family: $ff1;
-                    font-weight: 200;
+        //         & .mobile-card-inner {
+        //             font-family: $ff1;
+        //             font-weight: 200;
 
-                    & img {
-                        border-radius: 10px;
+        //             & img {
+        //                 border-radius: 10px;
 
-                        &:hover {
-                            border: $bs2;
-                        }
-                    }
-                }
-            }
+        //                 &:hover {
+        //                     border: $bs2;
+        //                 }
+        //             }
+        //         }
+        //     }
 
-            &.dates {
-                width: 100%;
-                // height: ;
-            }
-        }
+        //     &.dates {
+        //         width: 100%;
+        //         // height: ;
+        //     }
+        // }
     }
 
 }

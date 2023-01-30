@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from "react-redux"
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import { CgOptions } from "react-icons/cg"
-
 import { TOGGLE_FILTER_MODAL } from '../store/reducers/stay.reducer'
 import { TOGGLE_IS_SHADOW } from '../store/reducers/user.reducer'
 import { useNavigate } from 'react-router-dom'
@@ -18,6 +17,7 @@ export function LabelsFilter() {
     const displayedWidth = (ElCarousel?.current?.offsetWidth - 114)
     const [isLabelsFilterSticky, setIsLabelsFilterSticky] = useState(false)
     const stayLabels = [
+        
         { name: 'Play', src: 'play' }, { name: 'Iconic cities', src: 'iconic' }, { name: 'Caves', src: 'cave' },
         { name: 'By the lake', src: 'lake' }, { name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
         { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' }, { name: 'Boats', src: 'boats' }, { name: 'Beachfront', src: 'beach' }, { name: 'Cabins', src: 'cabin' }, { name: 'Historical homes', src: 'historical-homes' },
@@ -71,7 +71,7 @@ export function LabelsFilter() {
 
     function IsLastNextClick() {
         if ((currentIndex * 100) === ((totalWidth - displayedWidth) - ((totalWidth - displayedWidth) % 400) + 400)) {
-            return ((totalWidth - displayedWidth) + 70)
+            return ((totalWidth - displayedWidth) + 30)
         }
         else {
             return (currentIndex * 100)
@@ -104,7 +104,7 @@ export function LabelsFilter() {
                             <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
                         </div> : ''}
 
-                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 70))) && <div className='btn-container next'>
+                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 30))) && <div className='btn-container next'>
                             <button className='next-btn' onClick={handleNext}> <BiChevronRight style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
 
                         </div>}
