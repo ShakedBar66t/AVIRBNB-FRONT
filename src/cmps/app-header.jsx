@@ -44,7 +44,7 @@ export function AppHeader({ isOn, setIsOn }) {
     // expended guests modal states
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
-    const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 })
+    const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 })
     // notifications
     // const [isNotif, setIsNotif] = useState
     // final filterBy
@@ -127,7 +127,7 @@ export function AppHeader({ isOn, setIsOn }) {
         let addedText = false
         let text = ''
         newGuests[type] += value
-        newGuests.Total += value
+        newGuests.total += value
         setGuests(newGuests)
 
         if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
@@ -241,7 +241,7 @@ export function AppHeader({ isOn, setIsOn }) {
         const { location, checkIn, checkOut, guests } = filterBy
         const queryParams = `isParams=true&location=${location}&checkIn=${checkIn}&checkOut=${checkOut}
         &adults=${guests.Adults}&infants=${guests.Infants}&children=${guests.Children}&pets=${guests.Pets}
-        &total=${guests.Total}&minPrice='&maxPrice='&bedrooms='&beds='&type='&amenities=''`
+        &total=${guests.total}&minPrice='&maxPrice='&bedrooms='&beds='&type='&amenities=''`
         navigate(`/explore?${queryParams}`)
         dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         handleExpendedModalClick(ev)

@@ -51,7 +51,6 @@ export function StayDetails() {
 
     useEffect(() => {
         loadStay()
-
     }, [])
 
     async function loadStay() {
@@ -62,10 +61,11 @@ export function StayDetails() {
             socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
         const totalPrice = totalNights * stay.price
-        setOrder({...order,startDate,endDate,totalNights,totalPrice,})
-       setGuests({...searchDetails.guests})
-    //    console.log('this is guests!!!',guests)
-    //    console.log('this is params!!!',searchDetails.guests)
+        setOrder({ ...order, startDate, endDate, totalNights, totalPrice, })
+        setGuests({ ...searchDetails.guests })
+        handleGuestsInput('adult', 0)
+        //    console.log('this is guests!!!',guests)
+        //    console.log('this is params!!!',searchDetails.guests)
         // setStay(stay)
         console.log(user, '....... test')
         socketService.emit('test', { userId: user?._id, hostId: stay.host._id })
@@ -157,7 +157,7 @@ export function StayDetails() {
 
     function handleGuestsInput(type, value) {
 
-        let newGuests = { ...guests }
+        let newGuests = (value) ? { ...guests } : { ...searchDetails.guests }
         let addedText = false
         let text = ''
         newGuests[type] += value
@@ -169,7 +169,6 @@ export function StayDetails() {
             if (newGuests.Adults + newGuests.Children > 0) {
                 text += `${newGuests.Adults + newGuests.Children} guest`
                 if (newGuests.Adults + newGuests.Children > 1) {
-
                     text += 's'
                 }
                 addedText = true
@@ -197,6 +196,7 @@ export function StayDetails() {
 
             }
         }
+        console.log(text)
         setLowerGuestsText(text)
     }
 
@@ -370,7 +370,6 @@ export function StayDetails() {
 
                                     </div>
                                 })}
-
                             </div>}
                             <ColorForButton txt={'Reserve'}
                                 reserveOrder={reserveOrder} />

@@ -18,7 +18,7 @@ export function UserMsg() {
       timeoutIdRef.current = setTimeout(closeMsg, 3000)
     })
 
-    socketService.on('chat-add-notif', (notif) => {
+    socketService.on('host-add-notification', (notif) => {
       console.log('inside user-msg')
       showSuccessMsg(`new notif `)
     })
@@ -32,7 +32,7 @@ export function UserMsg() {
 
     return () => {
       unsubscribe()
-      socketService.off('chat-add-notif')
+      socketService.off('host-add-notification')
       socketService.off('chat-set-status')
     }
   }, [])
