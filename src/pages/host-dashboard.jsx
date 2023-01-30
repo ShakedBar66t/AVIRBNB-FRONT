@@ -42,7 +42,7 @@ export function HostDashBoard(){
 
             await updateOrder({ ...order, status: status })
             // alert('updated')
-            socketService.emit(SOCKET_EMIT_SET_STATUS, order.buyer._id) /////////// update user from host
+            socketService.emit(SOCKET_EMIT_SET_STATUS, order) /////////// update user from host
         }
         catch (err) {
             console.log(err)
