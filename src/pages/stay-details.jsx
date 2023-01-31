@@ -44,11 +44,12 @@ export function StayDetails() {
     const [isReserveModal, setReserveModal] = useState(false)
 
     const dateFormat = "MM-DD-YYYY";
-
     const startDate = (searchDetails.checkIn && searchDetails.checkIn !== 'flexible') ? (dayjs(searchDetails.checkIn)) : dayjs("02-01-2023")
     const endDate = (searchDetails.checkOut && searchDetails.checkOut !== 'flexible') ? (dayjs(searchDetails.checkOut)) : dayjs("02-06-2023")
     const totalNights = Math.round((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24))
 
+
+    console.log('this is search details',searchDetails)
     useEffect(() => {
         loadStay()
     }, [])

@@ -58,10 +58,10 @@ function getFilterFromSearchParams(searchParams) {
     return filterBy
 }
 function getDefaultFilterForHeader() {
-    return { location: 'flexible', guests: { Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 }, checkIn: 'flexible', checkOut: 'flexible' }
+    return { location: 'flexible', guests: { Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 }, checkIn: 'flexible', checkOut: 'flexible' }
 }
 function getDefaultFilter() {
-    return { minPrice: 50, maxPrice: 100, bedrooms: '', type: [], beds: '', bathrooms: '', amenities: [], isParams: false, location: 'flexible', guests: { Adults: 1, Children: 0, Infants: 0, Pets: 0, Total: 1 }, checkIn: 'flexible', checkOut: 'flexible' }
+    return { minPrice: 50, maxPrice: 100, bedrooms: '', type: [], beds: '', bathrooms: '', amenities: [], isParams: false, location: 'flexible', guests: { Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 }, checkIn: 'flexible', checkOut: 'flexible' }
 }
 
 // function getById(stayId) {

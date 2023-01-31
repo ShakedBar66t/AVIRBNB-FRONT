@@ -169,7 +169,8 @@ export function AppHeader({ isOn, setIsOn }) {
                 text += ` ${newGuests.Infants} infants`
             }
         }
-        setFilterBy({ ...filterBy, guests })
+        setFilterBy({ ...filterBy, guests: newGuests })
+        // setFilterBy({ ...filterBy, guests })
         // dispatch({ type: SET_SEARCH_DETAILS, filterBy })
         setLowerGuestsText(text)
     }
