@@ -6,10 +6,32 @@ import { CgProfile } from 'react-icons/cg'
 import { BiMessageAlt } from 'react-icons/bi'
 import { useSelector } from "react-redux"
 import { toggleLoginModal } from "../store/user.actions"
+import { socketService } from "../services/socket.service"
+import { useEffect, useState } from "react"
 
 export function MoblieFooter() {
+    const [isNotif, setIsNotif] = useState(false)
     const user = useSelector(storeState => storeState.userModule.user)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        socketService.on('host-add-notification', (notif) => {  ///////host notif
+            console.log('inside footer')
+            setIsNotif(true)
+        })
+
+        socketService.on('update-order-status', (notif) => { ///// user notif 
+            console.log('inside footer')
+            setIsNotif(true)
+        })
+
+        return () => {
+            socketService.off('host-add-notification')
+            socketService.off('update-order-status')
+        }
+    }, [])
+
+
     if (!user) return
     return <section className="mobile-footer">
         <nav className="flex">
@@ -29,8 +51,8 @@ export function MoblieFooter() {
                 <div><BiMessageAlt /></div>
                 <div>Inbox</div>
             </NavLink>
-            <NavLink key={user._id || 'login'} to={`/user/${user._id}`}>
-                <div><CgProfile /></div>
+            <NavLink onClick={() => setIsNotif(false)} key={user._id || 'login'} to={`/user/${user._id}`} >
+                <div><CgProfile /><span className={`notification-dot-footer ${(isNotif) ? 'shown' : ''}`}></span></div>
                 <div>{(user) ? 'Profile' : 'Login'} </div>
                 {/* <div onClick={(user) ? navigate('/host') : ()=>toggleLoginModal()}>{(user) ? 'Profile' : 'Login'} </div> */}
             </NavLink>
