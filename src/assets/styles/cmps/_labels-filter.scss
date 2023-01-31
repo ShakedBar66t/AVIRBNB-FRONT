@@ -1,10 +1,9 @@
 .carousel-container-wrapper {
     height: 160px;
-
+    display: flex;
+    align-items: flex-end;
     @include for-mobile-layout {
-        display: flex;
         height: 190px;
-        align-items: flex-end;
     }
 
     &.fixed {
@@ -29,7 +28,7 @@
     }
 
     @include for-wide-layout {
-        padding: 0 80px 0 65px;
+        padding: 0 80px 0 75px;
     }
 
     &.fixed {
