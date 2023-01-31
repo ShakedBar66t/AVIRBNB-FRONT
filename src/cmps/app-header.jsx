@@ -47,7 +47,6 @@ export function AppHeader({ isOn, setIsOn }) {
     const [lowerGuestsText, setLowerGuestsText] = useState('Add guests')
     const [guests, setGuests] = useState({ Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 })
     // notifications
-
     const [isNotif, setIsNotif] = useState(false)
 
     // final filterBy
@@ -60,11 +59,11 @@ export function AppHeader({ isOn, setIsOn }) {
 
     useEffect(() => {
         socketService.on('host-add-notification', (notif) => {  ///////host notif
-            setIsNotif(!isNotif)
+            setIsNotif(true)
         })
 
         socketService.on('update-order-status', (notif) => { ///// user notif 
-            setIsNotif(!isNotif)
+            setIsNotif(true)
         })
 
         return () => {
@@ -300,7 +299,7 @@ export function AppHeader({ isOn, setIsOn }) {
                         }}
                         className='user-info-btn ' ><span><FaBars /></span>
                         <span >{(user) ? <img style={{ width: '33px', height: '33px', borderRadius: '50%' }} src={user.imgUrl} /> : <FaUserCircle className='fa-user-circle ' />}            </span>
-                        <span className={`notifcation-dot ${isNotif ? 'shown' : ''}`}></span>
+                        <span className={`notification-dot ${isNotif ? 'shown' : ''}`}></span>
                         <div className={`user-modal ${userModal ? 'open' : ''} ${(stayId || isTripPage || isHostDashboardPage) ? 'on-details-layout' : 'stay-index-layout'}`}>
                             {(!user) && <button onClick={() => {
 
@@ -311,7 +310,7 @@ export function AppHeader({ isOn, setIsOn }) {
                                 toggleUserModal()
                                 toggleLoginModal('signup')
                             }}>Sign up </button>}
-                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications  <span className={`notifcation-dot ${isNotif ? 'shown' : ''}`}></span> </button>}
+                            {(user) && <button onClick={() => navigate(`/user/notification/${user._id}`)} >Notifications  <span className={`notification-dot ${isNotif ? 'shown' : ''}`}></span> </button>}
                             {(user) && <button onClick={() => navigate('/user/trip')} >Trips </button>}
                             {(user) && <button onClick={() => navigate(`/user/wishlist/${user._id}`)} >Wishlists </button>}
                             <hr />

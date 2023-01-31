@@ -227,10 +227,10 @@
         }
     }
 
-    .notifcation-dot {
+    .notification-dot {
         display: none;
         position: absolute;
-        border-radius: 100%;
+        border-radius: 50%;
         height: 15px;
         width: 15px;
         background-color: $clr9;
@@ -240,6 +240,7 @@
 
         &.shown {
             display: block;
+            animation: bounce 0.5s ease-in-out 2;
         }
     }
 
@@ -247,6 +248,20 @@
         color: $clr6;
     }
 
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .mobile-filter-modal {
