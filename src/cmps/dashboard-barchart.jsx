@@ -52,9 +52,10 @@ export function BarChart({ orders, year }) {
         label: 'Dataset 1',
         data: orderService.getMonthlyIncome(orders, year),
         backgroundColor: '#00A699',
+        
       }
     ],
 
   }
-  return <Bar options={options} data={data} height="120vw" />
+  return <Bar options={options} data={data}  width={"100%"} height={"35vh"} />
 }
