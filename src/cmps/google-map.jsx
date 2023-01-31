@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"
 import { stayService } from "../services/stay.service"
 import GoogleMapReact from 'google-map-react';
 
-
 const AnyReactComponent = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>;
 const Loc1 = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>
 const Loc2 = ({ text }) => <div style={{ fontSize: '2.5rem' }}>{text}</div>
@@ -26,10 +25,7 @@ export default function GoogleMap() {
         setCoordinates({ lat: stay.loc.lat, lng: stay.loc.lan })
     }
 
-    // console.log(stay)
-
     const zoom = 11
-
     const handleClick = ({ lat, lng }) => {
         setCoordinates({ lat, lng })
     }

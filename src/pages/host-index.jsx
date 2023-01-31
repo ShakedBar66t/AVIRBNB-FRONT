@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AppHeader } from "../cmps/app-header"
@@ -8,21 +7,14 @@ import { stayAmenities, stayService } from "../services/stay.service"
 import { getLoggedinUser } from "../services/user.service"
 import { addStay } from "../store/actions/stay.actions"
 
-
-
 export function HostIndex() {
 
     const [stay, setStay] = useState(stayService.getEmptyStay())
     const navigate = useNavigate()
-    // console.log(stay)
-
-
     const stayAmenities = ['TV', 'Internet', 'Wifi', 'Air conditioning', 'Pool', 'Kitchen', 'Doorman', 'Gym', 'Elevator', 'Heating', 'Washer', 'Dryer', 'Smoke detector', 'First aid kit', 'Fire extinguisher', 'Essentials', 'Shampoo', '24-hour check-in', 'Hangers', 'Hair dryer', 'Iron', 'Laptop friendly workspace', 'Self check-in', 'Hot water', 'Bed linens', 'Beachfront', 'Microwave', 'Coffee maker', 'Refrigerator', 'Dishes and silverware', 'Cooking basics', 'Stove', 'Babysitter recommendations', 'Step-free access', 'Luggage dropoff allowed', 'Indoor fireplace', 'Extra pillows and blankets', 'Wide entryway', 'Keypad', 'Pocket wifi', 'Ethernet connection', 'Private bathroom', 'How water kettle', 'Fireplace guards', 'Building staff', 'Accessible-height toilet', 'Room-darkening shades']
 
-
-
     function handleChange({ target }) {
-        // console.log(target)
+
         const { name: field, files } = target;
         if (field === 'name' || field === 'capacity' || field === 'price' || field === 'description' || field === 'stay-type' || field === 'summary' || field === 'bathrooms' || field === 'bedrooms') {
             setStay(({ ...stay, [field]: target.value }))
@@ -50,7 +42,6 @@ export function HostIndex() {
     async function onAddStay(ev) {
         ev.preventDefault()
         const savedStay = await addStay(stay)
-        // console.log(savedStay)
         try {
             navigate(`/explore/${savedStay._id}`)
         } catch (err) {

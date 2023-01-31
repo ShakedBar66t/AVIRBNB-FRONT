@@ -7,7 +7,6 @@ import { loadUser, updateUser } from "../store/user.actions"
 import { showErrorMsg } from "../services/event-bus.service"
 import { AppFooter } from "./app-footer"
 
-
 export function UserEdit() {
 
     const { userId } = useParams()

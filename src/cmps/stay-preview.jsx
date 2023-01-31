@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
-import { useSelector } from "react-redux";
+
 import { stayService } from "../services/stay.service";
 import { utilService } from "../services/util.service";
 
@@ -14,10 +16,6 @@ export function StayPreview({ stay, onToggleLike }) {
     const user = useSelector(storeState => storeState.userModule.user)
     const dateStr = useRef(prevDateStr())
 
-    // useEffect(()=>{
-    //     prevDateStr()
-    // },[])
-
     function prevDateStr() {
         const day = 1000 * 60 * 60 * 24
         const startingDate = Date.now() + (utilService.getRandomIntInclusive(0, 14) * day)
@@ -26,9 +24,7 @@ export function StayPreview({ stay, onToggleLike }) {
         const endDate = startingDate + day * 5
         const endingMonth = utilService.getMonthName(new Date(endDate))
         const endingDay = new Date(endDate).getDate()
-        return `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
-        // dateStr.current = `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `
-      
+        return `${startingMonth} ${startingDay}- ${(startingMonth === endingMonth) ? '' : endingMonth} ${endingDay} `   
     }
 
     function checkIfLikedByUser() {
@@ -53,7 +49,6 @@ export function StayPreview({ stay, onToggleLike }) {
         <button className={`like-btn clear-btn ${checkIfLikedByUser()}`}> <FaHeart /></button>
         <button className="like-btn clear-btn" onClick={(ev) => { onToggleLike(ev, stay).then((ans) => setIsLikedByUser(prev => !prev)) }}
         ><FaRegHeart className="reg-heart-fa" /></button>
-
 
         {(currImgUrlIdx > 0) && <button className="img-preview-paging-btns prev-img-preview-btn clear-btn" onClick={(ev) => {
             ev.stopPropagation()

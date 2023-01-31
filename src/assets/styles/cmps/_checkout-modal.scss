@@ -1,7 +1,5 @@
-
 .checkout-modal{
     position: fixed;
-  
     background-color: $clr6;
     width: 100vw;
     height: 650px;
@@ -66,20 +64,8 @@
 
     }
 
-    // .modal-price-info{
-    //     padding: 1rem 0;
-    //     gap: 0.25rem;
-    // }
-    
-    // .modal-stay-info-cont{
-        
-    // }
-    // .modal-stay-info{
-    //     padding: 1rem 0;
-    //     border-bottom: $bs1;
-    // }
-
    }
+
    h4{
     color: $clr9;
     font-size: rem(18px);
@@ -103,6 +89,5 @@
     font-size: rem(18px);
     border: none;
    }
-
 
 }

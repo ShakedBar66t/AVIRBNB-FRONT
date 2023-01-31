@@ -2,9 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppHeader } from "../cmps/app-header";
 
-
 export function UserWishlist() {
-
     const stays = useSelector(storeState => storeState.stayModule.stays)
     const navigate = useNavigate()
 
@@ -13,7 +11,7 @@ export function UserWishlist() {
             stay,
             likedBy: stay.likedByUsers.map(user => user.fullname)
         }
-    });
+    })
 
     console.log('liked places', likedStays)
     
@@ -35,8 +33,6 @@ export function UserWishlist() {
                                     })}
                                 </div>
                                     <h4>{stay.stay.name}</h4>
-
-
                             </section>
                         })}
                     </div>

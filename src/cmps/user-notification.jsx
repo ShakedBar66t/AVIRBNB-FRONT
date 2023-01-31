@@ -5,7 +5,6 @@ import { userService } from "../services/user.service";
 import { loadUser } from "../store/user.actions";
 import { AppHeader } from '../cmps/app-header'
 
-
 export function UserNotification() {
 
     const { userId } = useParams()

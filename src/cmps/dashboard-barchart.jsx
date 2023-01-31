@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,16 +8,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { orderService } from '../services/order.service';
-import { useSelector } from 'react-redux';
-import { MonthlyIcome } from '../customHooks/getMonthlyIncome';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-
-// import {faker} from 'faker';
-
+import { Bar } from 'react-chartjs-2'
+import { orderService } from '../services/order.service'
 
 ChartJS.register(
   CategoryScale,
@@ -26,9 +18,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
-);
-
-
+)
 
 export const options = {
   responsive: true,
@@ -48,30 +38,23 @@ export const options = {
         }
       }
     }
-
-
-  },
-};
-
+  }
+}
 
 const labels = ["Jauary", "Feb", "Mar", "Apr", "May",
   "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-export function BarChart({orders,year}) {
-
-  const currMonth = new Date().getMonth()
-   const data = {
-    labels :labels,
+export function BarChart({ orders, year }) {
+  const data = {
+    labels: labels,
     datasets: [
       {
         label: 'Dataset 1',
-        data:orderService.getMonthlyIncome(orders,year),
-        // data: [200, 300, 400, 500, 600, 300, 300],
+        data: orderService.getMonthlyIncome(orders, year),
         backgroundColor: '#00A699',
-  
       }
     ],
-  
-  };
-  return <Bar options={options} data={data} height="120vw" />;
+
+  }
+  return <Bar options={options} data={data} height="120vw" />
 }

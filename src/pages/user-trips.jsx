@@ -36,11 +36,8 @@ export function UserTrips() {
     function onUpdateBySocket(updatedOrder) {
         const userOrders = orders.map(order => order._id === order._id ? updatedOrder : order)
         OnloadUserOrders()
-
         console.log(userOrders, 'socket updatedddd')
     }
-
-    // console.log('trips', userTrips)
 
     return <section className="order-layout">
         <AppHeader />
@@ -56,9 +53,6 @@ export function UserTrips() {
                 </div>
                 <p className="bug-report">Can’t find your reservation here? <span>Visit the Help Center</span></p>
             </section>}
-            {/* <button onClick={() => {
-                socketService.emit('testa', 'kaka')
-            }}>testa</button> */}
             {(orders.length) ? <TripList trips={orders} /> : ''}
 
         </main>

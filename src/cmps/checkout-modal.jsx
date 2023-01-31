@@ -1,18 +1,15 @@
-import { IoCloseSharp } from "react-icons/io5"
 import { useSelector } from "react-redux"
-import { TOGGLE_CHECKOUT_MODAL } from "../store/reducers/user.reducer"
-import { toggleCheckoutModal } from "../store/user.actions"
-import { FaStar } from 'react-icons/fa'
-import { addOrder } from '../store/actions/order.actions'
 import { useNavigate } from "react-router-dom"
 
+import { IoCloseSharp } from "react-icons/io5"
+import { FaStar } from 'react-icons/fa'
+
+import { toggleCheckoutModal } from "../store/user.actions"
+import { addOrder } from '../store/actions/order.actions'
 
 export function ReserveModal({ order }) {
-
     const isCheckoutModal = useSelector(storeState => storeState.userModule.isCheckoutModal)
-    console.log('this is order', order)
     const navigate = useNavigate()
-
 
     return <div className={`checkout-modal ${(isCheckoutModal) ? 'open' : 'closed'}`}>
         <header>
@@ -48,23 +45,7 @@ export function ReserveModal({ order }) {
             <button onClick={() => addOrder(order).then(res => {
                 toggleCheckoutModal()
                 navigate('/user/trip')
-                })} className="reserve-btn">Reserve now</button>
+            })} className="reserve-btn">Reserve now</button>
         </main>
     </div>
-    // {return (isCheckoutModal) ? <div className={`checkout-modal ${(isCheckoutModal) ? 'open' : 'closed'}`}>
-    // <header>
-    // <button className="clear-btn" style={{ fontSize: '21px' }} onClick={toggleCheckoutModal}><IoCloseSharp /></button>
-    //     <h2>Confirm order</h2>
-    // </header>
-    // <hr className="full"/>
-    // <main className="checkout-cont">
-    //     <div className="trip-info">
-    //     <h4>your trip</h4>
-    //     <div className="flex space-between"><p>Check-in</p> <p>{new Date(order.startDate).toLocaleDateString()}</p></div>
-    //     <div className="flex space-between"><p>Check-out</p> <p>{new Date(order.endDate).toLocaleDateString()}</p></div>
-    //     <div className="flex space-between"><p>Host name</p> <p>{order.host.fullname}</p></div>
-
-    //     </div>
-    // </main>
-    // </div> : ''}
 }

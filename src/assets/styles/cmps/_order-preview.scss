@@ -1,28 +1,25 @@
 .order-preview{
-    // display: flex;
-    // gap: 20px;
-    // display: grid;
-    // grid-template-columns: 1fr minmax(70px,1fr) repeat(5,1fr) 150px;
     display: flex;
     justify-content: space-evenly;
-    // gap: 20px;
     padding: 1rem ;
     outline: 1px solid black;
     color: $clr7;
     font-weight: 350;
     font-family: Circular;
     font-size: rem(10px);
+
     @include for-mobile-layout {
         font-size: rem(12px);
     }
+
     @include for-narrow-layout {
         font-size: rem(14px);
     }
+
     @include for-midium-layout {
         font-size: 1rem;
     }
     
-
     div{
         width:11.428%;
     }
@@ -37,9 +34,7 @@
         font-weight: 700;
     }
 
-  
-    button{
-        
+    button{ 
         font-family: inherit;
         font-size: rem(9px);
 
@@ -50,11 +45,10 @@
         @include for-narrow-layout {
             font-size: rem(14px);
         }
+
         @include for-midium-layout {
             font-size: 1rem;
         }
-
-      
     }
 
     .desktop{
@@ -63,26 +57,27 @@
             display: block;
         }
     }
+
     .mobile{
 
         @include for-narrow-layout {
             display: none;
         }
 
-    }
-    
+    }  
 }
+
 .order-preview :last-child{
-    // flex-shrink: 0;
     width:20%;
     display: flex;
     flex-wrap: nowrap;
-    span{
 
+    span{
         padding-left: 20px;
         @include for-normal-layout {
          }
     }
+
     svg{
         display: none;
         @include for-normal-layout {
@@ -91,89 +86,10 @@
          }
 
     }
+
     .status{
         padding-left: 35px;
         @include for-normal-layout {
          }
     }
- 
-
 }
-
-
-// .order-preview{
-//     border-bottom: $bs1;
-//     padding: 1.5rem;
-//     justify-content: space-between;
-//     color: $clr7;
-//     font-weight: lighter;
-//     font-family: Circular;
-//     padding: 1rem;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     gap: 1rem;
-
-//     @include for-normal-layout {
-//         padding: 1rem;
-//         flex-direction: row;
-//         justify-content: space-between;
-//     }
-
-//     @include for-trip-wide-layout {
-//         padding: 1.5rem;
-//     }
-
-
-//     img{
-//         border-radius: 50%;
-//         width: 75px;
-//         height: 75px;
-
-//         @include for-normal-layout {
-//             width: 65px;
-//             height: 65px;
-//         }
-    
-//         @include for-trip-wide-layout {
-//             width: 75px;
-//             height: 75px;
-//         }
-//     }
-
-//     h4{
-//         font-size: 1.2rem;
-//         @include for-normal-layout {
-//             font-size: 1.5rem;
-//         }
-//     }
-
-//     .order-actions-btn-container{
-//         font-size: 1.5rem;
-//         color: $clr8;
-        
-//         button{
-//             font-size: 1rem;
-//             @include for-wide-layout {
-//                 font-size: 1.5rem;
-//             }
-//         }
-//     }
-
-//     .reserved-at{
-//         color: $clr7;
-//         font-size: rem(14px);
-     
-  
-//         @include for-trip-wide-layout {
-//             font-size: 1rem;
-//         }
-//     }
-//     p{
-//         color: $clr8;
-//         font-size: rem(14px);
-//         @include for-wide-layout {
-//             font-size: 1rem;
-//         }
-//     }
-// }

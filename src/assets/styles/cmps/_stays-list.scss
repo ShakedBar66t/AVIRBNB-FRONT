@@ -6,7 +6,6 @@
     margin-top: 35px;
 
     @include for-ultrawide-layout {
-        // grid-template-columns: repeat(6, minmax(260px, 500px));
         grid-template-columns: repeat(6, 1fr);
     }
 }

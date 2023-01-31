@@ -20,7 +20,6 @@ export function StayIndex() {
     const [isOn, setIsOn] = useState(false)
     // const queryFilterBy = stayService.getFilterFromSearchParams(searchParams)
 
-
     useEffect(() => {
         // if (location.pathname === '/explore') loadStays()
         // else loadStays(queryFilterBy)
@@ -42,46 +41,45 @@ export function StayIndex() {
     //     }
     // }, [user])
 
-    async function onRemoveStay(stayId) {
-        try {
-            await removeStay(stayId)
-            showSuccessMsg('Stay removed')
-        } catch (err) {
-            showErrorMsg('Cannot remove stay')
-        }
-    }
+    // async function onRemoveStay(stayId) {
+    //     try {
+    //         await removeStay(stayId)
+    //         showSuccessMsg('Stay removed')
+    //     } catch (err) {
+    //         showErrorMsg('Cannot remove stay')
+    //     }
+    // }
 
-    async function onAddStay() {
-        const stay = stayService.getEmptyStay()
-        stay.vendor = prompt('Vendor?')
-        try {
-            const savedStay = await addStay(stay)
-            showSuccessMsg(`Stay added (id: ${savedStay._id})`)
-        } catch (err) {
-            showErrorMsg('Cannot add stay')
-        }
-    }
+    // async function onAddStay() {
+    //     const stay = stayService.getEmptyStay()
+    //     stay.vendor = prompt('Vendor?')
+    //     try {
+    //         const savedStay = await addStay(stay)
+    //         showSuccessMsg(`Stay added (id: ${savedStay._id})`)
+    //     } catch (err) {
+    //         showErrorMsg('Cannot add stay')
+    //     }
+    // }
 
-    async function onUpdateStay(stay) {
-        const price = +prompt('New price?')
-        const stayToSave = { ...stay, price }
-        try {
-            const savedStay = await updateStay(stayToSave)
-            showSuccessMsg(`Stay updated, new price: ${savedStay.price}`)
-        } catch (err) {
-            showErrorMsg('Cannot update stay')
-        }
-    }
+    // async function onUpdateStay(stay) {
+    //     const price = +prompt('New price?')
+    //     const stayToSave = { ...stay, price }
+    //     try {
+    //         const savedStay = await updateStay(stayToSave)
+    //         showSuccessMsg(`Stay updated, new price: ${savedStay.price}`)
+    //     } catch (err) {
+    //         showErrorMsg('Cannot update stay')
+    //     }
+    // }
 
-    function onAddToStayt(stay) {
-        // console.log(`Adding ${stay.vendor} to Stayt`)
-        addToStayt(stay)
-        showSuccessMsg('Added to Stayt')
-    }
+    // function onAddToStayt(stay) {
+    //     addToStayt(stay)
+    //     showSuccessMsg('Added to Stayt')
+    // }
 
-    function onAddStayMsg(stay) {
-        // console.log(`TODO Adding msg to stay`)
-    }
+    // function onAddStayMsg(stay) {
+    //     // console.log(`TODO Adding msg to stay`)
+    // }
 
     async function onToggleLike(ev, stay) {
         ev.stopPropagation()

@@ -9,9 +9,8 @@ import { toggleLoginModal } from "../store/user.actions"
 
 export function MoblieFooter() {
     const user = useSelector(storeState => storeState.userModule.user)
-    console.log(user)
     const navigate = useNavigate()
-    if(!user) return
+    if (!user) return
     return <section className="mobile-footer">
         <nav className="flex">
             <NavLink key="explore" to={'/explore'}>
@@ -35,9 +34,6 @@ export function MoblieFooter() {
                 <div>{(user) ? 'Profile' : 'Login'} </div>
                 {/* <div onClick={(user) ? navigate('/host') : ()=>toggleLoginModal()}>{(user) ? 'Profile' : 'Login'} </div> */}
             </NavLink>
-
-            {/* <NavLink to={'/explore'}>explore 🔍</NavLink>
-                <NavLink to={'/explore'}>explore 🔍</NavLink> */}
 
         </nav>
     </section>

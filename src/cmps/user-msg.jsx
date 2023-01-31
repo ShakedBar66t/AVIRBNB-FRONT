@@ -23,12 +23,10 @@ export function UserMsg() {
       showSuccessMsg(`new notif `)
     })
 
-
     socketService.on('chat-set-status', (notif) => {
       console.log('inside chat-set-status')
       showSuccessMsg(`new notif `)
     })
-
 
     return () => {
       unsubscribe()
