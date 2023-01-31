@@ -263,7 +263,7 @@ export function StayDetails() {
                             <h2 className="subtitle-title"> <span>{stay.type}</span> hosted by {stay.host.fullname}</h2>
                             <span>{stay.capacity} guests · {stay.bathrooms} bathrooms · {stay.bedrooms} bedrooms </span>
                         </div>
-                        <img className="host-image" src={stay.host.pictureUrl} />
+                        <img className="host-image" src={stay.host.imgUrl} />
                     </div>
                     <div className="user-stay-info">
                         {achievements.map((achievement, index) => (

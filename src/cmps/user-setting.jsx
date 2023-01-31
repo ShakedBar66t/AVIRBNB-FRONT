@@ -36,6 +36,16 @@ export function UserSetting({ setPage }) {
                 </div>
             </article>
             <article className="setting-prev" onClick={() => {
+                navigate('/host/dashboard')
+            }}>
+
+                <div> <BiBarChartAlt2 /></div>
+                <div>
+                    <h4>Professional hosting tools</h4>
+                    <p>Get professional tools if you manage several properties on Avirbnb</p>
+                </div>
+            </article>
+            <article className="setting-prev" onClick={() => {
                 navigate('/user/trip')
             }}>
                 <div> <SiAirbnb /></div>
@@ -61,16 +71,6 @@ export function UserSetting({ setPage }) {
                 <div>
                     <h4>Notifications</h4>
                     <p>Choose notification preferences and how you want to be contracted</p>
-                </div>
-            </article>
-            <article className="setting-prev" onClick={() => {
-                navigate('/host/dashboard')
-            }}>
-
-                <div> <BiBarChartAlt2 /></div>
-                <div>
-                    <h4>Professional hosting tools</h4>
-                    <p>Get professional tools if you manage several properties on Avirbnb</p>
                 </div>
             </article>
 

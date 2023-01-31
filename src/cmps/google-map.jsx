@@ -41,7 +41,7 @@ export default function GoogleMap() {
             >
                 <AnyReactComponent
                     {...coordinates}
-                    text="📍"
+                    text="🏠"
                 />
             </GoogleMapReact>
         </div>
