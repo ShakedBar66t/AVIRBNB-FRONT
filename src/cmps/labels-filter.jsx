@@ -17,7 +17,7 @@ export function LabelsFilter() {
     const displayedWidth = (ElCarousel?.current?.offsetWidth - 114)
     const [isLabelsFilterSticky, setIsLabelsFilterSticky] = useState(false)
     const stayLabels = [
-        
+
         { name: 'Play', src: 'play' }, { name: 'Iconic cities', src: 'iconic' }, { name: 'Caves', src: 'cave' },
         { name: 'By the lake', src: 'lake' }, { name: 'Riads', src: 'riads' }, { name: 'Amazing views', src: 'views' }, { name: 'Castles', src: 'castle' },
         { name: ' Amzaing pools', src: 'pool' }, { name: 'Mansions', src: 'mansions' }, { name: 'Boats', src: 'boats' }, { name: 'Beachfront', src: 'beach' }, { name: 'Cabins', src: 'cabin' }, { name: 'Historical homes', src: 'historical-homes' },
@@ -79,38 +79,36 @@ export function LabelsFilter() {
     }
 
     return (
-        <div className='fixed-main-wrapper'>
-            <div className={`carousel-container-wrapper full `}>
-                <div className={`carousel-container main-layout  `} ref={ElCarousel}>
-                    <div className="carousel ">
-                        <div className="carousel-inner" ref={ElCarousel1} >
-                            {
-                                stayLabels.map((label, index) => {
-                                    return (
-                                        <div name={label.name} key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
+        <div className={`carousel-container-wrapper main-layout full `}>
+            <div className={`carousel-container main-layout ${!isLabelsFilterSticky ? 'fixed' : ''} `} ref={ElCarousel}>
+                <div className="carousel ">
+                    <div className="carousel-inner" ref={ElCarousel1} >
+                        {
+                            stayLabels.map((label, index) => {
+                                return (
+                                    <div name={label.name} key={index} className="carousel-group" style={{ transform: `translateX(-${IsLastNextClick()}px)` }}>
 
-                                            <div name={label.name} className="label-filter-btn"
-                                                onClick={(ev) => handleLabelClick(ev)} >
-                                                <img name={label.name} src={require(`../assets/labels-logos/${label.src}.jpg`)} />
-                                                <span name={label.name}>{label.name}</span>
-                                            </div>
+                                        <div name={label.name} className="label-filter-btn"
+                                            onClick={(ev) => handleLabelClick(ev)} >
+                                            <img name={label.name} src={require(`../assets/labels-logos/${label.src}.jpg`)} />
+                                            <span name={label.name}>{label.name}</span>
                                         </div>
-                                    )
-                                })
-                            }
-                        </div>
-
-                        {(currentIndex) ? <div className={'btn-container prev '}>
-                            <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
-                        </div> : ''}
-
-                        {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 30))) && <div className='btn-container next'>
-                            <button className='next-btn' onClick={handleNext}> <BiChevronRight style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
-
-                        </div>}
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
+
+                    {(currentIndex) ? <div className={'btn-container prev '}>
+                        <button className={`prev-btn ${!currentIndex ? 'hidden' : ''}`} onClick={handlePrev}> <BiChevronLeft style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
+                    </div> : ''}
+
+                    {(!(IsLastNextClick() === ((totalWidth - displayedWidth) + 30))) && <div className='btn-container next'>
+                        <button className='next-btn' onClick={handleNext}> <BiChevronRight style={{ marginTop: '2.5px', paddingRight: '2.4px' }} /></button>
+
+                    </div>}
                 </div>
+                <button className='setting-btn' onClick={handleSettingClick}> <span><CgOptions className='setting-icon' />Filters</span></button>
             </div>
         </div>
     )

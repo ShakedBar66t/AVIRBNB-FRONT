@@ -55,9 +55,7 @@ export function StayDetails() {
 
     async function loadStay() {
         const stay = await stayService.getById(stayId)
-        console.log(user);
         if (!user?.isHost) {
-            console.log("ya host", user, stay);
             socketService.emit(SOCKET_EVENT_REGISTER_USER_TO_ROOM, stay?.host._id)
         }
         const totalPrice = totalNights * stay.price
@@ -152,11 +150,12 @@ export function StayDetails() {
     }
 
     function handleGuestsInput(type, value) {
-
+        // debugger
         let newGuests = (value) ? { ...guests } : { ...searchDetails.guests }
         let addedText = false
         let text = ''
         newGuests[type] += value
+        newGuests.total += value
         setGuests(newGuests)
 
         if (newGuests.Adults + newGuests.Children + newGuests.Infants + newGuests.Pets === 0) {
@@ -192,7 +191,6 @@ export function StayDetails() {
 
             }
         }
-        console.log(text)
         setLowerGuestsText(text)
     }
 
@@ -215,7 +213,6 @@ export function StayDetails() {
                 stay: { _id: stay._id, name: stay.name, price: stay.price, imgUrl: stay.imgUrls[0], type: stay.type, loc: stay.loc, avRate: stay.avRate },
                 buyer: { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
             }
-            // console.log('new order!!!!!!!!', newOrder)
             setOrder(newOrder)
             toggleCheckoutModal()
             // setReserveModal(prev => !prev)
@@ -335,7 +332,6 @@ export function StayDetails() {
                                             const dateEnd = values[1].$d.getTime()
                                             const daysCount = Math.round((dateEnd - dateStart) / (day))
                                             const totalPrice = daysCount * stay.price
-                                            console.log('valuesss!!!!', totalPrice)
                                             // setSelectedRange(dates.map((date) => dayjs(date).format(dateFormat)))
                                             setOrder({ ...order, totalPrice: totalPrice, startDate: values[0].$d, endDate: values[1].$d, totalNights: daysCount })
                                         }} />

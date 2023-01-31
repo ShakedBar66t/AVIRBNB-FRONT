@@ -17,7 +17,6 @@ export function UserTrips() {
     const navigate = useNavigate()
     useEffect(() => {
         OnloadUserOrders()
-
         socketService.on('update-order-status', onUpdateBySocket)
         return () => {
             socketService.off('update-order-status', onUpdateBySocket)

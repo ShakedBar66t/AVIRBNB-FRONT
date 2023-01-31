@@ -233,10 +233,14 @@
         border-radius: 100%;
         height: 15px;
         width: 15px;
-        background-color: rgba(229, 20, 236, 0.918);
+        background-color: $clr9;
         z-index: 33;
         right: 0;
         top: 0px;
+
+        &.shown {
+            display: block;
+        }
     }
 
     & .fa-search {

@@ -1,31 +1,40 @@
 .carousel-container-wrapper {
-    position: sticky;
+    display: flex;
     height: 190px;
-    width: 100%;
-    z-index: 1;
+    align-items: flex-end;
+
+    &.fixed {
+        position: fixed;
+        top: 95px
+    }
 }
 
 .carousel-container {
     z-index: 2;
-    bottom: 0;
     top: 90px;
-    z-index: 0;
     display: grid;
-    // margin-right: 10px;
     grid-template-columns: 1fr 90px;
     gap: 24px;
     background-color: white;
-    padding: 0 ;
     position: sticky;
-    top: 180px;
+    padding: 0 24px 0 19px;
 
-    // @include for-narrow-layout {
-    //     padding: 0 40px 0 35px;
-    // }
 
-    // @include for-wide-layout {
-    //     padding: 0 80px 0 65px;
-    // }
+    @include for-narrow-layout {
+        padding: 0 40px 0 35px;
+    }
+
+    @include for-wide-layout {
+        padding: 0 80px 0 65px;
+    }
+
+    &.fixed {
+        z-index: 1;
+        top: 80px;
+        position: fixed;
+        box-shadow: 0px 0px 1px 0px rgb(72 72 72 / 0.6);
+        border-bottom: 1px solid #ccc;
+    }
 
 
     .setting-btn {
@@ -209,7 +218,7 @@
         gap: 24px;
         background-color: white;
         padding: 0 24px 0 12px;
-       
+
 
         @include for-narrow-layout {
             padding: 0 40px;
@@ -277,7 +286,7 @@
         font-weight: 600;
         grid-column: 1;
         grid-row: 1;
-        
+
 
         .carousel-inner {
             position: relative;
@@ -288,7 +297,7 @@
             padding: 0;
             justify-items: start;
             gap: 36px;
-           
+
         }
 
         .btn-container {

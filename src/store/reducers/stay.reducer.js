@@ -14,7 +14,7 @@ const initialState = {
     stayt: [],
     isFilterModalOpen: false,
     lastRemovedStay: null,
-    searchDetails: { location: '', checkIn: '', checkOut: '', guests: { adults: 1, children: 0, infants: 0, pets: 0 } }
+    searchDetails: { location: '', checkIn: '', checkOut: '', guests: { Adults: 1, Children: 0, Infants: 0, Pets: 0, total: 1 } }
 }
 
 export function stayReducer(state = initialState, action) {
@@ -26,9 +26,7 @@ export function stayReducer(state = initialState, action) {
             newState = { ...state, stays: action.stays }
             break
         case SET_SEARCH_DETAILS:
-            console.log(action.filterBy)
             newState = { ...state, searchDetails: { ...action.filterBy } }
-            console.log(initialState.searchDetails)
             break
         case REMOVE_STAY:
             const lastRemovedStay = state.stays.find(stay => stay._id === action.stayId)
